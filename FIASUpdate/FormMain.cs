@@ -1,21 +1,18 @@
-﻿using JANL;
+﻿using FIASUpdate.API;
+using JANL;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using FIASUpdate.API;
 
 namespace FIASUpdate
 {
     public partial class FormMain : Form
     {
         private Progress<TaskProgress> TP;
-        private FIASClient Client;
 
-        public FormMain()
-        {
-            InitializeComponent();
-        }
+        public FormMain() => InitializeComponent();
 
         private void AddResult(string table, string status)
         {
@@ -30,7 +27,7 @@ namespace FIASUpdate
             {
                 B_Import.Enabled = false;
                 LV_Result.Items.Clear();
-                var Options = new ImportOptions()
+                var Options = new ImportOptions
                 {
                     Skip = CB_OnlyEmpty.Checked,
                     Shrink = CB_Shrink.Checked
@@ -61,11 +58,8 @@ namespace FIASUpdate
 
         private void FIAS_ResultChanged(object sender, ResultAddedEventArgs e) => AddResult(e.Table, e.Status);
 
-        private async void FormMain_Load(object sender, EventArgs e)
+        private void FormMain_Load(object sender, EventArgs e)
         {
-            Client = new FIASClient();
-            var ttt = await Client.GetAllDownloadFileInfo(new DateTime(2021, 11, 3));
-
             TP = new Progress<TaskProgress>((T) =>
             {
                 if (T.HasStatus) { SL_Status.Text = T.Status; }
@@ -80,6 +74,15 @@ namespace FIASUpdate
                     SL_Value.Text += " " + new string('|', T.Value / 100_000);
                 }
             });
+        }
+
+        private async void GetFiles()
+        {
+            using (var Client = new FIASClient())
+            {
+                var Files = await Client.GetAllDownloadFileInfo(new DateTime(2022, 1, 4));
+                Console.WriteLine(Files.First().GarXMLDeltaURL);
+            }
         }
 
         private void SetResult(IReadOnlyDictionary<string, string> Result)

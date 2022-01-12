@@ -7,6 +7,11 @@
       <Name>FIAS_GAR</Name>
     </ProjectBasedModelProvider>
   </SourceModelProvider>
+  <TargetModelProvider>
+    <ConnectionBasedModelProvider>
+      <ConnectionString>Data Source=10.98.40.130;Initial Catalog=FIAS_GAR;Persist Security Info=True;User ID=techpris;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True</ConnectionString>
+    </ConnectionBasedModelProvider>
+  </TargetModelProvider>
   <SchemaCompareSettingsService>
     <SchemaCompareSettingsService>
       <PropertyElementName>
@@ -292,8 +297,12 @@
         <Value>True</Value>
       </PropertyElementName>
       <PropertyElementName>
+        <Name>TargetDatabaseName</Name>
+        <Value>FIAS_GAR</Value>
+      </PropertyElementName>
+      <PropertyElementName>
         <Name>TargetConnectionString</Name>
-        <Value>Integrated Security=True;Pooling=False;Connect Timeout=30</Value>
+        <Value>Data Source=10.98.40.130;Initial Catalog=FIAS_GAR;Persist Security Info=True;User ID=techpris;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True;Application Name="Microsoft SQL Server Data Tools, Schema Compare"</Value>
       </PropertyElementName>
       <PropertyElementName>
         <Name>TreatVerificationErrorsAsWarnings</Name>

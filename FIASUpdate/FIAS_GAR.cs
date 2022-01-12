@@ -12,7 +12,7 @@ using System.Threading;
 
 namespace FIASUpdate
 {
-    internal struct ImportOptions
+    internal class ImportOptions
     {
         public bool Shrink { get; set; }
         public bool Skip { get; set; }
@@ -20,10 +20,10 @@ namespace FIASUpdate
 
     internal class FIAS_GAR : IDisposable
     {
-        private const string GAR = @"D:\Data\FIAS_GAR";
-        private const string GAR_66 = GAR + @"\gar_xml\66";
-        private const string GAR_Common = GAR + @"\gar_xml";
-        private const string GAR_XSD = GAR + @"\gar_schemas";
+        private static readonly string GAR = FIASManager.Root;
+        private static readonly string GAR_66 = GAR + @"\gar_xml\66";
+        private static readonly string GAR_Common = GAR + @"\gar_xml";
+        private static readonly string GAR_XSD = GAR + @"\gar_schemas";
         private readonly Dictionary<string, string> _result = new Dictionary<string, string>();
         private readonly Dictionary<string, DataSet> DataSets = new Dictionary<string, DataSet>();
         private readonly Database DB;
@@ -59,7 +59,7 @@ namespace FIASUpdate
             CreateTables();
         }
 
-        public void Import() => Import(new ImportOptions() { Skip = true });
+        public void Import() => Import(new ImportOptions { Skip = true });
 
         public void Import(ImportOptions options)
         {
@@ -169,10 +169,6 @@ namespace FIASUpdate
             using (var Connection = SQL.NewConnection(DBName))
             using (var SBC = new SqlBulkCopy(Connection) { DestinationTableName = T.Name, BulkCopyTimeout = 0, NotifyAfter = 100 })
             {
-                //foreach (Column C in T.Columns)
-                //{
-                //	SBC.ColumnMappings.Add(C.Name, C.Name);
-                //}
                 SBC.SqlRowsCopied += SBC_SqlRowsCopied;
                 SBC.EnableStreaming = true;
                 SBC.WriteToServer(FR);
@@ -193,7 +189,7 @@ namespace FIASUpdate
                 //Имя таблицы и файла
                 string FileName = R.Match(File).Groups["name"].Value;
                 string TableName = FileName;
-                if (FileName.Contains("PARAMS")) { FileName = $"PARAM({FileName})"; TableName = "PARAM"; }
+                if (FileName.Contains("PARAMS")) { FileName = $"PARAMS({FileName})"; TableName = "PARAMS"; }
                 //Проверка существования
                 Table T = DB.Tables[TableName];
                 if (T is null)
@@ -259,7 +255,7 @@ namespace FIASUpdate
         #endregion Events
 
         #region IDisposable Support
-        private bool disposedValue = false; // Для определения избыточных вызовов
+        private bool disposedValue;
 
         public void Dispose() => Dispose(true);
 

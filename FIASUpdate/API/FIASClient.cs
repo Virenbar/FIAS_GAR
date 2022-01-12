@@ -33,7 +33,7 @@ namespace FIASUpdate.API
         }
 
         #region IDisposable Support
-        private bool disposedValue = false;
+        private bool disposedValue;
 
         public void Dispose() => Dispose(true);
 

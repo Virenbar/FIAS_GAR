@@ -22,25 +22,5 @@ namespace FIASUpdate.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=RYBAKOVAV;Initial Catalog=FIAS_GAR;Integrated Security=true")]
-        public string DBString {
-            get {
-                return ((string)(this["DBString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=partserver2014;Initial Catalog=FIAS_GAR;Integrated Security=True")]
-        public string DB2014 {
-            get {
-                return ((string)(this["DB2014"]));
-            }
-        }
     }
 }
