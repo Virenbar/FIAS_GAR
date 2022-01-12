@@ -1,0 +1,14 @@
+﻿CREATE TABLE [dbo].[MUN_HIERARCHY] (
+    [ID]          BIGINT       NOT NULL,
+    [OBJECTID]    BIGINT       NOT NULL,
+    [PARENTOBJID] BIGINT       NULL,
+    [CHANGEID]    BIGINT       NOT NULL,
+    [OKTMO]       VARCHAR (11) NULL,
+    [PREVID]      BIGINT       NULL,
+    [NEXTID]      BIGINT       NULL,
+    [UPDATEDATE]  DATETIME     NOT NULL,
+    [STARTDATE]   DATETIME     NOT NULL,
+    [ENDDATE]     DATETIME     NOT NULL,
+    [ISACTIVE]    BIT          NOT NULL
+);
+

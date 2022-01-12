@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[NORMATIVE_DOCS_KINDS] (
+    [ID]   BIGINT        NOT NULL,
+    [NAME] VARCHAR (500) NOT NULL
+);
+

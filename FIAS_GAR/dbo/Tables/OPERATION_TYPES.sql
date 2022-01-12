@@ -1,0 +1,11 @@
+﻿CREATE TABLE [dbo].[OPERATION_TYPES] (
+    [ID]         BIGINT        NOT NULL,
+    [NAME]       VARCHAR (100) NOT NULL,
+    [SHORTNAME]  VARCHAR (100) NULL,
+    [DESC]       VARCHAR (250) NULL,
+    [UPDATEDATE] DATETIME      NOT NULL,
+    [STARTDATE]  DATETIME      NOT NULL,
+    [ENDDATE]    DATETIME      NOT NULL,
+    [ISACTIVE]   BIT           NOT NULL
+);
+

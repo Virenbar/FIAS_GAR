@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[NORMATIVE_DOCS_TYPES] (
+    [ID]        BIGINT        NOT NULL,
+    [NAME]      VARCHAR (500) NOT NULL,
+    [STARTDATE] DATETIME      NOT NULL,
+    [ENDDATE]   DATETIME      NOT NULL
+);
+

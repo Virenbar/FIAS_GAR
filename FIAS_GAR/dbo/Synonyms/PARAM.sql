@@ -1,0 +1,2 @@
+﻿CREATE SYNONYM [dbo].[PARAM] FOR [dbo].[PARAMS];
+

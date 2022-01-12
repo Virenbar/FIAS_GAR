@@ -1,0 +1,16 @@
+﻿CREATE TABLE [dbo].[STEADS] (
+    [ID]         BIGINT        NOT NULL,
+    [OBJECTID]   BIGINT        NOT NULL,
+    [OBJECTGUID] VARCHAR (MAX) NOT NULL,
+    [CHANGEID]   BIGINT        NOT NULL,
+    [NUMBER]     VARCHAR (250) NOT NULL,
+    [OPERTYPEID] VARCHAR (2)   NOT NULL,
+    [PREVID]     BIGINT        NULL,
+    [NEXTID]     BIGINT        NULL,
+    [UPDATEDATE] DATETIME      NOT NULL,
+    [STARTDATE]  DATETIME      NOT NULL,
+    [ENDDATE]    DATETIME      NOT NULL,
+    [ISACTUAL]   BIT           NOT NULL,
+    [ISACTIVE]   BIT           NOT NULL
+);
+

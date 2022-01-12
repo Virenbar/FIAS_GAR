@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.960
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FIAS_Updater", "FIAS_Updater\FIAS_Updater.vbproj", "{EF86A026-1522-467D-BAC5-06F646C3A68D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIASUpdate", "FIASUpdate\FIASUpdate.csproj", "{CBF1C9F3-5B8C-49AE-9999-D8288E15A6F1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7643C139-B1D0-4C71-8D6A-B60439D0B722}"
+	ProjectSection(SolutionItems) = preProject
+		.tfignore = .tfignore
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+	EndProjectSection
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "FIAS_GAR", "FIAS_GAR\FIAS_GAR.sqlproj", "{A9CAC8EE-A0B0-45E2-A8F0-95CF99CE7DC2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DB_Compare", "DB_Compare", "{2EE829A5-A673-4E75-ACD1-7CDECFBC92E0}"
+	ProjectSection(SolutionItems) = preProject
+		DB_Compare\FIAS-partserver2014.scmp = DB_Compare\FIAS-partserver2014.scmp
+		DB_Compare\FIAS-techpris.scmp = DB_Compare\FIAS-techpris.scmp
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EF86A026-1522-467D-BAC5-06F646C3A68D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF86A026-1522-467D-BAC5-06F646C3A68D}.Debug|x64.ActiveCfg = Debug|x64
+		{EF86A026-1522-467D-BAC5-06F646C3A68D}.Debug|x64.Build.0 = Debug|x64
+		{EF86A026-1522-467D-BAC5-06F646C3A68D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF86A026-1522-467D-BAC5-06F646C3A68D}.Release|x64.ActiveCfg = Release|x64
+		{EF86A026-1522-467D-BAC5-06F646C3A68D}.Release|x64.Build.0 = Release|x64
+		{CBF1C9F3-5B8C-49AE-9999-D8288E15A6F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBF1C9F3-5B8C-49AE-9999-D8288E15A6F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBF1C9F3-5B8C-49AE-9999-D8288E15A6F1}.Debug|x64.ActiveCfg = Debug|x64
+		{CBF1C9F3-5B8C-49AE-9999-D8288E15A6F1}.Debug|x64.Build.0 = Debug|x64
+		{CBF1C9F3-5B8C-49AE-9999-D8288E15A6F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBF1C9F3-5B8C-49AE-9999-D8288E15A6F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBF1C9F3-5B8C-49AE-9999-D8288E15A6F1}.Release|x64.ActiveCfg = Release|x64
+		{CBF1C9F3-5B8C-49AE-9999-D8288E15A6F1}.Release|x64.Build.0 = Release|x64
+		{A9CAC8EE-A0B0-45E2-A8F0-95CF99CE7DC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9CAC8EE-A0B0-45E2-A8F0-95CF99CE7DC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9CAC8EE-A0B0-45E2-A8F0-95CF99CE7DC2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A9CAC8EE-A0B0-45E2-A8F0-95CF99CE7DC2}.Debug|x64.Build.0 = Debug|Any CPU
+		{A9CAC8EE-A0B0-45E2-A8F0-95CF99CE7DC2}.Debug|x64.Deploy.0 = Debug|Any CPU
+		{A9CAC8EE-A0B0-45E2-A8F0-95CF99CE7DC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9CAC8EE-A0B0-45E2-A8F0-95CF99CE7DC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9CAC8EE-A0B0-45E2-A8F0-95CF99CE7DC2}.Release|x64.ActiveCfg = Release|Any CPU
+		{A9CAC8EE-A0B0-45E2-A8F0-95CF99CE7DC2}.Release|x64.Build.0 = Release|Any CPU
+		{A9CAC8EE-A0B0-45E2-A8F0-95CF99CE7DC2}.Release|x64.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1995851D-86DE-4CB2-81B2-BC21BE06C396}
+	EndGlobalSection
+EndGlobal
