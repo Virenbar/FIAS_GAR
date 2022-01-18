@@ -33,7 +33,7 @@ namespace FIASUpdate
                     Shrink = CB_Shrink.Checked
                 };
                 SWL.Start();
-                using (var FIAS = new FIAS_GAR(TP))
+                using (var FIAS = new DBImport(TP))
                 {
                     FIAS.ResultAdded += FIAS_ResultChanged;
                     await Task.Run(() => FIAS.Import(Options));

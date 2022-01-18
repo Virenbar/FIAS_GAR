@@ -271,9 +271,10 @@
   <ItemGroup>
     <Compile Include="API\FIASClient.cs" />
     <Compile Include="API\FIASInfo.cs" />
+    <Compile Include="DBCreate.cs" />
     <Compile Include="FIASManager.cs" />
     <Compile Include="FIASReader.cs" />
-    <Compile Include="FIAS_GAR.cs" />
+    <Compile Include="DBImport.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
