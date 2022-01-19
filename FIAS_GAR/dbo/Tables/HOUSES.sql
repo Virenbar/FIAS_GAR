@@ -16,8 +16,11 @@
     [STARTDATE]  DATETIME      NOT NULL,
     [ENDDATE]    DATETIME      NOT NULL,
     [ISACTUAL]   BIT           NOT NULL,
-    [ISACTIVE]   BIT           NOT NULL
+    [ISACTIVE]   BIT           NOT NULL,
+    CONSTRAINT [PK_HOUSES] PRIMARY KEY NONCLUSTERED ([ID] ASC)
 );
+
+
 
 
 GO

@@ -13,8 +13,11 @@
     [STARTDATE]  DATETIME      NOT NULL,
     [ENDDATE]    DATETIME      NOT NULL,
     [ISACTUAL]   BIT           NOT NULL,
-    [ISACTIVE]   BIT           NOT NULL
+    [ISACTIVE]   BIT           NOT NULL,
+    CONSTRAINT [PK_ADDR_OBJ] PRIMARY KEY NONCLUSTERED ([ID] ASC)
 );
+
+
 
 
 GO
