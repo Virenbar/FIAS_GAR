@@ -11,6 +11,7 @@ using System.Threading;
 
 namespace FIASUpdate
 {
+    [Obsolete]
     internal class DBCreate : IDisposable
     {
         private static readonly string GAR = FIASManager.Root;

@@ -1,9 +1,9 @@
 ﻿-- =============================================
 -- Author:		Artyom
--- Create date: 19.01.2022
+-- Create date: 15.12.2021
 -- Description:	Поиск в реестре (Выводит всегда 1 строку)
 -- =============================================
-CREATE FUNCTION [adm].[UF_SearchRegistryByLevel](
+CREATE FUNCTION [adm].[UF_SearchOne](
 	@Search VARCHAR(1000),
 	@Level  INT           = 0)
 RETURNS TABLE
@@ -24,6 +24,7 @@ RETURN
 			 (@Level = 0 OR [R].[Level] = @Level)
    ORDER BY
 		   LEN([R].[AddressFull])
+		 , [R].[AddressFull]
 	   UNION ALL
 	   SELECT
 		   NULL

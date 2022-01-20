@@ -24,5 +24,6 @@ BEGIN
 		 CONTAINS([R].[AddressFull], @Search)
 	ORDER BY
 		LEN([R].[AddressFull])
+	  , [R].[AddressFull]
 
 END
