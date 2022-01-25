@@ -20,27 +20,20 @@ namespace FIASUpdate
         /// <summary>
         /// Отправить асинхронное сообщение в контекст синхронизации.
         /// </summary>
-        public void PostEvent<T>(EventHandler<T> Handler, T Args) where T : EventArgs
-        {
-            void Callback(object state)
-            {
-                T E = (T)state;
-                Handler?.Invoke(Sender, E);
-            }
-            Context.Post(Callback, Args);
-        }
+        public void PostEvent<T>(EventHandler<T> Handler, T Args) where T : EventArgs => Context.Post(GetCallback(Handler), Args);
 
         /// <summary>
         /// Отправить синхронное сообщение в контекст синхронизации.
         /// </summary>
-        public void SendEvent<T>(EventHandler<T> Handler, T Args) where T : EventArgs
+        public void SendEvent<T>(EventHandler<T> Handler, T Args) where T : EventArgs => Context.Send(GetCallback(Handler), Args);
+
+        private SendOrPostCallback GetCallback<T>(EventHandler<T> Handler)
         {
-            void Callback(object state)
+            return (object state) =>
             {
                 T E = (T)state;
                 Handler?.Invoke(Sender, E);
-            }
-            Context.Send(Callback, Args);
+            };
         }
     }
 }

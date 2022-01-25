@@ -19,5 +19,6 @@ BEGIN
 		 ([R].[ParentGUID] = @GUID OR [R].[ObjectGUID] = @GUID)
 	ORDER BY
 		LEN([R].[AddressFull])
+	  , [R].[AddressFull]
 
 END

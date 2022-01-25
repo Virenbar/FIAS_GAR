@@ -15,8 +15,8 @@ namespace FIASUpdate
     internal class DBImport : IDisposable
     {
         private static readonly string GAR = FIASManager.Root;
-        private static readonly string GAR_66 = GAR + @"\gar_xml\66";
         private static readonly string GAR_Common = GAR + @"\gar_xml";
+
         private readonly Dictionary<string, string> _result = new Dictionary<string, string>();
 
         private readonly Database DB;
@@ -26,6 +26,8 @@ namespace FIASUpdate
 
         //Status Progress
         private readonly IProgress<TaskProgress> SP;
+
+        private readonly List<FIASTable> Tables = new List<FIASTable>();
 
         public DBImport() : this(new Progress<TaskProgress>()) { }
 
@@ -49,73 +51,97 @@ namespace FIASUpdate
         public void Import(ImportOptions options)
         {
             _result.Clear();
+            PrepareFiles();
             ImportTables(options.Skip);
-            if (options.Shrink)
-            {
-                ShrinkDatabase();
-            }
+            if (options.Shrink) { ShrinkDatabase(); }
         }
 
         #region Table Import
 
-        private int ImportTable(Table T, string File)
+        private long ImportTable(Table T, FIASTable Table)
         {
-            SP.Report(new TaskProgress($"Импорт в таблицу: {T.Name}"));
-            Dictionary<string, string> ColumnMap = T.Columns.Cast<Column>().ToDictionary((C) => C.Name, (C) => C.Name);
+            Dictionary<string, string> ColumnMap = T.Columns.Cast<Column>().ToDictionary(C => C.Name, C => C.Name);
 
-            using (var FR = new FIASReader(ColumnMap.Keys, File))
             using (var Connection = SQL.NewConnection(DBName))
             using (var SBC = new SqlBulkCopy(Connection) { DestinationTableName = T.Name, BulkCopyTimeout = 0, NotifyAfter = 100 })
             {
                 SBC.SqlRowsCopied += SBC_SqlRowsCopied;
                 SBC.EnableStreaming = true;
-                SBC.WriteToServer(FR);
-                var Count = SBC.RowsCopied;
-                SP.Report(new TaskProgress($"Импорт в таблицу завершён: {T.Name}", Count, Count));
-                return Count;
+                foreach (var File in Table.Files)
+                {
+                    SP.Report(new TaskProgress($"Импорт файла: {File.FullName}", 0, 0));
+                    using (var FR = new FIASReader(ColumnMap.Keys, File.Path))
+                    {
+                        SBC.WriteToServer(FR);
+                    }
+                    SBC.NotifyAfter = 100;
+                    var Count = SBC.RowsCopied;
+                    SP.Report(new TaskProgress($"Импорт файла завершён: {File.FullName}", Count, Count));
+                    Thread.Sleep(1000);
+                }
+                SP.Report(new TaskProgress($"Импорт в таблицу завершён: {T.Name}", 0, 0));
+                T.Refresh();
+                return T.RowCount;
             }
         }
 
         private void ImportTables(bool OnlyEmpty)
         {
-            HashSet<string> Prepared = new HashSet<string>();
-
-            var Files = new List<string>(Directory.EnumerateFiles(GAR_Common));
-            Files.AddRange(Directory.EnumerateFiles(GAR_66));
-            foreach (var File in Files)
+            foreach (var Table in Tables)
             {
-                //Имя таблицы и файла
-                string FileName = R.Match(File).Groups["name"].Value;
-                string TableName = FileName;
-                if (FileName.Contains("PARAMS")) { FileName = $"PARAMS({FileName})"; TableName = "PARAMS"; }
                 //Проверка существования
-                Table T = DB.Tables[TableName];
-                if (T is null)
+                Table T = DB.Tables[Table.Name];
+                if (T == null)
                 {
-                    AddResult(FileName, "Таблицы нет в БД");
+                    AddResult(Table.Name, "Таблицы нет в БД");
                     continue;
                 }
                 //Проверка настроек импорта
                 T.Refresh();
-                if (!Prepared.Contains(T.Name) && !OnlyEmpty)
+                if (!OnlyEmpty)
                 {
                     T.TruncateData();
-                    Prepared.Add(T.Name);
                 }
-                else if (!Prepared.Contains(T.Name) && OnlyEmpty && T.RowCount > 0)
+                else if (T.RowCount > 0)
                 {
-                    AddResult(FileName, $"Пропущена({T.RowCount:N0})");
+                    AddResult(Table.Name, $"Пропущена ({T.RowCount:N0})");
                     continue;
                 }
-                else
-                {
-                    Prepared.Add(T.Name);
-                }
+
                 //Импорт
-                var Count = ImportTable(T, File);
-                AddResult(FileName, $"Импортирована({Count:N0})");
+                var Count = ImportTable(T, Table);
+                AddResult(Table.Name, $"Импортирована ({Count:N0})");
                 Thread.Sleep(2 * 1000);
             }
+        }
+
+        private void PrepareFiles()
+        {
+            Tables.Clear();
+            var CFiles = Directory.EnumerateFiles(GAR_Common)
+                .Select(F => new XMLFile
+                {
+                    Name = R.Match(F).Groups["name"].Value,
+                    Path = F
+                });
+
+            var Files = Directory.EnumerateDirectories(GAR_Common)
+                .SelectMany(D => Directory.EnumerateFiles(D))
+                .Select(F => new XMLFile
+                {
+                    Name = R.Match(F).Groups["name"].Value,
+                    Region = Path.GetFileName(Path.GetDirectoryName(F)),
+                    Path = F
+                });
+
+            Tables.AddRange(
+               Enumerable.Concat(CFiles, Files)
+               .ToLookup(F => F.Name.Contains("PARAMS") ? "PARAMS" : F.Name)
+               .Select(L => new FIASTable
+               {
+                   Name = L.Key,
+                   Files = L.ToList()
+               }));
         }
 
         private void SBC_SqlRowsCopied(object sender, SqlRowsCopiedEventArgs e)
@@ -171,6 +197,11 @@ namespace FIASUpdate
 
         #endregion IDisposable Support
     }
+    internal class FIASTable
+    {
+        public List<XMLFile> Files { get; set; }
+        public string Name { get; set; }
+    }
     internal class ImportOptions
     {
         public bool Shrink { get; set; }
@@ -186,5 +217,12 @@ namespace FIASUpdate
 
         public string Status { get; private set; }
         public string Table { get; private set; }
+    }
+    internal class XMLFile
+    {
+        public string FullName => Region != null ? $"{Name}({Region})" : Name;
+        public string Name { get; set; }
+        public string Path { get; set; }
+        public string Region { get; set; }
     }
 }

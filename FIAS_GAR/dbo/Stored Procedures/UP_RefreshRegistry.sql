@@ -59,8 +59,8 @@ BEGIN
 								   [HPR].[ISACTIVE] = 1
 	-- Полное наименование типов
 	LEFT JOIN [HOUSE_TYPES] [HT] ON [HT].[ID] = [H].[HOUSETYPE]
-	LEFT JOIN [HOUSE_TYPES] [HT1] ON [HT1].[ID] = IIF([H].[ADDTYPE1] = 1, 10, [H].[ADDTYPE1] + 5)
-	LEFT JOIN [HOUSE_TYPES] [HT2] ON [HT2].[ID] = IIF([H].[ADDTYPE2] = 1, 10, [H].[ADDTYPE2] + 5)
+	LEFT JOIN [ADDHOUSE_TYPES] [HT1] ON [HT1].[ID] = [H].[ADDTYPE1]
+	LEFT JOIN [ADDHOUSE_TYPES] [HT2] ON [HT2].[ID] = [H].[ADDTYPE2]
 	WHERE [H].[ENDDATE] > GETDATE() AND [H].[ISACTIVE] = 1
 
 	-- Активные квартиры
