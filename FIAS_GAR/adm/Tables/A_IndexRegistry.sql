@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[A_IndexRegistry] (
+﻿CREATE TABLE [adm].[A_IndexRegistry] (
     [ParentGUID]  CHAR (36)      NULL,
     [ObjectGUID]  CHAR (36)      NOT NULL,
     [Level]       INT            NOT NULL,
@@ -12,5 +12,5 @@
 
 GO
 CREATE UNIQUE NONCLUSTERED INDEX [NCI_ParentObject]
-    ON [dbo].[A_IndexRegistry]([ParentGUID] ASC, [ObjectGUID] ASC);
+    ON [adm].[A_IndexRegistry]([ParentGUID] ASC, [ObjectGUID] ASC);
 

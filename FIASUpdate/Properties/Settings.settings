@@ -1,5 +1,12 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="FIASUpdate.Properties" GeneratedClassName="Settings">
   <Profiles />
-  <Settings />
+  <Settings>
+    <Setting Name="SQLCS" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data Source=partserver2014;Initial Catalog=master;Integrated Security=True</Value>
+    </Setting>
+    <Setting Name="XMLPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\Data\FIAS_GAR</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

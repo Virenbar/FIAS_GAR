@@ -28,7 +28,7 @@ BEGIN
 			   , [R].[Name]
 			   , CAST([R].[NameFull] AS VARCHAR(1000))
 			 FROM
-				 [A_IndexRegistry] [R]
+				 [adm].[A_IndexRegistry] [R]
 			 WHERE [R].[ObjectGUID] = @ObjectGUID
 			 UNION ALL
 			 SELECT
@@ -39,7 +39,7 @@ BEGIN
 			   , [R].[Name]
 			   , CAST(([R].[NameFull] + ', ' + [H].[NameFull]) AS VARCHAR(1000)) [NameFull]
 			 FROM
-				 [A_IndexRegistry] [R]
+				 [adm].[A_IndexRegistry] [R]
 			 JOIN [Hierarchy] [H] ON [H].[Parent] = [R].[ObjectGUID]
 			 WHERE [H].[Parent] IS NOT NULL)
 

@@ -28,7 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
             "Honk",
             "Honk"}, -1);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
@@ -36,7 +36,7 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.SL_Status = new System.Windows.Forms.ToolStripStatusLabel();
             this.SL_Value = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.Настройки = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
@@ -56,8 +56,15 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.CB_OnlyEmpty = new System.Windows.Forms.CheckBox();
             this.CB_Shrink = new System.Windows.Forms.CheckBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.B_SQLConnection = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.B_XMLPath = new System.Windows.Forms.Button();
+            this.B_Search = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.Настройки.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -67,6 +74,8 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -102,16 +111,17 @@
             this.SL_Value.Size = new System.Drawing.Size(12, 17);
             this.SL_Value.Text = "-";
             // 
-            // tabControl1
+            // Настройки
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(537, 556);
-            this.tabControl1.TabIndex = 10;
+            this.Настройки.Controls.Add(this.tabPage1);
+            this.Настройки.Controls.Add(this.tabPage2);
+            this.Настройки.Controls.Add(this.tabPage3);
+            this.Настройки.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Настройки.Location = new System.Drawing.Point(0, 0);
+            this.Настройки.Name = "Настройки";
+            this.Настройки.SelectedIndex = 0;
+            this.Настройки.Size = new System.Drawing.Size(537, 556);
+            this.Настройки.TabIndex = 10;
             // 
             // tabPage1
             // 
@@ -229,7 +239,7 @@
             this.LV_Result.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.LV_Result.HideSelection = false;
             this.LV_Result.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem2});
             this.LV_Result.Location = new System.Drawing.Point(3, 18);
             this.LV_Result.Name = "LV_Result";
             this.LV_Result.Size = new System.Drawing.Size(517, 401);
@@ -285,6 +295,7 @@
             this.SWL.ImageWaiting = ((System.Drawing.Image)(resources.GetObject("SWL.ImageWaiting")));
             this.SWL.Location = new System.Drawing.Point(3, 3);
             this.SWL.Name = "SWL";
+            this.SWL.ShowImage = false;
             this.SWL.Size = new System.Drawing.Size(255, 29);
             this.SWL.TabIndex = 2;
             // 
@@ -339,13 +350,109 @@
             this.CB_Shrink.Text = "Сжать БД";
             this.CB_Shrink.UseVisualStyleBackColor = true;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.B_Search);
+            this.tabPage3.Controls.Add(this.tableLayoutPanel2);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(529, 530);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Настройки";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.AutoSize = true;
+            this.tableLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.Controls.Add(this.textBox1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.B_SQLConnection, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.textBox2, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.B_XMLPath, 1, 1);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(523, 62);
+            this.tableLayoutPanel2.TabIndex = 2;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FIASUpdate.Properties.Settings.Default, "SQLCS", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox1.Location = new System.Drawing.Point(3, 4);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(438, 22);
+            this.textBox1.TabIndex = 1;
+            this.textBox1.Text = global::FIASUpdate.Properties.Settings.Default.SQLCS;
+            // 
+            // B_SQLConnection
+            // 
+            this.B_SQLConnection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.B_SQLConnection.AutoSize = true;
+            this.B_SQLConnection.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.B_SQLConnection.Location = new System.Drawing.Point(447, 3);
+            this.B_SQLConnection.Name = "B_SQLConnection";
+            this.B_SQLConnection.Padding = new System.Windows.Forms.Padding(1);
+            this.B_SQLConnection.Size = new System.Drawing.Size(73, 25);
+            this.B_SQLConnection.TabIndex = 0;
+            this.B_SQLConnection.Text = "SQL Server";
+            this.B_SQLConnection.UseVisualStyleBackColor = true;
+            this.B_SQLConnection.Click += new System.EventHandler(this.B_SQLConnection_Click);
+            // 
+            // textBox2
+            // 
+            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FIASUpdate.Properties.Settings.Default, "XMLPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox2.Location = new System.Drawing.Point(3, 35);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(438, 22);
+            this.textBox2.TabIndex = 1;
+            this.textBox2.Text = global::FIASUpdate.Properties.Settings.Default.XMLPath;
+            // 
+            // B_XMLPath
+            // 
+            this.B_XMLPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.B_XMLPath.AutoSize = true;
+            this.B_XMLPath.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.B_XMLPath.Location = new System.Drawing.Point(447, 34);
+            this.B_XMLPath.Name = "B_XMLPath";
+            this.B_XMLPath.Padding = new System.Windows.Forms.Padding(1);
+            this.B_XMLPath.Size = new System.Drawing.Size(73, 25);
+            this.B_XMLPath.TabIndex = 0;
+            this.B_XMLPath.Text = "XML Path";
+            this.B_XMLPath.UseVisualStyleBackColor = true;
+            this.B_XMLPath.Click += new System.EventHandler(this.B_XMLPath_Click);
+            // 
+            // B_Search
+            // 
+            this.B_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.B_Search.AutoSize = true;
+            this.B_Search.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.B_Search.Location = new System.Drawing.Point(432, 499);
+            this.B_Search.Name = "B_Search";
+            this.B_Search.Padding = new System.Windows.Forms.Padding(1);
+            this.B_Search.Size = new System.Drawing.Size(91, 25);
+            this.B_Search.TabIndex = 3;
+            this.B_Search.Text = "Поиск адреса";
+            this.B_Search.UseVisualStyleBackColor = true;
+            this.B_Search.Click += new System.EventHandler(this.B_Search_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(537, 578);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.Настройки);
             this.Controls.Add(this.statusStrip1);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -355,7 +462,7 @@
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
+            this.Настройки.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.flowLayoutPanel3.ResumeLayout(false);
@@ -371,6 +478,10 @@
             this.groupBox1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -381,7 +492,7 @@
 		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
 		private System.Windows.Forms.ToolStripStatusLabel SL_Status;
 		private System.Windows.Forms.ToolStripStatusLabel SL_Value;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl Настройки;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
@@ -401,6 +512,13 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.CheckBox CB_OnlyEmpty;
         private System.Windows.Forms.CheckBox CB_Shrink;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Button B_SQLConnection;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button B_XMLPath;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button B_Search;
     }
 }
 

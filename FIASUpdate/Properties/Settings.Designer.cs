@@ -22,5 +22,29 @@ namespace FIASUpdate.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=partserver2014;Initial Catalog=master;Integrated Security=True")]
+        public string SQLCS {
+            get {
+                return ((string)(this["SQLCS"]));
+            }
+            set {
+                this["SQLCS"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("D:\\Data\\FIAS_GAR")]
+        public string XMLPath {
+            get {
+                return ((string)(this["XMLPath"]));
+            }
+            set {
+                this["XMLPath"] = value;
+            }
+        }
     }
 }

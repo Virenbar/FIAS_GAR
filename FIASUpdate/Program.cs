@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FIASUpdate.Properties;
+using JANL.SQL;
+using System;
 using System.Windows.Forms;
 
 namespace FIASUpdate
@@ -11,15 +13,18 @@ namespace FIASUpdate
         [STAThread]
         private static void Main()
         {
+            Settings.Default.PropertyChanged += Default_PropertyChanged;
+            Settings.Default.Reload();
+            Defaults.DefaultConnection = Settings.Default.SQLCS;
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormMain());
-            Init();
         }
 
-        private static void Init()
+        private static void Default_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            JANL.SQL.Defaults.DefaultConnection = FIASManager.DBString;
+            Defaults.DefaultConnection = Settings.Default.SQLCS;
         }
     }
 }

@@ -3,7 +3,7 @@
 -- Create date: 10.01.2022
 -- Description:	Поиск в реестре по GUID
 -- =============================================
-CREATE PROCEDURE [dbo].[UP_SearchRegistryByGUID]
+CREATE PROCEDURE [adm].[UP_SearchRegistryByGUID]
 	@GUID  CHAR(36),
 	@Level INT      = 0,
 	@Limit INT      = 10

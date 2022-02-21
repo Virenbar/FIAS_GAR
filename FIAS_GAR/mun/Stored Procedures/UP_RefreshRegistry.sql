@@ -3,15 +3,15 @@
 -- Create date: 05.12.2021
 -- Description:	Обновить реестр все объектов
 -- =============================================
-CREATE PROCEDURE [dbo].[UP_RefreshRegistry]
+CREATE PROCEDURE [mun].[UP_RefreshRegistry]
 AS
 BEGIN
 	SET NOCOUNT ON;
 	RAISERROR('Очистка реестра', 0, 1) WITH NOWAIT
-	TRUNCATE TABLE [A_IndexRegistry]
+	TRUNCATE TABLE [mun].[A_IndexRegistry]
 
 	RAISERROR('Добавление планировочных объектов', 0, 1) WITH NOWAIT
-	INSERT INTO [A_IndexRegistry](
+	INSERT INTO [mun].[A_IndexRegistry](
 		[ParentGUID]
 	  , [ObjectGUID]
 	  , [Level]
@@ -27,7 +27,7 @@ BEGIN
 	  , ISNULL([AO].[TYPENAME] + ' ' + [AO].[NAME], '')
 	FROM
 		[ADDR_OBJ] [AO]
-	LEFT JOIN [ADM_HIERARCHY] [AOP] ON [AOP].[OBJECTID] = [AO].[OBJECTID] AND
+	LEFT JOIN [MUN_HIERARCHY] [AOP] ON [AOP].[OBJECTID] = [AO].[OBJECTID] AND
 									   [AOP].[ISACTIVE] = 1
 	LEFT JOIN [REESTR_OBJECTS] [AOPR] ON [AOPR].[OBJECTID] = [AOP].[PARENTOBJID] AND
 										 [AOPR].[ISACTIVE] = 1
@@ -35,7 +35,7 @@ BEGIN
 
 	-- Активные дома
 	RAISERROR('Добавление домов', 0, 1) WITH NOWAIT
-	INSERT INTO [A_IndexRegistry](
+	INSERT INTO [mun].[A_IndexRegistry](
 		[ParentGUID]
 	  , [ObjectGUID]
 	  , [Level]
@@ -51,7 +51,7 @@ BEGIN
 	  , ISNULL([HT].[SHORTNAME] + ' ' + [H].[HOUSENUM], '') + ISNULL(' ' + [HT1].[SHORTNAME] + ' ' + [H].[ADDNUM1], '') + ISNULL(' ' + [HT2].[SHORTNAME] + ' ' + [H].[ADDNUM2], '')
 	FROM
 		[HOUSES] [H]
-	JOIN [ADM_HIERARCHY] [HP] ON [HP].[OBJECTID] = [H].[OBJECTID] AND
+	JOIN [MUN_HIERARCHY] [HP] ON [HP].[OBJECTID] = [H].[OBJECTID] AND
 								 [HP].[ISACTIVE] = 1
 	JOIN [REESTR_OBJECTS] [HR] ON [HR].[OBJECTID] = [H].[OBJECTID] AND
 								  [HR].[ISACTIVE] = 1
@@ -65,7 +65,7 @@ BEGIN
 
 	-- Активные квартиры
 	RAISERROR('Добавление квартир', 0, 1) WITH NOWAIT
-	INSERT INTO [A_IndexRegistry](
+	INSERT INTO [mun].[A_IndexRegistry](
 		[ParentGUID]
 	  , [ObjectGUID]
 	  , [Level]
@@ -81,7 +81,7 @@ BEGIN
 	  , ISNULL([AT].[SHORTNAME] + ' ', '') + [A].[NUMBER]
 	FROM
 		[APARTMENTS] [A]
-	JOIN [ADM_HIERARCHY] [AP] ON [AP].[OBJECTID] = [A].[OBJECTID] AND
+	JOIN [MUN_HIERARCHY] [AP] ON [AP].[OBJECTID] = [A].[OBJECTID] AND
 								 [AP].[ISACTIVE] = 1
 	JOIN [REESTR_OBJECTS] [AR] ON [AR].[OBJECTID] = [A].[OBJECTID] AND
 								  [AR].[ISACTIVE] = 1
@@ -93,7 +93,7 @@ BEGIN
 
 	--Активные комнаты
 	RAISERROR('Добавление комнат', 0, 1) WITH NOWAIT
-	INSERT INTO [A_IndexRegistry](
+	INSERT INTO [mun].[A_IndexRegistry](
 		[ParentGUID]
 	  , [ObjectGUID]
 	  , [Level]
@@ -109,7 +109,7 @@ BEGIN
 	  , ISNULL([RT].[SHORTNAME] + ' ', '') + [R].[NUMBER]
 	FROM
 		[ROOMS] [R]
-	JOIN [ADM_HIERARCHY] [RP] ON [RP].[OBJECTID] = [R].[OBJECTID] AND
+	JOIN [MUN_HIERARCHY] [RP] ON [RP].[OBJECTID] = [R].[OBJECTID] AND
 								 [RP].[ISACTIVE] = 1
 	JOIN [REESTR_OBJECTS] [RR] ON [RR].[OBJECTID] = [R].[OBJECTID] AND
 								  [RR].[ISACTIVE] = 1
@@ -121,7 +121,7 @@ BEGIN
 
 	--Активные парко места
 	RAISERROR('Добавление парко-мест', 0, 1) WITH NOWAIT
-	INSERT INTO [A_IndexRegistry](
+	INSERT INTO [mun].[A_IndexRegistry](
 		[ParentGUID]
 	  , [ObjectGUID]
 	  , [Level]
@@ -137,7 +137,7 @@ BEGIN
 	  , [C].[NUMBER]
 	FROM
 		[CARPLACES] [C]
-	JOIN [ADM_HIERARCHY] [CP] ON [CP].[OBJECTID] = [C].[OBJECTID] AND
+	JOIN [MUN_HIERARCHY] [CP] ON [CP].[OBJECTID] = [C].[OBJECTID] AND
 								 [CP].[ISACTIVE] = 1
 	JOIN [REESTR_OBJECTS] [CR] ON [CR].[OBJECTID] = [C].[OBJECTID] AND
 								  [CR].[ISACTIVE] = 1
@@ -147,7 +147,7 @@ BEGIN
 
 	--Активные участки
 	RAISERROR('Добавление участков', 0, 1) WITH NOWAIT
-	INSERT INTO [A_IndexRegistry](
+	INSERT INTO [mun].[A_IndexRegistry](
 		[ParentGUID]
 	  , [ObjectGUID]
 	  , [Level]
@@ -163,7 +163,7 @@ BEGIN
 	  , [S].[NUMBER]
 	FROM
 		[STEADS] [S]
-	JOIN [ADM_HIERARCHY] [SP] ON [SP].[OBJECTID] = [S].[OBJECTID] AND
+	JOIN [MUN_HIERARCHY] [SP] ON [SP].[OBJECTID] = [S].[OBJECTID] AND
 								 [SP].[ISACTIVE] = 1
 	JOIN [REESTR_OBJECTS] [SR] ON [SR].[OBJECTID] = [S].[OBJECTID] AND
 								  [SR].[ISACTIVE] = 1
@@ -173,7 +173,7 @@ BEGIN
 
 	-- Обновить полные адреса для всех объектов
 	RAISERROR('Обновление полных адресов', 0, 1) WITH NOWAIT
-	UPDATE [A_IndexRegistry] SET
-		[AddressFull] = [adm].[SUF_GetFullAddress]([ObjectGUID])
+	UPDATE [mun].[A_IndexRegistry] SET
+		[AddressFull] = [mun].[SUF_GetFullAddress]([ObjectGUID])
 
 END

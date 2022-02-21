@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Data.ConnectionUI;
+using FIASUpdate.Properties;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace FIASUpdate
 {
@@ -65,13 +68,7 @@ namespace FIASUpdate
                 if (T.HasStatus) { SL_Status.Text = T.Status; }
                 if (T.HasValue)
                 {
-                    if (T.Value + T.Max == 0)
-                    {
-                        SL_Value.Text = "";
-                        return;
-                    }
-                    SL_Value.Text = T.Value.ToString("N0");
-                    SL_Value.Text += " " + new string('|', T.Value / 100_000);
+                    SL_Value.Text = (T.Value + T.Max == 0) ? "" : $"{T.Value:N0}{new string('|', T.Value / 100_000)}";
                 }
             });
         }
@@ -94,6 +91,49 @@ namespace FIASUpdate
                 LVI.SubItems.Add(KV.Value);
             }
             LV_Result.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+        }
+
+        #region UI Events
+
+        private void B_SQLConnection_Click(object sender, EventArgs e)
+        {
+            using (var D = new DataConnectionDialog())
+            {
+                DataSource.AddStandardDataSources(D);
+                //D.DataSources.Add(DataSource.SqlDataSource);
+                D.SelectedDataSource = DataSource.SqlDataSource;
+                D.SelectedDataProvider = DataProvider.SqlDataProvider;
+                D.ConnectionString = FIASManager.DBString;
+                if (DataConnectionDialog.Show(D) == DialogResult.OK)
+                {
+                    Settings.Default.SQLCS = D.ConnectionString;
+                    Settings.Default.Save();
+                }
+            }
+        }
+
+        private void B_XMLPath_Click(object sender, EventArgs e)
+        {
+            using (var F = new CommonOpenFileDialog
+            {
+                IsFolderPicker = true,
+                DefaultDirectory = FIASManager.Root
+            })
+            {
+                if (F.ShowDialog() == CommonFileDialogResult.Ok)
+                {
+                    Settings.Default.XMLPath = F.FileName;
+                    Settings.Default.Save();
+                }
+            }
+        }
+
+        #endregion UI Events
+
+        private void B_Search_Click(object sender, EventArgs e)
+        {
+            var F = new FormAddressSearch();
+            F.ShowDialog(this);
         }
     }
 }

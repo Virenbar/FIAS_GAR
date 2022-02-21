@@ -6,53 +6,55 @@
 CREATE FUNCTION [mun].[UF_GetHierarchy](
 	@ObjectGUID CHAR(36))
 RETURNS @Hierarchy TABLE(
-	[GUID]  CHAR(36),
-	[Level] INT,
-	[Type]  VARCHAR(50),
-	[Name]  VARCHAR(250))
+	[GUID]     CHAR(36),
+	[Level]    INT,
+	[Type]     VARCHAR(50),
+	[Name]     VARCHAR(250),
+	[NameFull] VARCHAR(1000))
 AS
 BEGIN
-
-	--DECLARE @G CHAR(36)
-	--SET @ObjectGUID = [adm].[SUF_GetParentGUID](@ObjectGUID);
-
 	WITH Hierarchy(
-		[GUID]
+		[Parent]
+	  , [GUID]
 	  , [Level]
 	  , [Type]
 	  , [Name]
-	  , [Parent])
+	  , [NameFull])
 		 AS (SELECT
-				 [AO].[OBJECTGUID]
-			   , [AO].[LEVEL]
-			   , [AO].[TYPENAME]
-			   , [AO].[NAME]
-			   , [mun].[SUF_GetParentGUID]([AO].[OBJECTGUID])
+				 [R].[ParentGUID]
+			   , [R].[ObjectGUID]
+			   , [R].[Level]
+			   , [R].[Type]
+			   , [R].[Name]
+			   , CAST([R].[NameFull] AS VARCHAR(1000))
 			 FROM
-				 [ADDR_OBJ] [AO]
-			 WHERE [AO].[ISACTIVE] = 1 AND [AO].[OBJECTGUID] = @ObjectGUID
+				 [mun].[A_IndexRegistry] [R]
+			 WHERE [R].[ObjectGUID] = @ObjectGUID
 			 UNION ALL
 			 SELECT
-				 [AO].[OBJECTGUID]
-			   , [AO].[LEVEL]
-			   , [AO].[TYPENAME]
-			   , [AO].[NAME]
-			   , [mun].[SUF_GetParentGUID]([AO].[OBJECTGUID])
+				 [R].[ParentGUID]
+			   , [R].[ObjectGUID]
+			   , [R].[Level]
+			   , [R].[Type]
+			   , [R].[Name]
+			   , CAST(([R].[NameFull] + ', ' + [H].[NameFull]) AS VARCHAR(1000)) [NameFull]
 			 FROM
-				 [ADDR_OBJ] [AO]
-			 JOIN [Hierarchy] [H] ON [H].[Parent] = [AO].[OBJECTGUID]
-			 WHERE [AO].[ISACTIVE] = 1 AND [H].[Parent] IS NOT NULL)
+				 [mun].[A_IndexRegistry] [R]
+			 JOIN [Hierarchy] [H] ON [H].[Parent] = [R].[ObjectGUID]
+			 WHERE [H].[Parent] IS NOT NULL)
 
 		 INSERT INTO @Hierarchy(
 			 [GUID]
 		   , [Level]
 		   , [Type]
-		   , [Name])
+		   , [Name]
+		   , [NameFull])
 		 SELECT
 			 [H].[GUID]
 		   , [H].[Level]
 		   , [H].[Type]
 		   , [H].[Name]
+		   , [H].[NameFull]
 		 FROM
 			 [Hierarchy] [H]
 		 ORDER BY
