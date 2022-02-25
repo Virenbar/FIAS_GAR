@@ -29,7 +29,7 @@ namespace FIASUpdate
 
         private SendOrPostCallback GetCallback<T>(EventHandler<T> Handler)
         {
-            return (object state) =>
+            return (state) =>
             {
                 T E = (T)state;
                 Handler?.Invoke(Sender, E);

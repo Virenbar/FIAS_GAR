@@ -442,6 +442,26 @@
     <Build Include="dbo\Synonyms\UP_SearchRegistryByGUID.sql" />
     <Build Include="dbo\Synonyms\UP_SearchRegistry.sql" />
     <Build Include="dbo\Synonyms\A_IndexRegistry.sql" />
+    <Build Include="mun\Stored Procedures\UP_RegistrySelectChild.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="mun\Stored Procedures\UP_RegistrySelect.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="mun\Stored Procedures\UP_GetHierarchy.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="adm\Stored Procedures\UP_RegistrySelectChild.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="adm\Stored Procedures\UP_RegistrySelect.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
   </ItemGroup>
   <ItemGroup>
     <None Include="FIAS_GAR.publish.xml" />

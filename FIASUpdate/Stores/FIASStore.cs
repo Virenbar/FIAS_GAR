@@ -18,7 +18,7 @@ namespace FIASUpdate.Stores
             {
                 using (var DT = await UP_RegistrySelectChild(GUID).ExecuteAsync(C))
                 {
-                    return DT.Rows.Cast<DataRow>().Select(R => new FIASRegistryAddress(R)).ToList();
+                    return DT.Rows.Cast<DataRow>().Select(R => FIASRegistryAddress.Parse(R)).ToList();
                 }
             }
         }
@@ -29,7 +29,7 @@ namespace FIASUpdate.Stores
             {
                 using (var DT = await UP_RegistrySelect(GUID).ExecuteAsync(C))
                 {
-                    return DT.Rows.Cast<DataRow>().Select(R => new FIASHierarchyItem(R)).ToList();
+                    return DT.Rows.Cast<DataRow>().Select(R => FIASHierarchyItem.Parse(R)).ToList();
                 }
             }
         }
@@ -40,7 +40,7 @@ namespace FIASUpdate.Stores
             {
                 using (var DT = await UP_RegistrySelect(GUID).ExecuteAsync(C))
                 {
-                    return new FIASRegistryAddress(DT.Rows[0]);
+                    return FIASRegistryAddress.Parse(DT.Rows[0]);
                 }
             }
         }
@@ -60,7 +60,7 @@ namespace FIASUpdate.Stores
                     : UP_SearchRegistry(division, S, Level, Limit))
                     .ExecuteAsync(C))
                 {
-                    return DT.Rows.Cast<DataRow>().Select(R => new FIASRegistryAddress(R)).ToList();
+                    return DT.Rows.Cast<DataRow>().Select(R => FIASRegistryAddress.Parse(R)).ToList();
                 }
             }
         }
@@ -116,21 +116,21 @@ namespace FIASUpdate.Stores
             return Command;
         }
 
-        private static SelectProcedure UP_SearchRegistryByGUID(FIASDivision H, string GUID, int? Level, int? Limit)
-        {
-            var Command = new SelectProcedure($"{H}.{nameof(UP_SearchRegistryByGUID)}");
-            var P = Command.Parameters;
-            P.Add(new SqlParameter("@GUID", SqlDbType.Char, 36)).Value = GUID;
-            P.Add(new SqlParameter("@Level", SqlDbType.Int)).Value = Level;
-            P.Add(new SqlParameter("@Limit", SqlDbType.Int)).Value = Limit;
-            return Command;
-        }
-
         private static SelectProcedure UP_SearchRegistry(FIASDivision H, string Search, int? Level, int? Limit)
         {
             var Command = new SelectProcedure($"{H}.{nameof(UP_SearchRegistry)}");
             var P = Command.Parameters;
             P.Add(new SqlParameter("@Search", SqlDbType.VarChar, 500)).Value = Search;
+            P.Add(new SqlParameter("@Level", SqlDbType.Int)).Value = Level;
+            P.Add(new SqlParameter("@Limit", SqlDbType.Int)).Value = Limit;
+            return Command;
+        }
+
+        private static SelectProcedure UP_SearchRegistryByGUID(FIASDivision H, string GUID, int? Level, int? Limit)
+        {
+            var Command = new SelectProcedure($"{H}.{nameof(UP_SearchRegistryByGUID)}");
+            var P = Command.Parameters;
+            P.Add(new SqlParameter("@GUID", SqlDbType.Char, 36)).Value = GUID;
             P.Add(new SqlParameter("@Level", SqlDbType.Int)).Value = Level;
             P.Add(new SqlParameter("@Limit", SqlDbType.Int)).Value = Limit;
             return Command;

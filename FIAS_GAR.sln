@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.tfignore = .tfignore
 		.nuget\NuGet.Config = .nuget\NuGet.Config
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "FIAS_GAR", "FIAS_GAR\FIAS_GAR.sqlproj", "{A9CAC8EE-A0B0-45E2-A8F0-95CF99CE7DC2}"

@@ -51,6 +51,12 @@ namespace FIASUpdate
             }
         }
 
+        private void B_Search_Click(object sender, EventArgs e)
+        {
+            var F = new FormAddressSearch();
+            F.ShowDialog(this);
+        }
+
         private void CB_Drop_CheckedChanged(object sender, EventArgs e)
         {
             CB_DropConfirm.Visible = CB_Drop.Checked;
@@ -73,7 +79,7 @@ namespace FIASUpdate
             });
         }
 
-        private async void GetFiles()
+        private async Task GetFiles()
         {
             using (var Client = new FIASClient())
             {
@@ -100,7 +106,6 @@ namespace FIASUpdate
             using (var D = new DataConnectionDialog())
             {
                 DataSource.AddStandardDataSources(D);
-                //D.DataSources.Add(DataSource.SqlDataSource);
                 D.SelectedDataSource = DataSource.SqlDataSource;
                 D.SelectedDataProvider = DataProvider.SqlDataProvider;
                 D.ConnectionString = FIASManager.DBString;
@@ -129,11 +134,5 @@ namespace FIASUpdate
         }
 
         #endregion UI Events
-
-        private void B_Search_Click(object sender, EventArgs e)
-        {
-            var F = new FormAddressSearch();
-            F.ShowDialog(this);
-        }
     }
 }

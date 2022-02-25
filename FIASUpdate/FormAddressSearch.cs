@@ -20,34 +20,19 @@ namespace FIASUpdate
         {
             InitializeComponent();
             Level = 10;
-            RB_F = new List<(RadioButton RB, FIASDivision Division)>() { (RB_ADM, FIASDivision.adm), (RB_MUN, FIASDivision.mun) };
-        }
-
-        private bool UIState
-        {
-            set
-            {
-                TB_Search.ReadOnly = !value;
-                B_Search.Enabled = value;
-                CB_Level.Enabled = value;
-                //B_Cancel.Enabled = value;
-                //B_OK.Enabled = value;
-                B_Info.Enabled = value;
-                RB_ADM.Enabled = value;
-                RB_MUN.Enabled = value;
-            }
+            RB_F = new List<(RadioButton RB, FIASDivision Division)> { (RB_ADM, FIASDivision.adm), (RB_MUN, FIASDivision.mun) };
         }
 
         private void RefreshUI()
         {
             Text = "Справочник ФИАС";
-            if (LV_Search.Items.Count > 0) { Text += $"(Объектов: {LV_Search.Items.Count:N0})"; }
+            if (LV_Search.Items.Count > 0) { Text += $" (Объектов: {LV_Search.Items.Count:N0})"; }
         }
 
         private async Task Search()
         {
             if (TB_Search.Text.Length < 2) { return; }
-            UIState = false;
+            SetUIState(false);
             try
             {
                 var D = RB_F.First(R => R.RB.Checked).Division;
@@ -67,7 +52,17 @@ namespace FIASUpdate
                 RefreshUI();
             }
             catch (Exception E) { Msgs.ShowError(E); }
-            finally { UIState = true; }
+            finally { SetUIState(true); }
+        }
+
+        private void SetUIState(bool value)
+        {
+            TB_Search.ReadOnly = !value;
+            B_Search.Enabled = value;
+            CB_Level.Enabled = value;
+            B_Info.Enabled = value;
+            RB_ADM.Enabled = value;
+            RB_MUN.Enabled = value;
         }
 
         #region Properties
@@ -90,15 +85,15 @@ namespace FIASUpdate
 
         private async void B_Info_Click(object sender, EventArgs e)
         {
-            UIState = false;
+            SetUIState(false);
             try
             {
                 var D = await FIASStore.Statistics();
                 var S = string.Join(Environment.NewLine, D.Select(KV => $"{KV.Key}: {KV.Value}"));
-                Msgs.ShowInfo(S, "Инфо о БД");
+                Msgs.ShowInfo(S, "Информация о БД");
             }
             catch (Exception E) { Msgs.ShowError(E.Message); }
-            finally { UIState = true; }
+            finally { SetUIState(true); }
         }
 
         private async void B_Search_Click(object sender, EventArgs e) => await Search();
@@ -113,7 +108,7 @@ namespace FIASUpdate
         {
             Icon = Owner.Icon;
             CB_Level.SelectedIndexChanged -= CB_Level_SelectedIndexChanged;
-            UIState = false;
+            SetUIState(false);
             try
             {
                 using (var C = await SQLHelper.NewConnectionAsync())
@@ -124,7 +119,7 @@ namespace FIASUpdate
                 CB_Level.ValueMember = "Level";
                 CB_Level.SelectedValue = Level;
                 CB_Level.SelectedIndexChanged += CB_Level_SelectedIndexChanged;
-                UIState = true;
+                SetUIState(true);
             }
             catch (Exception) { Msgs.ShowError($"Не удалось подключиться к базе {DBName}"); }
             RefreshUI();

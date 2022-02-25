@@ -7,8 +7,6 @@ namespace FIASUpdate
         static FIASManager()
         {
             Settings.Default.Reload();
-            //Root = @"D:\Data\FIAS_GAR";
-            //DBString = "Data Source=partserver2014;Initial Catalog=master;Integrated Security=True";
             DBName = "FIAS_GAR";
         }
 
