@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[NORMATIVE_DOCS] (
     [ID]         BIGINT         NOT NULL,
-    [NAME]       VARCHAR (8000) NOT NULL,
+    [NAME]       VARCHAR (8000) NULL,
     [DATE]       DATETIME       NOT NULL,
     [NUMBER]     VARCHAR (150)  NOT NULL,
     [TYPE]       BIGINT         NOT NULL,
@@ -13,6 +13,8 @@
     [COMMENT]    VARCHAR (8000) NULL,
     CONSTRAINT [PK_NORMATIVE_DOCS] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
+
+
 
 
 

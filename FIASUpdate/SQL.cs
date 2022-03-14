@@ -1,9 +1,4 @@
 ﻿using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FIASUpdate
 {
@@ -15,7 +10,8 @@ namespace FIASUpdate
         {
             var SCSB = new SqlConnectionStringBuilder(FIASManager.DBString)
             {
-                InitialCatalog = Database
+                InitialCatalog = Database,
+                Encrypt = false
             };
             var connection = new SqlConnection(SCSB.ToString());
             connection.Open();
