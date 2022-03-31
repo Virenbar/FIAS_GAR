@@ -10,12 +10,9 @@ CREATE PROCEDURE [mun].[UP_SearchRegistry]
 AS
 BEGIN
 	SET NOCOUNT ON;
+	SET @Search = @Search + '*'
+	SET @Search = [dbo].[SUF_ExpressionNEAR](@Search)
 
-	SET @Search = REPLACE(@Search, '.', ' ')
-	SET @Search = REPLACE(@Search, ',', ' ')
-	SET @Search = REPLACE(@Search, '  ', ' ')
-
-	SET @Search = '"' + REPLACE(@Search, ' ', '*" AND "') + '*"'
 	SELECT TOP (@Limit)
 		[R].*
 	FROM
