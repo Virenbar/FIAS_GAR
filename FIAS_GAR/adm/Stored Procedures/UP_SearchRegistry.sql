@@ -20,7 +20,8 @@ BEGIN
 	WHERE(@Level = 0 OR [R].[Level] = @Level) AND
 		 CONTAINS([R].[AddressFull], @Search)
 	ORDER BY
-		LEN([R].[AddressFull])
+		[R].[Level]
+	  , LEN([R].[AddressFull])
 	  , [R].[AddressFull]
 
 END
