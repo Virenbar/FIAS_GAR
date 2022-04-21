@@ -15,6 +15,7 @@ namespace FIASUpdate
     {
         private readonly string DBName = FIASManager.DBName;
         private readonly List<(RadioButton RB, FIASDivision Division)> RB_F;
+        private readonly FIASStore Store = new FIASStore();
 
         public FormAddressSearch()
         {
@@ -38,7 +39,7 @@ namespace FIASUpdate
                 var D = RB_F.First(R => R.RB.Checked).Division;
                 var S = TB_Search.Text.TrimSpaces();
                 var Limit = (int)NUD_Limit.Value;
-                var Result = await FIASStore.Search(D, S, Level, Limit);
+                var Result = await Store.Search(D, S, Level, Limit);
                 LV_Search.BeginUpdate();
                 LV_Search.Items.Clear();
                 foreach (var R in Result)
@@ -88,7 +89,7 @@ namespace FIASUpdate
             SetUIState(false);
             try
             {
-                var D = await FIASStore.Statistics();
+                var D = await Store.Statistics();
                 var S = string.Join(Environment.NewLine, D.Select(KV => $"{KV.Key}: {KV.Value}"));
                 Msgs.ShowInfo(S, "Информация о БД");
             }
@@ -121,7 +122,7 @@ namespace FIASUpdate
                 CB_Level.SelectedIndexChanged += CB_Level_SelectedIndexChanged;
                 SetUIState(true);
             }
-            catch (Exception) { Msgs.ShowError($"Не удалось подключиться к базе {DBName}"); }
+            catch (Exception E) { Msgs.ShowError($"Не удалось подключиться к базе {DBName}: {E.Message}"); }
             RefreshUI();
             await Search();
         }
@@ -155,7 +156,7 @@ namespace FIASUpdate
             }
         }
 
-        private void TB_Search_TextChanged(object sender, EventArgs e) => L_GUID.Visible = FIASStore.IsGUID(TB_Search.Text);
+        private void TB_Search_TextChanged(object sender, EventArgs e) => L_GUID.Visible = Store.IsGUID(TB_Search.Text);
 
         #endregion UI Events
     }

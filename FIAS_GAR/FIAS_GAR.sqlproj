@@ -533,6 +533,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="FIAS_GAR.publish.xml" />
+    <None Include="Sandbox.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\120\SqlSchemas\master.dacpac">

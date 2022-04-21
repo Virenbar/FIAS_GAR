@@ -1,0 +1,50 @@
+﻿site_name: Документация FIAS_GAR
+site_description: "Проект БД ФИАС ГАР для SQL Server и приложение для её обновления"
+copyright: Copyright &copy; 2022 Virenbar
+theme:
+  logo: assets/images/logo.png
+  favicon: assets/images/favicon.ico
+  features:
+    - navigation.instant
+    - navigation.top
+    - navigation.sections
+    - navigation.indexes
+  font:
+    text: 'Fira Sans'
+    code: 'Fira Code'
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Virenbar/FIAS_GAR
+  # analytics:
+  #   provider: google
+  #   property: G-XXXXXXXXXX
+repo_name: 'Virenbar/FIAS_GAR'
+repo_url: https://github.com/Virenbar/FIAS_GAR
+edit_uri: edit/master/docs/
+markdown_extensions:
+  - meta
+  - admonition
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - attr_list
+  - toc:
+      permalink: "#"
+nav:
+  - index.md
+  - FIAS_GAR:
+    - Таблицы: tables.md
+    - Объекты БД: database-objects.md
+  #- FIAS Update:

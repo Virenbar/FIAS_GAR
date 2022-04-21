@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace FIASUpdate.Stores
 {
-    public static class FIASStore
+    public class FIASStore
     {
-        public static async Task<List<FIASRegistryAddress>> GetChilds(string GUID)
+        public async Task<List<FIASRegistryAddress>> GetChilds(string GUID)
         {
             using (var C = SQLHelper.NewConnection())
             {
@@ -23,18 +23,18 @@ namespace FIASUpdate.Stores
             }
         }
 
-        public static async Task<List<FIASHierarchyItem>> GetHierarchy(string GUID)
+        public async Task<List<FIASHierarchyItem>> GetHierarchy(FIASDivision division, string GUID)
         {
             using (var C = SQLHelper.NewConnection())
             {
-                using (var DT = await UP_RegistrySelect(GUID).ExecuteAsync(C))
+                using (var DT = await UP_GetHierarchy(division, GUID).ExecuteAsync(C))
                 {
                     return DT.Rows.Cast<DataRow>().Select(R => FIASHierarchyItem.Parse(R)).ToList();
                 }
             }
         }
 
-        public static async Task<FIASRegistryAddress> GetObject(string GUID)
+        public async Task<FIASRegistryAddress> GetObject(string GUID)
         {
             using (var C = SQLHelper.NewConnection())
             {
@@ -45,13 +45,21 @@ namespace FIASUpdate.Stores
             }
         }
 
-        public static bool IsGUID(string Search)
+        public bool IsGUID(string Search)
         {
             if (Search.Length != 36) { return false; }
             return Guid.TryParse(Search, out var G);
         }
 
-        public static async Task<List<FIASRegistryAddress>> Search(FIASDivision division, string S, int? Level, int? Limit)
+        /// <summary>
+        /// Поиск адреса по AddressFull или GUID
+        /// </summary>
+        /// <param name="division">Иерархия</param>
+        /// <param name="S">Текст для поиска</param>
+        /// <param name="Level">Уровень объекта</param>
+        /// <param name="Limit">Максимальное кол-во строк для вывода </param>
+        /// <returns></returns>
+        public async Task<List<FIASRegistryAddress>> Search(FIASDivision division, string S, int? Level, int? Limit)
         {
             using (var C = SQLHelper.NewConnection())
             {
@@ -65,17 +73,15 @@ namespace FIASUpdate.Stores
             }
         }
 
-        public static async Task<Dictionary<string, string>> Statistics()
+        public async Task<Dictionary<string, string>> Statistics()
         {
-            var D = new Dictionary<string, string>();
             using (var C = SQLHelper.NewConnection())
             {
                 using (var DT = await UP_FIAS_Statistics().ExecuteAsync(C))
                 {
-                    foreach (DataRow R in DT.Rows) { D.Add(R.Field<string>("Name"), R.Field<string>("Value")); }
+                    return DT.Rows.Cast<DataRow>().ToDictionary(R => R.Field<string>("Name"), R => R.Field<string>("Value"));
                 }
             }
-            return D;
         }
 
         #region SQL
