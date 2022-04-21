@@ -11,8 +11,8 @@ theme:
     - navigation.sections
     - navigation.indexes
   font:
-    text: 'Fira Sans'
-    code: 'Fira Code'
+    text: "Fira Sans"
+    code: "Fira Code"
   name: material
   palette:
     - media: "(prefers-color-scheme: light)"
@@ -32,7 +32,9 @@ extra:
   # analytics:
   #   provider: google
   #   property: G-XXXXXXXXXX
-repo_name: 'Virenbar/FIAS_GAR'
+extra_css:
+  - stylesheets/extra.css
+repo_name: "Virenbar/FIAS_GAR"
 repo_url: https://github.com/Virenbar/FIAS_GAR
 edit_uri: edit/master/docs/
 markdown_extensions:
@@ -43,13 +45,18 @@ markdown_extensions:
   - attr_list
   - toc:
       permalink: "#"
+plugins:
+  - search:
+      lang:
+        - en
+        - ru
 nav:
   - index.md
   - FIAS_GAR:
-    - Таблицы: tables.md
-    - Объекты БД: database-objects.md
-    - Примечания: notes.md
+      - Таблицы: tables.md
+      - Объекты БД: database-objects.md
+      - Примечания: notes.md
   #- FIAS Update:
   - Ссылки:
-    - ФИАС: "https://fias.nalog.ru"
-    - Обновления БД ФИАС: "https://fias.nalog.ru/Updates"
+      - ФИАС: "https://fias.nalog.ru"
+      - Обновления БД ФИАС: "https://fias.nalog.ru/Updates"

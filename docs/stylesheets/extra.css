@@ -1,0 +1,13 @@
+:root {
+    --md-primary-fg-color: #0066b3;
+    --md-footer-bg-color: #0066b3;
+}
+
+:root>* {
+    --md-footer-bg-color: #0066b3;
+}
+
+.md-typeset {
+    font-size: .7rem;
+    line-height: 1;
+}
