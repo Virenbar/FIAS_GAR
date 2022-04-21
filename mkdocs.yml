@@ -48,4 +48,8 @@ nav:
   - FIAS_GAR:
     - Таблицы: tables.md
     - Объекты БД: database-objects.md
+    - Примечания: notes.md
   #- FIAS Update:
+  - Ссылки:
+    - ФИАС: "https://fias.nalog.ru"
+    - Обновления БД ФИАС: "https://fias.nalog.ru/Updates"
