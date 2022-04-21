@@ -4,6 +4,7 @@ copyright: Copyright &copy; 2022 Virenbar
 theme:
   logo: assets/images/logo.png
   favicon: assets/images/favicon.ico
+  language: ru
   features:
     - navigation.instant
     - navigation.top
