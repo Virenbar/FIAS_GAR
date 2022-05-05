@@ -25,6 +25,7 @@ theme:
       toggle:
         icon: material/toggle-switch
         name: Switch to light mode
+  custom_dir: overrides
 extra:
   social:
     - icon: fontawesome/brands/github
