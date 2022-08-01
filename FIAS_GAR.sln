@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.960
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIASUpdate", "FIASUpdate\FIASUpdate.csproj", "{CBF1C9F3-5B8C-49AE-9999-D8288E15A6F1}"
 EndProject
@@ -19,6 +19,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DB_Compare", "DB_Compare", 
 		DB_Compare\FIAS-partserver2014.scmp = DB_Compare\FIAS-partserver2014.scmp
 		DB_Compare\FIAS-techpris.scmp = DB_Compare\FIAS-techpris.scmp
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIAS.Search", "FIAS.Search\FIAS.Search.csproj", "{072238A3-E0CA-4A0B-9463-8724B001CED6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIAS.API", "FIAS.API\FIAS.API.csproj", "{2948DA51-52B1-4B49-8968-5338084CA82B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,6 +50,22 @@ Global
 		{A9CAC8EE-A0B0-45E2-A8F0-95CF99CE7DC2}.Release|x64.ActiveCfg = Release|Any CPU
 		{A9CAC8EE-A0B0-45E2-A8F0-95CF99CE7DC2}.Release|x64.Build.0 = Release|Any CPU
 		{A9CAC8EE-A0B0-45E2-A8F0-95CF99CE7DC2}.Release|x64.Deploy.0 = Release|Any CPU
+		{072238A3-E0CA-4A0B-9463-8724B001CED6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{072238A3-E0CA-4A0B-9463-8724B001CED6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{072238A3-E0CA-4A0B-9463-8724B001CED6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{072238A3-E0CA-4A0B-9463-8724B001CED6}.Debug|x64.Build.0 = Debug|Any CPU
+		{072238A3-E0CA-4A0B-9463-8724B001CED6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{072238A3-E0CA-4A0B-9463-8724B001CED6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{072238A3-E0CA-4A0B-9463-8724B001CED6}.Release|x64.ActiveCfg = Release|Any CPU
+		{072238A3-E0CA-4A0B-9463-8724B001CED6}.Release|x64.Build.0 = Release|Any CPU
+		{2948DA51-52B1-4B49-8968-5338084CA82B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2948DA51-52B1-4B49-8968-5338084CA82B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2948DA51-52B1-4B49-8968-5338084CA82B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2948DA51-52B1-4B49-8968-5338084CA82B}.Debug|x64.Build.0 = Debug|Any CPU
+		{2948DA51-52B1-4B49-8968-5338084CA82B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2948DA51-52B1-4B49-8968-5338084CA82B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2948DA51-52B1-4B49-8968-5338084CA82B}.Release|x64.ActiveCfg = Release|Any CPU
+		{2948DA51-52B1-4B49-8968-5338084CA82B}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
