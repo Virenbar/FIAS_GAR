@@ -2,6 +2,7 @@
 -- Author:		Artyom
 -- Create date: 05.12.2021
 -- Description:	Поиск в реестре
+--exec mun.UP_SearchRegistry 'Екатеринбург', 1, 50
 -- =============================================
 CREATE PROCEDURE [adm].[UP_SearchRegistry]
 	@Search VARCHAR(500),

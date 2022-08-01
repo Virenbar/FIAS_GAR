@@ -16,9 +16,7 @@ namespace FIASUpdate
     {
         private static readonly string GAR = FIASManager.Root;
         private static readonly string GAR_Common = GAR + @"\gar_xml";
-
         private readonly Dictionary<string, string> _result = new Dictionary<string, string>();
-
         private readonly Database DB;
         private readonly string DBName;
         private readonly SyncEvent Events;
@@ -29,7 +27,7 @@ namespace FIASUpdate
 
         private readonly List<FIASTable> Tables = new List<FIASTable>();
 
-        public DBImport() : this(new Progress<TaskProgress>()) { }
+        public DBImport() : this(null) { }
 
         public DBImport(IProgress<TaskProgress> TaskProgress)
         {
@@ -69,17 +67,17 @@ namespace FIASUpdate
                 SBC.EnableStreaming = true;
                 foreach (var File in Table.Files)
                 {
-                    SP.Report(new TaskProgress($"Импорт файла: {File.FullName}", 0, 0));
+                    SP?.Report(new TaskProgress($"Импорт файла: {File.FullName}", 0, 0));
                     using (var FR = new FIASReader(ColumnMap.Keys, File.Path))
                     {
                         SBC.WriteToServer(FR);
                     }
                     SBC.NotifyAfter = 100;
                     var Count = SBC.RowsCopied;
-                    SP.Report(new TaskProgress($"Импорт файла завершён: {File.FullName}", Count, Count));
+                    SP?.Report(new TaskProgress($"Импорт файла завершён: {File.FullName}", Count, Count));
                     Thread.Sleep(1000);
                 }
-                SP.Report(new TaskProgress($"Импорт в таблицу завершён: {T.Name}", 0, 0));
+                SP?.Report(new TaskProgress($"Импорт в таблицу завершён: {T.Name}", 0, 0));
                 T.Refresh();
                 return T.RowCount;
             }
@@ -148,7 +146,7 @@ namespace FIASUpdate
         {
             SqlBulkCopy SBC = (SqlBulkCopy)sender;
             var SBCCount = (int)e.RowsCopied;
-            SP.Report(new TaskProgress(SBCCount, SBCCount));
+            SP?.Report(new TaskProgress(SBCCount, SBCCount));
             if (SBCCount >= 10000 && SBC.NotifyAfter != 1000) { SBC.NotifyAfter = 1000; }
         }
 
@@ -163,11 +161,11 @@ namespace FIASUpdate
         private void ShrinkDatabase()
         {
             var Size = DB.Size;
-            SP.Report(new TaskProgress($"Сжатие БД({Size:N2} МБ)", 0, 0));
+            SP?.Report(new TaskProgress($"Сжатие БД({Size:N2} МБ)", 0, 0));
             Thread.Sleep(1000);
             DB.Shrink(1, ShrinkMethod.Default);
             DB.Refresh();
-            SP.Report(new TaskProgress($"БД сжата({Size:N2} МБ -> {DB.Size:N2} МБ)"));
+            SP?.Report(new TaskProgress($"БД сжата({Size:N2} МБ -> {DB.Size:N2} МБ)"));
         }
 
         #region Events
