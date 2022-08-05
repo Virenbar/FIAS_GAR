@@ -20,9 +20,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DB_Compare", "DB_Compare", 
 		DB_Compare\FIAS-techpris.scmp = DB_Compare\FIAS-techpris.scmp
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIAS.Search", "FIAS.Search\FIAS.Search.csproj", "{072238A3-E0CA-4A0B-9463-8724B001CED6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FIAS.Search", "FIAS.Search\FIAS.Search.csproj", "{072238A3-E0CA-4A0B-9463-8724B001CED6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIAS.API", "FIAS.API\FIAS.API.csproj", "{2948DA51-52B1-4B49-8968-5338084CA82B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FIAS.API", "FIAS.API\FIAS.API.csproj", "{2948DA51-52B1-4B49-8968-5338084CA82B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

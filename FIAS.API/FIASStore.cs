@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FIAS.API
 {
-    public class FIASStore : IDisposable
+    public class FIASStore
     {
         public string ConnectionString { get; set; }
 
