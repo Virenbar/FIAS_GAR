@@ -28,54 +28,59 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "Honk",
             "Honk"}, -1);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.SL_Status = new System.Windows.Forms.ToolStripStatusLabel();
             this.SL_Value = new System.Windows.Forms.ToolStripStatusLabel();
             this.Настройки = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.CB_Drop = new System.Windows.Forms.CheckBox();
-            this.CB_DropConfirm = new System.Windows.Forms.CheckBox();
-            this.L_DropWarning = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.TP_Import = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.LV_Result = new System.Windows.Forms.ListView();
             this.Table = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Result = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.B_Import = new System.Windows.Forms.Button();
-            this.SWL = new JANL.StopWatchLabel();
+            this.SWL = new JANL.UserControls.StopWatchLabel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.CB_OnlyEmpty = new System.Windows.Forms.CheckBox();
             this.CB_Shrink = new System.Windows.Forms.CheckBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.TP_Settings = new System.Windows.Forms.TabPage();
+            this.B_Search = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.B_SQLConnection = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.B_XMLPath = new System.Windows.Forms.Button();
-            this.B_Search = new System.Windows.Forms.Button();
+            this.TP_Tables = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.LV_Tables = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.B_TablesRefresh = new System.Windows.Forms.Button();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.B_TablesSave = new System.Windows.Forms.Button();
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.statusStrip1.SuspendLayout();
             this.Настройки.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.flowLayoutPanel3.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.TP_Import.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
-            this.tabPage3.SuspendLayout();
+            this.TP_Settings.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.TP_Tables.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -113,9 +118,9 @@
             // 
             // Настройки
             // 
-            this.Настройки.Controls.Add(this.tabPage1);
-            this.Настройки.Controls.Add(this.tabPage2);
-            this.Настройки.Controls.Add(this.tabPage3);
+            this.Настройки.Controls.Add(this.TP_Import);
+            this.Настройки.Controls.Add(this.TP_Settings);
+            this.Настройки.Controls.Add(this.TP_Tables);
             this.Настройки.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Настройки.Location = new System.Drawing.Point(0, 0);
             this.Настройки.Name = "Настройки";
@@ -123,100 +128,18 @@
             this.Настройки.Size = new System.Drawing.Size(537, 556);
             this.Настройки.TabIndex = 10;
             // 
-            // tabPage1
+            // TP_Import
             // 
-            this.tabPage1.Controls.Add(this.groupBox3);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(529, 530);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Создание таблиц";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.flowLayoutPanel3);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox3.Location = new System.Drawing.Point(3, 3);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(523, 100);
-            this.groupBox3.TabIndex = 0;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "groupBox3";
-            this.groupBox3.Visible = false;
-            // 
-            // flowLayoutPanel3
-            // 
-            this.flowLayoutPanel3.Controls.Add(this.flowLayoutPanel2);
-            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 18);
-            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(517, 79);
-            this.flowLayoutPanel3.TabIndex = 0;
-            // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.AutoSize = true;
-            this.flowLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanel2.Controls.Add(this.CB_Drop);
-            this.flowLayoutPanel2.Controls.Add(this.CB_DropConfirm);
-            this.flowLayoutPanel2.Controls.Add(this.L_DropWarning);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(492, 23);
-            this.flowLayoutPanel2.TabIndex = 2;
-            this.flowLayoutPanel2.WrapContents = false;
-            // 
-            // CB_Drop
-            // 
-            this.CB_Drop.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.CB_Drop.AutoSize = true;
-            this.CB_Drop.Location = new System.Drawing.Point(3, 3);
-            this.CB_Drop.Name = "CB_Drop";
-            this.CB_Drop.Size = new System.Drawing.Size(117, 17);
-            this.CB_Drop.TabIndex = 0;
-            this.CB_Drop.Text = "Создать таблицы";
-            this.CB_Drop.UseVisualStyleBackColor = true;
-            // 
-            // CB_DropConfirm
-            // 
-            this.CB_DropConfirm.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.CB_DropConfirm.AutoSize = true;
-            this.CB_DropConfirm.Location = new System.Drawing.Point(126, 3);
-            this.CB_DropConfirm.Name = "CB_DropConfirm";
-            this.CB_DropConfirm.Size = new System.Drawing.Size(192, 17);
-            this.CB_DropConfirm.TabIndex = 2;
-            this.CB_DropConfirm.Text = "Старые таблицы будут удалены";
-            this.CB_DropConfirm.UseVisualStyleBackColor = true;
-            this.CB_DropConfirm.Visible = false;
-            // 
-            // L_DropWarning
-            // 
-            this.L_DropWarning.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.L_DropWarning.AutoSize = true;
-            this.L_DropWarning.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_DropWarning.ForeColor = System.Drawing.Color.Red;
-            this.L_DropWarning.Location = new System.Drawing.Point(324, 5);
-            this.L_DropWarning.Name = "L_DropWarning";
-            this.L_DropWarning.Size = new System.Drawing.Size(165, 13);
-            this.L_DropWarning.TabIndex = 1;
-            this.L_DropWarning.Text = "Таблицы будут пересозданы";
-            this.L_DropWarning.Visible = false;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.groupBox2);
-            this.tabPage2.Controls.Add(this.tableLayoutPanel1);
-            this.tabPage2.Controls.Add(this.groupBox1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(529, 530);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Импорт данных";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.TP_Import.Controls.Add(this.groupBox2);
+            this.TP_Import.Controls.Add(this.tableLayoutPanel1);
+            this.TP_Import.Controls.Add(this.groupBox1);
+            this.TP_Import.Location = new System.Drawing.Point(4, 22);
+            this.TP_Import.Name = "TP_Import";
+            this.TP_Import.Padding = new System.Windows.Forms.Padding(3);
+            this.TP_Import.Size = new System.Drawing.Size(529, 530);
+            this.TP_Import.TabIndex = 1;
+            this.TP_Import.Text = "Импорт данных";
+            this.TP_Import.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -239,7 +162,7 @@
             this.LV_Result.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.LV_Result.HideSelection = false;
             this.LV_Result.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
+            listViewItem1});
             this.LV_Result.Location = new System.Drawing.Point(3, 18);
             this.LV_Result.Name = "LV_Result";
             this.LV_Result.Size = new System.Drawing.Size(517, 401);
@@ -350,17 +273,31 @@
             this.CB_Shrink.Text = "Сжать БД";
             this.CB_Shrink.UseVisualStyleBackColor = true;
             // 
-            // tabPage3
+            // TP_Settings
             // 
-            this.tabPage3.Controls.Add(this.B_Search);
-            this.tabPage3.Controls.Add(this.tableLayoutPanel2);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(529, 530);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Настройки";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.TP_Settings.Controls.Add(this.B_Search);
+            this.TP_Settings.Controls.Add(this.tableLayoutPanel2);
+            this.TP_Settings.Location = new System.Drawing.Point(4, 22);
+            this.TP_Settings.Name = "TP_Settings";
+            this.TP_Settings.Padding = new System.Windows.Forms.Padding(3);
+            this.TP_Settings.Size = new System.Drawing.Size(529, 530);
+            this.TP_Settings.TabIndex = 2;
+            this.TP_Settings.Text = "Настройки";
+            this.TP_Settings.UseVisualStyleBackColor = true;
+            // 
+            // B_Search
+            // 
+            this.B_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.B_Search.AutoSize = true;
+            this.B_Search.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.B_Search.Location = new System.Drawing.Point(432, 499);
+            this.B_Search.Name = "B_Search";
+            this.B_Search.Padding = new System.Windows.Forms.Padding(1);
+            this.B_Search.Size = new System.Drawing.Size(91, 25);
+            this.B_Search.TabIndex = 3;
+            this.B_Search.Text = "Поиск адреса";
+            this.B_Search.UseVisualStyleBackColor = true;
+            this.B_Search.Click += new System.EventHandler(this.B_Search_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -432,19 +369,116 @@
             this.B_XMLPath.UseVisualStyleBackColor = true;
             this.B_XMLPath.Click += new System.EventHandler(this.B_XMLPath_Click);
             // 
-            // B_Search
+            // TP_Tables
             // 
-            this.B_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.B_Search.AutoSize = true;
-            this.B_Search.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.B_Search.Location = new System.Drawing.Point(432, 499);
-            this.B_Search.Name = "B_Search";
-            this.B_Search.Padding = new System.Windows.Forms.Padding(1);
-            this.B_Search.Size = new System.Drawing.Size(91, 25);
-            this.B_Search.TabIndex = 3;
-            this.B_Search.Text = "Поиск адреса";
-            this.B_Search.UseVisualStyleBackColor = true;
-            this.B_Search.Click += new System.EventHandler(this.B_Search_Click);
+            this.TP_Tables.Controls.Add(this.groupBox3);
+            this.TP_Tables.Location = new System.Drawing.Point(4, 22);
+            this.TP_Tables.Name = "TP_Tables";
+            this.TP_Tables.Size = new System.Drawing.Size(529, 530);
+            this.TP_Tables.TabIndex = 3;
+            this.TP_Tables.Text = "Таблицы";
+            this.TP_Tables.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.LV_Tables);
+            this.groupBox3.Controls.Add(this.tableLayoutPanel3);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox3.Location = new System.Drawing.Point(0, 0);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(529, 497);
+            this.groupBox3.TabIndex = 1;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Таблицы для импорта";
+            // 
+            // LV_Tables
+            // 
+            this.LV_Tables.CheckBoxes = true;
+            this.LV_Tables.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4});
+            this.LV_Tables.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LV_Tables.FullRowSelect = true;
+            this.LV_Tables.GridLines = true;
+            this.LV_Tables.HideSelection = false;
+            listViewItem2.StateImageIndex = 0;
+            this.LV_Tables.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem2});
+            this.LV_Tables.Location = new System.Drawing.Point(3, 18);
+            this.LV_Tables.MultiSelect = false;
+            this.LV_Tables.Name = "LV_Tables";
+            this.LV_Tables.Size = new System.Drawing.Size(523, 441);
+            this.LV_Tables.TabIndex = 0;
+            this.LV_Tables.UseCompatibleStateImageBehavior = false;
+            this.LV_Tables.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Таблица";
+            this.columnHeader1.Width = 116;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Строк";
+            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Размер";
+            this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.AutoSize = true;
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Controls.Add(this.B_TablesRefresh, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.flowLayoutPanel2, 1, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 459);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(523, 35);
+            this.tableLayoutPanel3.TabIndex = 2;
+            // 
+            // B_TablesRefresh
+            // 
+            this.B_TablesRefresh.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.B_TablesRefresh.Location = new System.Drawing.Point(3, 6);
+            this.B_TablesRefresh.Name = "B_TablesRefresh";
+            this.B_TablesRefresh.Size = new System.Drawing.Size(75, 23);
+            this.B_TablesRefresh.TabIndex = 2;
+            this.B_TablesRefresh.Text = "Обновить";
+            this.B_TablesRefresh.UseVisualStyleBackColor = true;
+            this.B_TablesRefresh.Click += new System.EventHandler(this.B_TablesRefresh_Click);
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.AutoSize = true;
+            this.flowLayoutPanel2.Controls.Add(this.B_TablesSave);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(439, 3);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(81, 29);
+            this.flowLayoutPanel2.TabIndex = 1;
+            // 
+            // B_TablesSave
+            // 
+            this.B_TablesSave.Location = new System.Drawing.Point(3, 3);
+            this.B_TablesSave.Name = "B_TablesSave";
+            this.B_TablesSave.Size = new System.Drawing.Size(75, 23);
+            this.B_TablesSave.TabIndex = 2;
+            this.B_TablesSave.Text = "Сохранить";
+            this.B_TablesSave.UseVisualStyleBackColor = true;
+            this.B_TablesSave.Click += new System.EventHandler(this.B_TablesSave_Click);
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Дата импорта";
             // 
             // FormMain
             // 
@@ -463,14 +497,8 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.Настройки.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.flowLayoutPanel3.ResumeLayout(false);
-            this.flowLayoutPanel3.PerformLayout();
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.flowLayoutPanel2.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.TP_Import.ResumeLayout(false);
+            this.TP_Import.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -478,10 +506,16 @@
             this.groupBox1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
+            this.TP_Settings.ResumeLayout(false);
+            this.TP_Settings.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.TP_Tables.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
+            this.flowLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -493,32 +527,36 @@
 		private System.Windows.Forms.ToolStripStatusLabel SL_Status;
 		private System.Windows.Forms.ToolStripStatusLabel SL_Value;
         private System.Windows.Forms.TabControl Настройки;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.CheckBox CB_Drop;
-        private System.Windows.Forms.CheckBox CB_DropConfirm;
-        private System.Windows.Forms.Label L_DropWarning;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage TP_Import;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ListView LV_Result;
         private System.Windows.Forms.ColumnHeader Table;
         private System.Windows.Forms.ColumnHeader Result;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button B_Import;
-        private JANL.StopWatchLabel SWL;
+        private JANL.UserControls.StopWatchLabel SWL;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.CheckBox CB_OnlyEmpty;
         private System.Windows.Forms.CheckBox CB_Shrink;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage TP_Settings;
         private System.Windows.Forms.Button B_SQLConnection;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button B_XMLPath;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button B_Search;
+        private System.Windows.Forms.TabPage TP_Tables;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.ListView LV_Tables;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Button B_TablesRefresh;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.Button B_TablesSave;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
     }
 }
 

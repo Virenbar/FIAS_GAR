@@ -18,6 +18,7 @@
     <SccProvider>SAK</SccProvider>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -30,7 +31,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -79,15 +79,18 @@
     <ApplicationIcon>Resources\FNS.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Azure.Core, Version=1.22.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
-      <HintPath>..\packages\Azure.Core.1.22.0\lib\net461\Azure.Core.dll</HintPath>
+    <Reference Include="Azure.Core, Version=1.24.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Azure.Core.1.24.0\lib\net461\Azure.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Azure.Identity, Version=1.5.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
-      <HintPath>..\packages\Azure.Identity.1.5.0\lib\netstandard2.0\Azure.Identity.dll</HintPath>
+    <Reference Include="Azure.Identity, Version=1.6.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Azure.Identity.1.6.0\lib\netstandard2.0\Azure.Identity.dll</HintPath>
     </Reference>
     <Reference Include="CustomMarshalers" />
-    <Reference Include="JANL, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Virenbar.JANL.1.4.1\lib\net452\JANL.dll</HintPath>
+    <Reference Include="JANL, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Virenbar.JANL.2.1.2\lib\net452\JANL.dll</HintPath>
+    </Reference>
+    <Reference Include="JANL.WinForms, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Virenbar.JANL.WinForms.2.1.2\lib\net452\JANL.WinForms.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -98,32 +101,35 @@
     <Reference Include="Microsoft.Data.ConnectionUI.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=f4ca07f51760da93, processorArchitecture=MSIL">
       <HintPath>..\packages\DataConnectionDialog.1.2\lib\Microsoft.Data.ConnectionUI.Dialog.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Data.SqlClient, Version=4.1.0.0, Culture=neutral, PublicKeyToken=23ec7fc2d6eaa4a5, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Data.SqlClient.4.1.0\lib\net461\Microsoft.Data.SqlClient.dll</HintPath>
+    <Reference Include="Microsoft.Data.SqlClient, Version=5.0.0.0, Culture=neutral, PublicKeyToken=23ec7fc2d6eaa4a5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.SqlClient.5.0.0\lib\net462\Microsoft.Data.SqlClient.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Data.Tools.Sql.BatchParser, Version=16.200.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\net462\Microsoft.Data.Tools.Sql.BatchParser.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47027.0\lib\net462\Microsoft.Data.Tools.Sql.BatchParser.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Identity.Client, Version=4.42.0.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Identity.Client.4.42.0\lib\net461\Microsoft.Identity.Client.dll</HintPath>
+    <Reference Include="Microsoft.Identity.Client, Version=4.45.0.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Identity.Client.4.45.0\lib\net461\Microsoft.Identity.Client.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Identity.Client.Extensions.Msal, Version=2.19.6.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Identity.Client.Extensions.Msal.2.19.6\lib\net45\Microsoft.Identity.Client.Extensions.Msal.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=6.16.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.6.16.0\lib\net472\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    <Reference Include="Microsoft.IdentityModel.Abstractions, Version=6.22.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Abstractions.6.22.0\lib\net472\Microsoft.IdentityModel.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.IdentityModel.Logging, Version=6.16.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.IdentityModel.Logging.6.16.0\lib\net472\Microsoft.IdentityModel.Logging.dll</HintPath>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=6.22.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.6.22.0\lib\net472\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.IdentityModel.Protocols, Version=6.16.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.6.16.0\lib\net472\Microsoft.IdentityModel.Protocols.dll</HintPath>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=6.22.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.6.22.0\lib\net472\Microsoft.IdentityModel.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect, Version=6.16.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.6.16.0\lib\net472\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll</HintPath>
+    <Reference Include="Microsoft.IdentityModel.Protocols, Version=6.21.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.6.21.0\lib\net472\Microsoft.IdentityModel.Protocols.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.IdentityModel.Tokens, Version=6.16.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.6.16.0\lib\net472\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    <Reference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect, Version=6.21.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.6.21.0\lib\net472\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=6.22.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.6.22.0\lib\net472\Microsoft.IdentityModel.Tokens.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Assessment, Version=1.100.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.SqlServer.Assessment.1.1.5\lib\net462\Microsoft.SqlServer.Assessment.dll</HintPath>
@@ -132,79 +138,79 @@
       <HintPath>..\packages\Microsoft.SqlServer.Assessment.Authoring.1.1.0\lib\net462\Microsoft.SqlServer.Assessment.Types.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=16.200.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\net462\Microsoft.SqlServer.ConnectionInfo.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47027.0\lib\net462\Microsoft.SqlServer.ConnectionInfo.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Dmf, Version=16.200.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\net462\Microsoft.SqlServer.Dmf.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47027.0\lib\net462\Microsoft.SqlServer.Dmf.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Dmf.Common, Version=16.200.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\net462\Microsoft.SqlServer.Dmf.Common.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47027.0\lib\net462\Microsoft.SqlServer.Dmf.Common.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Management.Assessment, Version=16.200.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\net462\Microsoft.SqlServer.Management.Assessment.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47027.0\lib\net462\Microsoft.SqlServer.Management.Assessment.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Management.Collector, Version=16.200.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\net462\Microsoft.SqlServer.Management.Collector.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47027.0\lib\net462\Microsoft.SqlServer.Management.Collector.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Management.CollectorEnum, Version=16.200.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\net462\Microsoft.SqlServer.Management.CollectorEnum.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47027.0\lib\net462\Microsoft.SqlServer.Management.CollectorEnum.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Management.HadrData, Version=16.200.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\net462\Microsoft.SqlServer.Management.HadrData.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47027.0\lib\net462\Microsoft.SqlServer.Management.HadrData.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Management.HadrModel, Version=16.200.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\net462\Microsoft.SqlServer.Management.HadrModel.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47027.0\lib\net462\Microsoft.SqlServer.Management.HadrModel.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Management.RegisteredServers, Version=16.200.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\net462\Microsoft.SqlServer.Management.RegisteredServers.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47027.0\lib\net462\Microsoft.SqlServer.Management.RegisteredServers.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Management.Sdk.Sfc, Version=16.200.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\net462\Microsoft.SqlServer.Management.Sdk.Sfc.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47027.0\lib\net462\Microsoft.SqlServer.Management.Sdk.Sfc.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Management.SqlScriptPublish, Version=16.200.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\net462\Microsoft.SqlServer.Management.SqlScriptPublish.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47027.0\lib\net462\Microsoft.SqlServer.Management.SqlScriptPublish.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Management.XEvent, Version=16.200.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\net462\Microsoft.SqlServer.Management.XEvent.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47027.0\lib\net462\Microsoft.SqlServer.Management.XEvent.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Management.XEventDbScoped, Version=16.200.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\net462\Microsoft.SqlServer.Management.XEventDbScoped.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47027.0\lib\net462\Microsoft.SqlServer.Management.XEventDbScoped.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Management.XEventDbScopedEnum, Version=16.200.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\net462\Microsoft.SqlServer.Management.XEventDbScopedEnum.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47027.0\lib\net462\Microsoft.SqlServer.Management.XEventDbScopedEnum.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Management.XEventEnum, Version=16.200.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\net462\Microsoft.SqlServer.Management.XEventEnum.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47027.0\lib\net462\Microsoft.SqlServer.Management.XEventEnum.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.PolicyEnum, Version=16.200.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\net462\Microsoft.SqlServer.PolicyEnum.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47027.0\lib\net462\Microsoft.SqlServer.PolicyEnum.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.RegSvrEnum, Version=16.200.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\net462\Microsoft.SqlServer.RegSvrEnum.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47027.0\lib\net462\Microsoft.SqlServer.RegSvrEnum.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.ServiceBrokerEnum, Version=16.200.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\net462\Microsoft.SqlServer.ServiceBrokerEnum.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47027.0\lib\net462\Microsoft.SqlServer.ServiceBrokerEnum.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Smo, Version=16.200.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\net462\Microsoft.SqlServer.Smo.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47027.0\lib\net462\Microsoft.SqlServer.Smo.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Smo.Notebook, Version=16.200.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\net462\Microsoft.SqlServer.Smo.Notebook.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47027.0\lib\net462\Microsoft.SqlServer.Smo.Notebook.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.SmoExtended, Version=16.200.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\net462\Microsoft.SqlServer.SmoExtended.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47027.0\lib\net462\Microsoft.SqlServer.SmoExtended.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.SqlClrProvider, Version=16.200.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\net462\Microsoft.SqlServer.SqlClrProvider.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47027.0\lib\net462\Microsoft.SqlServer.SqlClrProvider.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.SqlEnum, Version=16.200.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\net462\Microsoft.SqlServer.SqlEnum.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47027.0\lib\net462\Microsoft.SqlServer.SqlEnum.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.SqlWmiManagement, Version=16.200.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\net462\Microsoft.SqlServer.SqlWmiManagement.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47027.0\lib\net462\Microsoft.SqlServer.SqlWmiManagement.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.WmiEnum, Version=16.200.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\net462\Microsoft.SqlServer.WmiEnum.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47027.0\lib\net462\Microsoft.SqlServer.WmiEnum.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.4.0, Culture=neutral, PublicKeyToken=8985beaab7ea3f04, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft-WindowsAPICodePack-Core.1.1.4\lib\net472\Microsoft.WindowsAPICodePack.dll</HintPath>
@@ -232,16 +238,16 @@
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.6.0.0\lib\net461\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
     <Reference Include="System.IdentityModel" />
-    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=6.16.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.6.16.0\lib\net472\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=6.22.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.6.22.0\lib\net472\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
     <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="System.Memory.Data, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.Data.6.0.0\lib\net461\System.Memory.Data.dll</HintPath>
@@ -329,8 +335,6 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\FIASClient.cs" />
-    <Compile Include="API\FIASInfo.cs" />
     <Compile Include="DBCreate.cs" />
     <Compile Include="Enums\FIASDivision.cs" />
     <Compile Include="Extensions.cs" />
@@ -351,6 +355,7 @@
     </Compile>
     <Compile Include="Models\FIASHierarchyItem.cs" />
     <Compile Include="Models\FIASRegistryAddress.cs" />
+    <Compile Include="Models\FIASTableInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQL.cs" />
@@ -402,15 +407,20 @@
   <ItemGroup>
     <None Include="Resources\FNS.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\FIAS.Core\FIAS.Core.csproj">
+      <Project>{b5035c78-ca6f-4e4f-9922-848a2070d4c4}</Project>
+      <Name>FIAS.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\Microsoft.Data.SqlClient.SNI.4.0.0\build\net46\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('..\packages\Microsoft.Data.SqlClient.SNI.4.0.0\build\net46\Microsoft.Data.SqlClient.SNI.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.Data.SqlClient.SNI.4.0.0\build\net46\Microsoft.Data.SqlClient.SNI.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Data.SqlClient.SNI.4.0.0\build\net46\Microsoft.Data.SqlClient.SNI.targets'))" />
     <Error Condition="!Exists('..\packages\System.Text.Json.6.0.2\build\System.Text.Json.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Text.Json.6.0.2\build\System.Text.Json.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Data.SqlClient.SNI.5.0.0\build\net46\Microsoft.Data.SqlClient.SNI.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Data.SqlClient.SNI.5.0.0\build\net46\Microsoft.Data.SqlClient.SNI.targets'))" />
   </Target>
   <Import Project="..\packages\System.Text.Json.6.0.2\build\System.Text.Json.targets" Condition="Exists('..\packages\System.Text.Json.6.0.2\build\System.Text.Json.targets')" />
+  <Import Project="..\packages\Microsoft.Data.SqlClient.SNI.5.0.0\build\net46\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('..\packages\Microsoft.Data.SqlClient.SNI.5.0.0\build\net46\Microsoft.Data.SqlClient.SNI.targets')" />
 </Project>

@@ -2,7 +2,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace FIASUpdate.API
+namespace FIAS.Core.API
 {
     public class FIASInfo
     {

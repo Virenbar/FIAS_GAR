@@ -5,21 +5,21 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace FIASUpdate.API
+namespace FIAS.Core.API
 {
     public class FIASClient : IDisposable
     {
         private const string URL = "https://fias.nalog.ru/WebServices/Public/GetAllDownloadFileInfo";
-        private readonly HttpClient FIAS;
+        private readonly HttpClient Client;
 
         public FIASClient()
         {
-            FIAS = new HttpClient();
+            Client = new HttpClient();
         }
 
         public async Task<List<FIASInfo>> GetAllDownloadFileInfo()
         {
-            var HRM = await FIAS.GetAsync(URL);
+            var HRM = await Client.GetAsync(URL);
             var Content = await HRM.Content.ReadAsStringAsync();
 
             var Info = JsonConvert.DeserializeObject<List<FIASInfo>>(Content);
@@ -29,25 +29,12 @@ namespace FIASUpdate.API
         public async Task<List<FIASInfo>> GetAllDownloadFileInfo(DateTime Date)
         {
             var Info = await GetAllDownloadFileInfo();
-            return Info.Where(I => I.Date > Date).ToList();
+            return Info.Where(I => I.Date >= Date).ToList();
         }
 
         #region IDisposable Support
-        private bool disposedValue;
 
-        public void Dispose() => Dispose(true);
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
-            {
-                if (disposing)
-                {
-                    FIAS.Dispose();
-                }
-                disposedValue = true;
-            }
-        }
+        public void Dispose() => Client.Dispose();
 
         #endregion IDisposable Support
     }

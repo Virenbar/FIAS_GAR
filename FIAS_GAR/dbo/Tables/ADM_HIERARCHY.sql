@@ -21,7 +21,13 @@
 
 
 
+
+
 GO
 CREATE CLUSTERED INDEX [ClusteredIndex-20211110-144134]
     ON [dbo].[ADM_HIERARCHY]([OBJECTID] ASC, [PARENTOBJID] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'CanImport', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'ADM_HIERARCHY';
 

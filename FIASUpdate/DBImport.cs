@@ -1,4 +1,5 @@
-﻿using JANL;
+﻿using FIASUpdate.Stores;
+using JANL;
 using Microsoft.Data.SqlClient;
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
@@ -25,6 +26,7 @@ namespace FIASUpdate
         //Status Progress
         private readonly IProgress<TaskProgress> SP;
 
+        private readonly FIASStore Store = new FIASStore(Program.Connection);
         private readonly List<FIASTable> Tables = new List<FIASTable>();
 
         public DBImport() : this(null) { }
@@ -44,13 +46,13 @@ namespace FIASUpdate
 
         public IReadOnlyDictionary<string, string> Result => _result;
 
-        public void Import() => Import(new ImportOptions { Skip = true });
+        public void Import() => Import(new ImportOptions { OnlyEmpty = true });
 
         public void Import(ImportOptions options)
         {
             _result.Clear();
             PrepareFiles();
-            ImportTables(options.Skip);
+            ImportTables(options);
             if (options.Shrink) { ShrinkDatabase(); }
         }
 
@@ -83,7 +85,7 @@ namespace FIASUpdate
             }
         }
 
-        private void ImportTables(bool OnlyEmpty)
+        private void ImportTables(ImportOptions options)
         {
             foreach (var Table in Tables)
             {
@@ -96,7 +98,12 @@ namespace FIASUpdate
                 }
                 //Проверка настроек импорта
                 T.Refresh();
-                if (!OnlyEmpty)
+                if (!Store.GetCanImport(Table.Name))
+                {
+                    AddResult(Table.Name, $"Пропущена ({T.RowCount:N0})");
+                    continue;
+                }
+                if (!options.OnlyEmpty)
                 {
                     T.TruncateData();
                 }
@@ -108,6 +115,7 @@ namespace FIASUpdate
 
                 //Импорт
                 var Count = ImportTable(T, Table);
+                Store.SetLastImport(Table.Name, options.Date);
                 AddResult(Table.Name, $"Импортирована ({Count:N0})");
                 Thread.Sleep(2 * 1000);
             }
@@ -202,8 +210,9 @@ namespace FIASUpdate
     }
     internal class ImportOptions
     {
+        public DateTime Date { get; set; }
+        public bool OnlyEmpty { get; set; }
         public bool Shrink { get; set; }
-        public bool Skip { get; set; }
     }
     internal class ResultAddedEventArgs : EventArgs
     {

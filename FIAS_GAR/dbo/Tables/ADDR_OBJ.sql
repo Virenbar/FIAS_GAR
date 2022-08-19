@@ -20,7 +20,17 @@
 
 
 
+
+
+
+
 GO
 CREATE CLUSTERED INDEX [ClusteredIndex-20211206-181151]
     ON [dbo].[ADDR_OBJ]([OBJECTID] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'CanImport', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'ADDR_OBJ';
+
+
 

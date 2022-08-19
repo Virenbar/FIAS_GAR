@@ -1,18 +1,21 @@
-﻿using FIASUpdate.API;
+﻿using FIAS.Core.API;
+using FIASUpdate.Models;
+using FIASUpdate.Properties;
+using FIASUpdate.Stores;
 using JANL;
+using Microsoft.Data.ConnectionUI;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.Data.ConnectionUI;
-using FIASUpdate.Properties;
-using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace FIASUpdate
 {
     public partial class FormMain : Form
     {
+        private FIASStore Store = new FIASStore(Program.Connection);
         private Progress<TaskProgress> TP;
 
         public FormMain() => InitializeComponent();
@@ -32,7 +35,7 @@ namespace FIASUpdate
                 LV_Result.Items.Clear();
                 var Options = new ImportOptions
                 {
-                    Skip = CB_OnlyEmpty.Checked,
+                    OnlyEmpty = CB_OnlyEmpty.Checked,
                     Shrink = CB_Shrink.Checked
                 };
                 SWL.Start();
@@ -57,14 +60,6 @@ namespace FIASUpdate
             F.ShowDialog(this);
         }
 
-        private void CB_Drop_CheckedChanged(object sender, EventArgs e)
-        {
-            CB_DropConfirm.Visible = CB_Drop.Checked;
-            if (!CB_Drop.Checked) { CB_DropConfirm.Checked = false; }
-        }
-
-        private void CB_DropConfirm_CheckedChanged(object sender, EventArgs e) => L_DropWarning.Visible = CB_DropConfirm.Checked;
-
         private void FIAS_ResultChanged(object sender, ResultAddedEventArgs e) => AddResult(e.Table, e.Status);
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -77,6 +72,7 @@ namespace FIASUpdate
                     SL_Value.Text = (T.Value + T.Max == 0) ? "" : $"{T.Value:N0}{new string('|', T.Value / 100_000)}";
                 }
             });
+            LV_Tables.Items.Clear();
         }
 
         private async Task GetFiles()
@@ -86,6 +82,30 @@ namespace FIASUpdate
                 var Files = await Client.GetAllDownloadFileInfo(new DateTime(2022, 1, 4));
                 Console.WriteLine(Files.First().GarXMLDeltaURL);
             }
+        }
+
+        private void RefreshTables()
+        {
+            var Tables = Store.TablesInfo();
+            LV_Tables.BeginUpdate();
+            LV_Tables.Items.Clear();
+            foreach (var T in Tables)
+            {
+                var LVI = new ListViewItem(new[] { $"{T.Name}", $"{T.RowCount:N0}", $"{T.TotalMB:N2} МБ", $"{T.LastImport:yyyy.MM.dd}" }) { Tag = T, Checked = T.CanImport };
+                LV_Tables.Items.Add(LVI);
+            }
+            LV_Tables.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            LV_Tables.EndUpdate();
+        }
+
+        private void SaveTables()
+        {
+            foreach (ListViewItem item in LV_Tables.Items)
+            {
+                var Table = (FIASTableInfo)item.Tag;
+                Store.SetCanImport(Table.Name, item.Checked);
+            }
+            RefreshTables();
         }
 
         private void SetResult(IReadOnlyDictionary<string, string> Result)
@@ -116,6 +136,10 @@ namespace FIASUpdate
                 }
             }
         }
+
+        private void B_TablesRefresh_Click(object sender, EventArgs e) => RefreshTables();
+
+        private void B_TablesSave_Click(object sender, EventArgs e) => SaveTables();
 
         private void B_XMLPath_Click(object sender, EventArgs e)
         {

@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+	</ItemGroup>
+	
+	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+		<PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net452'">
+		<Reference Include="System.Data.DataSetExtensions" />
+		<Reference Include="System.Net.Http" />
+	</ItemGroup>
+</Project>

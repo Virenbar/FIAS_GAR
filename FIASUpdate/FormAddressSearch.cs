@@ -1,7 +1,6 @@
 ﻿using FIASUpdate.Enums;
 using FIASUpdate.Stores;
 using JANL;
-using JANL.SQL;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,7 +14,7 @@ namespace FIASUpdate
     {
         private readonly string DBName = FIASManager.DBName;
         private readonly List<(RadioButton RB, FIASDivision Division)> RB_F;
-        private readonly FIASStore Store = new FIASStore();
+        private readonly FIASStore Store = new FIASStore(Program.Connection);
 
         public FormAddressSearch()
         {
@@ -112,10 +111,7 @@ namespace FIASUpdate
             SetUIState(false);
             try
             {
-                using (var C = await SQLHelper.NewConnectionAsync())
-                {
-                    CB_Level.DataSource = await FIASStore.UP_CB_Levels().ExecuteAsync(C);
-                }
+                CB_Level.DataSource = await Store.FIASLevels();
                 CB_Level.DisplayMember = "Name";
                 CB_Level.ValueMember = "Level";
                 CB_Level.SelectedValue = Level;
@@ -156,7 +152,7 @@ namespace FIASUpdate
             }
         }
 
-        private void TB_Search_TextChanged(object sender, EventArgs e) => L_GUID.Visible = Store.IsGUID(TB_Search.Text);
+        private void TB_Search_TextChanged(object sender, EventArgs e) => L_GUID.Visible = FIASStore.IsGUID(TB_Search.Text);
 
         #endregion UI Events
     }
