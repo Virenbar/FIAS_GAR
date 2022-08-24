@@ -1,4 +1,4 @@
-﻿namespace FIASUpdate.Enums
+﻿namespace FIAS.Core.Enums
 {
     public enum FIASDivision
     {   /// <summary>

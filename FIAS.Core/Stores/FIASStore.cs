@@ -1,5 +1,5 @@
-﻿using FIASUpdate.Enums;
-using FIASUpdate.Models;
+﻿using FIAS.Core.Enums;
+using FIAS.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-namespace FIASUpdate.Stores
+namespace FIAS.Core.Stores
 {
     public class FIASStore
     {
@@ -39,13 +39,32 @@ namespace FIASUpdate.Stores
                 return DT.Rows.Cast<DataRow>().Select(R => FIASHierarchyItem.Parse(R)).ToList();
         }
 
+        /// <summary>
+        /// Внутренний код
+        /// </summary>
+        /// <param name="GUID"></param>
+        /// <returns></returns>
+        public long GetID(string GUID) => UP_IDByGUID(GUID);
+
         public DateTime? GetLastImport(string table) => (DateTime?)UP_TablePropertyGet(table, "LastImport");
 
-        public async Task<FIASRegistryAddress> GetObject(string GUID)
+        public FIASRegistryAddress GetObject(string GUID) => GetObject(FIASDivision.mun, GUID);
+
+        public FIASRegistryAddress GetObject(FIASDivision division, string GUID)
         {
-            using (var DT = await Task.Run(() => UP_RegistrySelect(GUID)))
+            using (var DT = UP_RegistrySelect(division, GUID))
+            {
+                if (DT.Rows.Count == 0) { return null; }
                 return FIASRegistryAddress.Parse(DT.Rows[0]);
+            }
         }
+
+        /// <summary>
+        /// Ссылка на выписку по объекту
+        /// </summary>
+        /// <param name="GUID"></param>
+        /// <returns></returns>
+        public string GetPDFStatement(string GUID) => $"https://fias.nalog.ru/Export/ExportPdfStatement?objId={GetID(GUID)}&actual=true&division=1";
 
         /// <summary>
         /// Поиск адреса по AddressFull или GUID
@@ -78,6 +97,8 @@ namespace FIASUpdate.Stores
         }
 
         #region SQL
+
+        #region Execute
 
         private static void ExecuteNonQuery(SqlCommand command, string connection)
         {
@@ -130,6 +151,8 @@ namespace FIASUpdate.Stores
 
         private static SqlCommand NewProcedure([CallerMemberName] string name = null) => new SqlCommand(name) { CommandType = CommandType.StoredProcedure };
 
+        #endregion Execute
+
         private DataTable UP_CB_Levels()
         {
             using (var Command = NewProcedure())
@@ -152,9 +175,21 @@ namespace FIASUpdate.Stores
             }
         }
 
-        private DataTable UP_RegistrySelect(string GUID)
+        private long UP_IDByGUID(string GUID)
         {
             using (var Command = NewProcedure())
+            {
+                var P = Command.Parameters;
+                P.AddWithValue("@GUID", GUID);
+                return ExecuteScalar<long>(Command, Connection);
+            }
+        }
+
+        private DataTable UP_RegistrySelect(string GUID) => UP_RegistrySelect(FIASDivision.mun, GUID);
+
+        private DataTable UP_RegistrySelect(FIASDivision H, string GUID)
+        {
+            using (var Command = NewProcedure($"{H}.{nameof(UP_RegistrySelect)}"))
             {
                 var P = Command.Parameters;
                 P.Add(new SqlParameter("@GUID", SqlDbType.Char, 36)).Value = GUID;

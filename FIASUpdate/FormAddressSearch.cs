@@ -1,5 +1,5 @@
-﻿using FIASUpdate.Enums;
-using FIASUpdate.Stores;
+﻿using FIAS.Core.Enums;
+using FIAS.Core.Stores;
 using JANL;
 using System;
 using System.Collections.Generic;

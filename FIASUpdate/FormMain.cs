@@ -1,7 +1,7 @@
 ﻿using FIAS.Core.API;
-using FIASUpdate.Models;
+using FIAS.Core.Models;
 using FIASUpdate.Properties;
-using FIASUpdate.Stores;
+using FIAS.Core.Stores;
 using JANL;
 using Microsoft.Data.ConnectionUI;
 using Microsoft.WindowsAPICodePack.Dialogs;

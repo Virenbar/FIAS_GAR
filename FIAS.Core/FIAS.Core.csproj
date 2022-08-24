@@ -2,6 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
+		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
 	
 	<ItemGroup>
@@ -10,10 +11,11 @@
 	
 	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
 		<PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+		<PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'net452'">
-		<Reference Include="System.Data.DataSetExtensions" />
+	<ItemGroup Condition="'$(TargetFramework)' == 'net452'"> 
 		<Reference Include="System.Net.Http" />
+		<Reference Include="System.Data.DataSetExtensions" />
 	</ItemGroup>
 </Project>
