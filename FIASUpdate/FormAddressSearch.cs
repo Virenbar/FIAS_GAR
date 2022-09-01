@@ -12,7 +12,7 @@ namespace FIASUpdate
 {
     public partial class FormAddressSearch : Form
     {
-        private readonly string DBName = FIASManager.DBName;
+        private readonly string DBName = Program.DBName;
         private readonly List<(RadioButton RB, FIASDivision Division)> RB_F;
         private readonly FIASStore Store = new FIASStore(Program.Connection);
 

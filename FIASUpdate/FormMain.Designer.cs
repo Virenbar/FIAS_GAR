@@ -51,23 +51,24 @@
             this.CB_OnlyEmpty = new System.Windows.Forms.CheckBox();
             this.CB_Shrink = new System.Windows.Forms.CheckBox();
             this.TP_Settings = new System.Windows.Forms.TabPage();
-            this.B_Search = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.B_SQLConnection = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.B_XMLPath = new System.Windows.Forms.Button();
-            this.TP_Tables = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.LV_Tables = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.B_TablesRefresh = new System.Windows.Forms.Button();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.B_TablesSave = new System.Windows.Forms.Button();
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.сервисToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MI_Search = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.statusStrip1.SuspendLayout();
             this.Настройки.SuspendLayout();
             this.TP_Import.SuspendLayout();
@@ -77,10 +78,10 @@
             this.flowLayoutPanel1.SuspendLayout();
             this.TP_Settings.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.TP_Tables.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -91,7 +92,7 @@
             this.toolStripStatusLabel1,
             this.SL_Status,
             this.SL_Value});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 556);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 588);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.statusStrip1.Size = new System.Drawing.Size(537, 22);
@@ -120,12 +121,11 @@
             // 
             this.Настройки.Controls.Add(this.TP_Import);
             this.Настройки.Controls.Add(this.TP_Settings);
-            this.Настройки.Controls.Add(this.TP_Tables);
             this.Настройки.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Настройки.Location = new System.Drawing.Point(0, 0);
+            this.Настройки.Location = new System.Drawing.Point(0, 24);
             this.Настройки.Name = "Настройки";
             this.Настройки.SelectedIndex = 0;
-            this.Настройки.Size = new System.Drawing.Size(537, 556);
+            this.Настройки.Size = new System.Drawing.Size(537, 564);
             this.Настройки.TabIndex = 10;
             // 
             // TP_Import
@@ -136,7 +136,7 @@
             this.TP_Import.Location = new System.Drawing.Point(4, 22);
             this.TP_Import.Name = "TP_Import";
             this.TP_Import.Padding = new System.Windows.Forms.Padding(3);
-            this.TP_Import.Size = new System.Drawing.Size(529, 530);
+            this.TP_Import.Size = new System.Drawing.Size(529, 506);
             this.TP_Import.TabIndex = 1;
             this.TP_Import.Text = "Импорт данных";
             this.TP_Import.UseVisualStyleBackColor = true;
@@ -147,7 +147,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(3, 70);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(523, 422);
+            this.groupBox2.Size = new System.Drawing.Size(523, 398);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Результат";
@@ -165,7 +165,7 @@
             listViewItem1});
             this.LV_Result.Location = new System.Drawing.Point(3, 18);
             this.LV_Result.Name = "LV_Result";
-            this.LV_Result.Size = new System.Drawing.Size(517, 401);
+            this.LV_Result.Size = new System.Drawing.Size(517, 377);
             this.LV_Result.TabIndex = 10;
             this.LV_Result.UseCompatibleStateImageBehavior = false;
             this.LV_Result.View = System.Windows.Forms.View.Details;
@@ -190,7 +190,7 @@
             this.tableLayoutPanel1.Controls.Add(this.B_Import, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.SWL, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 492);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 468);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -275,29 +275,16 @@
             // 
             // TP_Settings
             // 
-            this.TP_Settings.Controls.Add(this.B_Search);
+            this.TP_Settings.Controls.Add(this.groupBox3);
+            this.TP_Settings.Controls.Add(this.tableLayoutPanel3);
             this.TP_Settings.Controls.Add(this.tableLayoutPanel2);
             this.TP_Settings.Location = new System.Drawing.Point(4, 22);
             this.TP_Settings.Name = "TP_Settings";
             this.TP_Settings.Padding = new System.Windows.Forms.Padding(3);
-            this.TP_Settings.Size = new System.Drawing.Size(529, 530);
+            this.TP_Settings.Size = new System.Drawing.Size(529, 538);
             this.TP_Settings.TabIndex = 2;
             this.TP_Settings.Text = "Настройки";
             this.TP_Settings.UseVisualStyleBackColor = true;
-            // 
-            // B_Search
-            // 
-            this.B_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.B_Search.AutoSize = true;
-            this.B_Search.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.B_Search.Location = new System.Drawing.Point(432, 499);
-            this.B_Search.Name = "B_Search";
-            this.B_Search.Padding = new System.Windows.Forms.Padding(1);
-            this.B_Search.Size = new System.Drawing.Size(91, 25);
-            this.B_Search.TabIndex = 3;
-            this.B_Search.Text = "Поиск адреса";
-            this.B_Search.UseVisualStyleBackColor = true;
-            this.B_Search.Click += new System.EventHandler(this.B_Search_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -319,17 +306,6 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(523, 62);
             this.tableLayoutPanel2.TabIndex = 2;
             // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FIASUpdate.Properties.Settings.Default, "SQLCS", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox1.Location = new System.Drawing.Point(3, 4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(438, 22);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.Text = global::FIASUpdate.Properties.Settings.Default.SQLCS;
-            // 
             // B_SQLConnection
             // 
             this.B_SQLConnection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -343,17 +319,6 @@
             this.B_SQLConnection.Text = "SQL Server";
             this.B_SQLConnection.UseVisualStyleBackColor = true;
             this.B_SQLConnection.Click += new System.EventHandler(this.B_SQLConnection_Click);
-            // 
-            // textBox2
-            // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FIASUpdate.Properties.Settings.Default, "XMLPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox2.Location = new System.Drawing.Point(3, 35);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(438, 22);
-            this.textBox2.TabIndex = 1;
-            this.textBox2.Text = global::FIASUpdate.Properties.Settings.Default.XMLPath;
             // 
             // B_XMLPath
             // 
@@ -369,24 +334,13 @@
             this.B_XMLPath.UseVisualStyleBackColor = true;
             this.B_XMLPath.Click += new System.EventHandler(this.B_XMLPath_Click);
             // 
-            // TP_Tables
-            // 
-            this.TP_Tables.Controls.Add(this.groupBox3);
-            this.TP_Tables.Location = new System.Drawing.Point(4, 22);
-            this.TP_Tables.Name = "TP_Tables";
-            this.TP_Tables.Size = new System.Drawing.Size(529, 530);
-            this.TP_Tables.TabIndex = 3;
-            this.TP_Tables.Text = "Таблицы";
-            this.TP_Tables.UseVisualStyleBackColor = true;
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.LV_Tables);
-            this.groupBox3.Controls.Add(this.tableLayoutPanel3);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox3.Location = new System.Drawing.Point(0, 0);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(3, 65);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(529, 497);
+            this.groupBox3.Size = new System.Drawing.Size(523, 433);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Таблицы для импорта";
@@ -409,7 +363,7 @@
             this.LV_Tables.Location = new System.Drawing.Point(3, 18);
             this.LV_Tables.MultiSelect = false;
             this.LV_Tables.Name = "LV_Tables";
-            this.LV_Tables.Size = new System.Drawing.Size(523, 441);
+            this.LV_Tables.Size = new System.Drawing.Size(517, 412);
             this.LV_Tables.TabIndex = 0;
             this.LV_Tables.UseCompatibleStateImageBehavior = false;
             this.LV_Tables.View = System.Windows.Forms.View.Details;
@@ -429,6 +383,10 @@
             this.columnHeader3.Text = "Размер";
             this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Дата импорта";
+            // 
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.AutoSize = true;
@@ -438,19 +396,22 @@
             this.tableLayoutPanel3.Controls.Add(this.B_TablesRefresh, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.flowLayoutPanel2, 1, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 459);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 498);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(523, 35);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(523, 37);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
             // B_TablesRefresh
             // 
             this.B_TablesRefresh.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.B_TablesRefresh.AutoSize = true;
+            this.B_TablesRefresh.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.B_TablesRefresh.Location = new System.Drawing.Point(3, 6);
             this.B_TablesRefresh.Name = "B_TablesRefresh";
-            this.B_TablesRefresh.Size = new System.Drawing.Size(75, 23);
+            this.B_TablesRefresh.Padding = new System.Windows.Forms.Padding(1);
+            this.B_TablesRefresh.Size = new System.Drawing.Size(73, 25);
             this.B_TablesRefresh.TabIndex = 2;
             this.B_TablesRefresh.Text = "Обновить";
             this.B_TablesRefresh.UseVisualStyleBackColor = true;
@@ -461,35 +422,84 @@
             this.flowLayoutPanel2.AutoSize = true;
             this.flowLayoutPanel2.Controls.Add(this.B_TablesSave);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(439, 3);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(438, 3);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(81, 29);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(82, 31);
             this.flowLayoutPanel2.TabIndex = 1;
             // 
             // B_TablesSave
             // 
+            this.B_TablesSave.AutoSize = true;
+            this.B_TablesSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.B_TablesSave.Location = new System.Drawing.Point(3, 3);
             this.B_TablesSave.Name = "B_TablesSave";
-            this.B_TablesSave.Size = new System.Drawing.Size(75, 23);
+            this.B_TablesSave.Padding = new System.Windows.Forms.Padding(1);
+            this.B_TablesSave.Size = new System.Drawing.Size(76, 25);
             this.B_TablesSave.TabIndex = 2;
             this.B_TablesSave.Text = "Сохранить";
             this.B_TablesSave.UseVisualStyleBackColor = true;
             this.B_TablesSave.Click += new System.EventHandler(this.B_TablesSave_Click);
             // 
-            // columnHeader4
+            // menuStrip1
             // 
-            this.columnHeader4.Text = "Дата импорта";
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.сервисToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(537, 24);
+            this.menuStrip1.TabIndex = 11;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // сервисToolStripMenuItem
+            // 
+            this.сервисToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.сервисToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MI_Search});
+            this.сервисToolStripMenuItem.Name = "сервисToolStripMenuItem";
+            this.сервисToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.сервисToolStripMenuItem.Text = "Сервис";
+            // 
+            // MI_Search
+            // 
+            this.MI_Search.Name = "MI_Search";
+            this.MI_Search.Size = new System.Drawing.Size(180, 22);
+            this.MI_Search.Text = "Поиск адреса в БД";
+            this.MI_Search.Click += new System.EventHandler(this.MI_Search_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FIASUpdate.Properties.Settings.Default, "SQLCS", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox1.Location = new System.Drawing.Point(3, 4);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(438, 22);
+            this.textBox1.TabIndex = 1;
+            this.textBox1.Text = global::FIASUpdate.Properties.Settings.Default.SQLCS;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FIASUpdate.Properties.Settings.Default, "XMLPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox2.Location = new System.Drawing.Point(3, 35);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(438, 22);
+            this.textBox2.TabIndex = 1;
+            this.textBox2.Text = global::FIASUpdate.Properties.Settings.Default.XMLPath;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(537, 578);
+            this.ClientSize = new System.Drawing.Size(537, 610);
             this.Controls.Add(this.Настройки);
             this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(550, 500);
             this.Name = "FormMain";
             this.Text = "FIAS Update";
@@ -510,12 +520,13 @@
             this.TP_Settings.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.TP_Tables.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -545,8 +556,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button B_XMLPath;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button B_Search;
-        private System.Windows.Forms.TabPage TP_Tables;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ListView LV_Tables;
         private System.Windows.Forms.ColumnHeader columnHeader1;
@@ -557,6 +566,9 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Button B_TablesSave;
         private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem сервисToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MI_Search;
     }
 }
 

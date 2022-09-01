@@ -14,7 +14,7 @@ namespace FIASUpdate
     [Obsolete]
     internal class DBCreate : IDisposable
     {
-        private static readonly string GAR = FIASManager.Root;
+        private static readonly string GAR = Program.XMLPath;
         private static readonly string GAR_XSD = GAR + @"\gar_schemas";
         private readonly Dictionary<string, DataSet> DataSets = new Dictionary<string, DataSet>();
         private readonly Database DB;
@@ -28,7 +28,7 @@ namespace FIASUpdate
 
         public DBCreate(IProgress<TaskProgress> TaskProgress)
         {
-            DBName = FIASManager.DBName;
+            DBName = Program.DBName;
             SP = TaskProgress;
 
             SqlConnection Connection = SQL.NewConnection();

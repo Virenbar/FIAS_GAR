@@ -62,9 +62,9 @@
             // TB_Search
             // 
             this.TB_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.TB_Search.Location = new System.Drawing.Point(9, 11);
+            this.TB_Search.Location = new System.Drawing.Point(9, 10);
             this.TB_Search.Name = "TB_Search";
-            this.TB_Search.Size = new System.Drawing.Size(725, 20);
+            this.TB_Search.Size = new System.Drawing.Size(724, 22);
             this.TB_Search.TabIndex = 0;
             this.FormToolTip.SetToolTip(this.TB_Search, "Enter - Выполнить поиск\r\nEsc - Очистить поле");
             this.TB_Search.TextChanged += new System.EventHandler(this.TB_Search_TextChanged);
@@ -74,7 +74,7 @@
             // 
             this.NUD_Limit.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.FlowLayoutPanel1.SetFlowBreak(this.NUD_Limit, true);
-            this.NUD_Limit.Location = new System.Drawing.Point(337, 3);
+            this.NUD_Limit.Location = new System.Drawing.Point(339, 3);
             this.NUD_Limit.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -86,7 +86,7 @@
             0,
             0});
             this.NUD_Limit.Name = "NUD_Limit";
-            this.NUD_Limit.Size = new System.Drawing.Size(72, 20);
+            this.NUD_Limit.Size = new System.Drawing.Size(72, 22);
             this.NUD_Limit.TabIndex = 7;
             this.NUD_Limit.Value = new decimal(new int[] {
             50,
@@ -98,9 +98,9 @@
             // 
             this.Label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.Label5.AutoSize = true;
-            this.Label5.Location = new System.Drawing.Point(3, 32);
+            this.Label5.Location = new System.Drawing.Point(3, 33);
             this.Label5.Name = "Label5";
-            this.Label5.Size = new System.Drawing.Size(52, 13);
+            this.Label5.Size = new System.Drawing.Size(53, 13);
             this.Label5.TabIndex = 9;
             this.Label5.Text = "Деление";
             // 
@@ -109,9 +109,9 @@
             this.RB_ADM.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.RB_ADM.AutoSize = true;
             this.RB_ADM.Checked = true;
-            this.RB_ADM.Location = new System.Drawing.Point(61, 30);
+            this.RB_ADM.Location = new System.Drawing.Point(62, 31);
             this.RB_ADM.Name = "RB_ADM";
-            this.RB_ADM.Size = new System.Drawing.Size(122, 17);
+            this.RB_ADM.Size = new System.Drawing.Size(128, 17);
             this.RB_ADM.TabIndex = 12;
             this.RB_ADM.TabStop = true;
             this.RB_ADM.Text = "Административное";
@@ -122,9 +122,9 @@
             // 
             this.RB_MUN.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.RB_MUN.AutoSize = true;
-            this.RB_MUN.Location = new System.Drawing.Point(189, 30);
+            this.RB_MUN.Location = new System.Drawing.Point(196, 31);
             this.RB_MUN.Name = "RB_MUN";
-            this.RB_MUN.Size = new System.Drawing.Size(105, 17);
+            this.RB_MUN.Size = new System.Drawing.Size(113, 17);
             this.RB_MUN.TabIndex = 11;
             this.RB_MUN.Text = "Муниципальное";
             this.RB_MUN.UseVisualStyleBackColor = true;
@@ -137,7 +137,7 @@
             this.FlowLayoutPanel1.SetFlowBreak(this.L_GUID, true);
             this.L_GUID.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.L_GUID.ForeColor = System.Drawing.Color.ForestGreen;
-            this.L_GUID.Location = new System.Drawing.Point(300, 31);
+            this.L_GUID.Location = new System.Drawing.Point(315, 32);
             this.L_GUID.Name = "L_GUID";
             this.L_GUID.Size = new System.Drawing.Size(38, 15);
             this.L_GUID.TabIndex = 10;
@@ -147,10 +147,10 @@
             // TB_Address
             // 
             this.TB_Address.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.TB_Address.Location = new System.Drawing.Point(47, 33);
+            this.TB_Address.Location = new System.Drawing.Point(47, 32);
             this.TB_Address.Name = "TB_Address";
             this.TB_Address.ReadOnly = true;
-            this.TB_Address.Size = new System.Drawing.Size(703, 20);
+            this.TB_Address.Size = new System.Drawing.Size(701, 22);
             this.TB_Address.TabIndex = 5;
             // 
             // Label4
@@ -159,7 +159,7 @@
             this.Label4.AutoSize = true;
             this.Label4.Location = new System.Drawing.Point(3, 7);
             this.Label4.Name = "Label4";
-            this.Label4.Size = new System.Drawing.Size(51, 13);
+            this.Label4.Size = new System.Drawing.Size(52, 13);
             this.Label4.TabIndex = 9;
             this.Label4.Text = "Уровень";
             // 
@@ -167,9 +167,9 @@
             // 
             this.Label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.Label1.AutoSize = true;
-            this.Label1.Location = new System.Drawing.Point(291, 7);
+            this.Label1.Location = new System.Drawing.Point(292, 7);
             this.Label1.Name = "Label1";
-            this.Label1.Size = new System.Drawing.Size(40, 13);
+            this.Label1.Size = new System.Drawing.Size(41, 13);
             this.Label1.TabIndex = 8;
             this.Label1.Text = "Лимит";
             // 
@@ -188,7 +188,7 @@
             this.FlowLayoutPanel1.Controls.Add(this.L_GUID);
             this.FlowLayoutPanel1.Location = new System.Drawing.Point(9, 40);
             this.FlowLayoutPanel1.Name = "FlowLayoutPanel1";
-            this.FlowLayoutPanel1.Size = new System.Drawing.Size(412, 50);
+            this.FlowLayoutPanel1.Size = new System.Drawing.Size(414, 51);
             this.FlowLayoutPanel1.TabIndex = 14;
             // 
             // CB_Level
@@ -196,7 +196,7 @@
             this.CB_Level.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.CB_Level.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CB_Level.FormattingEnabled = true;
-            this.CB_Level.Location = new System.Drawing.Point(60, 3);
+            this.CB_Level.Location = new System.Drawing.Point(61, 3);
             this.CB_Level.Name = "CB_Level";
             this.CB_Level.Size = new System.Drawing.Size(225, 21);
             this.CB_Level.TabIndex = 6;
@@ -221,7 +221,7 @@
             this.TableLayoutPanel3.RowCount = 2;
             this.TableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.TableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.TableLayoutPanel3.Size = new System.Drawing.Size(800, 99);
+            this.TableLayoutPanel3.Size = new System.Drawing.Size(800, 100);
             this.TableLayoutPanel3.TabIndex = 17;
             // 
             // B_Search
@@ -229,10 +229,10 @@
             this.B_Search.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.B_Search.AutoSize = true;
             this.B_Search.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.B_Search.Location = new System.Drawing.Point(740, 9);
+            this.B_Search.Location = new System.Drawing.Point(739, 9);
             this.B_Search.Name = "B_Search";
             this.B_Search.Padding = new System.Windows.Forms.Padding(1);
-            this.B_Search.Size = new System.Drawing.Size(51, 25);
+            this.B_Search.Size = new System.Drawing.Size(52, 25);
             this.B_Search.TabIndex = 3;
             this.B_Search.Text = "Поиск";
             this.B_Search.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -245,10 +245,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.B_Info.AutoSize = true;
             this.B_Info.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.B_Info.Location = new System.Drawing.Point(740, 40);
+            this.B_Info.Location = new System.Drawing.Point(739, 40);
             this.B_Info.Name = "B_Info";
             this.B_Info.Padding = new System.Windows.Forms.Padding(1);
-            this.B_Info.Size = new System.Drawing.Size(51, 25);
+            this.B_Info.Size = new System.Drawing.Size(52, 25);
             this.B_Info.TabIndex = 3;
             this.B_Info.Text = "О БД";
             this.B_Info.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -292,9 +292,9 @@
             this.B_CopyGUID.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.B_CopyGUID.AutoSize = true;
             this.B_CopyGUID.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.B_CopyGUID.Location = new System.Drawing.Point(756, 3);
+            this.B_CopyGUID.Location = new System.Drawing.Point(754, 3);
             this.B_CopyGUID.Name = "B_CopyGUID";
-            this.B_CopyGUID.Size = new System.Drawing.Size(41, 23);
+            this.B_CopyGUID.Size = new System.Drawing.Size(43, 23);
             this.B_CopyGUID.TabIndex = 3;
             this.B_CopyGUID.Text = "Copy";
             this.B_CopyGUID.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -308,7 +308,7 @@
             this.TB_GUID.Location = new System.Drawing.Point(47, 4);
             this.TB_GUID.Name = "TB_GUID";
             this.TB_GUID.ReadOnly = true;
-            this.TB_GUID.Size = new System.Drawing.Size(703, 20);
+            this.TB_GUID.Size = new System.Drawing.Size(701, 20);
             this.TB_GUID.TabIndex = 4;
             // 
             // Label2
@@ -326,9 +326,9 @@
             this.B_CopyAddress.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.B_CopyAddress.AutoSize = true;
             this.B_CopyAddress.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.B_CopyAddress.Location = new System.Drawing.Point(756, 32);
+            this.B_CopyAddress.Location = new System.Drawing.Point(754, 32);
             this.B_CopyAddress.Name = "B_CopyAddress";
-            this.B_CopyAddress.Size = new System.Drawing.Size(41, 23);
+            this.B_CopyAddress.Size = new System.Drawing.Size(43, 23);
             this.B_CopyAddress.TabIndex = 3;
             this.B_CopyAddress.Text = "Copy";
             this.B_CopyAddress.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -354,9 +354,9 @@
             this.LV_Search.FullRowSelect = true;
             this.LV_Search.GridLines = true;
             this.LV_Search.HideSelection = false;
-            this.LV_Search.Location = new System.Drawing.Point(0, 99);
+            this.LV_Search.Location = new System.Drawing.Point(0, 100);
             this.LV_Search.Name = "LV_Search";
-            this.LV_Search.Size = new System.Drawing.Size(800, 293);
+            this.LV_Search.Size = new System.Drawing.Size(800, 292);
             this.LV_Search.TabIndex = 14;
             this.LV_Search.UseCompatibleStateImageBehavior = false;
             this.LV_Search.View = System.Windows.Forms.View.Details;
@@ -366,11 +366,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.LV_Search);
             this.Controls.Add(this.TableLayoutPanel3);
             this.Controls.Add(this.TableLayoutPanel2);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Name = "FormAddressSearch";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormAddressSearch";
             this.Load += new System.EventHandler(this.FormAddressSearch_Load);
             ((System.ComponentModel.ISupportInitialize)(this.NUD_Limit)).EndInit();

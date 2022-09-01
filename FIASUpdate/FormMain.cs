@@ -54,12 +54,6 @@ namespace FIASUpdate
             }
         }
 
-        private void B_Search_Click(object sender, EventArgs e)
-        {
-            var F = new FormAddressSearch();
-            F.ShowDialog(this);
-        }
-
         private void FIAS_ResultChanged(object sender, ResultAddedEventArgs e) => AddResult(e.Table, e.Status);
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -128,8 +122,8 @@ namespace FIASUpdate
                 DataSource.AddStandardDataSources(D);
                 D.SelectedDataSource = DataSource.SqlDataSource;
                 D.SelectedDataProvider = DataProvider.SqlDataProvider;
-                D.ConnectionString = FIASManager.DBString;
-                if (DataConnectionDialog.Show(D) == DialogResult.OK)
+                D.ConnectionString = Program.Connection;
+                if (DataConnectionDialog.Show(D, this) == DialogResult.OK)
                 {
                     Settings.Default.SQLCS = D.ConnectionString;
                     Settings.Default.Save();
@@ -139,14 +133,18 @@ namespace FIASUpdate
 
         private void B_TablesRefresh_Click(object sender, EventArgs e) => RefreshTables();
 
-        private void B_TablesSave_Click(object sender, EventArgs e) => SaveTables();
+        private void B_TablesSave_Click(object sender, EventArgs e)
+        {
+            Program.SaveSettings();
+            SaveTables();
+        }
 
         private void B_XMLPath_Click(object sender, EventArgs e)
         {
             using (var F = new CommonOpenFileDialog
             {
                 IsFolderPicker = true,
-                DefaultDirectory = FIASManager.Root
+                DefaultDirectory = Program.XMLPath
             })
             {
                 if (F.ShowDialog() == CommonFileDialogResult.Ok)
@@ -155,6 +153,12 @@ namespace FIASUpdate
                     Settings.Default.Save();
                 }
             }
+        }
+
+        private void MI_Search_Click(object sender, EventArgs e)
+        {
+            var F = new FormAddressSearch();
+            F.ShowDialog(this);
         }
 
         #endregion UI Events

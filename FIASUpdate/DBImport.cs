@@ -15,7 +15,7 @@ namespace FIASUpdate
 {
     internal class DBImport : IDisposable
     {
-        private static readonly string GAR = FIASManager.Root;
+        private static readonly string GAR = Program.XMLPath;
         private static readonly string GAR_Common = GAR + @"\gar_xml";
         private readonly Dictionary<string, string> _result = new Dictionary<string, string>();
         private readonly Database DB;
@@ -33,7 +33,7 @@ namespace FIASUpdate
 
         public DBImport(IProgress<TaskProgress> TaskProgress)
         {
-            DBName = FIASManager.DBName;
+            DBName = Program.DBName;
             Events = new SyncEvent(this);
             SP = TaskProgress;
 

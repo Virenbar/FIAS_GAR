@@ -8,7 +8,7 @@ namespace FIASUpdate
 
         public static SqlConnection NewConnection(string Database)
         {
-            var SCSB = new SqlConnectionStringBuilder(FIASManager.DBString)
+            var SCSB = new SqlConnectionStringBuilder(Program.Connection)
             {
                 InitialCatalog = Database,
                 Encrypt = false

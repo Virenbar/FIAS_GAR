@@ -337,7 +337,6 @@
   <ItemGroup>
     <Compile Include="DBCreate.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="FIASManager.cs" />
     <Compile Include="FIASReader.cs" />
     <Compile Include="DBImport.cs" />
     <Compile Include="FormAddressSearch.cs">

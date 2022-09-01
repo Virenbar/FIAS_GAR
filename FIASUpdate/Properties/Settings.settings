@@ -8,5 +8,8 @@
     <Setting Name="XMLPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">D:\Data\FIAS_GAR</Value>
     </Setting>
+    <Setting Name="DBName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">FIAS_GAR</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

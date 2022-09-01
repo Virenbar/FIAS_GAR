@@ -1,0 +1,65 @@
+name: Build Artifact
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_call:
+    outputs:
+      version:
+        description: "Version builded"
+        value: ${{ jobs.build.outputs.version }}
+jobs:
+  build:
+    name: Build
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
+    runs-on: windows-latest
+    env:
+      DOTNET_NOLOGO: true
+      SolutionName: FIAS_GAR.sln
+      Configuration: ${{ matrix.configuration }}
+    outputs:
+      version: ${{steps.version.outputs.version}}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Install .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.x
+
+      # - name: Set VERSION
+      #   id: version
+      #   run: .\.github\scripts\version.ps1
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Restore packages
+        run: nuget restore
+
+      - name: Build solution
+        if: matrix.configuration == 'Debug'
+        run: msbuild $env:SolutionName /t:Build /p:Configuration=$env:Configuration
+
+      - name: Build solution
+        if: matrix.configuration == 'Release'
+        run: msbuild $env:SolutionName /t:Build /p:Configuration=$env:Configuration /p:ContinuousIntegrationBuild=true
+
+      # - name: Pack nupkg
+      #   if: matrix.configuration == 'Release'
+      #   run: .\.github\scripts\pack.ps1
+
+      # - name: Upload artifact
+      #   if: matrix.configuration == 'Release'
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: JANL
+      #     path: "*.*nupkg"
+      #     if-no-files-found: error
