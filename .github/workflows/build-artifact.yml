@@ -34,9 +34,9 @@ jobs:
         with:
           dotnet-version: 6.0.x
 
-      # - name: Set VERSION
-      #   id: version
-      #   run: .\.github\scripts\version.ps1
+      - name: Set VERSION
+        id: version
+        run: .\.github\scripts\version.ps1
 
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v1.1
@@ -44,22 +44,8 @@ jobs:
       - name: Restore packages
         run: nuget restore
 
+      - name: Restore solution
+        run: msbuild $env:SolutionName /t:Restore /p:Configuration=$env:Configuration
+
       - name: Build solution
-        if: matrix.configuration == 'Debug'
         run: msbuild $env:SolutionName /t:Build /p:Configuration=$env:Configuration
-
-      - name: Build solution
-        if: matrix.configuration == 'Release'
-        run: msbuild $env:SolutionName /t:Build /p:Configuration=$env:Configuration /p:ContinuousIntegrationBuild=true
-
-      # - name: Pack nupkg
-      #   if: matrix.configuration == 'Release'
-      #   run: .\.github\scripts\pack.ps1
-
-      # - name: Upload artifact
-      #   if: matrix.configuration == 'Release'
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: JANL
-      #     path: "*.*nupkg"
-      #     if-no-files-found: error
