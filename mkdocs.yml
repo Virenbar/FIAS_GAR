@@ -31,6 +31,9 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/Virenbar/FIAS_GAR
+  analytics:
+    provider: yandex
+    property: 87731504
   # analytics:
   #   provider: google
   #   property: G-XXXXXXXXXX
