@@ -40,7 +40,6 @@ repo_name: "Virenbar/FIAS_GAR"
 repo_url: https://github.com/Virenbar/FIAS_GAR
 edit_uri: edit/master/docs/
 markdown_extensions:
-  - meta
   - admonition
   - pymdownx.highlight
   - pymdownx.superfences
@@ -55,10 +54,12 @@ plugins:
 nav:
   - index.md
   - FIAS_GAR:
-      - Таблицы: tables.md
-      - Объекты БД: database-objects.md
-      - Примечания: notes.md
-  #- FIAS Update:
+      - Описание: fias-gar/index.md
+      - Таблицы: fias-gar/tables.md
+      - Объекты БД: fias-gar/database-objects.md
+  - FIAS Core: fias-core.md
+  - FIAS Update: fias-update.md
+  - Примечания: notes.md
   - Ссылки:
       - ФИАС: "https://fias.nalog.ru"
       - Обновления БД ФИАС: "https://fias.nalog.ru/Updates"
