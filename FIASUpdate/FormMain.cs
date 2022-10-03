@@ -127,6 +127,7 @@ namespace FIASUpdate
                 {
                     Settings.Default.SQLCS = D.ConnectionString;
                     Settings.Default.Save();
+                    Store.Connection = Program.Connection;
                 }
             }
         }

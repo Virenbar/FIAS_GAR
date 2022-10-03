@@ -1,4 +1,5 @@
 ﻿using FIAS.Core.Stores;
+using FIASUpdate.Models;
 using JANL;
 using Microsoft.Data.SqlClient;
 using Microsoft.SqlServer.Management.Common;
@@ -8,7 +9,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace FIASUpdate
@@ -21,7 +21,6 @@ namespace FIASUpdate
         private readonly Database DB;
         private readonly string DBName;
         private readonly SyncEvent Events;
-        private readonly Regex R = new Regex("AS_(?<name>[a-zA-Z_]+)_");
 
         //Status Progress
         private readonly IProgress<TaskProgress> SP;
@@ -115,7 +114,7 @@ namespace FIASUpdate
 
                 //Импорт
                 var Count = ImportTable(T, Table);
-                Store.SetLastImport(Table.Name, options.Date);
+                Store.SetLastImport(Table.Name, Table.Date);
                 AddResult(Table.Name, $"Импортирована ({Count:N0})");
                 Thread.Sleep(2 * 1000);
             }
@@ -125,29 +124,20 @@ namespace FIASUpdate
         {
             Tables.Clear();
             var CFiles = Directory.EnumerateFiles(GAR_Common)
-                .Select(F => new XMLFile
-                {
-                    Name = R.Match(F).Groups["name"].Value,
-                    Path = F
-                });
+                .Select(F => new XMLFile(F));
 
             var Files = Directory.EnumerateDirectories(GAR_Common)
                 .SelectMany(D => Directory.EnumerateFiles(D))
-                .Select(F => new XMLFile
+                .Select(F => new XMLFile(F)
                 {
-                    Name = R.Match(F).Groups["name"].Value,
-                    Region = Path.GetFileName(Path.GetDirectoryName(F)),
-                    Path = F
+                    Region = Path.GetFileName(Path.GetDirectoryName(F))
                 });
 
-            Tables.AddRange(
-               Enumerable.Concat(CFiles, Files)
+            var T = Enumerable.Concat(CFiles, Files)
                .ToLookup(F => F.Name.Contains("PARAMS") ? "PARAMS" : F.Name)
-               .Select(L => new FIASTable
-               {
-                   Name = L.Key,
-                   Files = L.ToList()
-               }));
+               .Select(L => new FIASTable(L.Key, L.ToList()));
+
+            Tables.AddRange(T);
         }
 
         private void SBC_SqlRowsCopied(object sender, SqlRowsCopiedEventArgs e)
@@ -203,14 +193,12 @@ namespace FIASUpdate
 
         #endregion IDisposable Support
     }
-    internal class FIASTable
-    {
-        public List<XMLFile> Files { get; set; }
-        public string Name { get; set; }
-    }
+
     internal class ImportOptions
     {
+        [Obsolete]
         public DateTime Date { get; set; }
+
         public bool OnlyEmpty { get; set; }
         public bool Shrink { get; set; }
     }
@@ -224,12 +212,5 @@ namespace FIASUpdate
 
         public string Status { get; private set; }
         public string Table { get; private set; }
-    }
-    internal class XMLFile
-    {
-        public string FullName => Region != null ? $"{Name}({Region})" : Name;
-        public string Name { get; set; }
-        public string Path { get; set; }
-        public string Region { get; set; }
     }
 }

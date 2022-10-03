@@ -8,11 +8,9 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	SELECT
-		'LastUpdate'                                  [Key]
-	  , 'Дата'                                        [Name]
-	  , CONVERT(VARCHAR, MAX([RO].[UPDATEDATE]), 104) [Value]
-	FROM
-		[REESTR_OBJECTS] [RO]
+		'LastUpdate'                                    [Key]
+	  , 'Дата'                                          [Name]
+	  , CONVERT(VARCHAR, [dbo].[SUF_LastUpdate](), 104) [Value]
 	UNION ALL
 	SELECT
 		'Level-' + Format([OL].[LEVEL], 'D2') [Key]

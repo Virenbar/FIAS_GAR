@@ -11,8 +11,6 @@ CREATE FUNCTION [dbo].[SUF_PrepareAddress](
 RETURNS VARCHAR(500)
 AS
 BEGIN
-	DECLARE @Result VARCHAR(500)
-	--
 	SET @Address = REPLACE(@Address, '5я', '5')
 	SET @Address = REPLACE(@Address, 'Килачевское', 'Килачёвское')
 	--
