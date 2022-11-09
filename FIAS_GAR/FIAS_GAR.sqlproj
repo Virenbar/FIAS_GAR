@@ -542,6 +542,15 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
+    <Build Include="mun\Functions\SUF_Search.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="adm\Functions\SUF_Search.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="Security\Permissions.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FIAS_GAR.publish.xml" />

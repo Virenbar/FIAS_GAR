@@ -37,12 +37,6 @@ select *,mun.SUF_AreaName(FIAS_GUID) from TechPris.dbo.S_Address
 where  mun.SUF_AreaGUID(FIAS_GUID)='8d80baaf-fe7c-4021-87f5-e8b2826aa6ab'
 	
 
-	SELECT
-	*
-FROM
-	[S_Terr]
-WHERE [fl_delete] = 0
-
 SELECT DISTINCT
 	[FIAS_GAR].[mun].[SUF_AreaName]([FIAS_GUID])
   , [FIAS_GAR].[mun].[SUF_AreaGUID]([FIAS_GUID])
@@ -51,3 +45,25 @@ SELECT DISTINCT
 FROM
 	[S_Address]
 WHERE [FIAS_GUID] IS NOT NULL
+
+-- Поиск GUID адреса
+SELECT
+	[mun].[SUF_Search]([dbo].[SUF_ExpressionNEAR]('Екатеринбург Екатеринбург Уральска 5'), 10, DEFAULT) [GUID]
+
+SELECT
+	[A].*
+  , [R].[AddressFull]
+FROM
+   (SELECT
+	   [Name]
+	 , [mun].[SUF_Search]([dbo].[SUF_ExpressionNEAR]([Name]), 10, DEFAULT) [GUID]
+	FROM
+	   (VALUES('Екатеринбург Екатеринбург Уральска 5'), ('Екатеринбург Екатеринбург Уральска 1')) [Address]([Name])) [A]
+LEFT JOIN [mun].[A_IndexRegistry] [R] ON [R].[ObjectGUID] = [A].[GUID]
+
+SELECT
+	[A].*
+  , [R].[AddressFull]
+FROM
+	(VALUES('Екатеринбург Екатеринбург Уральска 5'), ('Екатеринбург Екатеринбург Уральска 1')) [A]([Name])
+LEFT JOIN [mun].[A_IndexRegistry] [R] ON [R].[ObjectGUID] = [mun].[SUF_Search]([dbo].[SUF_ExpressionNEAR]([A].[Name]), 10, DEFAULT)
