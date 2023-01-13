@@ -1,4 +1,4 @@
-﻿site_name: Документация FIAS_GAR
+site_name: Документация FIAS_GAR
 site_description: "Проект БД ФИАС ГАР для SQL Server и приложение для её обновления"
 site_url: https://virenbar.ru/FIAS_GAR/
 copyright: Copyright &copy; 2023 Virenbar
@@ -11,6 +11,7 @@ theme:
     - navigation.top
     - navigation.sections
     - navigation.indexes
+    - navigation.tabs
   font:
     text: "Fira Sans"
     code: "Fira Code"
@@ -55,14 +56,12 @@ plugins:
         - en
         - ru
 nav:
-  - index.md
+  - Описание: index.md
   - FIAS_GAR:
-      - Описание: fias-gar/index.md
-      - Таблицы: fias-gar/tables.md
+      - Описание БД: fias-gar/index.md
+      - Таблицы ГАР: fias-gar/tables.md
       - Объекты БД: fias-gar/database-objects.md
   - FIAS Core: fias-core.md
   - FIAS Update: fias-update.md
   - Примечания: notes.md
-  - Ссылки:
-      - ФИАС: "https://fias.nalog.ru"
-      - Обновления БД ФИАС: "https://fias.nalog.ru/Updates"
+  - Ссылки: links.md

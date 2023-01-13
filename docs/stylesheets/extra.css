@@ -3,6 +3,7 @@
     --md-primary-fg-color: var(--fias-color);
     --md-primary-fg-color--light: var(--fias-color);
     --md-primary-fg-color--dark:  var(--fias-color);
+    --md-footer-bg-color: var(--fias-color);
 }
 
 :root * {
