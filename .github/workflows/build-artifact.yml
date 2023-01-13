@@ -3,6 +3,10 @@ name: Build Artifact
 on:
   push:
     branches: [master]
+    paths-ignore:
+      - "**.md"
+      - "**.yml"
+      - "docs/**"
   pull_request:
     branches: [master]
   workflow_call:
@@ -25,14 +29,14 @@ jobs:
       version: ${{steps.version.outputs.version}}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
       - name: Install .NET Core
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 6.0.x
+          dotnet-version: 6.x
 
       - name: Set VERSION
         id: version

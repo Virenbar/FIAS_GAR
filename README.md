@@ -1,4 +1,4 @@
-# ФИАС ГАР [![Build artifact](https://img.shields.io/github/workflow/status/Virenbar/FIAS_GAR/Build%20Artifact?label=Build&logo=github)](https://github.com/Virenbar/FIAS_GAR/actions/workflows/build-artifact.yml)
+# ФИАС ГАР [![Build artifact](https://img.shields.io/github/actions/workflow/status/Virenbar/FIAS_GAR/build-artifact.yml?label=Build&logo=github)](https://github.com/Virenbar/FIAS_GAR/actions/workflows/build-artifact.yml)
 
 Проект БД ФИАС ГАР для SQL Server и приложение для её обновления.
 
