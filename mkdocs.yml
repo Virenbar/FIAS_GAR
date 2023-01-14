@@ -29,7 +29,16 @@ theme:
   custom_dir: overrides
 extra:
   social:
-    - icon: fontawesome/brands/github
+    - icon: material/home-city
+      link: https://fias.nalog.ru/
+      name: Сайт ФИАС
+    - icon: simple/vk
+      link: https://vk.com/nalog__ru
+      name: Официальное сообщество ФНС России
+    - icon: simple/telegram
+      link: https://t.me/nalog_gov_ru
+      name: Официальный канал ФНС России
+    - icon: simple/github
       link: https://github.com/Virenbar/FIAS_GAR
   analytics:
     provider: yandex
