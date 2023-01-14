@@ -8,10 +8,9 @@ theme:
   language: ru
   features:
     - navigation.instant
-    - navigation.top
-    - navigation.sections
-    - navigation.indexes
     - navigation.tabs
+    - navigation.sections
+    - navigation.top
   font:
     text: "Fira Sans"
     code: "Fira Code"
@@ -50,6 +49,9 @@ markdown_extensions:
   - attr_list
   - toc:
       permalink: "#"
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
 plugins:
   - search:
       lang:
