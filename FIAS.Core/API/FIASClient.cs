@@ -9,21 +9,22 @@ namespace FIAS.Core.API
 {
     public class FIASClient : IDisposable
     {
-        private const string URL = "https://fias.nalog.ru/WebServices/Public/GetAllDownloadFileInfo";
         private readonly HttpClient Client;
+        private readonly Uri Endpoint = new Uri("https://fias.nalog.ru/WebServices/Public/");
 
         public FIASClient()
         {
-            Client = new HttpClient();
+            Client = new HttpClient() { BaseAddress = Endpoint };
         }
 
         public async Task<List<FIASInfo>> GetAllDownloadFileInfo()
         {
-            var HRM = await Client.GetAsync(URL);
-            var Content = await HRM.Content.ReadAsStringAsync();
-
-            var Info = JsonConvert.DeserializeObject<List<FIASInfo>>(Content);
-            return Info;
+            using (var HRM = await Client.GetAsync("GetAllDownloadFileInfo"))
+            {
+                var Content = await HRM.Content.ReadAsStringAsync();
+                var Info = JsonConvert.DeserializeObject<List<FIASInfo>>(Content);
+                return Info;
+            }
         }
 
         public async Task<List<FIASInfo>> GetAllDownloadFileInfo(DateTime Date)

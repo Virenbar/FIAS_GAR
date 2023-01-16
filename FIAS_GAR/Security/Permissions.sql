@@ -1,8 +1,0 @@
-﻿GRANT SELECT
-    ON SCHEMA::[dbo] TO PUBLIC;
-
-
-GO
-GRANT EXECUTE
-    ON SCHEMA::[dbo] TO PUBLIC;
-
