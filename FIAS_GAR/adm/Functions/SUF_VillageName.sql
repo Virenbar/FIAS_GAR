@@ -5,10 +5,10 @@
 -- =============================================
 CREATE FUNCTION [adm].[SUF_VillageName](
 	@ObjectGUID CHAR(36))
-RETURNS CHAR(36)
+RETURNS VARCHAR(100)
 AS
 BEGIN
-	DECLARE @Result CHAR(36)
+	DECLARE @Result VARCHAR(100)
 
 	SELECT TOP (1)
 		@Result = [H].[Type] + ' ' + [H].[Name]
