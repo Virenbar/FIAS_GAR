@@ -11,5 +11,20 @@
     <Setting Name="DBName" Type="System.String" Scope="User">
       <Value Profile="(Default)">FIAS_GAR</Value>
     </Setting>
+    <Setting Name="SQLConnections" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;Data Source=partserver2014;Initial Catalog=master;Integrated Security=True&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="DefaultFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Segoe UI, 8.25pt</Value>
+    </Setting>
+    <Setting Name="DefaultBackColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">250, 250, 250</Value>
+    </Setting>
+    <Setting Name="DefaultForeColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Black</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

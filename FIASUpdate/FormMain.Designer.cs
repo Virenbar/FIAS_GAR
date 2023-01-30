@@ -51,9 +51,6 @@
             this.CB_OnlyEmpty = new System.Windows.Forms.CheckBox();
             this.CB_Shrink = new System.Windows.Forms.CheckBox();
             this.TP_Settings = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.B_SQLConnection = new System.Windows.Forms.Button();
-            this.B_XMLPath = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.LV_Tables = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -64,11 +61,14 @@
             this.B_TablesRefresh = new System.Windows.Forms.Button();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.B_TablesSave = new System.Windows.Forms.Button();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.B_SQLConnection = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.B_XMLPath = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.сервисToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MI_Search = new System.Windows.Forms.ToolStripMenuItem();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.statusStrip1.SuspendLayout();
             this.Настройки.SuspendLayout();
             this.TP_Import.SuspendLayout();
@@ -77,10 +77,10 @@
             this.groupBox1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.TP_Settings.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -136,7 +136,7 @@
             this.TP_Import.Location = new System.Drawing.Point(4, 22);
             this.TP_Import.Name = "TP_Import";
             this.TP_Import.Padding = new System.Windows.Forms.Padding(3);
-            this.TP_Import.Size = new System.Drawing.Size(529, 506);
+            this.TP_Import.Size = new System.Drawing.Size(529, 538);
             this.TP_Import.TabIndex = 1;
             this.TP_Import.Text = "Импорт данных";
             this.TP_Import.UseVisualStyleBackColor = true;
@@ -147,7 +147,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(3, 70);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(523, 398);
+            this.groupBox2.Size = new System.Drawing.Size(523, 430);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Результат";
@@ -165,7 +165,7 @@
             listViewItem1});
             this.LV_Result.Location = new System.Drawing.Point(3, 18);
             this.LV_Result.Name = "LV_Result";
-            this.LV_Result.Size = new System.Drawing.Size(517, 377);
+            this.LV_Result.Size = new System.Drawing.Size(517, 409);
             this.LV_Result.TabIndex = 10;
             this.LV_Result.UseCompatibleStateImageBehavior = false;
             this.LV_Result.View = System.Windows.Forms.View.Details;
@@ -190,7 +190,7 @@
             this.tableLayoutPanel1.Controls.Add(this.B_Import, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.SWL, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 468);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 500);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -285,54 +285,6 @@
             this.TP_Settings.TabIndex = 2;
             this.TP_Settings.Text = "Настройки";
             this.TP_Settings.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.AutoSize = true;
-            this.tableLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.Controls.Add(this.textBox1, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.B_SQLConnection, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.textBox2, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.B_XMLPath, 1, 1);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(523, 62);
-            this.tableLayoutPanel2.TabIndex = 2;
-            // 
-            // B_SQLConnection
-            // 
-            this.B_SQLConnection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.B_SQLConnection.AutoSize = true;
-            this.B_SQLConnection.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.B_SQLConnection.Location = new System.Drawing.Point(447, 3);
-            this.B_SQLConnection.Name = "B_SQLConnection";
-            this.B_SQLConnection.Padding = new System.Windows.Forms.Padding(1);
-            this.B_SQLConnection.Size = new System.Drawing.Size(73, 25);
-            this.B_SQLConnection.TabIndex = 0;
-            this.B_SQLConnection.Text = "SQL Server";
-            this.B_SQLConnection.UseVisualStyleBackColor = true;
-            this.B_SQLConnection.Click += new System.EventHandler(this.B_SQLConnection_Click);
-            // 
-            // B_XMLPath
-            // 
-            this.B_XMLPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.B_XMLPath.AutoSize = true;
-            this.B_XMLPath.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.B_XMLPath.Location = new System.Drawing.Point(447, 34);
-            this.B_XMLPath.Name = "B_XMLPath";
-            this.B_XMLPath.Padding = new System.Windows.Forms.Padding(1);
-            this.B_XMLPath.Size = new System.Drawing.Size(73, 25);
-            this.B_XMLPath.TabIndex = 0;
-            this.B_XMLPath.Text = "XML Path";
-            this.B_XMLPath.UseVisualStyleBackColor = true;
-            this.B_XMLPath.Click += new System.EventHandler(this.B_XMLPath_Click);
             // 
             // groupBox3
             // 
@@ -440,6 +392,76 @@
             this.B_TablesSave.UseVisualStyleBackColor = true;
             this.B_TablesSave.Click += new System.EventHandler(this.B_TablesSave_Click);
             // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.AutoSize = true;
+            this.tableLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.Controls.Add(this.textBox1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.B_SQLConnection, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.textBox2, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.B_XMLPath, 1, 1);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(523, 62);
+            this.tableLayoutPanel2.TabIndex = 2;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FIASUpdate.Properties.Settings.Default, "SQLCS", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox1.Location = new System.Drawing.Point(3, 4);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(438, 22);
+            this.textBox1.TabIndex = 1;
+            this.textBox1.Text = global::FIASUpdate.Properties.Settings.Default.SQLCS;
+            // 
+            // B_SQLConnection
+            // 
+            this.B_SQLConnection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.B_SQLConnection.AutoSize = true;
+            this.B_SQLConnection.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.B_SQLConnection.Location = new System.Drawing.Point(447, 3);
+            this.B_SQLConnection.Name = "B_SQLConnection";
+            this.B_SQLConnection.Padding = new System.Windows.Forms.Padding(1);
+            this.B_SQLConnection.Size = new System.Drawing.Size(73, 25);
+            this.B_SQLConnection.TabIndex = 0;
+            this.B_SQLConnection.Text = "SQL Server";
+            this.B_SQLConnection.UseVisualStyleBackColor = true;
+            this.B_SQLConnection.Click += new System.EventHandler(this.B_SQLConnection_Click);
+            // 
+            // textBox2
+            // 
+            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FIASUpdate.Properties.Settings.Default, "XMLPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox2.Location = new System.Drawing.Point(3, 35);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(438, 22);
+            this.textBox2.TabIndex = 1;
+            this.textBox2.Text = global::FIASUpdate.Properties.Settings.Default.XMLPath;
+            // 
+            // B_XMLPath
+            // 
+            this.B_XMLPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.B_XMLPath.AutoSize = true;
+            this.B_XMLPath.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.B_XMLPath.Location = new System.Drawing.Point(447, 34);
+            this.B_XMLPath.Name = "B_XMLPath";
+            this.B_XMLPath.Padding = new System.Windows.Forms.Padding(1);
+            this.B_XMLPath.Size = new System.Drawing.Size(73, 25);
+            this.B_XMLPath.TabIndex = 0;
+            this.B_XMLPath.Text = "XML Path";
+            this.B_XMLPath.UseVisualStyleBackColor = true;
+            this.B_XMLPath.Click += new System.EventHandler(this.B_XMLPath_Click);
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -462,42 +484,24 @@
             // MI_Search
             // 
             this.MI_Search.Name = "MI_Search";
-            this.MI_Search.Size = new System.Drawing.Size(180, 22);
+            this.MI_Search.Size = new System.Drawing.Size(176, 22);
             this.MI_Search.Text = "Поиск адреса в БД";
             this.MI_Search.Click += new System.EventHandler(this.MI_Search_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FIASUpdate.Properties.Settings.Default, "SQLCS", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox1.Location = new System.Drawing.Point(3, 4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(438, 22);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.Text = global::FIASUpdate.Properties.Settings.Default.SQLCS;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FIASUpdate.Properties.Settings.Default, "XMLPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox2.Location = new System.Drawing.Point(3, 35);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(438, 22);
-            this.textBox2.TabIndex = 1;
-            this.textBox2.Text = global::FIASUpdate.Properties.Settings.Default.XMLPath;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.BackColor = global::FIASUpdate.Properties.Settings.Default.DefaultBackColor;
             this.ClientSize = new System.Drawing.Size(537, 610);
             this.Controls.Add(this.Настройки);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::FIASUpdate.Properties.Settings.Default, "DefaultFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.DataBindings.Add(new System.Windows.Forms.Binding("ForeColor", global::FIASUpdate.Properties.Settings.Default, "DefaultForeColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::FIASUpdate.Properties.Settings.Default, "DefaultBackColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.Font = global::FIASUpdate.Properties.Settings.Default.DefaultFont;
+            this.ForeColor = global::FIASUpdate.Properties.Settings.Default.DefaultForeColor;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(550, 500);
@@ -518,13 +522,13 @@
             this.flowLayoutPanel1.PerformLayout();
             this.TP_Settings.ResumeLayout(false);
             this.TP_Settings.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

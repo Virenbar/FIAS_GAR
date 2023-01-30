@@ -1,9 +1,8 @@
 ﻿using FIAS.Core.API;
 using FIAS.Core.Models;
-using FIASUpdate.Properties;
 using FIAS.Core.Stores;
+using FIASUpdate.Properties;
 using JANL;
-using Microsoft.Data.ConnectionUI;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Collections.Generic;
@@ -31,7 +30,7 @@ namespace FIASUpdate
         {
             try
             {
-                B_Import.Enabled = false;
+                UIState(false);
                 LV_Result.Items.Clear();
                 var Options = new ImportOptions
                 {
@@ -50,7 +49,7 @@ namespace FIASUpdate
             finally
             {
                 SWL.Stop();
-                B_Import.Enabled = true;
+                UIState(true);
             }
         }
 
@@ -67,6 +66,7 @@ namespace FIASUpdate
                 }
             });
             LV_Tables.Items.Clear();
+            //GetFiles();
         }
 
         private async Task GetFiles()
@@ -113,22 +113,20 @@ namespace FIASUpdate
             LV_Result.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
 
+        private void UIState(bool state)
+        {
+            B_Import.Enabled = state;
+            B_SQLConnection.Enabled = state;
+        }
+
         #region UI Events
 
         private void B_SQLConnection_Click(object sender, EventArgs e)
         {
-            using (var D = new DataConnectionDialog())
+            using (var F = new FormDBList())
             {
-                DataSource.AddStandardDataSources(D);
-                D.SelectedDataSource = DataSource.SqlDataSource;
-                D.SelectedDataProvider = DataProvider.SqlDataProvider;
-                D.ConnectionString = Program.Connection;
-                if (DataConnectionDialog.Show(D, this) == DialogResult.OK)
-                {
-                    Settings.Default.SQLCS = D.ConnectionString;
-                    Settings.Default.Save();
-                    Store.Connection = Program.Connection;
-                }
+                F.ShowDialog(this);
+                Store.Connection = Program.Connection;
             }
         }
 

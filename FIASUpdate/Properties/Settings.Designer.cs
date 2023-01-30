@@ -58,5 +58,56 @@ namespace FIASUpdate.Properties {
                 this["DBName"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>Data Source=partserver2014;Initial Catalog=master;Integrated Security=True</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection SQLConnections {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["SQLConnections"]));
+            }
+            set {
+                this["SQLConnections"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI, 8.25pt")]
+        public global::System.Drawing.Font DefaultFont {
+            get {
+                return ((global::System.Drawing.Font)(this["DefaultFont"]));
+            }
+            set {
+                this["DefaultFont"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("250, 250, 250")]
+        public global::System.Drawing.Color DefaultBackColor {
+            get {
+                return ((global::System.Drawing.Color)(this["DefaultBackColor"]));
+            }
+            set {
+                this["DefaultBackColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color DefaultForeColor {
+            get {
+                return ((global::System.Drawing.Color)(this["DefaultForeColor"]));
+            }
+            set {
+                this["DefaultForeColor"] = value;
+            }
+        }
     }
 }

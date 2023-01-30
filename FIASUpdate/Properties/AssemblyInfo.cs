@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("FIASUpdate")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("IT Organization")]
+[assembly: AssemblyCompany("Virenbar")]
 [assembly: AssemblyProduct("FIASUpdate")]
-[assembly: AssemblyCopyright("Copyright © IT Organization 2021")]
+[assembly: AssemblyCopyright("Copyright © Virenbar 2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
