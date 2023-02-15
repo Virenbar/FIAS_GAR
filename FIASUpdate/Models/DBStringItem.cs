@@ -5,7 +5,7 @@ namespace FIASUpdate.Models
 {
     internal class DBStringItem : ListViewItem
     {
-        private SqlConnectionStringBuilder CSB;
+        private readonly SqlConnectionStringBuilder CSB;
 
         public DBStringItem(string connection)
         {

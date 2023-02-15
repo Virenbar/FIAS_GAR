@@ -67,7 +67,9 @@ plugins:
         - en
         - ru
 nav:
-  - Описание: index.md
+  - Описание:
+      - Проекты: index.md
+      - Использование: usage.md
   - FIAS_GAR:
       - Описание БД: fias-gar/index.md
       - Таблицы ГАР: fias-gar/tables.md

@@ -17,7 +17,7 @@
 
 Приложение для импорта данный из XML в БД.
 
-## [Документация](https://virenbar.ru/FIAS_GAR/)
+## [Документация](https://virenbar.github.io/FIAS_GAR/)
 
 ![Основная форма](/docs/assets/fias/import.png)
 ![Настройки импорта](/docs/assets/fias/settings.png)  
