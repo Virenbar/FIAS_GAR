@@ -335,7 +335,14 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\UC_DeltaImport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UC_DeltaImport.Designer.cs">
+      <DependentUpon>UC_DeltaImport.cs</DependentUpon>
+    </Compile>
     <Compile Include="DBCreate.cs" />
+    <Compile Include="DBDeltaImport.cs" />
     <Compile Include="Models\DBStringItem.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="FIASReader.cs" />

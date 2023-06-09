@@ -6,6 +6,7 @@ using JANL;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -35,7 +36,7 @@ namespace FIASUpdate
                 var Options = new ImportOptions
                 {
                     OnlyEmpty = CB_OnlyEmpty.Checked,
-                    Shrink = CB_Shrink.Checked
+                    ShrinkDatabase = CB_Shrink.Checked
                 };
                 SWL.Start();
                 using (var FIAS = new DBImport(TP))

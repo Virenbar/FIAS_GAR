@@ -23,10 +23,26 @@ namespace FIASUpdate.Models
             Date = DateTime.ParseExact(date, "yyyyMMdd", CultureInfo.InvariantCulture);
         }
 
+        /// <summary>
+        /// Дата выгрузки
+        /// </summary>
         public DateTime Date { get; }
+
+        /// <summary>
+        /// Имя с регионом
+        /// </summary>
         public string FullName => Region != null ? $"{Name}({Region})" : Name;
+
+        /// <summary>
+        /// GUID выгрузки
+        /// </summary>
         public Guid GUID { get; }
+
+        /// <summary>
+        /// Имя таблицы выгрузки
+        /// </summary>
         public string Name { get; }
+
         public string Path { get; }
         public string Region { get; set; }
 

@@ -15,8 +15,6 @@ namespace FIASUpdate
 {
     internal class DBImport : IDisposable
     {
-        private static readonly string GAR = Program.XMLPath;
-        private static readonly string GAR_Common = GAR + @"\gar_xml";
         private readonly Dictionary<string, string> _result = new Dictionary<string, string>();
         private readonly Database DB;
         private readonly string DBName;
@@ -44,6 +42,8 @@ namespace FIASUpdate
         }
 
         public IReadOnlyDictionary<string, string> Result => _result;
+        private static string GAR_Common => Program.XMLPath;
+        private static string GAR_Full => $@"{GAR_Common}\gar_xml";
 
         public void Import() => Import(new ImportOptions { OnlyEmpty = true });
 
@@ -52,7 +52,7 @@ namespace FIASUpdate
             _result.Clear();
             PrepareFiles();
             ImportTables(options);
-            if (options.Shrink) { ShrinkDatabase(); }
+            if (options.ShrinkDatabase) { ShrinkDatabase(); }
         }
 
         #region Table Import
@@ -123,10 +123,10 @@ namespace FIASUpdate
         private void PrepareFiles()
         {
             Tables.Clear();
-            var CFiles = Directory.EnumerateFiles(GAR_Common)
+            var CFiles = Directory.EnumerateFiles(GAR_Full)
                 .Select(F => new XMLFile(F));
 
-            var Files = Directory.EnumerateDirectories(GAR_Common)
+            var Files = Directory.EnumerateDirectories(GAR_Full)
                 .SelectMany(D => Directory.EnumerateFiles(D))
                 .Select(F => new XMLFile(F)
                 {
@@ -199,8 +199,15 @@ namespace FIASUpdate
         [Obsolete]
         public DateTime Date { get; set; }
 
+        /// <summary>
+        /// Импортировать только в пустые таблицы
+        /// </summary>
         public bool OnlyEmpty { get; set; }
-        public bool Shrink { get; set; }
+
+        /// <summary>
+        /// Сжать БД после импорта
+        /// </summary>
+        public bool ShrinkDatabase { get; set; }
     }
     internal class ResultAddedEventArgs : EventArgs
     {

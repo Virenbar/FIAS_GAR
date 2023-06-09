@@ -17,6 +17,9 @@ namespace FIAS.Core.Stores
 
         public string Connection { get; set; }
 
+        /// <summary>
+        /// Является ли строка GUID
+        /// </summary>
         public static bool IsGUID(string Search)
         {
             if (Search.Length != 36) { return false; }
@@ -25,6 +28,10 @@ namespace FIAS.Core.Stores
 
         public Task<DataTable> FIASLevels() => Task.Run(UP_CB_Levels);
 
+        /// <summary>
+        /// Получить статус разрешения импорта таблицы
+        /// </summary>
+        /// <param name="table">Имя таблицы</param>
         public bool GetCanImport(string table) => (bool)UP_TablePropertyGet(table, "CanImport");
 
         public async Task<List<FIASRegistryAddress>> GetChilds(string GUID)
@@ -40,12 +47,13 @@ namespace FIAS.Core.Stores
         }
 
         /// <summary>
-        /// Внутренний код
+        /// Получить внутренний код
         /// </summary>
-        /// <param name="GUID"></param>
-        /// <returns></returns>
         public long GetID(string GUID) => UP_IDByGUID(GUID);
 
+        /// <summary>
+        /// Получать дату импорта таблицы
+        /// </summary>
         public DateTime? GetLastImport(string table) => (DateTime?)UP_TablePropertyGet(table, "LastImport");
 
         public FIASRegistryAddress GetObject(string GUID) => GetObject(FIASDivision.mun, GUID);
@@ -82,6 +90,9 @@ namespace FIAS.Core.Stores
 
         public void SetCanImport(string table, bool value) => UP_TablePropertySet(table, "CanImport", value);
 
+        /// <summary>
+        /// Задать дату импорта таблицы
+        /// </summary>
         public void SetLastImport(string table, DateTime date) => UP_TablePropertySet(table, "LastImport", date);
 
         public async Task<Dictionary<string, string>> Statistics()
@@ -90,6 +101,9 @@ namespace FIAS.Core.Stores
                 return DT.Rows.Cast<DataRow>().ToDictionary(R => R.Field<string>("Name"), R => R.Field<string>("Value"));
         }
 
+        /// <summary>
+        /// Информация о таблицах в БД
+        /// </summary>
         public List<FIASTableInfo> TablesInfo()
         {
             using (var DT = UP_TablesInfo())
