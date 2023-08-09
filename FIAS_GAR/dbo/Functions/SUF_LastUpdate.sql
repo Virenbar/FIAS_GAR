@@ -9,22 +9,9 @@ AS
 BEGIN
 	DECLARE @Date DATETIME
 	SELECT
-		@Date = MAX([LU].[Date])
+		@Date = MAX(CAST([dbo].[SUF_TableProperty]([T].[TableName], 'LastImport') AS DATETIME))
 	FROM
-	   (SELECT
-			MAX([CHANGEDATE]) Date
-		FROM
-			[CHANGE_HISTORY]
-		UNION ALL
-		SELECT
-			MAX([UPDATEDATE]) Date
-		FROM
-			[REESTR_OBJECTS]
-		UNION ALL
-		SELECT
-			MAX([CREATEDATE]) Date
-		FROM
-			[REESTR_OBJECTS]) [LU]
+		[dbo].[UF_TablesInfo]() [T]
 
 	RETURN @Date
 
