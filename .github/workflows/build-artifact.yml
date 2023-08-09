@@ -47,4 +47,4 @@ jobs:
         run: msbuild $env:SolutionName /t:Restore /p:Configuration=Release
 
       - name: Build solution
-        run: msbuild $env:SolutionName /t:Build /p:Configuration=Release /p:ContinuousIntegrationBuild=true
+        run: msbuild $env:SolutionName /t:Build /p:Configuration=Release
