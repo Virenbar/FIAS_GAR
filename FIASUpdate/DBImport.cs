@@ -10,11 +10,13 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using Settings = FIASUpdate.Properties.Settings;
 
 namespace FIASUpdate
 {
     internal class DBImport : IDisposable
     {
+        private static readonly Settings Settings = Settings.Default;
         private readonly Dictionary<string, string> _result = new Dictionary<string, string>();
         private readonly Database DB;
         private readonly string DBName;
@@ -23,14 +25,14 @@ namespace FIASUpdate
         //Status Progress
         private readonly IProgress<TaskProgress> SP;
 
-        private readonly FIASStore Store = new FIASStore(Program.Connection);
+        private readonly FIASDatabaseStore Store = new FIASDatabaseStore(Settings.SQLConnection);
         private readonly List<FIASTable> Tables = new List<FIASTable>();
 
-        public DBImport() : this(null) { }
+        public DBImport() : this(default) { }
 
         public DBImport(IProgress<TaskProgress> TaskProgress)
         {
-            DBName = Program.DBName;
+            DBName = Settings.DBName;
             Events = new SyncEvent(this);
             SP = TaskProgress;
 
@@ -42,8 +44,9 @@ namespace FIASUpdate
         }
 
         public IReadOnlyDictionary<string, string> Result => _result;
-        private static string GAR_Common => Program.XMLPath;
+        private static string GAR_Common => Settings.XMLPath;
         private static string GAR_Full => $@"{GAR_Common}\gar_xml";
+        private static string GAR_Version => $@"{GAR_Full}\Version.txt";
 
         public void Import() => Import(new ImportOptions { OnlyEmpty = true });
 
@@ -57,6 +60,12 @@ namespace FIASUpdate
 
         #region Table Import
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="T">Таблица БД</param>
+        /// <param name="Table">Таблица FIAS</param>
+        /// <returns>Количество импортированных строк</returns>
         private long ImportTable(Table T, FIASTable Table)
         {
             Dictionary<string, string> ColumnMap = T.Columns.Cast<Column>().ToDictionary(C => C.Name, C => C.Name);
@@ -69,7 +78,7 @@ namespace FIASUpdate
                 foreach (var File in Table.Files)
                 {
                     SP?.Report(new TaskProgress($"Импорт файла: {File.FullName}", 0, 0));
-                    using (var FR = new FIASReader(ColumnMap.Keys, File.Path))
+                    using (var FR = new FIASReader(File.Path, ColumnMap.Keys))
                     {
                         SBC.WriteToServer(FR);
                     }
@@ -86,16 +95,28 @@ namespace FIASUpdate
 
         private void ImportTables(ImportOptions options)
         {
+            var subjects = Tables
+                .SelectMany(T => T.Files.Where(F => !string.IsNullOrEmpty(F.Region)).Select(F => F.Region))
+                .Distinct().ToList();
+            DateTime date = new DateTime(2000, 1, 1);
+            if (File.Exists(GAR_Version))
+            {
+                DateTime.TryParse(File.ReadAllText(GAR_Version), out date);
+            }
+            // Debug only
+            //Store.SetSubjects(subjects);
+            //Store.SetVersion(date);
+
             foreach (var Table in Tables)
             {
-                //Проверка существования
+                // Проверка существования
                 Table T = DB.Tables[Table.Name];
                 if (T == null)
                 {
                     AddResult(Table.Name, "Таблицы нет в БД");
                     continue;
                 }
-                //Проверка настроек импорта
+                // Проверка настроек импорта
                 T.Refresh();
                 if (!Store.GetCanImport(Table.Name))
                 {
@@ -118,12 +139,15 @@ namespace FIASUpdate
                 AddResult(Table.Name, $"Импортирована ({Count:N0})");
                 Thread.Sleep(2 * 1000);
             }
+
+            Store.SetSubjects(subjects);
+            Store.SetVersion(date);
         }
 
         private void PrepareFiles()
         {
             Tables.Clear();
-            var CFiles = Directory.EnumerateFiles(GAR_Full)
+            var CFiles = Directory.EnumerateFiles(GAR_Full, "*.xml")
                 .Select(F => new XMLFile(F));
 
             var Files = Directory.EnumerateDirectories(GAR_Full)
@@ -196,9 +220,6 @@ namespace FIASUpdate
 
     internal class ImportOptions
     {
-        [Obsolete]
-        public DateTime Date { get; set; }
-
         /// <summary>
         /// Импортировать только в пустые таблицы
         /// </summary>

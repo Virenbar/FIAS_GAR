@@ -4,7 +4,7 @@ namespace FIASUpdate
 {
     internal class FIASReader : XMLDataReader
     {
-        public FIASReader(IEnumerable<string> Columns, string File) : base(File, Columns) { }
+        public FIASReader(string File, IEnumerable<string> Columns) : base(File, Columns) { }
 
         protected override bool IsValidRow()
         {
@@ -14,7 +14,7 @@ namespace FIASUpdate
         protected override string GetAttribute(string name)
         {
             var Value = base.GetAttribute(name);
-            //Опять костыль. В некоторых XML Boolean хранится как Integer.
+            // Опять костыль. В некоторых XML Boolean хранится как Integer.
             if ((name == "ISACTIVE" || name == "ISACTUAL") && !bool.TryParse(Value, out _))
             {
                 return Value == "1" ? bool.TrueString : bool.FalseString;

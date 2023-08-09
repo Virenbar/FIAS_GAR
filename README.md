@@ -1,4 +1,4 @@
-# ФИАС ГАР [![Build artifact](https://img.shields.io/github/actions/workflow/status/Virenbar/FIAS_GAR/build-artifact.yml?label=Build&logo=github)](https://github.com/Virenbar/FIAS_GAR/actions/workflows/build-artifact.yml)
+# ФИАС ГАР [![Build artifact][build-src]][build-href] [![Codacy Badge][codacy-src]][codacy-href]
 
 Проект БД ФИАС ГАР для SQL Server и приложение для её обновления.
 
@@ -25,3 +25,10 @@
 
 *P.S. Данное решение предназначено для разработчик работающих с .NET и SQL Server.*  
 *P.P.S. Импорт тестировался только с 66 регионом, поэтому при импорте других регионов могут возникнуть ошибки из-за некорректных данных в XML. (В основном из-за NULL вместо значения)*
+
+<!-- Badges -->
+[build-src]: https://img.shields.io/github/actions/workflow/status/Virenbar/FIAS_GAR/build-artifact.yml?label=Build&logo=github
+[build-href]: ttps://github.com/Virenbar/FIAS_GAR/actions/workflows/build-artifact.yml
+
+[codacy-src]: https://app.codacy.com/project/badge/Grade/d9c5e3f57c914aed83166e72af7ba936
+[codacy-href]: https://app.codacy.com/gh/Virenbar/FIAS_GAR/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade

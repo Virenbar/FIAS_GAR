@@ -108,12 +108,10 @@
             // 
             this.RB_ADM.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.RB_ADM.AutoSize = true;
-            this.RB_ADM.Checked = true;
-            this.RB_ADM.Location = new System.Drawing.Point(62, 31);
+            this.RB_ADM.Location = new System.Drawing.Point(181, 31);
             this.RB_ADM.Name = "RB_ADM";
             this.RB_ADM.Size = new System.Drawing.Size(128, 17);
             this.RB_ADM.TabIndex = 12;
-            this.RB_ADM.TabStop = true;
             this.RB_ADM.Text = "Административное";
             this.RB_ADM.UseVisualStyleBackColor = true;
             this.RB_ADM.CheckedChanged += new System.EventHandler(this.RB_CheckedChanged);
@@ -122,10 +120,12 @@
             // 
             this.RB_MUN.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.RB_MUN.AutoSize = true;
-            this.RB_MUN.Location = new System.Drawing.Point(196, 31);
+            this.RB_MUN.Checked = true;
+            this.RB_MUN.Location = new System.Drawing.Point(62, 31);
             this.RB_MUN.Name = "RB_MUN";
             this.RB_MUN.Size = new System.Drawing.Size(113, 17);
             this.RB_MUN.TabIndex = 11;
+            this.RB_MUN.TabStop = true;
             this.RB_MUN.Text = "Муниципальное";
             this.RB_MUN.UseVisualStyleBackColor = true;
             this.RB_MUN.CheckedChanged += new System.EventHandler(this.RB_CheckedChanged);
@@ -183,8 +183,8 @@
             this.FlowLayoutPanel1.Controls.Add(this.Label1);
             this.FlowLayoutPanel1.Controls.Add(this.NUD_Limit);
             this.FlowLayoutPanel1.Controls.Add(this.Label5);
-            this.FlowLayoutPanel1.Controls.Add(this.RB_ADM);
             this.FlowLayoutPanel1.Controls.Add(this.RB_MUN);
+            this.FlowLayoutPanel1.Controls.Add(this.RB_ADM);
             this.FlowLayoutPanel1.Controls.Add(this.L_GUID);
             this.FlowLayoutPanel1.Location = new System.Drawing.Point(9, 40);
             this.FlowLayoutPanel1.Name = "FlowLayoutPanel1";
@@ -366,12 +366,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.BackColor = global::FIASUpdate.Properties.Settings.Default.DefaultBackColor;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.LV_Search);
             this.Controls.Add(this.TableLayoutPanel3);
             this.Controls.Add(this.TableLayoutPanel2);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.DataBindings.Add(new System.Windows.Forms.Binding("ForeColor", global::FIASUpdate.Properties.Settings.Default, "DefaultForeColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::FIASUpdate.Properties.Settings.Default, "DefaultFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::FIASUpdate.Properties.Settings.Default, "DefaultBackColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.Font = global::FIASUpdate.Properties.Settings.Default.DefaultFont;
+            this.ForeColor = global::FIASUpdate.Properties.Settings.Default.DefaultForeColor;
             this.Name = "FormAddressSearch";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormAddressSearch";

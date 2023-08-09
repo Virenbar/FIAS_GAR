@@ -26,12 +26,12 @@ namespace FIASUpdate.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=partserver2014;Initial Catalog=master;Integrated Security=True")]
-        public string SQLCS {
+        public string SQLConnection {
             get {
-                return ((string)(this["SQLCS"]));
+                return ((string)(this["SQLConnection"]));
             }
             set {
-                this["SQLCS"] = value;
+                this["SQLConnection"] = value;
             }
         }
         

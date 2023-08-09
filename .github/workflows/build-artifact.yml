@@ -1,5 +1,4 @@
 name: Build Artifact
-
 on:
   push:
     branches: [master]
@@ -17,14 +16,10 @@ on:
 jobs:
   build:
     name: Build
-    strategy:
-      matrix:
-        configuration: [Debug, Release]
     runs-on: windows-latest
     env:
       DOTNET_NOLOGO: true
       SolutionName: FIAS_GAR.sln
-      Configuration: ${{ matrix.configuration }}
     outputs:
       version: ${{steps.version.outputs.version}}
     steps:
@@ -49,7 +44,7 @@ jobs:
         run: nuget restore
 
       - name: Restore solution
-        run: msbuild $env:SolutionName /t:Restore /p:Configuration=$env:Configuration
+        run: msbuild $env:SolutionName /t:Restore /p:Configuration=Release
 
       - name: Build solution
-        run: msbuild $env:SolutionName /t:Build /p:Configuration=$env:Configuration
+        run: msbuild $env:SolutionName /t:Build /p:Configuration=Release /p:ContinuousIntegrationBuild=true

@@ -9,6 +9,7 @@ namespace FIASUpdate
 {
     public partial class FormDBList : Form
     {
+        private static readonly Settings Settings = Settings.Default;
         private DBStringItem Current;
 
         public FormDBList()
@@ -28,7 +29,7 @@ namespace FIASUpdate
         {
             LV_DB.BeginUpdate();
             LV_DB.Items.Clear();
-            foreach (var DB in Settings.Default.SQLConnections)
+            foreach (var DB in Settings.SQLConnections)
             {
                 LV_DB.Items.Add(new DBStringItem(DB));
             }
@@ -54,8 +55,8 @@ namespace FIASUpdate
 
         private void B_Select_Click(object sender, EventArgs e)
         {
-            Settings.Default.SQLCS = Current.Connection;
-            Settings.Default.Save();
+            Settings.SQLConnection = Current.Connection;
+            Settings.Save();
             Close();
         }
 
@@ -74,8 +75,8 @@ namespace FIASUpdate
                 D.SelectedDataProvider = DataProvider.SqlDataProvider;
                 if (DataConnectionDialog.Show(D, this) == DialogResult.OK)
                 {
-                    Settings.Default.SQLConnections.Add(D.ConnectionString);
-                    Settings.Default.Save();
+                    Settings.SQLConnections.Add(D.ConnectionString);
+                    Settings.Save();
                 }
             }
             RefreshList();
@@ -85,8 +86,8 @@ namespace FIASUpdate
         {
             if (Msgs.AskYesNo($"Удалить {Current.Server}({Current.Database})?") == DialogResult.Yes)
             {
-                Settings.Default.SQLConnections.Remove(Current.Connection);
-                Settings.Default.Save();
+                Settings.SQLConnections.Remove(Current.Connection);
+                Settings.Save();
             }
             RefreshList();
         }
@@ -101,9 +102,9 @@ namespace FIASUpdate
                 D.ConnectionString = Current.Connection;
                 if (DataConnectionDialog.Show(D, this) == DialogResult.OK)
                 {
-                    Settings.Default.SQLConnections.Remove(Current.Connection);
-                    Settings.Default.SQLConnections.Add(D.ConnectionString);
-                    Settings.Default.Save();
+                    Settings.SQLConnections.Remove(Current.Connection);
+                    Settings.SQLConnections.Add(D.ConnectionString);
+                    Settings.Save();
                 }
             }
             RefreshList();

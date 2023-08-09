@@ -8,15 +8,11 @@ namespace FIASUpdate
 {
     internal static class Program
     {
-        public static string Connection => Settings.Default.SQLCS;
-        public static string DBName => Settings.Default.DBName;
-        public static string XMLPath => Settings.Default.XMLPath;
-
-        public static void SaveSettings() => Settings.Default.Save();
+        private static readonly Settings Settings = Settings.Default;
 
         private static void Default_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Defaults.Connection = Settings.Default.SQLCS;
+            Defaults.Connection = Settings.SQLConnection;
         }
 
         /// <summary>
@@ -25,9 +21,9 @@ namespace FIASUpdate
         [STAThread]
         private static void Main()
         {
-            Settings.Default.PropertyChanged += Default_PropertyChanged;
-            Settings.Default.Reload();
-            Defaults.Connection = Settings.Default.SQLCS;
+            Settings.PropertyChanged += Default_PropertyChanged;
+            Settings.Reload();
+            Defaults.Connection = Settings.SQLConnection;
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

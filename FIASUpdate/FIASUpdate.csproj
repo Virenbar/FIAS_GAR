@@ -87,10 +87,10 @@
     </Reference>
     <Reference Include="CustomMarshalers" />
     <Reference Include="JANL, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Virenbar.JANL.2.2.1\lib\net452\JANL.dll</HintPath>
+      <HintPath>..\packages\Virenbar.JANL.2.3.0\lib\net452\JANL.dll</HintPath>
     </Reference>
     <Reference Include="JANL.WinForms, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Virenbar.JANL.WinForms.2.2.1\lib\net452\JANL.WinForms.dll</HintPath>
+      <HintPath>..\packages\Virenbar.JANL.WinForms.2.3.0\lib\net452\JANL.WinForms.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.7.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -219,7 +219,7 @@
       <HintPath>..\packages\Microsoft-WindowsAPICodePack-Shell.1.1.4\lib\net472\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -335,6 +335,12 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\UC_Database.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UC_Database.Designer.cs">
+      <DependentUpon>UC_Database.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\UC_DeltaImport.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -372,6 +378,9 @@
     <Compile Include="SQL.cs" />
     <Compile Include="SyncEvent.cs" />
     <Compile Include="XMLDataReader.cs" />
+    <EmbeddedResource Include="Controls\UC_Database.resx">
+      <DependentUpon>UC_Database.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormAddressSearch.resx">
       <DependentUpon>FormAddressSearch.cs</DependentUpon>
     </EmbeddedResource>

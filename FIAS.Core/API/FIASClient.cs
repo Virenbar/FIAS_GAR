@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace FIAS.Core.API
 {
+    /// <summary>
+    /// Клиент для API ФИАС
+    /// </summary>
     public class FIASClient : IDisposable
     {
         private readonly HttpClient Client;
@@ -14,9 +17,13 @@ namespace FIAS.Core.API
 
         public FIASClient()
         {
-            Client = new HttpClient() { BaseAddress = Endpoint };
+            Client = new HttpClient { BaseAddress = Endpoint };
         }
 
+        /// <summary>
+        /// Получить список всех архивов
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<FIASInfo>> GetAllDownloadFileInfo()
         {
             using (var HRM = await Client.GetAsync("GetAllDownloadFileInfo"))
@@ -27,10 +34,26 @@ namespace FIAS.Core.API
             }
         }
 
-        public async Task<List<FIASInfo>> GetAllDownloadFileInfo(DateTime Date)
+        /// <summary>
+        /// Получить список архивов после указанной даты
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public async Task<List<FIASInfo>> GetAllDownloadFileInfo(DateTime date)
         {
             var Info = await GetAllDownloadFileInfo();
-            return Info.Where(I => I.Date >= Date).ToList();
+            return Info.Where(I => I.Date > date).ToList();
+        }
+
+        /// <summary>
+        /// Получить список архивов после указанной версии
+        /// </summary>
+        /// <param name="version">Версия</param>
+        /// <returns></returns>
+        public async Task<List<FIASInfo>> GetAllDownloadFileInfo(int version)
+        {
+            var Info = await GetAllDownloadFileInfo();
+            return Info.Where(I => I.VersionId > version).ToList();
         }
 
         #region IDisposable Support

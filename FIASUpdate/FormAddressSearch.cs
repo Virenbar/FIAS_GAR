@@ -1,5 +1,6 @@
-﻿using FIAS.Core.Enums;
+﻿using FIAS.Core;
 using FIAS.Core.Stores;
+using FIASUpdate.Properties;
 using JANL;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,10 @@ namespace FIASUpdate
 {
     public partial class FormAddressSearch : Form
     {
-        private readonly string DBName = Program.DBName;
+        private static readonly Settings Settings = Settings.Default;
+        private readonly string DBName = Settings.DBName;
         private readonly List<(RadioButton RB, FIASDivision Division)> RB_F;
-        private readonly FIASStore Store = new FIASStore(Program.Connection);
+        private readonly FIASStore Store = new FIASStore(Settings.SQLConnection);
 
         public FormAddressSearch()
         {
