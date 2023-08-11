@@ -5,9 +5,8 @@ using System.Collections.Generic;
 
 namespace FIASUpdate
 {
-    internal class DBDeltaImport
+    internal class DBImportDelta : DBImport
     {
-        private static readonly Settings Settings = Settings.Default;
         private readonly FIASStore Store = new FIASStore(Settings.SQLConnection);
         private readonly List<FIASTable> Tables = new List<FIASTable>();
 

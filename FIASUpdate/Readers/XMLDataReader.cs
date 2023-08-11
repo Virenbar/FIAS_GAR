@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Xml;
 
-namespace FIASUpdate
+namespace FIASUpdate.Readers
 {
     internal class XMLDataReader : IDataReader
     {

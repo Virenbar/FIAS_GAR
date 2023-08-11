@@ -15,8 +15,6 @@ namespace FIASUpdate
     [Obsolete("Заменён на FIAS_GAR")]
     internal class DBCreate : IDisposable
     {
-        private static readonly string GAR = Settings.XMLPath;
-        private static readonly string GAR_XSD = GAR + @"\gar_schemas";
         private static readonly Settings Settings = Settings.Default;
         private readonly Dictionary<string, DataSet> DataSets = new Dictionary<string, DataSet>();
         private readonly Database DB;
@@ -40,6 +38,9 @@ namespace FIASUpdate
             DB.Refresh();
             var I = Server.Information;
         }
+
+        private static string GAR => Settings.XMLPath;
+        private static string GAR_XSD => GAR + @"\gar_schemas";
 
         public void Create()
         {

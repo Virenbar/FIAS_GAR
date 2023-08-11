@@ -1,4 +1,4 @@
-﻿namespace FIASUpdate
+﻿namespace FIASUpdate.Forms
 {
     partial class FormAddressSearch
     {

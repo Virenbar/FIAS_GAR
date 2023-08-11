@@ -5,7 +5,7 @@ using Microsoft.Data.ConnectionUI;
 using System;
 using System.Windows.Forms;
 
-namespace FIASUpdate
+namespace FIASUpdate.Forms
 {
     public partial class FormDBList : Form
     {

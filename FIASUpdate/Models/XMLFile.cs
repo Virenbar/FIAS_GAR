@@ -43,7 +43,14 @@ namespace FIASUpdate.Models
         /// </summary>
         public string Name { get; }
 
+        /// <summary>
+        /// Полный путь
+        /// </summary>
         public string Path { get; }
+
+        /// <summary>
+        /// Код региона
+        /// </summary>
         public string Region { get; set; }
 
         public override string ToString() => $"{{Name={Name},Date={Date},GUID={GUID}}}";

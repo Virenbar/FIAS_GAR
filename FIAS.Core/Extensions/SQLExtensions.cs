@@ -55,7 +55,5 @@ namespace FIAS.Core.Extensions
             }
             return Result;
         }
-
-        // private static SqlCommand NewProcedure([CallerMemberName] string name = null) => new SqlCommand(name) { CommandType = CommandType.StoredProcedure };
     }
 }

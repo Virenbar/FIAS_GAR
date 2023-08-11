@@ -1,5 +1,6 @@
 ﻿using FIAS.Core.Models;
 using FIAS.Core.Stores;
+using FIASUpdate.Forms;
 using FIASUpdate.Properties;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
@@ -58,7 +59,7 @@ namespace FIASUpdate.Controls
             using (var F = new FormDBList())
             {
                 F.ShowDialog(this);
-                Store.Connection = Settings.SQLConnection; // Program.Connection;
+                Store.Connection = Settings.SQLConnection;
             }
         }
 
@@ -67,7 +68,7 @@ namespace FIASUpdate.Controls
             using (var F = new CommonOpenFileDialog
             {
                 IsFolderPicker = true,
-                DefaultDirectory = Settings.XMLPath // Program.XMLPath
+                DefaultDirectory = Settings.XMLPath
             })
             {
                 if (F.ShowDialog() == CommonFileDialogResult.Ok)

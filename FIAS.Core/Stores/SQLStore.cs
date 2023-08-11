@@ -6,7 +6,7 @@ namespace FIAS.Core.Stores
 {
     public abstract class SQLStore
     {
-        public SQLStore(string connection) => Connection = connection;
+        protected SQLStore(string connection) => Connection = connection;
 
         public string Connection { get; set; }
 

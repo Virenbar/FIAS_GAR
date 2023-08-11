@@ -341,28 +341,35 @@
     <Compile Include="Controls\UC_Database.Designer.cs">
       <DependentUpon>UC_Database.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\UC_DeltaImport.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\UC_DeltaImport.Designer.cs">
-      <DependentUpon>UC_DeltaImport.cs</DependentUpon>
-    </Compile>
     <Compile Include="DBCreate.cs" />
-    <Compile Include="DBDeltaImport.cs" />
+    <Compile Include="DBImport.cs" />
+    <Compile Include="DBImportDelta.cs" />
+    <Compile Include="Forms\FormImportDelta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormImportDelta.Designer.cs">
+      <DependentUpon>FormImportDelta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormImportFull.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormImportFull.Designer.cs">
+      <DependentUpon>FormImportFull.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\DBStringItem.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="FIASReader.cs" />
-    <Compile Include="DBImport.cs" />
-    <Compile Include="FormAddressSearch.cs">
+    <Compile Include="Readers\FIASReader.cs" />
+    <Compile Include="DBImportFull.cs" />
+    <Compile Include="Forms\FormAddressSearch.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormAddressSearch.Designer.cs">
+    <Compile Include="Forms\FormAddressSearch.Designer.cs">
       <DependentUpon>FormAddressSearch.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormDBList.cs">
+    <Compile Include="Forms\FormDBList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormDBList.Designer.cs">
+    <Compile Include="Forms\FormDBList.Designer.cs">
       <DependentUpon>FormDBList.cs</DependentUpon>
     </Compile>
     <Compile Include="FormMain.cs">
@@ -377,18 +384,24 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQL.cs" />
     <Compile Include="SyncEvent.cs" />
-    <Compile Include="XMLDataReader.cs" />
+    <Compile Include="Readers\XMLDataReader.cs" />
     <EmbeddedResource Include="Controls\UC_Database.resx">
       <DependentUpon>UC_Database.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormAddressSearch.resx">
+    <EmbeddedResource Include="Forms\FormAddressSearch.resx">
       <DependentUpon>FormAddressSearch.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormDBList.resx">
+    <EmbeddedResource Include="Forms\FormDBList.resx">
       <DependentUpon>FormDBList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormImportDelta.resx">
+      <DependentUpon>FormImportDelta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormImportFull.resx">
+      <DependentUpon>FormImportFull.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
