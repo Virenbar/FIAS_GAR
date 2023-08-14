@@ -1,5 +1,4 @@
-﻿using FIASUpdate.Properties;
-using JANL;
+﻿using JANL;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -16,7 +15,6 @@ namespace FIASUpdate.Forms
         public FormImportFull()
         {
             InitializeComponent();
-            Icon = Resources.FNS;
         }
 
         private void AddResult(string table, string status)
@@ -89,6 +87,7 @@ namespace FIASUpdate.Forms
 
         private void FormImportFull_Load(object sender, EventArgs e)
         {
+            Icon = Owner.Icon;
             TP = new Progress<TaskProgress>((T) =>
             {
                 if (T.HasStatus) { SL_Status.Text = T.Status; }

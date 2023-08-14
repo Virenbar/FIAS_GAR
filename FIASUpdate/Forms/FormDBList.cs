@@ -15,7 +15,6 @@ namespace FIASUpdate.Forms
         public FormDBList()
         {
             InitializeComponent();
-            Icon = Resources.FNS;
         }
 
         protected override void OnLoad(EventArgs e)
@@ -58,6 +57,11 @@ namespace FIASUpdate.Forms
             Settings.SQLConnection = Current.Connection;
             Settings.Save();
             Close();
+        }
+
+        private void FormDBList_Load(object sender, EventArgs e)
+        {
+            Icon = Owner.Icon;
         }
 
         private void LV_DB_SelectedIndexChanged(object sender, EventArgs e)

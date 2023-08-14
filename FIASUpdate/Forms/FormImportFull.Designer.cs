@@ -120,9 +120,9 @@
             this.flowLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel2.Controls.Add(this.B_Import);
             this.flowLayoutPanel2.Controls.Add(this.B_Cancel);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(302, 3);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(286, 3);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(177, 31);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(193, 31);
             this.flowLayoutPanel2.TabIndex = 11;
             // 
             // B_Import
@@ -136,6 +136,7 @@
             this.B_Import.Size = new System.Drawing.Size(105, 25);
             this.B_Import.TabIndex = 0;
             this.B_Import.Text = "Импортировать";
+            this.B_Import.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.B_Import.UseVisualStyleBackColor = true;
             this.B_Import.Click += new System.EventHandler(this.B_Import_Click);
             // 
@@ -144,12 +145,14 @@
             this.B_Cancel.AutoSize = true;
             this.B_Cancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.B_Cancel.Enabled = false;
+            this.B_Cancel.Image = global::FIASUpdate.icons8.Cancel16;
             this.B_Cancel.Location = new System.Drawing.Point(114, 3);
             this.B_Cancel.Name = "B_Cancel";
             this.B_Cancel.Padding = new System.Windows.Forms.Padding(1);
-            this.B_Cancel.Size = new System.Drawing.Size(60, 25);
+            this.B_Cancel.Size = new System.Drawing.Size(76, 25);
             this.B_Cancel.TabIndex = 1;
             this.B_Cancel.Text = "Отмена";
+            this.B_Cancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.B_Cancel.UseVisualStyleBackColor = true;
             this.B_Cancel.Click += new System.EventHandler(this.B_Cancel_Click);
             // 

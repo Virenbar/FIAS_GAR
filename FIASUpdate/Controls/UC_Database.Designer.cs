@@ -129,12 +129,14 @@
             // 
             this.B_Save.AutoSize = true;
             this.B_Save.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.B_Save.Location = new System.Drawing.Point(426, 35);
+            this.B_Save.Image = global::FIASUpdate.icons8.Save16;
+            this.B_Save.Location = new System.Drawing.Point(410, 35);
             this.B_Save.Name = "B_Save";
             this.B_Save.Padding = new System.Windows.Forms.Padding(1);
-            this.B_Save.Size = new System.Drawing.Size(72, 25);
+            this.B_Save.Size = new System.Drawing.Size(88, 25);
             this.B_Save.TabIndex = 2;
             this.B_Save.Text = "Сохранить";
+            this.B_Save.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.B_Save.UseVisualStyleBackColor = true;
             this.B_Save.Click += new System.EventHandler(this.B_Save_Click);
             // 
@@ -143,12 +145,14 @@
             this.B_Refresh.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.B_Refresh.AutoSize = true;
             this.B_Refresh.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.B_Refresh.Image = global::FIASUpdate.icons8.Replace16;
             this.B_Refresh.Location = new System.Drawing.Point(3, 35);
             this.B_Refresh.Name = "B_Refresh";
             this.B_Refresh.Padding = new System.Windows.Forms.Padding(1);
-            this.B_Refresh.Size = new System.Drawing.Size(68, 25);
+            this.B_Refresh.Size = new System.Drawing.Size(84, 25);
             this.B_Refresh.TabIndex = 2;
             this.B_Refresh.Text = "Обновить";
+            this.B_Refresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.B_Refresh.UseVisualStyleBackColor = true;
             this.B_Refresh.Click += new System.EventHandler(this.B_Refresh_Click);
             // 
@@ -244,6 +248,7 @@
             this.B_SQLConnection.Size = new System.Drawing.Size(74, 25);
             this.B_SQLConnection.TabIndex = 0;
             this.B_SQLConnection.Text = "SQL Server";
+            this.B_SQLConnection.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.B_SQLConnection.UseVisualStyleBackColor = true;
             this.B_SQLConnection.Click += new System.EventHandler(this.B_SQLConnection_Click);
             // 
@@ -269,6 +274,7 @@
             this.B_XMLPath.Size = new System.Drawing.Size(74, 25);
             this.B_XMLPath.TabIndex = 0;
             this.B_XMLPath.Text = "XML Path";
+            this.B_XMLPath.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.B_XMLPath.UseVisualStyleBackColor = true;
             this.B_XMLPath.Click += new System.EventHandler(this.B_XMLPath_Click);
             // 

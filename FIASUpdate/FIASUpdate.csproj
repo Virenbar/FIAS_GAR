@@ -76,7 +76,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\FNS.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\FIAS_Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Azure.Core, Version=1.28.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
@@ -344,6 +344,12 @@
     <Compile Include="DBCreate.cs" />
     <Compile Include="DBImport.cs" />
     <Compile Include="DBImportDelta.cs" />
+    <Compile Include="Forms\FormAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormAbout.designer.cs">
+      <DependentUpon>FormAbout.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormImportDelta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -355,6 +361,11 @@
     </Compile>
     <Compile Include="Forms\FormImportFull.Designer.cs">
       <DependentUpon>FormImportFull.cs</DependentUpon>
+    </Compile>
+    <Compile Include="icons8.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>icons8.resx</DependentUpon>
     </Compile>
     <Compile Include="Models\DBStringItem.cs" />
     <Compile Include="Extensions.cs" />
@@ -388,6 +399,9 @@
     <EmbeddedResource Include="Controls\UC_Database.resx">
       <DependentUpon>UC_Database.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormAbout.resx">
+      <DependentUpon>FormAbout.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormAddressSearch.resx">
       <DependentUpon>FormAddressSearch.cs</DependentUpon>
     </EmbeddedResource>
@@ -402,6 +416,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormImportFull.resx">
       <DependentUpon>FormImportFull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons8.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>icons8.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -447,6 +465,25 @@
       <Project>{b5035c78-ca6f-4e4f-9922-848a2070d4c4}</Project>
       <Name>FIAS.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\FIAS_Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FIAS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\icons8\Add16.png" />
+    <Content Include="Resources\icons8\Cancel16.png" />
+    <Content Include="Resources\icons8\Info16.png" />
+    <Content Include="Resources\icons8\Minus16.png" />
+    <Content Include="Resources\icons8\Ok16.png" />
+    <Content Include="Resources\icons8\OpenedFolder16.png" />
+    <Content Include="Resources\icons8\PencilDrawing16.png" />
+    <Content Include="Resources\icons8\Replace16.png" />
+    <Content Include="Resources\icons8\Save16.png" />
+    <Content Include="Resources\icons8\Search16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Data.SqlClient.SNI.5.0.1\build\net46\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('..\packages\Microsoft.Data.SqlClient.SNI.5.0.1\build\net46\Microsoft.Data.SqlClient.SNI.targets')" />
