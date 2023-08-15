@@ -8,14 +8,14 @@ using System.Data;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading;
+using Settings = FIASUpdate.Properties.Settings;
 
 namespace FIASUpdate
 {
-    [Obsolete]
+    [Obsolete("Заменён на FIAS_GAR")]
     internal class DBCreate : IDisposable
     {
-        private static readonly string GAR = Program.XMLPath;
-        private static readonly string GAR_XSD = GAR + @"\gar_schemas";
+        private static readonly Settings Settings = Settings.Default;
         private readonly Dictionary<string, DataSet> DataSets = new Dictionary<string, DataSet>();
         private readonly Database DB;
         private readonly string DBName;
@@ -28,7 +28,7 @@ namespace FIASUpdate
 
         public DBCreate(IProgress<TaskProgress> TaskProgress)
         {
-            DBName = Program.DBName;
+            DBName = Settings.DBName;
             SP = TaskProgress;
 
             SqlConnection Connection = SQL.NewConnection();
@@ -38,6 +38,9 @@ namespace FIASUpdate
             DB.Refresh();
             var I = Server.Information;
         }
+
+        private static string GAR => Settings.XMLPath;
+        private static string GAR_XSD => GAR + @"\gar_schemas";
 
         public void Create()
         {

@@ -1,180 +1,44 @@
-﻿using FIAS.Core.Stores;
-using FIASUpdate.Models;
-using JANL;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.IO;
-using System.Linq;
-using System.Threading;
+using Settings = FIASUpdate.Properties.Settings;
 
 namespace FIASUpdate
 {
-    internal class DBImport : IDisposable
+    internal abstract class DBImport : IDisposable
     {
-        private readonly Dictionary<string, string> _result = new Dictionary<string, string>();
-        private readonly Database DB;
-        private readonly string DBName;
-        private readonly SyncEvent Events;
+        protected static readonly Settings Settings = Settings.Default;
+        protected readonly Database DB;
+        protected readonly string DBName = Settings.DBName;
+        protected readonly SyncEvent Events;
 
-        //Status Progress
-        private readonly IProgress<TaskProgress> SP;
-
-        private readonly FIASStore Store = new FIASStore(Program.Connection);
-        private readonly List<FIASTable> Tables = new List<FIASTable>();
-
-        public DBImport() : this(null) { }
-
-        public DBImport(IProgress<TaskProgress> TaskProgress)
+        protected DBImport()
         {
-            DBName = Program.DBName;
             Events = new SyncEvent(this);
-            SP = TaskProgress;
 
-            SqlConnection Connection = SQL.NewConnection();
+            SqlConnection Connection = NewConnection();
             Server Server = new Server(new ServerConnection(Connection));
             DB = Server.Databases[DBName];
             if (DB == null) { throw new InvalidOperationException($"База данных {DBName} не найдена"); }
             DB.Refresh();
         }
 
-        public IReadOnlyDictionary<string, string> Result => _result;
-        private static string GAR_Common => Program.XMLPath;
-        private static string GAR_Full => $@"{GAR_Common}\gar_xml";
+        protected static SqlConnection NewConnection() => NewConnection("master");
 
-        public void Import() => Import(new ImportOptions { OnlyEmpty = true });
-
-        public void Import(ImportOptions options)
+        protected static SqlConnection NewConnection(string Database)
         {
-            _result.Clear();
-            PrepareFiles();
-            ImportTables(options);
-            if (options.ShrinkDatabase) { ShrinkDatabase(); }
-        }
-
-        #region Table Import
-
-        private long ImportTable(Table T, FIASTable Table)
-        {
-            Dictionary<string, string> ColumnMap = T.Columns.Cast<Column>().ToDictionary(C => C.Name, C => C.Name);
-
-            using (var Connection = SQL.NewConnection(DBName))
-            using (var SBC = new SqlBulkCopy(Connection) { DestinationTableName = T.Name, BulkCopyTimeout = 0, NotifyAfter = 100 })
+            var SCSB = new SqlConnectionStringBuilder(Settings.SQLConnection)
             {
-                SBC.SqlRowsCopied += SBC_SqlRowsCopied;
-                SBC.EnableStreaming = true;
-                foreach (var File in Table.Files)
-                {
-                    SP?.Report(new TaskProgress($"Импорт файла: {File.FullName}", 0, 0));
-                    using (var FR = new FIASReader(ColumnMap.Keys, File.Path))
-                    {
-                        SBC.WriteToServer(FR);
-                    }
-                    SBC.NotifyAfter = 100;
-                    var Count = SBC.RowsCopied;
-                    SP?.Report(new TaskProgress($"Импорт файла завершён: {File.FullName}", Count, Count));
-                    Thread.Sleep(1000);
-                }
-                SP?.Report(new TaskProgress($"Импорт в таблицу завершён: {T.Name}", 0, 0));
-                T.Refresh();
-                return T.RowCount;
-            }
+                InitialCatalog = Database,
+                Encrypt = false
+            };
+            var connection = new SqlConnection(SCSB.ToString());
+            connection.Open();
+            return connection;
         }
 
-        private void ImportTables(ImportOptions options)
-        {
-            foreach (var Table in Tables)
-            {
-                //Проверка существования
-                Table T = DB.Tables[Table.Name];
-                if (T == null)
-                {
-                    AddResult(Table.Name, "Таблицы нет в БД");
-                    continue;
-                }
-                //Проверка настроек импорта
-                T.Refresh();
-                if (!Store.GetCanImport(Table.Name))
-                {
-                    AddResult(Table.Name, $"Пропущена ({T.RowCount:N0})");
-                    continue;
-                }
-                if (!options.OnlyEmpty)
-                {
-                    T.TruncateData();
-                }
-                else if (T.RowCount > 0)
-                {
-                    AddResult(Table.Name, $"Пропущена ({T.RowCount:N0})");
-                    continue;
-                }
-
-                //Импорт
-                var Count = ImportTable(T, Table);
-                Store.SetLastImport(Table.Name, Table.Date);
-                AddResult(Table.Name, $"Импортирована ({Count:N0})");
-                Thread.Sleep(2 * 1000);
-            }
-        }
-
-        private void PrepareFiles()
-        {
-            Tables.Clear();
-            var CFiles = Directory.EnumerateFiles(GAR_Full)
-                .Select(F => new XMLFile(F));
-
-            var Files = Directory.EnumerateDirectories(GAR_Full)
-                .SelectMany(D => Directory.EnumerateFiles(D))
-                .Select(F => new XMLFile(F)
-                {
-                    Region = Path.GetFileName(Path.GetDirectoryName(F))
-                });
-
-            var T = Enumerable.Concat(CFiles, Files)
-               .ToLookup(F => F.Name.Contains("PARAMS") ? "PARAMS" : F.Name)
-               .Select(L => new FIASTable(L.Key, L.ToList()));
-
-            Tables.AddRange(T);
-        }
-
-        private void SBC_SqlRowsCopied(object sender, SqlRowsCopiedEventArgs e)
-        {
-            SqlBulkCopy SBC = (SqlBulkCopy)sender;
-            var SBCCount = (int)e.RowsCopied;
-            SP?.Report(new TaskProgress(SBCCount, SBCCount));
-            if (SBCCount >= 10000 && SBC.NotifyAfter != 1000) { SBC.NotifyAfter = 1000; }
-        }
-
-        #endregion Table Import
-
-        private void AddResult(string table, string status)
-        {
-            _result.Add(table, status);
-            OnResultAdded(new ResultAddedEventArgs(table, status));
-        }
-
-        private void ShrinkDatabase()
-        {
-            var Size = DB.Size;
-            SP?.Report(new TaskProgress($"Сжатие БД({Size:N2} МБ)", 0, 0));
-            Thread.Sleep(1000);
-            DB.Shrink(1, ShrinkMethod.Default);
-            DB.Refresh();
-            SP?.Report(new TaskProgress($"БД сжата({Size:N2} МБ -> {DB.Size:N2} МБ)"));
-        }
-
-        #region Events
-
-        protected void OnResultAdded(ResultAddedEventArgs args) => Events.PostEvent(ResultAdded, args);
-
-        public event EventHandler<ResultAddedEventArgs> ResultAdded;
-
-        #endregion Events
-
-        #region IDisposable Support
+        #region IDisposable
         private bool disposedValue;
 
         public void Dispose() => Dispose(true);
@@ -191,33 +55,6 @@ namespace FIASUpdate
             }
         }
 
-        #endregion IDisposable Support
-    }
-
-    internal class ImportOptions
-    {
-        [Obsolete]
-        public DateTime Date { get; set; }
-
-        /// <summary>
-        /// Импортировать только в пустые таблицы
-        /// </summary>
-        public bool OnlyEmpty { get; set; }
-
-        /// <summary>
-        /// Сжать БД после импорта
-        /// </summary>
-        public bool ShrinkDatabase { get; set; }
-    }
-    internal class ResultAddedEventArgs : EventArgs
-    {
-        public ResultAddedEventArgs(string table, string status)
-        {
-            Table = table;
-            Status = status;
-        }
-
-        public string Status { get; private set; }
-        public string Table { get; private set; }
+        #endregion IDisposable
     }
 }

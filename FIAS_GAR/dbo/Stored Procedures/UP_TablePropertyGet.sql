@@ -11,5 +11,5 @@ BEGIN
 	SELECT
 		[EP].value
 	FROM
-		[fn_listextendedproperty](@Name, 'schema', 'dbo', 'table', @Table, NULL, NULL) [EP]
+		[fn_listextendedproperty](@Name, 'schema', 'dbo', 'table', @Table, DEFAULT, DEFAULT) [EP]
 END

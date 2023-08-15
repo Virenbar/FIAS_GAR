@@ -7,7 +7,7 @@ namespace FIAS.Core.API
     public class FIASInfo
     {
         /// <summary>
-        /// Идентификатор версии (в прямых выгрузках дата выгрузки вида yyyyMMdd)
+        /// Идентификатор версии (дата выгрузки вида yyyyMMdd)
         /// </summary>
         public int VersionId { get; set; }
 

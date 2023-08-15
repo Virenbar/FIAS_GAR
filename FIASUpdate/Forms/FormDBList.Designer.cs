@@ -1,4 +1,4 @@
-﻿namespace FIASUpdate
+﻿namespace FIASUpdate.Forms
 {
     partial class FormDBList
     {
@@ -52,9 +52,9 @@
             this.flowLayoutPanel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel3.Controls.Add(this.B_Select);
             this.flowLayoutPanel3.Controls.Add(this.B_Cancel);
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(124, 3);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(92, 3);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(137, 31);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(169, 31);
             this.flowLayoutPanel3.TabIndex = 4;
             this.flowLayoutPanel3.WrapContents = false;
             // 
@@ -62,12 +62,14 @@
             // 
             this.B_Select.AutoSize = true;
             this.B_Select.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.B_Select.Image = global::FIASUpdate.icons8.Ok16;
             this.B_Select.Location = new System.Drawing.Point(3, 3);
             this.B_Select.Name = "B_Select";
             this.B_Select.Padding = new System.Windows.Forms.Padding(1);
-            this.B_Select.Size = new System.Drawing.Size(65, 25);
+            this.B_Select.Size = new System.Drawing.Size(81, 25);
             this.B_Select.TabIndex = 0;
             this.B_Select.Text = "Выбрать";
+            this.B_Select.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.B_Select.UseVisualStyleBackColor = true;
             this.B_Select.Click += new System.EventHandler(this.B_Select_Click);
             // 
@@ -75,12 +77,14 @@
             // 
             this.B_Cancel.AutoSize = true;
             this.B_Cancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.B_Cancel.Location = new System.Drawing.Point(74, 3);
+            this.B_Cancel.Image = global::FIASUpdate.icons8.Cancel16;
+            this.B_Cancel.Location = new System.Drawing.Point(90, 3);
             this.B_Cancel.Name = "B_Cancel";
             this.B_Cancel.Padding = new System.Windows.Forms.Padding(1);
-            this.B_Cancel.Size = new System.Drawing.Size(60, 25);
+            this.B_Cancel.Size = new System.Drawing.Size(76, 25);
             this.B_Cancel.TabIndex = 0;
             this.B_Cancel.Text = "Отмена";
+            this.B_Cancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.B_Cancel.UseVisualStyleBackColor = true;
             this.B_Cancel.Click += new System.EventHandler(this.B_Cancel_Click);
             // 
@@ -134,22 +138,25 @@
             // 
             // MI_Add
             // 
+            this.MI_Add.Image = global::FIASUpdate.icons8.Add16;
             this.MI_Add.Name = "MI_Add";
-            this.MI_Add.Size = new System.Drawing.Size(128, 22);
+            this.MI_Add.Size = new System.Drawing.Size(180, 22);
             this.MI_Add.Text = "Добавить";
             this.MI_Add.Click += new System.EventHandler(this.MI_Add_Click);
             // 
             // MI_Edit
             // 
+            this.MI_Edit.Image = global::FIASUpdate.icons8.PencilDrawing16;
             this.MI_Edit.Name = "MI_Edit";
-            this.MI_Edit.Size = new System.Drawing.Size(128, 22);
+            this.MI_Edit.Size = new System.Drawing.Size(180, 22);
             this.MI_Edit.Text = "Изменить";
             this.MI_Edit.Click += new System.EventHandler(this.MI_Edit_Click);
             // 
             // MI_Delete
             // 
+            this.MI_Delete.Image = global::FIASUpdate.icons8.Minus16;
             this.MI_Delete.Name = "MI_Delete";
-            this.MI_Delete.Size = new System.Drawing.Size(128, 22);
+            this.MI_Delete.Size = new System.Drawing.Size(180, 22);
             this.MI_Delete.Text = "Удалить";
             this.MI_Delete.Click += new System.EventHandler(this.MI_Delete_Click);
             // 
@@ -187,6 +194,7 @@
             this.Name = "FormDBList";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Выбор соединения";
+            this.Load += new System.EventHandler(this.FormDBList_Load);
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.PerformLayout();
             this.menuStrip1.ResumeLayout(false);

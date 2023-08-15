@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FIASUpdate.Controls
+namespace FIASUpdate.Forms
 {
-    public partial class UC_DeltaImport : UserControl
+    public partial class FormImportDelta : Form
     {
-        public UC_DeltaImport()
+        public FormImportDelta()
         {
             InitializeComponent();
         }

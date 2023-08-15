@@ -6,11 +6,9 @@ on:
     paths:
       - "mkdocs.yml"
       - "docs/**"
-
 concurrency:
   group: "pages"
   cancel-in-progress: true
-
 jobs:
   build:
     name: Build
@@ -18,14 +16,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: 3.x
+
       - name: Build docs
         run: |
           pip install mkdocs-material
           mkdocs build
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
