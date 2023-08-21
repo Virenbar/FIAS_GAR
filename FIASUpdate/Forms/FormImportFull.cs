@@ -1,4 +1,5 @@
 ﻿using JANL;
+using JANL.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -59,7 +60,7 @@ namespace FIASUpdate.Forms
                     SetResult(FIAS.Result);
                 }
             }
-            catch (Exception ex) { Msgs.ShowException(ex); }
+            catch (Exception ex) { this.ShowException(ex); }
             finally
             {
                 SWL.Stop();

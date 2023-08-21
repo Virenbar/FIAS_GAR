@@ -247,6 +247,8 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -336,6 +338,7 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArchiveDownloader.cs" />
     <Compile Include="Controls\UC_Database.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -345,6 +348,7 @@
     <Compile Include="DBCreate.cs" />
     <Compile Include="DBImport.cs" />
     <Compile Include="DBImportDelta.cs" />
+    <Compile Include="Models\FIASArchiveItem.cs" />
     <Compile Include="Forms\FormAbout.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -370,6 +374,8 @@
     </Compile>
     <Compile Include="Models\DBStringItem.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Models\FIASArchive.cs" />
+    <Compile Include="Properties\Settings.cs" />
     <Compile Include="Readers\FIASReader.cs" />
     <Compile Include="DBImportFull.cs" />
     <Compile Include="Forms\FormAddressSearch.cs">

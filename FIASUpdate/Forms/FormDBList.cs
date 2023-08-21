@@ -1,6 +1,6 @@
 ﻿using FIASUpdate.Models;
 using FIASUpdate.Properties;
-using JANL;
+using JANL.Extensions;
 using Microsoft.Data.ConnectionUI;
 using System;
 using System.Windows.Forms;
@@ -88,7 +88,7 @@ namespace FIASUpdate.Forms
 
         private void MI_Delete_Click(object sender, EventArgs e)
         {
-            if (Msgs.AskYesNo($"Удалить {Current.Server}({Current.Database})?") == DialogResult.Yes)
+            if (this.AskYesNo($"Удалить {Current.Server}({Current.Database})?") == DialogResult.Yes)
             {
                 Settings.SQLConnections.Remove(Current.Connection);
                 Settings.Save();

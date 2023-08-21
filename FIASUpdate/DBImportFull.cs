@@ -34,7 +34,7 @@ namespace FIASUpdate
         public IReadOnlyDictionary<string, string> Result => _result;
         private static string GAR_Common => Settings.XMLPath;
         private static string GAR_Full => $@"{GAR_Common}\gar_xml";
-        private static string GAR_Version => $@"{GAR_Full}\Version.txt";
+        private static string GAR_Version => $@"{GAR_Full}\version.txt";
 
         public void Import() => Import(default, default);
 

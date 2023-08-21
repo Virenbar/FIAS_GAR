@@ -94,7 +94,6 @@
             this.B_ImportDelta.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.B_ImportDelta.AutoSize = true;
             this.B_ImportDelta.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.B_ImportDelta.Enabled = false;
             this.B_ImportDelta.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
             this.B_ImportDelta.Location = new System.Drawing.Point(177, 93);
             this.B_ImportDelta.Margin = new System.Windows.Forms.Padding(20);
@@ -105,7 +104,6 @@
             this.B_ImportDelta.Text = "Импорт БД - Обновления";
             this.B_ImportDelta.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.B_ImportDelta.UseVisualStyleBackColor = true;
-            this.B_ImportDelta.Visible = false;
             this.B_ImportDelta.Click += new System.EventHandler(this.B_ImportDelta_Click);
             // 
             // B_ImportFull
