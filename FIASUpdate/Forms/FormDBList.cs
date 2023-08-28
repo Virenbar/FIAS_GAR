@@ -3,6 +3,7 @@ using FIASUpdate.Properties;
 using JANL.Extensions;
 using Microsoft.Data.ConnectionUI;
 using System;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace FIASUpdate.Forms
@@ -54,7 +55,11 @@ namespace FIASUpdate.Forms
 
         private void B_Select_Click(object sender, EventArgs e)
         {
-            Settings.SQLConnection = Current.Connection;
+            var connection = new SqlConnectionStringBuilder(Current.Connection)
+            {
+                ApplicationName = "FIAS Update"
+            };
+            Settings.SQLConnection = connection.ToString();
             Settings.Save();
             Close();
         }

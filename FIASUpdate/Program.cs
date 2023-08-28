@@ -21,6 +21,12 @@ namespace FIASUpdate
         [STAThread]
         private static void Main()
         {
+            if (!Settings.Upgraded)
+            {
+                Settings.Upgrade();
+                Settings.Upgraded = true;
+                Settings.Save();
+            }
             Settings.PropertyChanged += Default_PropertyChanged;
             Settings.Reload();
             Defaults.Connection = Settings.SQLConnection;

@@ -89,5 +89,22 @@ namespace FIASUpdate.Properties {
                 return ((System.Drawing.Icon)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на MERGE INTO 
+        ///    &lt;target&gt; AS T
+        ///USING
+        ///    &lt;source&gt; AS S 
+        ///ON (T.id = S.id)
+        ///WHEN NOT MATCHED BY TARGET THEN
+        ///    &lt;insert&gt;
+        ///WHEN MATCHED THEN
+        ///    &lt;update&gt;.
+        /// </summary>
+        internal static string merge {
+            get {
+                return ResourceManager.GetString("merge", resourceCulture);
+            }
+        }
     }
 }

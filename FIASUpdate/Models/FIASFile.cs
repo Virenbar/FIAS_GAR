@@ -4,11 +4,11 @@ using System.Text.RegularExpressions;
 
 namespace FIASUpdate.Models
 {
-    internal class XMLFile
+    internal class FIASFile
     {
         private static readonly Regex R = new Regex(@"AS_(?<name>[a-zA-Z_]+)_(?<date>\d{8})_(?<guid>[\w-]{36})");
 
-        public XMLFile(string path)
+        public FIASFile(string path)
         {
             var M = R.Match(path);
             if (!M.Success) { throw new ArgumentException("Не корректный формат имени файла", nameof(path)); }

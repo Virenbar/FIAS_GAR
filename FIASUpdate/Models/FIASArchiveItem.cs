@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace FIASUpdate.Models
 {
@@ -8,7 +9,16 @@ namespace FIASUpdate.Models
         {
             Archive = archive;
             SubItems.Add(Archive.TextVersion);
-            SubItems.Add(Archive.IsExsists() ? "Скачан" : "Не скачан");
+            SubItems.Add("-");
+            SubItems.Add("-");
+            Refresh();
+        }
+
+        public void Refresh()
+        {
+            Archive.Refresh();
+            SubItems[2].Text = Archive.Exsists ? "Скачан" : "Не скачан";
+            SubItems[3].Text = Archive.ArchiveSize.HasValue ? $"{Archive.ArchiveSize / Math.Pow(1024, 2):N2} МБ" : "-";
         }
 
         public string State

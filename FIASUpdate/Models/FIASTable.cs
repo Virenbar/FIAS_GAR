@@ -6,7 +6,7 @@ namespace FIASUpdate.Models
 {
     internal class FIASTable
     {
-        public FIASTable(string name, List<XMLFile> files)
+        public FIASTable(string name, List<FIASFile> files)
         {
             Name = name;
             Files = files;
@@ -21,7 +21,7 @@ namespace FIASUpdate.Models
         /// <summary>
         /// Список XML файлов выгрузки
         /// </summary>
-        public List<XMLFile> Files { get; }
+        public List<FIASFile> Files { get; }
 
         /// <summary>
         /// Имя таблицы выгрузки

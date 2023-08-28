@@ -1,4 +1,5 @@
-﻿using JANL;
+﻿using FIASUpdate.Models;
+using JANL;
 using JANL.Extensions;
 using System;
 using System.Collections.Generic;
@@ -47,7 +48,7 @@ namespace FIASUpdate.Forms
             {
                 UIState(false);
                 LV_Result.Items.Clear();
-                var Options = new ImportOptions
+                var Options = new ImportFullOptions
                 {
                     OnlyEmpty = CB_OnlyEmpty.Checked,
                     ShrinkDatabase = CB_Shrink.Checked

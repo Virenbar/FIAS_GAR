@@ -10,44 +10,58 @@ namespace FIASUpdate.Models
 {
     internal class FIASArchive
     {
-        private FIASInfo Info;
+        private readonly FileInfo Archive;
+        private readonly FIASInfo Info;
 
         public FIASArchive(FIASInfo info)
         {
             Info = info;
+            Archive = new FileInfo(ArchivePath);
+            Refresh();
         }
 
-        public string DirectoryPath => $@"{ArchivePath}\gar_delta_xml";
-        public string FilePath => $@"{ArchivePath}\gar_delta_xml.zip";
+        public string ArchivePath => $@"{DirectoryPath}\gar_delta_xml.zip";
+        public long? ArchiveSize => Archive.Exists ? Archive.Length : (long?)null;
         public DateTime Date => Info.Date;
+        public bool Exsists { get; private set; }
+        public string ExtractPath => $@"{DirectoryPath}\gar_delta_xml";
         public string TextVersion => Info.TextVersion;
         public string URLDelta => Info.GarXMLDeltaURL;
         public int VersionId => Info.VersionId;
-        private string ArchivePath => $@"{Settings.GAR_Delta}\{Date:yyyy.MM.dd}";
+        private string DirectoryPath => $@"{FIASProperties.GAR_Delta}\{Date:yyyy.MM.dd}";
 
         public void Extract(IEnumerable<string> subjects)
         {
-            var path = FilePath;
+            var path = ArchivePath;
             using (var zip = ZipFile.OpenRead(path))
             {
-                var root = zip.Entries.Where(E => !E.FullName.Contains(@"\"));
-                var files = zip.Entries.Where(E => subjects.Any(S => E.FullName.Contains($@"{S}\")));
+                var root = zip.Entries.Where(E => !E.FullName.Contains(@"/"));
+                var files = zip.Entries.Where(E => subjects.Any(S => E.FullName.Contains($@"{S}/")));
 
                 foreach (var item in root.Concat(files))
                 {
-                    item.ExtractToFile(Path.Combine(DirectoryPath, item.FullName));
+                    var file = Path.Combine(ExtractPath, item.FullName);
+                    Directory.CreateDirectory(Path.GetDirectoryName(file));
+                    item.ExtractToFile(file, true);
                 }
-                //var subjectsFiles = zip.Entries
             }
         }
 
-        public bool IsExsists()
+        public void Refresh()
         {
-            var path = FilePath;
-            if (!File.Exists(path)) { return false; }
+            Archive.Refresh();
+            Exsists = Archive.Exists && IsValid();
+        }
+
+        private bool IsValid()
+        {
             try
             {
-                using (var zip = ZipFile.OpenRead(path))
+                // Попробовать открыть для проверки целостности
+                // Выдаст ошибку если файл в процессе записи
+                // Может зависнуть на повреждённом архиве
+                // Нужна проверка хэша, но увы
+                using (var zip = ZipFile.OpenRead(Archive.FullName))
                 {
                     return zip.Entries.Count > 0;
                 }

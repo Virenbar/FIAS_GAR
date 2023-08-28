@@ -15,8 +15,17 @@ namespace FIASUpdate
         private readonly HttpClient Client;
         private readonly SemaphoreSlim Semaphore;
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="archives">Список архивов</param>
         public ArchiveDownloader(List<FIASArchive> archives) : this(archives, 2) { }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="archives">Список архивов</param>
+        /// <param name="threads">Количество "потоков" для скачивания</param>
         public ArchiveDownloader(List<FIASArchive> archives, int threads)
         {
             Archives = archives;
@@ -36,17 +45,21 @@ namespace FIASUpdate
 
         private async Task<string> TryDownloadArchive(FIASArchive archive, CancellationToken token)
         {
-            var LocalFile = new FileInfo(archive.FilePath);
+            var LocalFile = new FileInfo(archive.ArchivePath);
             try
             {
                 await Semaphore.WaitAsync();
                 token.ThrowIfCancellationRequested();
-                var Responce = await Client.GetAsync(archive.URLDelta, token);
-                Responce.EnsureSuccessStatusCode();
-                Directory.CreateDirectory(LocalFile.DirectoryName);
-                using (var FS = new FileStream(LocalFile.FullName, FileMode.Create))
-                    await Responce.Content.CopyToAsync(FS);
-
+                // Считать только заголовок
+                using (var Responce = await Client.GetAsync(archive.URLDelta, HttpCompletionOption.ResponseHeadersRead, token))
+                {
+                    Responce.EnsureSuccessStatusCode();
+                    Directory.CreateDirectory(LocalFile.DirectoryName);
+                    // А содержимое записать прямо в файл
+                    using (var FS = new FileStream(LocalFile.FullName, FileMode.Create))
+                    using (var RS = await Responce.Content.ReadAsStreamAsync())
+                        await RS.CopyToAsync(FS);
+                }
                 return LocalFile.FullName;
             }
             finally
