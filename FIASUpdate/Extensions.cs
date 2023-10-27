@@ -16,7 +16,7 @@ namespace FIASUpdate
 
         public static Column Clone(this Column column)
         {
-            var copy = new Column()
+            var copy = new Column
             {
                 Name = column.Name,
                 DataType = column.DataType,

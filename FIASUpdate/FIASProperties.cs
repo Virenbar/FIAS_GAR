@@ -2,7 +2,7 @@
 
 namespace FIASUpdate
 {
-    internal class FIASProperties
+    internal static class FIASProperties
     {
         public static string DBName => Settings.Default.DBName;
         public static string GAR_Delta => $@"{GAR_Common}\gar_delta_xml";

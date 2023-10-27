@@ -40,7 +40,7 @@ namespace FIASUpdate
                 if (!Store.GetCanImport(table.Name)) { continue; }
 
                 // Импорт
-                var Count = ImportTable(table, item);
+                ImportTable(table, item);
                 Store.SetLastImport(item.Name, item.Date);
                 Thread.Sleep(500);
             }
@@ -84,9 +84,6 @@ namespace FIASUpdate
             foreach (Column column in T.Columns)
             { column.CloneTo(table); }
             table.Create();
-            //var defenition = columns.Select(C => $"[{C.Name}] {C.DataType.Name}{(C.DataType.IsStringType ? $"({C.DataType.MaximumLength})" : "")}");
-            //var create = $"CREATE TABLE [{temporaryTable}]({string.Join(",", defenition)})";
-            //DB.ExecuteNonQuery(create);
 
             // Импортировать данные
             var columns = T.Columns.Cast<Column>();
@@ -127,14 +124,6 @@ namespace FIASUpdate
             query.AppendLine("WHEN MATCHED THEN");
             query.AppendLine($"UPDATE SET { string.Join(",", update)};");
             DB.ExecuteNonQuery(query.ToString());
-
-            var merge = Resources.merge;
-            merge = merge.Replace("<target>", T.Name);
-            merge = merge.Replace("<source>", temporaryTable);
-            merge = merge.Replace("<insert>", string.Join(",", insert));
-            merge = merge.Replace("<values>", string.Join(",", values));
-            merge = merge.Replace("<update>", string.Join(",", update));
-            //DB.ExecuteNonQuery(merge);
 
             table.Drop();
             SP.Report(new TaskProgress($"Импорт в таблицу завершён: {T.Name}", 0, 0));
