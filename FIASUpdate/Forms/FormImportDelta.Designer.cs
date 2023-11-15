@@ -30,28 +30,22 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.SL_Status = new System.Windows.Forms.ToolStripStatusLabel();
-            this.SL_Value = new System.Windows.Forms.ToolStripStatusLabel();
+            this.TS_Progress = new FIASUpdate.Controls.ToolStripTaskProgress();
             this.LV_Archives = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.TB_Version = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.TB_Subject = new System.Windows.Forms.TextBox();
+            this.сolumnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.B_Download = new System.Windows.Forms.Button();
             this.B_Cancel = new System.Windows.Forms.Button();
             this.B_Import = new System.Windows.Forms.Button();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.FLP_Action = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.сolumnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.B_Open = new System.Windows.Forms.Button();
+            this.Info = new FIASUpdate.Controls.UC_DatabaseInfo();
             this.statusStrip1.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.FLP_Action.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -72,9 +66,7 @@
             this.statusStrip1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.statusStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.SL_Status,
-            this.SL_Value});
+            this.TS_Progress});
             this.statusStrip1.Location = new System.Drawing.Point(0, 458);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -82,23 +74,13 @@
             this.statusStrip1.TabIndex = 16;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
+            // TS_Progress
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(49, 17);
-            this.toolStripStatusLabel1.Text = "Статус: ";
-            // 
-            // SL_Status
-            // 
-            this.SL_Status.Name = "SL_Status";
-            this.SL_Status.Size = new System.Drawing.Size(12, 17);
-            this.SL_Status.Text = "-";
-            // 
-            // SL_Value
-            // 
-            this.SL_Value.Name = "SL_Value";
-            this.SL_Value.Size = new System.Drawing.Size(12, 17);
-            this.SL_Value.Text = "-";
+            this.TS_Progress.Name = "TS_Progress";
+            this.TS_Progress.Size = new System.Drawing.Size(62, 17);
+            this.TS_Progress.Status = "-";
+            this.TS_Progress.Text = "Статус: - -";
+            this.TS_Progress.Value = "-";
             // 
             // LV_Archives
             // 
@@ -108,8 +90,11 @@
             this.columnHeader3,
             this.сolumnHeader4});
             this.LV_Archives.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LV_Archives.FullRowSelect = true;
+            this.LV_Archives.GridLines = true;
             this.LV_Archives.HideSelection = false;
             this.LV_Archives.Location = new System.Drawing.Point(3, 18);
+            this.LV_Archives.MultiSelect = false;
             this.LV_Archives.Name = "LV_Archives";
             this.LV_Archives.Size = new System.Drawing.Size(556, 344);
             this.LV_Archives.TabIndex = 17;
@@ -130,77 +115,24 @@
             this.columnHeader3.Text = "Статус";
             this.columnHeader3.Width = 128;
             // 
-            // tableLayoutPanel1
+            // сolumnHeader4
             // 
-            this.tableLayoutPanel1.AutoSize = true;
-            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.TB_Version, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.TB_Subject, 1, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(562, 56);
-            this.tableLayoutPanel1.TabIndex = 18;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 7);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(48, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Версия:";
-            // 
-            // TB_Version
-            // 
-            this.TB_Version.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.TB_Version.Location = new System.Drawing.Point(70, 3);
-            this.TB_Version.Name = "TB_Version";
-            this.TB_Version.ReadOnly = true;
-            this.TB_Version.Size = new System.Drawing.Size(100, 22);
-            this.TB_Version.TabIndex = 1;
-            this.TB_Version.TabStop = false;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 35);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(61, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Субъекты:";
-            // 
-            // TB_Subject
-            // 
-            this.TB_Subject.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.TB_Subject.Location = new System.Drawing.Point(70, 31);
-            this.TB_Subject.Name = "TB_Subject";
-            this.TB_Subject.ReadOnly = true;
-            this.TB_Subject.Size = new System.Drawing.Size(386, 22);
-            this.TB_Subject.TabIndex = 1;
-            this.TB_Subject.TabStop = false;
+            this.сolumnHeader4.Text = "Размер";
+            this.сolumnHeader4.Width = 76;
             // 
             // B_Download
             // 
             this.B_Download.AutoSize = true;
             this.B_Download.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.B_Download.Enabled = false;
+            this.B_Download.Image = global::FIASUpdate.icons8.Save16;
             this.B_Download.Location = new System.Drawing.Point(3, 3);
             this.B_Download.Name = "B_Download";
             this.B_Download.Padding = new System.Windows.Forms.Padding(1);
-            this.B_Download.Size = new System.Drawing.Size(104, 25);
+            this.B_Download.Size = new System.Drawing.Size(120, 25);
             this.B_Download.TabIndex = 19;
             this.B_Download.Text = "Скачать архивы";
+            this.B_Download.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.B_Download.UseVisualStyleBackColor = true;
             this.B_Download.Click += new System.EventHandler(this.B_Download_Click);
             // 
@@ -209,12 +141,14 @@
             this.B_Cancel.AutoSize = true;
             this.B_Cancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.B_Cancel.Enabled = false;
-            this.B_Cancel.Location = new System.Drawing.Point(224, 3);
+            this.B_Cancel.Image = global::FIASUpdate.icons8.Cancel16;
+            this.B_Cancel.Location = new System.Drawing.Point(256, 3);
             this.B_Cancel.Name = "B_Cancel";
             this.B_Cancel.Padding = new System.Windows.Forms.Padding(1);
-            this.B_Cancel.Size = new System.Drawing.Size(60, 25);
+            this.B_Cancel.Size = new System.Drawing.Size(76, 25);
             this.B_Cancel.TabIndex = 20;
             this.B_Cancel.Text = "Отмена";
+            this.B_Cancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.B_Cancel.UseVisualStyleBackColor = true;
             this.B_Cancel.Click += new System.EventHandler(this.B_Cancel_Click);
             // 
@@ -223,27 +157,29 @@
             this.B_Import.AutoSize = true;
             this.B_Import.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.B_Import.Enabled = false;
-            this.B_Import.Location = new System.Drawing.Point(113, 3);
+            this.B_Import.Image = global::FIASUpdate.icons8.Replace16;
+            this.B_Import.Location = new System.Drawing.Point(129, 3);
             this.B_Import.Name = "B_Import";
             this.B_Import.Padding = new System.Windows.Forms.Padding(1);
-            this.B_Import.Size = new System.Drawing.Size(105, 25);
+            this.B_Import.Size = new System.Drawing.Size(121, 25);
             this.B_Import.TabIndex = 19;
             this.B_Import.Text = "Импортировать";
+            this.B_Import.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.B_Import.UseVisualStyleBackColor = true;
             this.B_Import.Click += new System.EventHandler(this.B_Import_Click);
             // 
-            // flowLayoutPanel1
+            // FLP_Action
             // 
-            this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanel1.Controls.Add(this.B_Download);
-            this.flowLayoutPanel1.Controls.Add(this.B_Import);
-            this.flowLayoutPanel1.Controls.Add(this.B_Cancel);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(272, 3);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(287, 31);
-            this.flowLayoutPanel1.TabIndex = 21;
-            this.flowLayoutPanel1.WrapContents = false;
+            this.FLP_Action.AutoSize = true;
+            this.FLP_Action.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.FLP_Action.Controls.Add(this.B_Download);
+            this.FLP_Action.Controls.Add(this.B_Import);
+            this.FLP_Action.Controls.Add(this.B_Cancel);
+            this.FLP_Action.Location = new System.Drawing.Point(224, 3);
+            this.FLP_Action.Name = "FLP_Action";
+            this.FLP_Action.Size = new System.Drawing.Size(335, 31);
+            this.FLP_Action.TabIndex = 21;
+            this.FLP_Action.WrapContents = false;
             // 
             // groupBox1
             // 
@@ -263,7 +199,8 @@
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel1, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.FLP_Action, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.B_Open, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 421);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -272,10 +209,30 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(562, 37);
             this.tableLayoutPanel2.TabIndex = 23;
             // 
-            // сolumnHeader4
+            // B_Open
             // 
-            this.сolumnHeader4.Text = "Размер";
-            this.сolumnHeader4.Width = 76;
+            this.B_Open.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.B_Open.AutoSize = true;
+            this.B_Open.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.B_Open.Location = new System.Drawing.Point(3, 6);
+            this.B_Open.Name = "B_Open";
+            this.B_Open.Padding = new System.Windows.Forms.Padding(1);
+            this.B_Open.Size = new System.Drawing.Size(99, 25);
+            this.B_Open.TabIndex = 20;
+            this.B_Open.Text = "Открыть папку";
+            this.B_Open.UseVisualStyleBackColor = true;
+            this.B_Open.Click += new System.EventHandler(this.B_Open_Click);
+            // 
+            // Info
+            // 
+            this.Info.AutoSize = true;
+            this.Info.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Info.Location = new System.Drawing.Point(0, 0);
+            this.Info.Name = "Info";
+            this.Info.Size = new System.Drawing.Size(562, 56);
+            this.Info.Subjects = null;
+            this.Info.TabIndex = 18;
+            this.Info.Version = new System.DateTime(((long)(0)));
             // 
             // FormImportDelta
             // 
@@ -284,8 +241,8 @@
             this.BackColor = global::FIASUpdate.Properties.Settings.Default.DefaultBackColor;
             this.ClientSize = new System.Drawing.Size(562, 480);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.Info);
             this.Controls.Add(this.tableLayoutPanel2);
-            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.label1);
             this.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::FIASUpdate.Properties.Settings.Default, "DefaultFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -299,10 +256,8 @@
             this.Load += new System.EventHandler(this.FormImportDelta_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
+            this.FLP_Action.ResumeLayout(false);
+            this.FLP_Action.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
@@ -315,24 +270,19 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripStatusLabel SL_Status;
-        private System.Windows.Forms.ToolStripStatusLabel SL_Value;
         private System.Windows.Forms.ListView LV_Archives;
         private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox TB_Version;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox TB_Subject;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.Button B_Download;
         private System.Windows.Forms.Button B_Cancel;
         private System.Windows.Forms.Button B_Import;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel FLP_Action;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.ColumnHeader сolumnHeader4;
+        private Controls.ToolStripTaskProgress TS_Progress;
+        private System.Windows.Forms.Button B_Open;
+        private Controls.UC_DatabaseInfo Info;
     }
 }

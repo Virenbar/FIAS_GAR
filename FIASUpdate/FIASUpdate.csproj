@@ -88,10 +88,10 @@
     </Reference>
     <Reference Include="CustomMarshalers" />
     <Reference Include="JANL, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Virenbar.JANL.2.3.0\lib\net452\JANL.dll</HintPath>
+      <HintPath>..\packages\Virenbar.JANL.2.3.4\lib\net452\JANL.dll</HintPath>
     </Reference>
     <Reference Include="JANL.WinForms, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Virenbar.JANL.WinForms.2.3.0\lib\net452\JANL.WinForms.dll</HintPath>
+      <HintPath>..\packages\Virenbar.JANL.WinForms.2.3.4\lib\net452\JANL.WinForms.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.7.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -345,6 +345,15 @@
     <Compile Include="Controls\UC_Database.Designer.cs">
       <DependentUpon>UC_Database.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ToolStripTaskProgress.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\UC_DatabaseInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UC_DatabaseInfo.Designer.cs">
+      <DependentUpon>UC_DatabaseInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="DBCreate.cs" />
     <Compile Include="DBImport.cs" />
     <Compile Include="DBImportDelta.cs" />
@@ -407,6 +416,9 @@
     <Compile Include="Readers\XMLDataReader.cs" />
     <EmbeddedResource Include="Controls\UC_Database.resx">
       <DependentUpon>UC_Database.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\UC_DatabaseInfo.resx">
+      <DependentUpon>UC_DatabaseInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormAbout.resx">
       <DependentUpon>FormAbout.cs</DependentUpon>
@@ -493,7 +505,6 @@
     <Content Include="Resources\icons8\Replace16.png" />
     <Content Include="Resources\icons8\Save16.png" />
     <Content Include="Resources\icons8\Search16.png" />
-    <Content Include="Resources\merge.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Data.SqlClient.SNI.5.0.1\build\net46\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('..\packages\Microsoft.Data.SqlClient.SNI.5.0.1\build\net46\Microsoft.Data.SqlClient.SNI.targets')" />

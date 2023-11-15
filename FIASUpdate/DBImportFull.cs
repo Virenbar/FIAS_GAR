@@ -1,5 +1,4 @@
-﻿using FIAS.Core.Stores;
-using FIASUpdate.Models;
+﻿using FIASUpdate.Models;
 using FIASUpdate.Readers;
 using JANL;
 using Microsoft.Data.SqlClient;
@@ -62,18 +61,18 @@ namespace FIASUpdate
         /// <summary>
         ///
         /// </summary>
-        /// <param name="T">Таблица БД</param>
-        /// <param name="Table">Таблица FIAS</param>
+        /// <param name="target">Таблица БД</param>
+        /// <param name="source">Таблица FIAS</param>
         /// <returns>Количество импортированных строк</returns>
-        private long ImportTable(Table T, FIASTable Table)
+        private long ImportTable(Table target, FIASTable source)
         {
             using (var Connection = NewConnection(DBName))
-            using (var SBC = new SqlBulkCopy(Connection) { DestinationTableName = T.Name, BulkCopyTimeout = 0, NotifyAfter = 100 })
+            using (var SBC = new SqlBulkCopy(Connection) { DestinationTableName = target.Name, BulkCopyTimeout = 0, NotifyAfter = 100 })
             {
                 SBC.SqlRowsCopied += SBC_SqlRowsCopied;
                 SBC.EnableStreaming = true;
-                var names = T.Columns.Cast<Column>().Select(C => C.Name);
-                foreach (var File in Table.Files)
+                var names = target.Columns.Cast<Column>().Select(C => C.Name);
+                foreach (var File in source.Files)
                 {
                     Token.ThrowIfCancellationRequested();
                     SP?.Report(new TaskProgress($"Импорт файла: {File.FullName}", 0, 0));
@@ -86,9 +85,9 @@ namespace FIASUpdate
                     SP?.Report(new TaskProgress($"Импорт файла завершён: {File.FullName}", Count, Count));
                     Thread.Sleep(1000);
                 }
-                SP?.Report(new TaskProgress($"Импорт в таблицу завершён: {T.Name}", 0, 0));
-                T.Refresh();
-                return T.RowCount;
+                SP?.Report(new TaskProgress($"Импорт в таблицу завершён: {target.Name}", 0, 0));
+                target.Refresh();
+                return target.RowCount;
             }
         }
 

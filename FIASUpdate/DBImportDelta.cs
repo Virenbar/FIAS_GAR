@@ -1,6 +1,4 @@
-﻿using FIAS.Core.Stores;
-using FIASUpdate.Models;
-using FIASUpdate.Properties;
+﻿using FIASUpdate.Models;
 using FIASUpdate.Readers;
 using JANL;
 using Microsoft.Data.SqlClient;
@@ -71,29 +69,29 @@ namespace FIASUpdate
         /// <summary>
         ///
         /// </summary>
-        /// <param name="T">Таблица БД</param>
-        /// <param name="Table">Таблица FIAS</param>
+        /// <param name="target">Таблица БД</param>
+        /// <param name="source">Таблица FIAS</param>
         /// <returns>Количество импортированных строк</returns>
-        private long ImportTable(Table T, FIASTable Table)
+        private long ImportTable(Table target, FIASTable source)
         {
             // Создать временную таблицу
-            var temporaryTable = $"_{T.Name}";
+            var temporaryTable = $"_{target.Name}";
             var table = DB.Tables[temporaryTable];
             table?.Drop();
             table = new Table(DB, temporaryTable);
-            foreach (Column column in T.Columns)
+            foreach (Column column in target.Columns)
             { column.CloneTo(table); }
             table.Create();
 
             // Импортировать данные
-            var columns = T.Columns.Cast<Column>();
+            var columns = target.Columns.Cast<Column>();
             using (var connection = NewConnection(DBName))
-            using (var SBC = new SqlBulkCopy(connection) { DestinationTableName = temporaryTable, BulkCopyTimeout = 0, NotifyAfter = 100 })
+            using (var SBC = new SqlBulkCopy(connection) { DestinationTableName = table.Name, BulkCopyTimeout = 0, NotifyAfter = 100 })
             {
                 SBC.SqlRowsCopied += SBC_SqlRowsCopied;
                 SBC.EnableStreaming = true;
-                var names = T.Columns.Cast<Column>().Select(C => C.Name);
-                foreach (var File in Table.Files)
+                var names = target.Columns.Cast<Column>().Select(C => C.Name);
+                foreach (var File in source.Files)
                 {
                     Token.ThrowIfCancellationRequested();
                     SP?.Report(new TaskProgress($"Импорт файла: {File.FullName}", 0, 0));
@@ -115,7 +113,7 @@ namespace FIASUpdate
             var update = columns.Skip(1).Select(C => $"[{C.Name}] = [S].[{C.Name}]");
 
             var query = new StringBuilder();
-            query.AppendLine($"MERGE INTO [{T.Name}] AS [T]");
+            query.AppendLine($"MERGE INTO [{target.Name}] AS [T]");
             query.AppendLine($"USING [{temporaryTable}] AS [S]");
             query.AppendLine($"ON([T].[{key}] = [S].[{key}])");
             query.AppendLine("WHEN NOT MATCHED BY TARGET THEN");
@@ -126,9 +124,9 @@ namespace FIASUpdate
             DB.ExecuteNonQuery(query.ToString());
 
             table.Drop();
-            SP.Report(new TaskProgress($"Импорт в таблицу завершён: {T.Name}", 0, 0));
-            T.Refresh();
-            return T.RowCount;
+            SP.Report(new TaskProgress($"Импорт в таблицу завершён: {target.Name}", 0, 0));
+            target.Refresh();
+            return target.RowCount;
         }
 
         private void SBC_SqlRowsCopied(object sender, SqlRowsCopiedEventArgs e)

@@ -1,8 +1,6 @@
 ﻿using FIASUpdate.Models;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,39 +9,30 @@ namespace FIASUpdate
 {
     internal class ArchiveDownloader : IDisposable
     {
-        private readonly List<FIASArchive> Archives;
         private readonly HttpClient Client;
         private readonly SemaphoreSlim Semaphore;
 
         /// <summary>
         ///
         /// </summary>
-        /// <param name="archives">Список архивов</param>
-        public ArchiveDownloader(List<FIASArchive> archives) : this(archives, 2) { }
+        public ArchiveDownloader() : this(2) { }
 
         /// <summary>
         ///
         /// </summary>
-        /// <param name="archives">Список архивов</param>
         /// <param name="threads">Количество "потоков" для скачивания</param>
-        public ArchiveDownloader(List<FIASArchive> archives, int threads)
+        public ArchiveDownloader(int threads)
         {
-            Archives = archives;
             Client = new HttpClient();
             Semaphore = new SemaphoreSlim(threads);
         }
 
-        public async Task Download(IProgress<int> IP = default, CancellationToken token = default)
+        public async Task Download(FIASArchive archive, CancellationToken token = default)
         {
-            var Tasks = Archives.Select(async (archive) =>
-            {
-                await TryDownloadArchive(archive, token);
-                IP.Report(1);
-            });
-            await Task.WhenAll(Tasks);
+            await TryDownloadArchive(archive, token);
         }
 
-        private async Task<string> TryDownloadArchive(FIASArchive archive, CancellationToken token)
+        private async Task TryDownloadArchive(FIASArchive archive, CancellationToken token)
         {
             var LocalFile = new FileInfo(archive.ArchivePath);
             try
@@ -60,7 +49,6 @@ namespace FIASUpdate
                     using (var RS = await Responce.Content.ReadAsStreamAsync())
                         await RS.CopyToAsync(FS);
                 }
-                return LocalFile.FullName;
             }
             finally
             {

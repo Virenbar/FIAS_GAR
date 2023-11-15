@@ -1,5 +1,4 @@
 ﻿using FIASUpdate.Models;
-using JANL;
 using JANL.Extensions;
 using System;
 using System.Collections.Generic;
@@ -12,7 +11,6 @@ namespace FIASUpdate.Forms
     public partial class FormImportFull : Form
     {
         private CancellationTokenSource CTS;
-        private Progress<TaskProgress> TP;
 
         public FormImportFull()
         {
@@ -27,6 +25,12 @@ namespace FIASUpdate.Forms
         }
 
         private void FIAS_ResultChanged(object sender, ResultAddedEventArgs e) => AddResult(e.Table, e.Status);
+
+        private void RefreshUI()
+        {
+            B_Import.Enabled = CTS == null;
+            B_Cancel.Enabled = CTS != null;
+        }
 
         private void SetResult(IReadOnlyDictionary<string, string> Result)
         {
@@ -44,9 +48,9 @@ namespace FIASUpdate.Forms
         private async Task StartImport()
         {
             CTS = new CancellationTokenSource();
+            RefreshUI();
             try
             {
-                UIState(false);
                 LV_Result.Items.Clear();
                 var Options = new ImportFullOptions
                 {
@@ -57,7 +61,7 @@ namespace FIASUpdate.Forms
                 using (var FIAS = new DBImportFull(Options))
                 {
                     FIAS.ResultAdded += FIAS_ResultChanged;
-                    await Task.Run(() => FIAS.Import(TP, CTS.Token));
+                    await Task.Run(() => FIAS.Import(TS_Progress.Progress, CTS.Token));
                     SetResult(FIAS.Result);
                 }
             }
@@ -65,44 +69,28 @@ namespace FIASUpdate.Forms
             finally
             {
                 SWL.Stop();
-                UIState(true);
                 CTS.Dispose();
                 CTS = null;
+                RefreshUI();
             }
-        }
-
-        private void UIState(bool state)
-        {
-            B_Import.Enabled = state;
-            B_Cancel.Enabled = !state;
         }
 
         #region UI Events
 
+        private void B_Cancel_Click(object sender, EventArgs e)
+        {
+            CTS.Cancel();
+            B_Cancel.Enabled = false;
+        }
+
         private void B_Import_Click(object sender, EventArgs e)
         {
-            if (CTS is null)
-            {
-                _ = StartImport();
-            }
+            _ = StartImport();
         }
 
         private void FormImportFull_Load(object sender, EventArgs e)
         {
             Icon = Owner.Icon;
-            TP = new Progress<TaskProgress>((T) =>
-            {
-                if (T.HasStatus) { SL_Status.Text = T.Status; }
-                if (T.HasValue)
-                {
-                    SL_Value.Text = (T.Value + T.Max == 0) ? "" : $"{T.Value:N0}{new string('|', T.Value / 100_000)}";
-                }
-            });
-        }
-
-        private void B_Cancel_Click(object sender, EventArgs e)
-        {
-            CTS?.Cancel();
         }
 
         #endregion UI Events

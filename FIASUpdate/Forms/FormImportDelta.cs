@@ -2,11 +2,13 @@
 using FIAS.Core.Stores;
 using FIASUpdate.Models;
 using FIASUpdate.Properties;
-using JANL;
 using JANL.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,12 +17,12 @@ namespace FIASUpdate.Forms
 {
     public partial class FormImportDelta : Form
     {
+        private static readonly FIASClient Client = new FIASClient();
         private static readonly Settings Settings = Settings.Default;
         private readonly FIASDatabaseStore Store = new FIASDatabaseStore(Settings.SQLConnection);
         private List<FIASArchive> Archives;
         private CancellationTokenSource CTS;
         private List<string> Subjects;
-        private Progress<TaskProgress> TP;
         private DateTime Version;
 
         public FormImportDelta()
@@ -44,16 +46,34 @@ namespace FIASUpdate.Forms
             }
             Version = version.Value;
             Subjects = subjects;
-            TB_Version.Text = $"{Version:yyyy.MM.dd}";
-            TB_Subject.Text = string.Join(" ", Subjects);
+            Info.Version = Version;
+            Info.Subjects = Subjects;
 
-            SL_Status.Text = "Получение списка архивов";
-            using (var client = new FIASClient())
+            TS_Progress.Status = "Получение списка архивов";
+            try
             {
-                var info = await client.GetAllDownloadFileInfo(Version);
+                var info = await Client.GetAllDownloadFileInfo(Version);
                 Archives = info.Select(I => new FIASArchive(I)).ToList();
             }
-            SL_Status.Text = "-";
+            catch (SocketException ex)
+            {
+                this.ShowError(ex, "Не удалось получить список архивов");
+                return;
+            }
+
+            if (Archives.Count == 0)
+            {
+                TS_Progress.Status = "Обновление не требуется";
+                return;
+            }
+
+            if (Archives.Any(A => string.IsNullOrWhiteSpace(A.URLDelta)))
+            {
+                this.ShowError("У некоторых архивов отсутствует ссылка на скачивание. Обновление невозможно.");
+                return;
+            }
+
+            TS_Progress.Clear();
             RefreshList();
             RefreshUI();
         }
@@ -66,16 +86,17 @@ namespace FIASUpdate.Forms
             LV_Archives.Items.AddRange(Archives.Select(A => new FIASArchiveItem(A)).ToArray());
             LV_Archives.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.ColumnContent);
             LV_Archives.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.ColumnContent);
-            LV_Archives.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.ColumnContent);
             LV_Archives.EndUpdate();
         }
 
         private void RefreshUI()
         {
             B_Download.Enabled = CTS == null && Archives.Any(A => !A.Exsists);
-            B_Import.Enabled = CTS == null && Archives.All(A => A.Exsists);
+            B_Import.Enabled = CTS == null && Archives.Count > 0 && Archives.All(A => A.Exsists);
             B_Cancel.Enabled = CTS != null;
         }
+
+        private IEnumerable<FIASArchiveItem> ListItems => LV_Archives.Items.Cast<FIASArchiveItem>();
 
         private async Task TaskDownload()
         {
@@ -83,27 +104,28 @@ namespace FIASUpdate.Forms
             RefreshUI();
             try
             {
-                var Count = 0;
-                var archives = Archives.Where(A => !A.Exsists).ToList();
-                SL_Status.Text = "Скачивание архивов";
-                SL_Value.Text = $@"{Count}/{archives.Count}";
-                var PP = new Progress<int>((count) =>
+                var count = 0;
+                var items = ListItems.Where(A => !A.Archive.Exsists).ToList();
+
+                TS_Progress.Status = "Скачивание архивов";
+                TS_Progress.Value = $@"{count}/{items.Count}";
+                using (var AD = new ArchiveDownloader())
                 {
-                    Count += count;
-                    SL_Value.Text = $@"{Count}/{archives.Count}";
-                    // TODO: Refresh only one
-                    RefreshList();
-                });
-                using (var AD = new ArchiveDownloader(archives))
-                {
-                    await AD.Download(PP, CTS.Token);
+                    var tasks = items.Select(async A =>
+                    {
+                        await AD.Download(A.Archive);
+                        A.Refresh();
+                        count++;
+                        TS_Progress.Value = $@"{count}/{items.Count}";
+                    });
+                    await Task.WhenAll(tasks);
                 }
-                SL_Status.Text = "Скачивание завершено";
+                TS_Progress.Status = "Скачивание завершено";
             }
             catch (OperationCanceledException)
             {
-                SL_Status.Text = "Скачивание отменено";
-                SL_Value.Text = "-";
+                TS_Progress.Status = "Скачивание отменено";
+                TS_Progress.Value = "-";
             }
             catch (Exception e) { this.ShowException(e); }
             finally
@@ -121,29 +143,27 @@ namespace FIASUpdate.Forms
             RefreshUI();
             try
             {
-                var items = LV_Archives.Items.Cast<FIASArchiveItem>().OrderBy(I => I.Archive.Date);
+                var items = ListItems.OrderBy(I => I.Archive.Date);
                 foreach (var item in items)
                 {
+                    item.State = "Импорт";
                     var Options = new ImportDeltaOptions
                     {
                         Subjects = Subjects
-                        //ShrinkDatabase = CB_Shrink.Checked
                     };
-                    //SWL.Start();
-                    item.State = "Импортирование";
-
                     using (var FIAS = new DBImportDelta(item.Archive, Options))
                     {
-                        await Task.Run(() => FIAS.Import(TP, CTS.Token));
+                        await Task.Run(() => FIAS.Import(TS_Progress.Progress, CTS.Token));
                     }
                     item.State = "Импортирован";
                 }
-                SL_Status.Text = "Импорт завершён";
+                TS_Progress.Status = "Импорт завершён";
+                FLP_Action.Enabled = false;
             }
             catch (OperationCanceledException)
             {
-                SL_Status.Text = "Импорт отменён";
-                SL_Value.Text = "-";
+                TS_Progress.Status = "Импорт отменён";
+                TS_Progress.Value = "-";
             }
             catch (Exception e) { this.ShowException(e); }
             finally
@@ -151,7 +171,6 @@ namespace FIASUpdate.Forms
                 CTS.Dispose();
                 CTS = null;
                 RefreshUI();
-                B_Import.Enabled = false;
             }
         }
 
@@ -173,14 +192,15 @@ namespace FIASUpdate.Forms
             _ = TaskImport();
         }
 
+        private void B_Open_Click(object sender, EventArgs e)
+        {
+            Directory.CreateDirectory(FIASProperties.GAR_Delta);
+            Process.Start(FIASProperties.GAR_Delta);
+        }
+
         private void FormImportDelta_Load(object sender, EventArgs e)
         {
             Icon = Owner.Icon;
-            TP = new Progress<TaskProgress>((T) =>
-            {
-                if (T.HasStatus) { SL_Status.Text = T.Status; }
-                if (T.HasValue) { SL_Value.Text = (T.Value + T.Max == 0) ? "" : $"{T.Value:N0}"; }
-            });
             _ = RefreshDatabase();
         }
 
