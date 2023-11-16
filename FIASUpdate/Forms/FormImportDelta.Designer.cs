@@ -18,6 +18,7 @@
                 components.Dispose();
             }
             Client.Dispose();
+            CTS?.Dispose();
             base.Dispose(disposing);
         }
 
