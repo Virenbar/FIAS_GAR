@@ -19,10 +19,10 @@ namespace FIAS.Core.Stores
         /// <summary>
         /// Является ли строка GUID
         /// </summary>
-        public static bool IsGUID(string Search)
+        public static bool IsGUID(string str)
         {
-            if (Search.Length != 36) { return false; }
-            return Guid.TryParse(Search, out var G);
+            if (str.Length != 36) { return false; }
+            return Guid.TryParse(str, out var _);
         }
 
         public Task<DataTable> FIASLevels() => Task.Run(UP_CB_Levels);

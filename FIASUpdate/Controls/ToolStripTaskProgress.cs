@@ -6,7 +6,7 @@ namespace FIASUpdate.Controls
 {
     public class ToolStripTaskProgress : ToolStripStatusLabel
     {
-        public ToolStripTaskProgress() : base()
+        public ToolStripTaskProgress()
         {
             Progress = new Progress<TaskProgress>(Handler);
             UpdateText();
