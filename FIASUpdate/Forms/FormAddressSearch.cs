@@ -1,7 +1,7 @@
 ﻿using FIAS.Core;
 using FIAS.Core.Stores;
 using FIASUpdate.Properties;
-using JANL;
+using JANL.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -53,7 +53,7 @@ namespace FIASUpdate.Forms
                 LV_Search.EndUpdate();
                 RefreshUI();
             }
-            catch (Exception E) { Msgs.ShowError(E); }
+            catch (Exception E) { this.ShowError(E); }
             finally { SetUIState(true); }
         }
 
@@ -92,9 +92,9 @@ namespace FIASUpdate.Forms
             {
                 var D = await Store.Statistics();
                 var S = string.Join(Environment.NewLine, D.Select(KV => $"{KV.Key}: {KV.Value}"));
-                Msgs.ShowInfo(S, "Информация о БД");
+                this.ShowInfo(S, "Информация о БД");
             }
-            catch (Exception E) { Msgs.ShowError(E.Message); }
+            catch (Exception E) { this.ShowError(E.Message); }
             finally { SetUIState(true); }
         }
 
@@ -120,7 +120,7 @@ namespace FIASUpdate.Forms
                 CB_Level.SelectedIndexChanged += CB_Level_SelectedIndexChanged;
                 SetUIState(true);
             }
-            catch (Exception E) { Msgs.ShowError($"Не удалось подключиться к базе {DBName}: {E.Message}"); }
+            catch (Exception E) { this.ShowError($"Не удалось подключиться к базе {DBName}: {E.Message}"); }
             RefreshUI();
             await Search();
         }

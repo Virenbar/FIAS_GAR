@@ -30,8 +30,8 @@ namespace FIASUpdate.Controls
             }
             LV_Tables.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             LV_Tables.EndUpdate();
-            TB_Version.Text = $"{Store.GetVersion():yyyy.MM.dd}";
-            TB_Subject.Text = string.Join(" ", Store.GetSubjects());
+            Info.Version = Store.GetVersion();
+            Info.Subjects = Store.GetSubjects();
         }
 
         private void SaveData()

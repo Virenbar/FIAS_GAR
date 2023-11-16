@@ -46,9 +46,7 @@
             this.CB_OnlyEmpty = new System.Windows.Forms.CheckBox();
             this.CB_Shrink = new System.Windows.Forms.CheckBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.SL_Status = new System.Windows.Forms.ToolStripStatusLabel();
-            this.SL_Value = new System.Windows.Forms.ToolStripStatusLabel();
+            this.TS_Progress = new FIASUpdate.Controls.ToolStripTaskProgress();
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -224,9 +222,7 @@
             this.statusStrip1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.statusStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.SL_Status,
-            this.SL_Value});
+            this.TS_Progress});
             this.statusStrip1.Location = new System.Drawing.Point(0, 572);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -234,23 +230,13 @@
             this.statusStrip1.TabIndex = 15;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
+            // TS_Progress
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(49, 17);
-            this.toolStripStatusLabel1.Text = "Статус: ";
-            // 
-            // SL_Status
-            // 
-            this.SL_Status.Name = "SL_Status";
-            this.SL_Status.Size = new System.Drawing.Size(12, 17);
-            this.SL_Status.Text = "-";
-            // 
-            // SL_Value
-            // 
-            this.SL_Value.Name = "SL_Value";
-            this.SL_Value.Size = new System.Drawing.Size(12, 17);
-            this.SL_Value.Text = "-";
+            this.TS_Progress.Name = "TS_Progress";
+            this.TS_Progress.Size = new System.Drawing.Size(62, 17);
+            this.TS_Progress.Status = "-";
+            this.TS_Progress.Text = "Статус: - -";
+            this.TS_Progress.Value = "-";
             // 
             // FormImportFull
             // 
@@ -301,10 +287,8 @@
         private System.Windows.Forms.CheckBox CB_OnlyEmpty;
         private System.Windows.Forms.CheckBox CB_Shrink;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripStatusLabel SL_Status;
-        private System.Windows.Forms.ToolStripStatusLabel SL_Value;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Button B_Cancel;
+        private Controls.ToolStripTaskProgress TS_Progress;
     }
 }

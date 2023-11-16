@@ -27,15 +27,15 @@ namespace FIASUpdate
             F.ShowDialog(this);
         }
 
-        private void MI_About_Click(object sender, EventArgs e)
+        private void B_Search_Click(object sender, EventArgs e)
         {
-            var F = new FormAbout();
+            var F = new FormAddressSearch();
             F.ShowDialog(this);
         }
 
-        private void MI_Search_Click(object sender, EventArgs e)
+        private void MI_About_Click(object sender, EventArgs e)
         {
-            var F = new FormAddressSearch();
+            var F = new FormAbout();
             F.ShowDialog(this);
         }
 

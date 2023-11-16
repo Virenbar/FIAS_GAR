@@ -70,11 +70,14 @@ nav:
   - Описание:
       - Проекты: index.md
       - Использование: usage.md
-  - FIAS_GAR:
+  - БД FIAS_GAR:
       - Описание БД: fias-gar/index.md
+      - Использование: fias-gar/usage.md
       - Таблицы ГАР: fias-gar/tables.md
       - Объекты БД: fias-gar/database-objects.md
+  - FIAS Update:
+      - Описание: fias-update/index.md
+      - Использование: fias-update/usage.md
   - FIAS Core: fias-core.md
-  - FIAS Update: fias-update.md
   - Примечания: notes.md
   - Ссылки: links.md
