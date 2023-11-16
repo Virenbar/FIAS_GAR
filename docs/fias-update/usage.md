@@ -27,7 +27,7 @@ description: "Импорт данных в БД FIAS_GAR"
 4. Нажать `Импорт полной копии БД`
 5. Нажать `Импортировать` и дождаться завершения импорта
 
-![import](assets/fias/import.png)
+![import](../assets/fias/import.png)
 
 ## Импорт разностных копий БД
 
@@ -38,4 +38,4 @@ description: "Импорт данных в БД FIAS_GAR"
 3. Нажать `Скачать архивы` и дождаться завершения скачивания
 4. Нажать `Импортировать` и дождаться завершения импорта
 
-![import-delta](assets/fias/import-delta.png)
+![import-delta](../assets/fias/import-delta.png)
