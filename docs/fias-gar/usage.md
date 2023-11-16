@@ -13,7 +13,7 @@ description: "Развертывание и обновление БД"
 4. ПКМ по **FIAS_GAR** > `Опубликовать...`
 5. Указать соединение с пустой базой данных и выполнить публикацию
 
-![publish](assets/fias-gar/publish.png)
+![publish](../assets/fias-gar/publish.png)
 
 ## Обновление БД
 
@@ -24,4 +24,4 @@ description: "Развертывание и обновление БД"
 5. Нажать `Сравнить` для создания скрипта обновления
 6. Нажать `Обновить` для применения изменений
 
-![compare](assets/fias-gar/compare.png)
+![compare](../assets/fias-gar/compare.png)
