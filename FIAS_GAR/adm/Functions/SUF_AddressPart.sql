@@ -1,10 +1,11 @@
 ﻿-- =============================================
 -- Author:		Artyom
--- Create date:	22.03.2022
--- Description:	Получить полное наименование дома (Улица+)
+-- Create date: 26.09.2023
+-- Description:	Получить наименование адреса от указаного уровня
 -- =============================================
-CREATE FUNCTION [adm].[SUF_HouseNameFull](
-	@ObjectGUID CHAR(36))
+CREATE FUNCTION [adm].[SUF_AddressPart](
+	@ObjectGUID CHAR(36),
+	@Level      INT)
 RETURNS VARCHAR(1000)
 AS
 BEGIN
@@ -14,7 +15,9 @@ BEGIN
 		@Result = [H].[NameFull]
 	FROM
 		[adm].[UF_Hierarchy](@ObjectGUID) [H]
-	WHERE [H].[Level] = 8
+	WHERE [H].[Level] >= @Level
+	ORDER BY
+		[H].[Level] ASC
 
 	RETURN @Result
 END

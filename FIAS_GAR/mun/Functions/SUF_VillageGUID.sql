@@ -1,7 +1,7 @@
 ﻿-- =============================================
 -- Author:		Artyom
--- Create date: 22.03.2022
--- Description:	Получить код населенного пункта
+-- Create date:	22.03.2022
+-- Description:	Получить GUID населенного пункта по GUID объекта
 -- =============================================
 CREATE FUNCTION [mun].[SUF_VillageGUID](
 	@ObjectGUID CHAR(36))
@@ -13,7 +13,7 @@ BEGIN
 	SELECT TOP (1)
 		@Result = [H].[GUID]
 	FROM
-		[mun].[UF_GetHierarchy](@ObjectGUID) [H]
+		[mun].[UF_Hierarchy](@ObjectGUID) [H]
 	WHERE [H].[Level] IN(4, 5, 6)
 	ORDER BY
 		[H].[Level] DESC

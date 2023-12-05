@@ -1,9 +1,9 @@
 ﻿-- =============================================
 -- Author:		Artyom
--- Create date: 18.03.2022
--- Description:	GUID определенного уровня из иеархии обекта
+-- Create date:	18.03.2022
+-- Description:	Получить GUID определенного уровня из иеархии объекта
 -- =============================================
-CREATE FUNCTION [adm].[SUF_GetHierarchyGUID](
+CREATE FUNCTION [mun].[SUF_HierarchyGUID](
 	@ObjectGUID CHAR(36),
 	@Level      INT)
 RETURNS CHAR(36)
@@ -16,10 +16,10 @@ BEGIN
 	SELECT TOP (1)
 		@Result = [H].[GUID]
 	FROM
-		[adm].[UF_GetHierarchy](@ObjectGUID) [H]
+		[mun].[UF_Hierarchy](@ObjectGUID) [H]
 	WHERE [H].[Level] <= @Level
 	ORDER BY
 		[H].[Level] DESC
-	RETURN @Result
 
+	RETURN @Result
 END

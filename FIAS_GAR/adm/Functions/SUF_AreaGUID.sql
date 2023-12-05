@@ -1,6 +1,6 @@
 ﻿-- =============================================
 -- Author:		Artyom
--- Create date: 22.03.2022
+-- Create date:	22.03.2022
 -- Description:	Получить код района
 -- =============================================
 CREATE FUNCTION [adm].[SUF_AreaGUID](
@@ -13,7 +13,7 @@ BEGIN
 	SELECT TOP (1)
 		@Result = [H].[GUID]
 	FROM
-		[adm].[UF_GetHierarchy](@ObjectGUID) [H]
+		[adm].[UF_Hierarchy](@ObjectGUID) [H]
 	WHERE [H].[Level] IN(2, 3)
 	ORDER BY
 		[H].[Level] DESC

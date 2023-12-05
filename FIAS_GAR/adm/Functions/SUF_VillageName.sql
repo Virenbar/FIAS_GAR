@@ -1,19 +1,19 @@
 ﻿-- =============================================
 -- Author:		Artyom
--- Create date: 22.03.2022
+-- Create date:	22.03.2022
 -- Description:	Получить наименование населенного пункта
 -- =============================================
 CREATE FUNCTION [adm].[SUF_VillageName](
 	@ObjectGUID CHAR(36))
-RETURNS CHAR(36)
+RETURNS VARCHAR(1000)
 AS
 BEGIN
-	DECLARE @Result CHAR(36)
+	DECLARE @Result VARCHAR(1000)
 
 	SELECT TOP (1)
 		@Result = [H].[Type] + ' ' + [H].[Name]
 	FROM
-		[adm].[UF_GetHierarchy](@ObjectGUID) [H]
+		[adm].[UF_Hierarchy](@ObjectGUID) [H]
 	WHERE [H].[Level] IN(4, 5, 6)
 	ORDER BY
 		[H].[Level] DESC

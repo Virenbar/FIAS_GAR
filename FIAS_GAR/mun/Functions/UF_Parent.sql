@@ -3,7 +3,7 @@
 -- Create date: 08.12.2021
 -- Description:	
 -- =============================================
-CREATE FUNCTION [mun].[UF_GetParent](
+CREATE FUNCTION [mun].[UF_Parent](
 	@ObjectGUID CHAR(36))
 RETURNS TABLE
 AS

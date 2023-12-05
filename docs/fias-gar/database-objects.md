@@ -46,15 +46,17 @@ description: "Дополнительные объекты БД"
 * `[adm].[UF_HouseAggregate]` – все дома
 * `[adm].[UF_StreetAggregate]` – все улицы
 * `[adm].[UF_VillageAggregate]` – все нас. пункты
-* `[*].[UF_GetHierarchy]` – Возвращает иерархию для объекта
-* `[*].[UF_GetParent]` - Родитель объекта по ObjectGUID
+* `[*].[UF_Hierarchy]` – Возвращает иерархию для объекта
+* `[*].[UF_Parent]` - Родитель объекта по ObjectGUID
 
 ### Скалярные функции
 
-* `[*].[SUF_GetFullAddress]` - Полный адрес объекта по ObjectGUID
-* `[*].[SUF_GetParentGUID]` - Код родителя по ObjectGUID
+* `[*].[SUF_AddressFull]` - Полный адрес объекта по ObjectGUID
+* `[*].[SUF_AddressPart]` - Адрес объекта по ObjectGUID от указанного уровня
+* `[*].[SUF_ParentGUID]` - Код родителя по ObjectGUID
 * `[*].[UF_SearchOne]` - Поиск в реестре (Выводит всегда 1 строку)
 * `[*].[UF_SearchRegistry]` - Поиск в реестре
+* `[*].SUF_VillageNameFull` - Наименование населенного пункта (Дом+)
 * `[dbo].[SUF_RemoveSpecialChars]` - Заменяет все лишние символы на пробелы
 
 #### Выражения

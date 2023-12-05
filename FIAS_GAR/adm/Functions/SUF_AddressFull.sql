@@ -1,9 +1,9 @@
 ﻿-- =============================================
 -- Author:		Artyom
--- Create date: 08.12.2021
--- Description:	
+-- Create date:	08.12.2021
+-- Description:	Получить полный адрес объекта по GUID
 -- =============================================
-CREATE FUNCTION [adm].[SUF_GetFullAddress](
+CREATE FUNCTION [adm].[SUF_AddressFull](
 	@ObjectGUID CHAR(36))
 RETURNS VARCHAR(1000)
 AS
@@ -13,7 +13,7 @@ BEGIN
 	SELECT TOP (1)
 		@Result = [H].[NameFull]
 	FROM
-		[adm].[UF_GetHierarchy](@ObjectGUID) [H]
+		[adm].[UF_Hierarchy](@ObjectGUID) [H]
 	WHERE [H].[Level] = 1
 
 	RETURN @Result
