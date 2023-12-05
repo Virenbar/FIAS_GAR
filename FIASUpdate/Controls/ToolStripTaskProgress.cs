@@ -1,5 +1,6 @@
 ﻿using JANL;
 using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace FIASUpdate.Controls
@@ -11,8 +12,6 @@ namespace FIASUpdate.Controls
             Progress = new Progress<TaskProgress>(Handler);
             UpdateText();
         }
-
-        public Progress<TaskProgress> Progress { get; }
 
         public void Clear()
         {
@@ -41,6 +40,10 @@ namespace FIASUpdate.Controls
         private string _status = "-";
         private string _value = "-";
 
+        [Browsable(false)]
+        public Progress<TaskProgress> Progress { get; }
+
+        [Browsable(false)]
         public string Status
         {
             get => _status;
@@ -51,6 +54,7 @@ namespace FIASUpdate.Controls
             }
         }
 
+        [Browsable(false)]
         public string Value
         {
             get => _value;

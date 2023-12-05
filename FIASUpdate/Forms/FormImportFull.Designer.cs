@@ -31,22 +31,22 @@
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "Honk",
             "Honk"}, -1);
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormImportFull));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.LV_Result = new System.Windows.Forms.ListView();
             this.Table = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Result = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.B_Open = new System.Windows.Forms.Button();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.B_Import = new System.Windows.Forms.Button();
             this.B_Cancel = new System.Windows.Forms.Button();
-            this.SWL = new JANL.UserControls.StopWatchLabel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.CB_OnlyEmpty = new System.Windows.Forms.CheckBox();
             this.CB_Shrink = new System.Windows.Forms.CheckBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.TS_Progress = new FIASUpdate.Controls.ToolStripTaskProgress();
+            this.TS_Stopwatch = new JANL.Controls.ToolStripStopwatch();
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -101,8 +101,8 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.B_Open, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.SWL, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 535);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -110,6 +110,22 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(482, 37);
             this.tableLayoutPanel1.TabIndex = 14;
+            // 
+            // B_Open
+            // 
+            this.B_Open.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.B_Open.AutoSize = true;
+            this.B_Open.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.B_Open.Image = global::FIASUpdate.icons8.OpenedFolder16;
+            this.B_Open.Location = new System.Drawing.Point(3, 6);
+            this.B_Open.Name = "B_Open";
+            this.B_Open.Padding = new System.Windows.Forms.Padding(1);
+            this.B_Open.Size = new System.Drawing.Size(115, 25);
+            this.B_Open.TabIndex = 0;
+            this.B_Open.Text = "Открыть папку";
+            this.B_Open.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.B_Open.UseVisualStyleBackColor = true;
+            this.B_Open.Click += new System.EventHandler(this.B_Open_Click);
             // 
             // flowLayoutPanel2
             // 
@@ -153,18 +169,6 @@
             this.B_Cancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.B_Cancel.UseVisualStyleBackColor = true;
             this.B_Cancel.Click += new System.EventHandler(this.B_Cancel_Click);
-            // 
-            // SWL
-            // 
-            this.SWL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SWL.ImageRunning = ((System.Drawing.Image)(resources.GetObject("SWL.ImageRunning")));
-            this.SWL.ImageWaiting = ((System.Drawing.Image)(resources.GetObject("SWL.ImageWaiting")));
-            this.SWL.Location = new System.Drawing.Point(3, 3);
-            this.SWL.Name = "SWL";
-            this.SWL.Prefix = "Время импорта:";
-            this.SWL.ShowImage = false;
-            this.SWL.Size = new System.Drawing.Size(235, 31);
-            this.SWL.TabIndex = 2;
             // 
             // groupBox1
             // 
@@ -222,7 +226,8 @@
             this.statusStrip1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.statusStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TS_Progress});
+            this.TS_Progress,
+            this.TS_Stopwatch});
             this.statusStrip1.Location = new System.Drawing.Point(0, 572);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -233,10 +238,18 @@
             // TS_Progress
             // 
             this.TS_Progress.Name = "TS_Progress";
-            this.TS_Progress.Size = new System.Drawing.Size(62, 17);
+            this.TS_Progress.Size = new System.Drawing.Size(409, 17);
+            this.TS_Progress.Spring = true;
             this.TS_Progress.Status = "-";
             this.TS_Progress.Text = "Статус: - -";
+            this.TS_Progress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.TS_Progress.Value = "-";
+            // 
+            // TS_Stopwatch
+            // 
+            this.TS_Stopwatch.Name = "TS_Stopwatch";
+            this.TS_Stopwatch.ShowText = false;
+            this.TS_Stopwatch.Size = new System.Drawing.Size(58, 20);
             // 
             // FormImportFull
             // 
@@ -281,7 +294,6 @@
         private System.Windows.Forms.ColumnHeader Result;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button B_Import;
-        private JANL.UserControls.StopWatchLabel SWL;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.CheckBox CB_OnlyEmpty;
@@ -290,5 +302,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Button B_Cancel;
         private Controls.ToolStripTaskProgress TS_Progress;
+        private JANL.Controls.ToolStripStopwatch TS_Stopwatch;
+        private System.Windows.Forms.Button B_Open;
     }
 }

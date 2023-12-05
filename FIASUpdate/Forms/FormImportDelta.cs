@@ -106,6 +106,7 @@ namespace FIASUpdate.Forms
         {
             CTS = new CancellationTokenSource();
             RefreshUI();
+            TS_Stopwatch.Start();
             try
             {
                 var count = 0;
@@ -138,6 +139,7 @@ namespace FIASUpdate.Forms
                 CTS = null;
                 RefreshList();
                 RefreshUI();
+                TS_Stopwatch.Stop();
             }
         }
 
@@ -145,6 +147,7 @@ namespace FIASUpdate.Forms
         {
             CTS = new CancellationTokenSource();
             RefreshUI();
+            TS_Stopwatch.Start();
             try
             {
                 var items = ListItems.OrderBy(I => I.Archive.Date);
@@ -175,6 +178,7 @@ namespace FIASUpdate.Forms
                 CTS.Dispose();
                 CTS = null;
                 RefreshUI();
+                TS_Stopwatch.Stop();
             }
         }
 

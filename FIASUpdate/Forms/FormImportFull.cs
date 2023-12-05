@@ -2,6 +2,8 @@
 using JANL.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -49,6 +51,7 @@ namespace FIASUpdate.Forms
         {
             CTS = new CancellationTokenSource();
             RefreshUI();
+            TS_Stopwatch.Start();
             try
             {
                 LV_Result.Items.Clear();
@@ -57,7 +60,6 @@ namespace FIASUpdate.Forms
                     OnlyEmpty = CB_OnlyEmpty.Checked,
                     ShrinkDatabase = CB_Shrink.Checked
                 };
-                SWL.Start();
                 using (var FIAS = new DBImportFull(Options))
                 {
                     FIAS.ResultAdded += FIAS_ResultChanged;
@@ -68,10 +70,10 @@ namespace FIASUpdate.Forms
             catch (Exception ex) { this.ShowException(ex); }
             finally
             {
-                SWL.Stop();
                 CTS.Dispose();
                 CTS = null;
                 RefreshUI();
+                TS_Stopwatch.Stop();
             }
         }
 
@@ -91,6 +93,12 @@ namespace FIASUpdate.Forms
         private void FormImportFull_Load(object sender, EventArgs e)
         {
             Icon = Owner.Icon;
+        }
+
+        private void B_Open_Click(object sender, EventArgs e)
+        {
+            Directory.CreateDirectory(FIASProperties.GAR_Full);
+            Process.Start(FIASProperties.GAR_Full);
         }
 
         #endregion UI Events

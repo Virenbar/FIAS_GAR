@@ -37,6 +37,7 @@ namespace FIASUpdate.Forms
             this.L_Version = new System.Windows.Forms.Label();
             this.LL_Icons = new System.Windows.Forms.LinkLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.LL_Manual = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -55,8 +56,8 @@ namespace FIASUpdate.Forms
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 79F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(243, 85);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 85F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(243, 98);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // flowLayoutPanel1
@@ -65,12 +66,13 @@ namespace FIASUpdate.Forms
             this.flowLayoutPanel1.Controls.Add(this.LL_Control);
             this.flowLayoutPanel1.Controls.Add(this.label1);
             this.flowLayoutPanel1.Controls.Add(this.L_Version);
+            this.flowLayoutPanel1.Controls.Add(this.LL_Manual);
             this.flowLayoutPanel1.Controls.Add(this.LL_Icons);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(50, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(190, 79);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(190, 92);
             this.flowLayoutPanel1.TabIndex = 1;
             this.flowLayoutPanel1.WrapContents = false;
             // 
@@ -85,6 +87,7 @@ namespace FIASUpdate.Forms
             this.LL_Control.TabStop = true;
             this.LL_Control.Text = "FIASUpdate от Virenbar";
             this.LL_Control.UseCompatibleTextRendering = true;
+            this.LL_Control.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LL_Control_LinkClicked);
             // 
             // label1
             // 
@@ -108,13 +111,14 @@ namespace FIASUpdate.Forms
             // 
             this.LL_Icons.AutoSize = true;
             this.LL_Icons.LinkArea = new System.Windows.Forms.LinkArea(10, 7);
-            this.LL_Icons.Location = new System.Drawing.Point(3, 59);
+            this.LL_Icons.Location = new System.Drawing.Point(3, 72);
             this.LL_Icons.Name = "LL_Icons";
             this.LL_Icons.Size = new System.Drawing.Size(93, 20);
             this.LL_Icons.TabIndex = 4;
             this.LL_Icons.TabStop = true;
             this.LL_Icons.Text = "Иконки от Icons8";
             this.LL_Icons.UseCompatibleTextRendering = true;
+            this.LL_Icons.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LL_Icons_LinkClicked);
             // 
             // pictureBox1
             // 
@@ -125,6 +129,17 @@ namespace FIASUpdate.Forms
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
+            // 
+            // LL_Manual
+            // 
+            this.LL_Manual.AutoSize = true;
+            this.LL_Manual.Location = new System.Drawing.Point(3, 59);
+            this.LL_Manual.Name = "LL_Manual";
+            this.LL_Manual.Size = new System.Drawing.Size(85, 13);
+            this.LL_Manual.TabIndex = 6;
+            this.LL_Manual.TabStop = true;
+            this.LL_Manual.Text = "Документация";
+            this.LL_Manual.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LL_Manual_LinkClicked);
             // 
             // FormAbout
             // 
@@ -166,5 +181,6 @@ namespace FIASUpdate.Forms
         private FlowLayoutPanel flowLayoutPanel1;
         private LinkLabel LL_Control;
         private LinkLabel LL_Icons;
+        private LinkLabel LL_Manual;
     }
 }

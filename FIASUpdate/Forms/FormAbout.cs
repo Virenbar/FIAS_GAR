@@ -24,5 +24,11 @@ namespace FIASUpdate.Forms
             LL_Icons.LinkVisited = true;
             OpenURL("https://icons8.ru");
         }
+
+        private void LL_Manual_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            LL_Manual.LinkVisited = true;
+            OpenURL("https://virenbar.ru/FIAS_GAR/fias-update/");
+        }
     }
 }
