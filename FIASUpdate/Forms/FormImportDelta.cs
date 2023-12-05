@@ -53,7 +53,11 @@ namespace FIASUpdate.Forms
             try
             {
                 var info = await Client.GetAllDownloadFileInfo(Version);
-                Archives = info.Select(I => new FIASArchive(I)).ToList();
+                // Бывают выгрузки без ссылок на архивы ГАР.
+                // Если отсутствуют обе,то пропустить такую выгрузку, например от 24.11.2023.
+                Archives = info.Where(I => !(string.IsNullOrEmpty(I.GarXMLFullURL) && string.IsNullOrEmpty(I.GarXMLDeltaURL)))
+                    .Select(I => new FIASArchive(I))
+                    .ToList();
             }
             catch (SocketException ex)
             {
@@ -67,7 +71,7 @@ namespace FIASUpdate.Forms
                 return;
             }
 
-            if (Archives.Any(A => string.IsNullOrWhiteSpace(A.URLDelta)))
+            if (Archives.Any(A => string.IsNullOrEmpty(A.URLDelta)))
             {
                 this.ShowError("У некоторых архивов отсутствует ссылка на скачивание. Обновление невозможно.");
                 return;

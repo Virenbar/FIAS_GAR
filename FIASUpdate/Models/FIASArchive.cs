@@ -27,6 +27,7 @@ namespace FIASUpdate.Models
         public string ExtractPath => $@"{DirectoryPath}\gar_delta_xml";
         public string TextVersion => Info.TextVersion;
         public string URLDelta => Info.GarXMLDeltaURL;
+        public string URLFull => Info.GarXMLFullURL;
         public int VersionId => Info.VersionId;
         private string DirectoryPath => $@"{FIASProperties.GAR_Delta}\{Date:yyyy.MM.dd}";
 
