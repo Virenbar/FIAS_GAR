@@ -1,4 +1,5 @@
-﻿/****** Скрипт для команды SelectTopNRows из среды SSMS  ******/
+﻿USE FIAS_GAR
+
 SELECT TOP (1000) [LEVEL]
       ,[NAME]
       ,[SHORTNAME]
@@ -11,27 +12,21 @@ SELECT TOP (1000) [LEVEL]
 --  85c6fd64-b630-408a-9c35-8462366f1ed3 обл Свердловская, р-н Ирбитский, п Рябиновый, ул Тихая, д. 2
  -- 476f70e2-5b63-4bf9-a213-f826ac1d3a8e обл Свердловская, г Красноуфимск, пер Рябиновый, д. 12
 
-SELECT
-	*
-FROM
-	[adm].[UF_GetHierarchy]('177c10d7-f36f-449e-a94b-5f7f45a0dbc8')
+SELECT * FROM [adm].[UF_GetHierarchy]('177c10d7-f36f-449e-a94b-5f7f45a0dbc8')
+SELECT * FROM [mun].[UF_GetHierarchy]('177c10d7-f36f-449e-a94b-5f7f45a0dbc8')
 
-SELECT
-	*
-FROM
-	[mun].[UF_GetHierarchy]('177c10d7-f36f-449e-a94b-5f7f45a0dbc8')
-
-
-	select mun.SUF_AreaName('85c6fd64-b630-408a-9c35-8462366f1ed3')
-	select mun.SUF_VillageName('85c6fd64-b630-408a-9c35-8462366f1ed3')
-	select mun.SUF_HouseNameFull('85c6fd64-b630-408a-9c35-8462366f1ed3')
-	select adm.SUF_AreaName('85c6fd64-b630-408a-9c35-8462366f1ed3')
-	select adm.SUF_VillageName('85c6fd64-b630-408a-9c35-8462366f1ed3')
-	select adm.SUF_HouseNameFull('85c6fd64-b630-408a-9c35-8462366f1ed3')
+SELECT [mun].[SUF_AreaName]('85c6fd64-b630-408a-9c35-8462366f1ed3')
+SELECT [mun].[SUF_VillageName]('85c6fd64-b630-408a-9c35-8462366f1ed3')
+SELECT [mun].[SUF_HouseNameFull]('85c6fd64-b630-408a-9c35-8462366f1ed3')
+SELECT [adm].[SUF_AreaName]('85c6fd64-b630-408a-9c35-8462366f1ed3')
+SELECT [adm].[SUF_VillageName]('85c6fd64-b630-408a-9c35-8462366f1ed3')
+SELECT [adm].[SUF_HouseNameFull]('85c6fd64-b630-408a-9c35-8462366f1ed3')
 
 SELECT	* FROM	[adm].[UF_GetHierarchy]('476f70e2-5b63-4bf9-a213-f826ac1d3a8e')
-
 SELECT	* FROM	[mun].[UF_GetHierarchy]('476f70e2-5b63-4bf9-a213-f826ac1d3a8e')
+
+SELECT	* FROM	[adm].UF_RegistryChild('ddb355ab-7c2a-4f86-b388-6afbd81a7e73',default)
+SELECT	* FROM	[mun].UF_RegistryChild('ddb355ab-7c2a-4f86-b388-6afbd81a7e73',default)
 
 select *,mun.SUF_AreaName(FIAS_GUID) from TechPris.dbo.S_Address
 where  mun.SUF_AreaGUID(FIAS_GUID)='8d80baaf-fe7c-4021-87f5-e8b2826aa6ab'
@@ -67,3 +62,11 @@ SELECT
 FROM
 	(VALUES('Екатеринбург Екатеринбург Уральска 5'), ('Екатеринбург Екатеринбург Уральска 1')) [A]([Name])
 LEFT JOIN [mun].[A_IndexRegistry] [R] ON [R].[ObjectGUID] = [mun].[SUF_Search]([dbo].[SUF_ExpressionNEAR]([A].[Name]), 10, DEFAULT)
+
+
+-- 
+SELECT	* FROM	[adm].[UF_GetHierarchy]('f31f9c11-a888-41c2-9cb2-9f86c486fecc')
+SELECT	* FROM	[mun].[UF_GetHierarchy]('f31f9c11-a888-41c2-9cb2-9f86c486fecc')
+
+SELECT	* FROM	[adm].UF_RegistryChild('f31f9c11-a888-41c2-9cb2-9f86c486fecc',default)
+SELECT	* FROM	[mun].UF_RegistryChild('f31f9c11-a888-41c2-9cb2-9f86c486fecc',default)

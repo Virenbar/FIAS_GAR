@@ -594,6 +594,34 @@
     <Build Include="adm\Synonyms\SUF_GetParentGUID.sql" />
     <Build Include="adm\Synonyms\SUF_GetHierarchyGUID.sql" />
     <Build Include="adm\Synonyms\SUF_GetFullAddress.sql" />
+    <Build Include="mun\Functions\SUF_StreetName.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="mun\Functions\SUF_HouseName.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="adm\Functions\SUF_StreetName.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="adm\Functions\SUF_HouseName.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="mun\Functions\UF_RegistryChild.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="adm\Functions\UF_RegistryChild.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\UP_ObjectParameters.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
   </ItemGroup>
   <ItemGroup>
     <None Include="FIAS_GAR.publish.xml" />

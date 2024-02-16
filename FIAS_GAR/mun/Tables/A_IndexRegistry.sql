@@ -9,3 +9,10 @@
     CONSTRAINT [PK_A_IndexRegistry] PRIMARY KEY CLUSTERED ([ObjectGUID] ASC)
 );
 
+
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [NCI_ParentObject]
+    ON [mun].[A_IndexRegistry]([ParentGUID] ASC, [ObjectGUID] ASC);
+
