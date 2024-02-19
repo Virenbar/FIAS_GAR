@@ -1,19 +1,12 @@
 ﻿using Microsoft.SqlServer.Management.Smo;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 
 namespace FIASUpdate
 {
-    internal static class Extensions
+    internal static class DataExtensions
     {
-        public static string TrimSpaces(this string str)
-        {
-            str = str.Trim();
-            while (str.Contains("  "))
-            {
-                str = str.Replace("  ", " ");
-            }
-            return str;
-        }
-
         public static Column Clone(this Column column)
         {
             var copy = new Column

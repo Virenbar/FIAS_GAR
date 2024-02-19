@@ -269,6 +269,7 @@
             this.Name = "FormImportFull";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Импорт БД";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormImportFull_FormClosing);
             this.Load += new System.EventHandler(this.FormImportFull_Load);
             this.groupBox2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);

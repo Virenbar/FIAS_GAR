@@ -118,10 +118,12 @@ namespace FIASUpdate.Forms
                 {
                     var tasks = items.Select(async A =>
                     {
-                        await AD.Download(A.Archive);
+                        CTS.Token.ThrowIfCancellationRequested();
+                        await AD.Download(A.Archive, CTS.Token);
                         A.Refresh();
                         count++;
                         TS_Progress.Value = $@"{count}/{items.Count}";
+                        CTS.Token.ThrowIfCancellationRequested();
                     });
                     await Task.WhenAll(tasks);
                 }
@@ -210,6 +212,15 @@ namespace FIASUpdate.Forms
         {
             Icon = Owner.Icon;
             _ = RefreshDatabase();
+        }
+
+        private void FormImportDelta_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (CTS != null)
+            {
+                e.Cancel = true;
+                this.ShowWarning("Отмените выполнение, чтобы закрыть окно.");
+            }
         }
 
         #endregion UI Events

@@ -124,6 +124,9 @@
   <data name="Cancel16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>resources\icons8\cancel16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Clipboard16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\icons8\clipboard16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Info16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>resources\icons8\info16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -136,6 +139,9 @@
   <data name="OpenedFolder16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>resources\icons8\openedfolder16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="PDF16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\icons8\pdf16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="PencilDrawing16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>resources\icons8\pencildrawing16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -147,5 +153,8 @@
   </data>
   <data name="Search16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>resources\icons8\search16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TableProperties16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\icons8\tableproperties16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

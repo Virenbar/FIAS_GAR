@@ -269,6 +269,7 @@
             this.Name = "FormImportDelta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Импорт БД";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormImportDelta_FormClosing);
             this.Load += new System.EventHandler(this.FormImportDelta_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

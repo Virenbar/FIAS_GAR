@@ -1,10 +1,12 @@
 ﻿using FIAS.Core;
+using FIAS.Core.Extensions;
 using FIAS.Core.Stores;
 using FIASUpdate.Properties;
 using JANL.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -22,7 +24,10 @@ namespace FIASUpdate.Forms
         {
             InitializeComponent();
             Level = 10;
-            RB_F = new List<(RadioButton RB, FIASDivision Division)> { (RB_ADM, FIASDivision.adm), (RB_MUN, FIASDivision.mun) };
+            RB_F = new List<(RadioButton RB, FIASDivision Division)> {
+                (RB_ADM, FIASDivision.adm),
+                (RB_MUN, FIASDivision.mun)
+            };
         }
 
         private void RefreshUI()
@@ -34,7 +39,7 @@ namespace FIASUpdate.Forms
         private async Task Search()
         {
             if (TB_Search.Text.Length < 2) { return; }
-            SetUIState(false);
+            UIState(false);
             try
             {
                 var D = RB_F.First(R => R.RB.Checked).Division;
@@ -54,15 +59,14 @@ namespace FIASUpdate.Forms
                 RefreshUI();
             }
             catch (Exception E) { this.ShowError(E); }
-            finally { SetUIState(true); }
+            finally { UIState(true); }
         }
 
-        private void SetUIState(bool value)
+        private void UIState(bool value)
         {
             TB_Search.ReadOnly = !value;
             B_Search.Enabled = value;
             CB_Level.Enabled = value;
-            B_Info.Enabled = value;
             RB_ADM.Enabled = value;
             RB_MUN.Enabled = value;
         }
@@ -77,17 +81,17 @@ namespace FIASUpdate.Forms
 
         private void B_CopyAddress_Click(object sender, EventArgs e)
         {
-            if (TB_Address.Text.Length > 0) { Clipboard.SetText(TB_Address.Text); }
+            Clipboard.SetText(TB_Address.Text);
         }
 
         private void B_CopyGUID_Click(object sender, EventArgs e)
         {
-            if (TB_GUID.Text.Length > 0) { Clipboard.SetText(TB_GUID.Text); }
+            Clipboard.SetText(TB_GUID.Text);
         }
 
         private async void B_Info_Click(object sender, EventArgs e)
         {
-            SetUIState(false);
+            UIState(false);
             try
             {
                 var D = await Store.Statistics();
@@ -95,7 +99,7 @@ namespace FIASUpdate.Forms
                 this.ShowInfo(S, "Информация о БД");
             }
             catch (Exception E) { this.ShowError(E.Message); }
-            finally { SetUIState(true); }
+            finally { UIState(true); }
         }
 
         private async void B_Search_Click(object sender, EventArgs e) => await Search();
@@ -110,7 +114,7 @@ namespace FIASUpdate.Forms
         {
             Icon = Owner.Icon;
             CB_Level.SelectedIndexChanged -= CB_Level_SelectedIndexChanged;
-            SetUIState(false);
+            UIState(false);
             try
             {
                 CB_Level.DataSource = await Store.FIASLevels();
@@ -118,24 +122,75 @@ namespace FIASUpdate.Forms
                 CB_Level.ValueMember = "Level";
                 CB_Level.SelectedValue = Level;
                 CB_Level.SelectedIndexChanged += CB_Level_SelectedIndexChanged;
-                SetUIState(true);
+                UIState(true);
             }
-            catch (Exception E) { this.ShowError($"Не удалось подключиться к базе {DBName}: {E.Message}"); }
+            catch (Exception E)
+            {
+                this.ShowError($"Не удалось подключиться к базе {DBName}: {E.Message}");
+            }
             RefreshUI();
             await Search();
         }
 
         private void LV_Search_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (LV_Search.SelectedItems.Count == 0)
+            if (LV_Search.SelectedItems.Count > 0)
+            {
+                var A = LV_Search.SelectedItems[0];
+                TB_GUID.Text = A.SubItems[0].Text;
+                TB_Address.Text = A.SubItems[1].Text;
+            }
+            else
             {
                 TB_GUID.Text = string.Empty;
                 TB_Address.Text = string.Empty;
-                return;
             }
-            var A = LV_Search.SelectedItems[0];
-            TB_GUID.Text = A.SubItems[0].Text;
-            TB_Address.Text = A.SubItems[1].Text;
+            MI_PDF.Enabled = TB_GUID.Text.Length > 0;
+            MI_Parameters.Enabled = TB_GUID.Text.Length > 0;
+            B_CopyGUID.Enabled = TB_GUID.Text.Length > 0;
+            B_CopyAddress.Enabled = TB_Address.Text.Length > 0;
+        }
+
+        private async void MI_DBInfo_Click(object sender, EventArgs e)
+        {
+            UIState(false);
+            try
+            {
+                var D = await Store.Statistics();
+                var S = string.Join(Environment.NewLine, D.Select(KV => $"{KV.Key}: {KV.Value}"));
+                this.ShowInfo(S, "Информация о БД");
+            }
+            catch (Exception E) { this.ShowError(E.Message); }
+            finally { UIState(true); }
+        }
+
+        private async void MI_Parameters_Click(object sender, EventArgs e)
+        {
+            UIState(false);
+            try
+            {
+                var parameters = await Store.GetObjectParameters(TB_GUID.Text);
+                var F = new FormDictionaryView()
+                {
+                    Text = "Параметры объекта",
+                    KeyHeader = "Параметр",
+                    ValeuHeader = "Значение"
+                };
+                F.SetDictionary(parameters);
+                F.ShowDialog(this);
+            }
+            catch (Exception E) { this.ShowError(E.Message); }
+            finally { UIState(true); }
+        }
+
+        private void MI_PDF_Click(object sender, EventArgs e)
+        {
+            var uri = Store.GetPDFStatement(TB_GUID.Text);
+            var info = new ProcessStartInfo(uri)
+            {
+                UseShellExecute = true
+            };
+            Process.Start(info);
         }
 
         private async void RB_CheckedChanged(object sender, EventArgs e) => await Search();
@@ -154,7 +209,7 @@ namespace FIASUpdate.Forms
             }
         }
 
-        private void TB_Search_TextChanged(object sender, EventArgs e) => L_GUID.Visible = FIASStore.IsGUID(TB_Search.Text);
+        private void TB_Search_TextChanged(object sender, EventArgs e) => L_GUID.Visible = TB_Search.Text.IsGUID();
 
         #endregion UI Events
     }

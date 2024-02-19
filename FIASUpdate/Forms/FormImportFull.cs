@@ -1,4 +1,5 @@
 ﻿using FIASUpdate.Models;
+using JANL;
 using JANL.Extensions;
 using System;
 using System.Collections.Generic;
@@ -99,6 +100,15 @@ namespace FIASUpdate.Forms
         {
             Directory.CreateDirectory(FIASProperties.GAR_Full);
             Process.Start(FIASProperties.GAR_Full);
+        }
+
+        private void FormImportFull_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (CTS != null)
+            {
+                e.Cancel = true;
+                this.ShowWarning("Отмените выполнение, чтобы закрыть окно.");
+            }
         }
 
         #endregion UI Events
