@@ -1,6 +1,5 @@
 ﻿using FIAS.Core.Extensions;
 using FIAS.Core.Models;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -16,21 +15,12 @@ namespace FIAS.Core.Stores
     {
         public FIASStore(string connection) : base(connection) { }
 
-        /// <summary>
-        /// Является ли строка GUID
-        /// </summary>
-        public static bool IsGUID(string str)
-        {
-            if (str.Length != 36) { return false; }
-            return Guid.TryParse(str, out var _);
-        }
-
         public Task<DataTable> FIASLevels() => Task.Run(UP_CB_Levels);
 
         public async Task<List<FIASRegistryAddress>> GetChilds(string GUID)
         {
             using (var DT = await Task.Run(() => UP_RegistrySelectChild(GUID)))
-                return DT.Rows.Cast<DataRow>().Select(R => FIASRegistryAddress.Parse(R)).ToList();
+                return FIASRegistryAddress.Parse(DT);
         }
 
         public async Task<List<FIASHierarchyItem>> GetHierarchy(FIASDivision division, string GUID)
@@ -72,47 +62,72 @@ namespace FIAS.Core.Stores
         /// <returns></returns>
         public async Task<List<FIASRegistryAddress>> Search(FIASDivision division, string S, int? Level, int? Limit)
         {
-            using (var DT = await Task.Run(() => IsGUID(S) ? UP_SearchRegistryByGUID(division, S, Level, Limit) : UP_SearchRegistry(division, S, Level, Limit)))
-                return DT.Rows.Cast<DataRow>().Select(R => FIASRegistryAddress.Parse(R)).ToList();
+            using (var DT = await Task.Run(() => S.IsGUID() ? UP_SearchRegistryByGUID(division, S, Level, Limit) : UP_SearchRegistry(division, S, Level, Limit)))
+                return FIASRegistryAddress.Parse(DT);
         }
 
         public async Task<Dictionary<string, string>> Statistics()
         {
             using (var DT = await Task.Run(UP_FIAS_Statistics))
-                return DT.Rows.Cast<DataRow>().ToDictionary(R => R.Field<string>("Name"), R => R.Field<string>("Value"));
+                return DT.ToDictionary<string, string>("Name", "Value");
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="GUID"></param>
+        /// <returns></returns>
+        public async Task<Dictionary<string, string>> GetObjectParameters(string GUID)
+        {
+            using (var DT = await Task.Run(() => UP_ObjectParameters(GUID)))
+                return DT.ToDictionary<string, string>("Name", "Value");
         }
 
         #region SQL
 
         private DataTable UP_CB_Levels()
         {
-            using (var Command = NewProcedure())
-                return Command.ExecuteSelect(Connection);
+            using (var command = NewProcedure())
+                return command.ExecuteSelect(Connection);
         }
 
         private DataTable UP_FIAS_Statistics()
         {
-            using (var Command = NewProcedure())
-                return Command.ExecuteSelect(Connection);
+            using (var command = NewProcedure())
+            {
+                command.CommandTimeout = 300;
+                return command.ExecuteSelect(Connection);
+            }
         }
 
         private DataTable UP_GetHierarchy(FIASDivision H, string GUID)
         {
-            using (var Command = NewProcedure($"{H}.{nameof(UP_GetHierarchy)}"))
+            using (var command = NewProcedure($"{H}.{nameof(UP_GetHierarchy)}"))
             {
-                var P = Command.Parameters;
+                var P = command.Parameters;
                 P.Add(new SqlParameter("@GUID", SqlDbType.Char, 36)).Value = GUID;
-                return Command.ExecuteSelect(Connection);
+                return command.ExecuteSelect(Connection);
+            }
+        }
+
+        private DataTable UP_ObjectParameters(string GUID)
+        {
+            using (var command = NewProcedure())
+            {
+                command.CommandTimeout = 300;
+                var P = command.Parameters;
+                P.AddWithValue("@GUID", GUID);
+                return command.ExecuteSelect(Connection);
             }
         }
 
         private long UP_IDByGUID(string GUID)
         {
-            using (var Command = NewProcedure())
+            using (var command = NewProcedure())
             {
-                var P = Command.Parameters;
+                var P = command.Parameters;
                 P.AddWithValue("@GUID", GUID);
-                return Command.ExecuteScalar<long>(Connection);
+                return command.ExecuteScalar<long>(Connection);
             }
         }
 
@@ -120,45 +135,45 @@ namespace FIAS.Core.Stores
 
         private DataTable UP_RegistrySelect(FIASDivision H, string GUID)
         {
-            using (var Command = NewProcedure($"{H}.{nameof(UP_RegistrySelect)}"))
+            using (var command = NewProcedure($"{H}.{nameof(UP_RegistrySelect)}"))
             {
-                var P = Command.Parameters;
+                var P = command.Parameters;
                 P.Add(new SqlParameter("@GUID", SqlDbType.Char, 36)).Value = GUID;
-                return Command.ExecuteSelect(Connection);
+                return command.ExecuteSelect(Connection);
             }
         }
 
         private DataTable UP_RegistrySelectChild(string GUID)
         {
-            using (var Command = NewProcedure())
+            using (var command = NewProcedure())
             {
-                var P = Command.Parameters;
-                P.Add(new SqlParameter("@GUID", SqlDbType.Char, 36)).Value = GUID;
-                return Command.ExecuteSelect(Connection);
+                var P = command.Parameters;
+                P.AddWithValue("@GUID", GUID);
+                return command.ExecuteSelect(Connection);
             }
         }
 
         private DataTable UP_SearchRegistry(FIASDivision H, string Search, int? Level, int? Limit)
         {
-            using (var Command = NewProcedure($"{H}.{nameof(UP_SearchRegistry)}"))
+            using (var command = NewProcedure($"{H}.{nameof(UP_SearchRegistry)}"))
             {
-                var P = Command.Parameters;
+                var P = command.Parameters;
                 P.Add(new SqlParameter("@Search", SqlDbType.VarChar, 500)).Value = Search;
                 P.Add(new SqlParameter("@Level", SqlDbType.Int)).Value = Level;
                 P.Add(new SqlParameter("@Limit", SqlDbType.Int)).Value = Limit;
-                return Command.ExecuteSelect(Connection);
+                return command.ExecuteSelect(Connection);
             }
         }
 
         private DataTable UP_SearchRegistryByGUID(FIASDivision H, string GUID, int? Level, int? Limit)
         {
-            using (var Command = NewProcedure($"{H}.{nameof(UP_SearchRegistryByGUID)}"))
+            using (var command = NewProcedure($"{H}.{nameof(UP_SearchRegistryByGUID)}"))
             {
-                var P = Command.Parameters;
+                var P = command.Parameters;
                 P.Add(new SqlParameter("@GUID", SqlDbType.Char, 36)).Value = GUID;
                 P.Add(new SqlParameter("@Level", SqlDbType.Int)).Value = Level;
                 P.Add(new SqlParameter("@Limit", SqlDbType.Int)).Value = Limit;
-                return Command.ExecuteSelect(Connection);
+                return command.ExecuteSelect(Connection);
             }
         }
 

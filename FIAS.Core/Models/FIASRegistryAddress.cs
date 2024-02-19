@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 
 namespace FIAS.Core.Models
 {
@@ -24,6 +26,8 @@ namespace FIAS.Core.Models
         public string ObjectGUID { get; set; }
         public string ParentGUID { get; set; }
         public string Type { get; set; }
+
+        public static List<FIASRegistryAddress> Parse(DataTable table) => table.Rows.Cast<DataRow>().Select(Parse).ToList();
 
         public static FIASRegistryAddress Parse(DataRow row) => new FIASRegistryAddress(row);
 
