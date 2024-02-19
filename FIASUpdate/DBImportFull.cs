@@ -99,7 +99,8 @@ namespace FIASUpdate
             DateTime date = new DateTime(2000, 1, 1);
             if (File.Exists(GAR_Version))
             {
-                DateTime.TryParse(File.ReadAllText(GAR_Version), out date);
+                var V = File.ReadAllLines(GAR_Version);
+                DateTime.TryParse(V[0], out date);
             }
 #if false
             Store.SetSubjects(subjects);
