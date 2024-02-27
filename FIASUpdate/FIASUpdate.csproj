@@ -367,9 +367,10 @@
     <Compile Include="Controls\UC_DatabaseInfo.Designer.cs">
       <DependentUpon>UC_DatabaseInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="DBCreate.cs" />
-    <Compile Include="DBImport.cs" />
-    <Compile Include="DBImportDelta.cs" />
+    <Compile Include="Database\DBClient.cs" />
+    <Compile Include="Database\DBCreate.cs" />
+    <Compile Include="Database\DBImport.cs" />
+    <Compile Include="Database\DBImportDelta.cs" />
     <Compile Include="Extensions\DataExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Forms\FormDictionaryView.cs">
@@ -408,7 +409,7 @@
     <Compile Include="FIASProperties.cs" />
     <Compile Include="Properties\Settings.cs" />
     <Compile Include="Readers\FIASReader.cs" />
-    <Compile Include="DBImportFull.cs" />
+    <Compile Include="Database\DBImportFull.cs" />
     <Compile Include="Forms\FormAddressSearch.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -431,7 +432,6 @@
     <Compile Include="Models\FIASFile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SQL.cs" />
     <Compile Include="SyncEvent.cs" />
     <Compile Include="Readers\XMLDataReader.cs" />
     <EmbeddedResource Include="Controls\UC_Database.resx">

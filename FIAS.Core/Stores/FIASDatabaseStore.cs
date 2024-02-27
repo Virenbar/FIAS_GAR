@@ -70,7 +70,7 @@ namespace FIAS.Core.Stores
         public List<FIASTableInfo> TablesInfo()
         {
             using (var DT = UP_TablesInfo())
-                return DT.Rows.Cast<DataRow>().Select(R => FIASTableInfo.Parse(R)).ToList();
+                return FIASTableInfo.Parse(DT);
         }
 
         #region SQL

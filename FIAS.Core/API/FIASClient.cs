@@ -26,9 +26,9 @@ namespace FIAS.Core.API
         /// <returns></returns>
         public async Task<List<FIASInfo>> GetAllDownloadFileInfo()
         {
-            using (var HRM = await Client.GetAsync("GetAllDownloadFileInfo"))
+            using (var HRM = await Client.GetAsync("GetAllDownloadFileInfo").ConfigureAwait(false))
             {
-                var Content = await HRM.Content.ReadAsStringAsync();
+                var Content = await HRM.Content.ReadAsStringAsync().ConfigureAwait(false);
                 var Info = JsonConvert.DeserializeObject<List<FIASInfo>>(Content);
                 return Info;
             }
@@ -41,7 +41,7 @@ namespace FIAS.Core.API
         /// <returns></returns>
         public async Task<List<FIASInfo>> GetAllDownloadFileInfo(DateTime date)
         {
-            var Info = await GetAllDownloadFileInfo();
+            var Info = await GetAllDownloadFileInfo().ConfigureAwait(false);
             return Info.Where(I => I.Date > date).ToList();
         }
 
@@ -52,7 +52,7 @@ namespace FIAS.Core.API
         /// <returns></returns>
         public async Task<List<FIASInfo>> GetAllDownloadFileInfo(int version)
         {
-            var Info = await GetAllDownloadFileInfo();
+            var Info = await GetAllDownloadFileInfo().ConfigureAwait(false);
             return Info.Where(I => I.VersionId > version).ToList();
         }
 

@@ -1,6 +1,4 @@
 ﻿using JANL;
-using Microsoft.Data.SqlClient;
-using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
 using System;
 using System.Collections.Generic;
@@ -8,39 +6,24 @@ using System.Data;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading;
-using Settings = FIASUpdate.Properties.Settings;
 
 namespace FIASUpdate
 {
     [Obsolete("Заменён на FIAS_GAR")]
-    internal class DBCreate : IDisposable
+    internal class DBCreate : DBClient
     {
-        private static readonly Settings Settings = Settings.Default;
         private readonly Dictionary<string, DataSet> DataSets = new Dictionary<string, DataSet>();
-        private readonly Database DB;
-        private readonly string DBName;
         private readonly Regex R = new Regex("AS_(?<name>[a-zA-Z_]+)_");
 
-        //Status Progress
+        // Status Progress
         private readonly IProgress<TaskProgress> SP;
 
-        public DBCreate() : this(new Progress<TaskProgress>()) { }
+        public DBCreate() : this(default) { }
 
-        public DBCreate(IProgress<TaskProgress> TaskProgress)
+        public DBCreate(IProgress<TaskProgress> TaskProgress) : base()
         {
-            DBName = Settings.DBName;
             SP = TaskProgress;
-
-            SqlConnection Connection = SQL.NewConnection();
-            Server Server = new Server(new ServerConnection(Connection));
-            DB = Server.Databases[DBName];
-            if (DB == null) { throw new InvalidOperationException($"База данных {DBName} не найдена"); }
-            DB.Refresh();
-            var I = Server.Information;
         }
-
-        private static string GAR => Settings.XMLPath;
-        private static string GAR_XSD => GAR + @"\gar_schemas";
 
         public void Create()
         {
@@ -106,7 +89,7 @@ namespace FIASUpdate
 
         private void ReadSchemas()
         {
-            foreach (var XSD in Directory.EnumerateFiles(GAR_XSD))
+            foreach (var XSD in Directory.EnumerateFiles(FIASProperties.GAR_XSD))
             {
                 var Name = R.Match(XSD).Groups["name"].Value;
                 SP.Report(new TaskProgress($"Чтение схемы:{Name}"));
@@ -128,24 +111,22 @@ namespace FIASUpdate
             }
         }
 
-        #region IDisposable Support
+        #region IDisposable
         private bool disposedValue;
 
-        public void Dispose() => Dispose(true);
-
-        protected virtual void Dispose(bool disposing)
+        protected override void Dispose(bool disposing)
         {
             if (!disposedValue)
             {
                 if (disposing)
                 {
                     foreach (var DS in DataSets.Values) { DS.Dispose(); }
-                    DB.Parent.ConnectionContext.Disconnect();
                 }
                 disposedValue = true;
             }
+            base.Dispose(disposing);
         }
 
-        #endregion IDisposable Support
+        #endregion IDisposable
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 
 namespace FIAS.Core.Models
 {
@@ -25,6 +27,8 @@ namespace FIAS.Core.Models
         public decimal TotalMB { get; }
         public decimal UnusedMB { get; }
         public decimal UsedMB { get; }
+
+        public static List<FIASTableInfo> Parse(DataTable table) => table.Rows.Cast<DataRow>().Select(Parse).ToList();
 
         public static FIASTableInfo Parse(DataRow row) => new FIASTableInfo(row);
 

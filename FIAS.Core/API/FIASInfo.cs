@@ -65,6 +65,11 @@ namespace FIAS.Core.API
         /// <summary>
         /// Дата выгрузки
         /// </summary>
+        public DateTime ExpDate { get; set; }
+
+        /// <summary>
+        /// Дата выгрузки
+        /// </summary>
         [JsonConverter(typeof(FIASDateTimeConverter))]
         public DateTime Date { get; set; }
     }

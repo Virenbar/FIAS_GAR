@@ -28,7 +28,7 @@
 
 <!-- Badges -->
 [build-src]: https://img.shields.io/github/actions/workflow/status/Virenbar/FIAS_GAR/build-artifact.yml?label=Build&logo=github
-[build-href]: ttps://github.com/Virenbar/FIAS_GAR/actions/workflows/build-artifact.yml
+[build-href]: https://github.com/Virenbar/FIAS_GAR/actions/workflows/build-artifact.yml
 
 [codacy-src]: https://app.codacy.com/project/badge/Grade/d9c5e3f57c914aed83166e72af7ba936
 [codacy-href]: https://app.codacy.com/gh/Virenbar/FIAS_GAR/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade

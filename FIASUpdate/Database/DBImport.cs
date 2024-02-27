@@ -1,9 +1,6 @@
 ﻿using FIAS.Core.Stores;
 using FIASUpdate.Models;
 using JANL;
-using Microsoft.Data.SqlClient;
-using Microsoft.SqlServer.Management.Common;
-using Microsoft.SqlServer.Management.Smo;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,10 +9,8 @@ using System.Threading;
 
 namespace FIASUpdate
 {
-    internal abstract class DBImport : IDisposable
+    internal abstract class DBImport : DBClient
     {
-        protected readonly Database DB;
-        protected readonly string DBName = FIASProperties.DBName;
         protected readonly SyncEvent Events;
         protected readonly List<FIASTable> Tables = new List<FIASTable>();
         protected readonly FIASDatabaseStore Store = new FIASDatabaseStore(FIASProperties.SQLConnection);
@@ -23,15 +18,9 @@ namespace FIASUpdate
         protected IProgress<TaskProgress> SP;
         protected CancellationToken Token;
 
-        protected DBImport()
+        protected DBImport() : base()
         {
             Events = new SyncEvent(this);
-
-            SqlConnection Connection = NewConnection();
-            Server Server = new Server(new ServerConnection(Connection));
-            DB = Server.Databases[DBName];
-            if (DB == null) { throw new InvalidOperationException($"База данных {DBName} не найдена"); }
-            DB.Refresh();
         }
 
         protected abstract string ScanPath { get; }
@@ -41,20 +30,6 @@ namespace FIASUpdate
         public void Import(IProgress<TaskProgress> progress) => Import(progress, default);
 
         public abstract void Import(IProgress<TaskProgress> progress, CancellationToken token);
-
-        protected static SqlConnection NewConnection() => NewConnection("master");
-
-        protected static SqlConnection NewConnection(string Database)
-        {
-            var SCSB = new SqlConnectionStringBuilder(FIASProperties.SQLConnection)
-            {
-                InitialCatalog = Database,
-                Encrypt = false
-            };
-            var connection = new SqlConnection(SCSB.ToString());
-            connection.Open();
-            return connection;
-        }
 
         protected void ScanFiles()
         {
@@ -75,24 +50,5 @@ namespace FIASUpdate
 
             Tables.AddRange(tables);
         }
-
-        #region IDisposable
-        private bool disposedValue;
-
-        public void Dispose() => Dispose(true);
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
-            {
-                if (disposing)
-                {
-                    DB.Parent.ConnectionContext.Disconnect();
-                }
-                disposedValue = true;
-            }
-        }
-
-        #endregion IDisposable
     }
 }
