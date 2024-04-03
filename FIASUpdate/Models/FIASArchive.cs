@@ -1,5 +1,4 @@
 ﻿using FIAS.Core.API;
-using FIASUpdate.Properties;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -59,7 +58,7 @@ namespace FIASUpdate.Models
             try
             {
                 // Попробовать открыть для проверки целостности
-                // Выдаст ошибку если файл в процессе записи
+                // Выдаст ошибку если файл в процессе записи или повреждён
                 // Может зависнуть на повреждённом архиве
                 // Нужна проверка хэша, но увы
                 using (var zip = ZipFile.OpenRead(Archive.FullName))

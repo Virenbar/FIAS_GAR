@@ -12,43 +12,48 @@ namespace FIAS.Core.Stores
     /// </summary>
     public class FIASDatabaseStore : SQLStore
     {
+        private const string CanImport = "CanImport";
+        private const string LastImport = "LastImport";
+        private const string Subjects = "Subjects";
+        private const string Version = "Version";
+
         public FIASDatabaseStore(string connection) : base(connection) { }
 
         /// <summary>
         /// Получить статус разрешения импорта таблицы
         /// </summary>
         /// <param name="table">Имя таблицы</param>
-        public bool GetCanImport(string table) => (bool)UP_TablePropertyGet(table, "CanImport");
+        public bool GetCanImport(string table) => (bool)UP_TablePropertyGet(table, CanImport);
 
         /// <summary>
         /// Получать дату импорта таблицы
         /// </summary>
-        public DateTime? GetLastImport(string table) => (DateTime?)UP_TablePropertyGet(table, "LastImport");
+        public DateTime? GetLastImport(string table) => (DateTime?)UP_TablePropertyGet(table, LastImport);
 
         /// <summary>
         /// Получить список субъектов
         /// </summary>
         public List<string> GetSubjects()
         {
-            var list = UP_DatabasePropertyGet<string>("Subjects") ?? "";
+            var list = UP_DatabasePropertyGet<string>(Subjects) ?? "";
             return list.Split(';').ToList();
         }
 
         /// <summary>
         /// Получить версию БД
         /// </summary>
-        public DateTime? GetVersion() => UP_DatabasePropertyGet<DateTime?>("Version");
+        public DateTime? GetVersion() => UP_DatabasePropertyGet<DateTime?>(Version);
 
         /// <summary>
         /// Задать статус разрешения импорта таблицы
         /// </summary>
         /// <param name="table">Имя таблицы</param>
-        public void SetCanImport(string table, bool value) => UP_TablePropertySet(table, "CanImport", value);
+        public void SetCanImport(string table, bool value) => UP_TablePropertySet(table, CanImport, value);
 
         /// <summary>
         /// Задать дату импорта таблицы
         /// </summary>
-        public void SetLastImport(string table, DateTime date) => UP_TablePropertySet(table, "LastImport", date);
+        public void SetLastImport(string table, DateTime date) => UP_TablePropertySet(table, LastImport, date);
 
         /// <summary>
         /// Задать список регионов
@@ -56,13 +61,13 @@ namespace FIAS.Core.Stores
         public void SetSubjects(List<string> regions)
         {
             var list = string.Join(";", regions);
-            UP_DatabasePropertySet("Subjects", list);
+            UP_DatabasePropertySet(Subjects, list);
         }
 
         /// <summary>
         /// Задать версию БД
         /// </summary>
-        public void SetVersion(DateTime version) => UP_DatabasePropertySet("Version", version);
+        public void SetVersion(DateTime version) => UP_DatabasePropertySet(Version, version);
 
         /// <summary>
         /// Информация о таблицах в БД

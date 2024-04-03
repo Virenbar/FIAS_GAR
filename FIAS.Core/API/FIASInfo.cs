@@ -43,13 +43,13 @@ namespace FIAS.Core.API
         /// <summary>
         /// URL версии КЛАДР 4 сжатого в формате ARJ
         /// </summary>
-        [Obsolete]
+        [Obsolete("Устаревший формат")]
         public string Kladr4ArjUrl { get; set; }
 
         /// <summary>
         /// URL версии КЛАДР 4 сжатого в формате 7Z
         /// </summary>
-        [Obsolete]
+        [Obsolete("Устаревший формат")]
         public string Kladr47ZUrl { get; set; }
 
         /// <summary>
