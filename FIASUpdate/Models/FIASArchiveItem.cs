@@ -24,7 +24,11 @@ namespace FIASUpdate.Models
         public string State
         {
             get => SubItems[2].Text;
-            set => SubItems[2].Text = value;
+            set
+            {
+                if (SubItems[2].Text == value) { return; }
+                SubItems[2].Text = value;
+            }
         }
 
         public FIASArchive Archive { get; }

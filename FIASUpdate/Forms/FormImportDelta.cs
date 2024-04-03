@@ -30,6 +30,8 @@ namespace FIASUpdate.Forms
             InitializeComponent();
         }
 
+        private IEnumerable<FIASArchiveItem> ListItems => LV_Archives.Items.Cast<FIASArchiveItem>();
+
         private async Task RefreshDatabase()
         {
             var version = Store.GetVersion();
@@ -45,6 +47,10 @@ namespace FIASUpdate.Forms
                 return;
             }
             Version = version.Value;
+#if DEBUG && false
+            // Для проверки
+            Version = DateTime.Today.AddDays(-14);
+#endif
             Subjects = subjects;
             Info.Version = Version;
             Info.Subjects = Subjects;
@@ -100,13 +106,27 @@ namespace FIASUpdate.Forms
             B_Cancel.Enabled = CTS != null;
         }
 
-        private IEnumerable<FIASArchiveItem> ListItems => LV_Archives.Items.Cast<FIASArchiveItem>();
-
-        private async Task TaskDownload()
+        private async Task StartTask(Func<CancellationToken, Task> task)
         {
             CTS = new CancellationTokenSource();
             RefreshUI();
             TS_Stopwatch.Start();
+            try
+            {
+                await task(CTS.Token);
+            }
+            catch (Exception e) { this.ShowException(e); }
+            finally
+            {
+                CTS.Dispose();
+                CTS = null;
+                TS_Stopwatch.Stop();
+                RefreshUI();
+            }
+        }
+
+        private async Task TaskDownload(CancellationToken token)
+        {
             try
             {
                 var count = 0;
@@ -118,12 +138,13 @@ namespace FIASUpdate.Forms
                 {
                     var tasks = items.Select(async A =>
                     {
-                        CTS.Token.ThrowIfCancellationRequested();
-                        await AD.Download(A.Archive, CTS.Token);
+                        token.ThrowIfCancellationRequested();
+                        var progress = new Progress<float>(p => A.State = $"Скачивание: {p:p0}");
+                        await AD.Download(A.Archive, progress, token);
                         A.Refresh();
                         count++;
                         TS_Progress.Value = $@"{count}/{items.Count}";
-                        CTS.Token.ThrowIfCancellationRequested();
+                        token.ThrowIfCancellationRequested();
                     });
                     await Task.WhenAll(tasks);
                 }
@@ -134,22 +155,14 @@ namespace FIASUpdate.Forms
                 TS_Progress.Status = "Скачивание отменено";
                 TS_Progress.Value = "-";
             }
-            catch (Exception e) { this.ShowException(e); }
             finally
             {
-                CTS.Dispose();
-                CTS = null;
                 RefreshList();
-                RefreshUI();
-                TS_Stopwatch.Stop();
             }
         }
 
-        private async Task TaskImport()
+        private async Task TaskImport(CancellationToken token)
         {
-            CTS = new CancellationTokenSource();
-            RefreshUI();
-            TS_Stopwatch.Start();
             try
             {
                 var items = ListItems.OrderBy(I => I.Archive.Date);
@@ -162,7 +175,7 @@ namespace FIASUpdate.Forms
                     };
                     using (var FIAS = new DBImportDelta(item.Archive, Options))
                     {
-                        await Task.Run(() => FIAS.Import(TS_Progress.Progress, CTS.Token));
+                        await Task.Run(() => FIAS.Import(TS_Progress.Progress, token));
                     }
                     item.State = "Импортирован";
                 }
@@ -173,14 +186,6 @@ namespace FIASUpdate.Forms
             {
                 TS_Progress.Status = "Импорт отменён";
                 TS_Progress.Value = "-";
-            }
-            catch (Exception e) { this.ShowException(e); }
-            finally
-            {
-                CTS.Dispose();
-                CTS = null;
-                RefreshUI();
-                TS_Stopwatch.Stop();
             }
         }
 
@@ -194,24 +199,18 @@ namespace FIASUpdate.Forms
 
         private void B_Download_Click(object sender, EventArgs e)
         {
-            _ = TaskDownload();
+            _ = StartTask(TaskDownload);
         }
 
         private void B_Import_Click(object sender, EventArgs e)
         {
-            _ = TaskImport();
+            _ = StartTask(TaskImport);
         }
 
         private void B_Open_Click(object sender, EventArgs e)
         {
             Directory.CreateDirectory(FIASProperties.GAR_Delta);
             Process.Start(FIASProperties.GAR_Delta);
-        }
-
-        private void FormImportDelta_Load(object sender, EventArgs e)
-        {
-            Icon = Owner.Icon;
-            _ = RefreshDatabase();
         }
 
         private void FormImportDelta_FormClosing(object sender, FormClosingEventArgs e)
@@ -221,6 +220,12 @@ namespace FIASUpdate.Forms
                 e.Cancel = true;
                 this.ShowWarning("Отмените выполнение, чтобы закрыть окно.");
             }
+        }
+
+        private void FormImportDelta_Load(object sender, EventArgs e)
+        {
+            Icon = Owner.Icon;
+            _ = RefreshDatabase();
         }
 
         #endregion UI Events

@@ -1,4 +1,5 @@
-﻿using FIASUpdate.Models;
+﻿using FIAS.Core.Extensions;
+using FIASUpdate.Models;
 using System;
 using System.IO;
 using System.Net.Http;
@@ -15,7 +16,7 @@ namespace FIASUpdate
         /// <summary>
         ///
         /// </summary>
-        public ArchiveDownloader() : this(2) { }
+        public ArchiveDownloader() : this(4) { }
 
         /// <summary>
         ///
@@ -23,32 +24,37 @@ namespace FIASUpdate
         /// <param name="threads">Количество "потоков" для скачивания</param>
         public ArchiveDownloader(int threads)
         {
-            Client = new HttpClient();
+            Client = new HttpClient(new HttpClientHandler() { MaxConnectionsPerServer = threads });
             Semaphore = new SemaphoreSlim(threads);
         }
 
         public async Task Download(FIASArchive archive, CancellationToken token = default)
-        {
-            await TryDownloadArchive(archive, token);
-        }
-
-        private async Task TryDownloadArchive(FIASArchive archive, CancellationToken token)
         {
             var LocalFile = new FileInfo(archive.ArchivePath);
             try
             {
                 await Semaphore.WaitAsync();
                 token.ThrowIfCancellationRequested();
-                // Считать только заголовок
-                using (var Responce = await Client.GetAsync(archive.URLDelta, HttpCompletionOption.ResponseHeadersRead, token))
-                {
-                    Responce.EnsureSuccessStatusCode();
-                    Directory.CreateDirectory(LocalFile.DirectoryName);
-                    // А содержимое записать прямо в файл
-                    using (var FS = new FileStream(LocalFile.FullName, FileMode.Create))
-                    using (var RS = await Responce.Content.ReadAsStreamAsync())
-                        await RS.CopyToAsync(FS);
-                }
+                Directory.CreateDirectory(LocalFile.DirectoryName);
+                using (var FS = new FileStream(LocalFile.FullName, FileMode.Create))
+                    await Client.DownloadAsync(archive.URLDelta, FS, token).ConfigureAwait(false);
+            }
+            finally
+            {
+                Semaphore.Release();
+            }
+        }
+
+        public async Task Download(FIASArchive archive, IProgress<float> progress, CancellationToken token = default)
+        {
+            var LocalFile = new FileInfo(archive.ArchivePath);
+            try
+            {
+                await Semaphore.WaitAsync().ConfigureAwait(false);
+                token.ThrowIfCancellationRequested();
+                Directory.CreateDirectory(LocalFile.DirectoryName);
+                using (var FS = new FileStream(LocalFile.FullName, FileMode.Create))
+                    await Client.DownloadAsync(archive.URLDelta, FS, progress, token).ConfigureAwait(false);
             }
             finally
             {
