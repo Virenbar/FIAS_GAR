@@ -24,7 +24,7 @@ namespace FIASUpdate
         /// <param name="threads">Количество "потоков" для скачивания</param>
         public ArchiveDownloader(int threads)
         {
-            Client = new HttpClient(new HttpClientHandler() { MaxConnectionsPerServer = threads });
+            Client = new HttpClient(new HttpClientHandler { MaxConnectionsPerServer = threads });
             Semaphore = new SemaphoreSlim(threads);
         }
 

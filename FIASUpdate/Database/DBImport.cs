@@ -18,7 +18,7 @@ namespace FIASUpdate
         protected IProgress<TaskProgress> SP;
         protected CancellationToken Token;
 
-        protected DBImport() : base()
+        protected DBImport()
         {
             Events = new SyncEvent(this);
         }

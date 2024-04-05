@@ -67,6 +67,7 @@ namespace FIASUpdate.Forms
             TB_Search.ReadOnly = !value;
             B_Search.Enabled = value;
             CB_Level.Enabled = value;
+            NUD_Limit.Enabled = value;
             RB_ADM.Enabled = value;
             RB_MUN.Enabled = value;
         }
@@ -170,7 +171,7 @@ namespace FIASUpdate.Forms
             try
             {
                 var parameters = await Store.GetObjectParameters(TB_GUID.Text);
-                var F = new FormDictionaryView()
+                var F = new FormDictionaryView
                 {
                     Text = "Параметры объекта",
                     KeyHeader = "Параметр",

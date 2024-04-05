@@ -20,7 +20,7 @@ namespace FIASUpdate
 
         public DBCreate() : this(default) { }
 
-        public DBCreate(IProgress<TaskProgress> TaskProgress) : base()
+        public DBCreate(IProgress<TaskProgress> TaskProgress)
         {
             SP = TaskProgress;
         }

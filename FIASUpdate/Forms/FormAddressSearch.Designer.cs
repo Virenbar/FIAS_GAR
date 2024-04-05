@@ -452,7 +452,6 @@
         internal System.Windows.Forms.TextBox TB_Address;
         internal System.Windows.Forms.TableLayoutPanel TableLayoutPanel3;
         internal System.Windows.Forms.Button B_Search;
-        internal System.Windows.Forms.Button B_Info;
         internal System.Windows.Forms.TableLayoutPanel TableLayoutPanel2;
         internal System.Windows.Forms.Label Label3;
         internal System.Windows.Forms.Button B_CopyGUID;

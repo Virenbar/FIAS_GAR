@@ -120,8 +120,6 @@
         private System.Windows.Forms.ListView LV;
         private System.Windows.Forms.ColumnHeader CH_Key;
         private System.Windows.Forms.ColumnHeader CH_Value;
-        private System.Windows.Forms.ContextMenuStrip CMS_LV;
-        private System.Windows.Forms.ToolStripMenuItem MI_Copy;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button B_Copy;
     }

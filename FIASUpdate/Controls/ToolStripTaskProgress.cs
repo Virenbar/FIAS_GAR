@@ -10,7 +10,6 @@ namespace FIASUpdate.Controls
         public ToolStripTaskProgress()
         {
             Progress = new Progress<TaskProgress>(Handler);
-            UpdateText();
         }
 
         public void Clear()

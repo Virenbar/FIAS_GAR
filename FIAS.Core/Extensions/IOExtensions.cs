@@ -8,21 +8,20 @@ namespace FIAS.Core.Extensions
 {
     public static class IOExtensions
     {
+        public static Task CopyToAsync(this Stream source, Stream destination, int bufferSize) => CopyToAsync(source, destination, bufferSize, default, default);
+
+        public static Task CopyToAsync(this Stream source, Stream destination, int bufferSize, IProgress<long> progress) => CopyToAsync(source, destination, bufferSize, progress, default);
+
         /// <summary>
         /// https://stackoverflow.com/a/46497896
         /// </summary>
-        public static async Task CopyToAsync(this Stream source, Stream destination, int bufferSize, IProgress<long> progress = default, CancellationToken cancellationToken = default)
+        public static async Task CopyToAsync(this Stream source, Stream destination, int bufferSize, IProgress<long> progress, CancellationToken cancellationToken)
         {
-            if (source == null)
-                throw new ArgumentNullException(nameof(source));
-            if (!source.CanRead)
-                throw new ArgumentException("Has to be readable", nameof(source));
-            if (destination == null)
-                throw new ArgumentNullException(nameof(destination));
-            if (!destination.CanWrite)
-                throw new ArgumentException("Has to be writable", nameof(destination));
-            if (bufferSize < 0)
-                throw new ArgumentOutOfRangeException(nameof(bufferSize));
+            if (source is null) { throw new ArgumentNullException(nameof(source)); }
+            if (!source.CanRead) { throw new ArgumentException("Has to be readable", nameof(source)); }
+            if (destination is null) { throw new ArgumentNullException(nameof(destination)); }
+            if (!destination.CanWrite) { throw new ArgumentException("Has to be writable", nameof(destination)); }
+            if (bufferSize < 0) { throw new ArgumentOutOfRangeException(nameof(bufferSize)); }
 
             var buffer = new byte[bufferSize];
             long totalBytesRead = 0;
@@ -38,7 +37,12 @@ namespace FIAS.Core.Extensions
         /// <summary>
         /// Асинхронно скачать файл
         /// </summary>
-        public static async Task DownloadAsync(this HttpClient client, string requestUri, Stream destination, CancellationToken cancellationToken = default)
+        public static Task DownloadAsync(this HttpClient client, string requestUri, Stream destination) => DownloadAsync(client, requestUri, destination, default(CancellationToken));
+
+        /// <summary>
+        /// Асинхронно скачать файл
+        /// </summary>
+        public static async Task DownloadAsync(this HttpClient client, string requestUri, Stream destination, CancellationToken cancellationToken)
         {
             // Считать только заголовок
             using (var response = await client.GetAsync(requestUri, HttpCompletionOption.ResponseHeadersRead, cancellationToken))
@@ -53,7 +57,12 @@ namespace FIAS.Core.Extensions
         /// <summary>
         /// Асинхронно скачать файл с отчётом о прогрессе
         /// </summary>
-        public static async Task DownloadAsync(this HttpClient client, string requestUri, Stream destination, IProgress<float> progress, CancellationToken cancellationToken = default)
+        public static Task DownloadAsync(this HttpClient client, string requestUri, Stream destination, IProgress<float> progress) => DownloadAsync(client, requestUri, destination, progress, default);
+
+        /// <summary>
+        /// Асинхронно скачать файл с отчётом о прогрессе
+        /// </summary>
+        public static async Task DownloadAsync(this HttpClient client, string requestUri, Stream destination, IProgress<float> progress, CancellationToken cancellationToken)
         {
             // Get the http headers first to examine the content length
             using (var response = await client.GetAsync(requestUri, HttpCompletionOption.ResponseHeadersRead, cancellationToken))

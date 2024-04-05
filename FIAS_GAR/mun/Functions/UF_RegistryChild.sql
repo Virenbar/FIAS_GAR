@@ -29,7 +29,7 @@ BEGIN
 			   , [R].[Name]
 			   , CAST([R].[AddressFull] AS VARCHAR(1000))
 			 FROM
-				 [FIAS_GAR].[mun].[A_IndexRegistry] [R]
+				 [mun].[A_IndexRegistry] [R]
 			 WHERE [R].[ParentGUID] = @ObjectGUID
 			 UNION ALL
 			 SELECT
@@ -40,7 +40,7 @@ BEGIN
 			   , [R].[Name]
 			   , [R].[AddressFull]
 			 FROM
-				 [FIAS_GAR].[mun].[A_IndexRegistry] [R]
+				 [mun].[A_IndexRegistry] [R]
 			 JOIN [Hierarchy] [H] ON [H].[ObjectGUID] = [R].[ParentGUID]
 			 WHERE [H].[ObjectGUID] IS NOT NULL)
 
