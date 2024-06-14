@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace FIAS.Core.Stores
 {
@@ -43,6 +45,18 @@ namespace FIAS.Core.Stores
         /// Получить версию БД
         /// </summary>
         public DateTime? GetVersion() => UP_DatabasePropertyGet<DateTime?>(Version);
+
+        /// <summary>
+        /// Обновить реестр адресов
+        /// </summary>
+        /// <param name="division">Тип реестра</param>
+        public Task RefreshRegistry(FIASDivision division) => RefreshRegistry(division, default);
+
+        /// <summary>
+        /// Обновить реестр адресов
+        /// </summary>
+        /// <param name="division">Тип реестра</param>
+        public Task RefreshRegistry(FIASDivision division, CancellationToken token) => UP_RefreshRegistry(division, token);
 
         /// <summary>
         /// Задать статус разрешения импорта таблицы
@@ -98,6 +112,16 @@ namespace FIAS.Core.Stores
                 P.AddWithValue("@Name", name);
                 P.AddWithValue("@Value", value);
                 Command.ExecuteNonQuery(Connection);
+            }
+        }
+
+        private async Task UP_RefreshRegistry(FIASDivision division, CancellationToken token)
+        {
+            using (var Command = NewProcedure())
+            {
+                Command.SetSchema($"{division}");
+                Command.CommandTimeout = 0;
+                await Command.ExecuteNonQueryAsync(Connection, token);
             }
         }
 

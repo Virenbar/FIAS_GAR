@@ -12,5 +12,15 @@ namespace FIAS.Core.Extensions
             if (str.Length != 36) { return false; }
             return Guid.TryParse(str, out var _);
         }
+
+        public static string TrimSpaces(this string str)
+        {
+            str = str.Trim();
+            while (str.Contains("  "))
+            {
+                str = str.Replace("  ", " ");
+            }
+            return str;
+        }
     }
 }
