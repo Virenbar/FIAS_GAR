@@ -19,8 +19,10 @@
 
 ## [Документация](https://virenbar.github.io/FIAS_GAR/)
 
-![Основная форма](/docs/assets/fias/import.png)
-![Настройки импорта](/docs/assets/fias/settings.png)  
+![Основная форма](/docs/assets/fias/main.png)
+![Форма настроек](/docs/assets/fias/settings.png)
+![Форма импорта](/docs/assets/fias/import-delta.png)
+![Форма импорта](/docs/assets/fias/import.png)
 ![Форма поиска адреса в БД](/docs/assets/fias/search.png)
 
 *P.S. Данное решение предназначено для разработчик работающих с .NET и SQL Server.*  
