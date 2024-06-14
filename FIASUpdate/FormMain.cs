@@ -15,6 +15,12 @@ namespace FIASUpdate
 
         #region UI Events
 
+        private void B_About_Click(object sender, EventArgs e)
+        {
+            var F = new FormAbout();
+            F.ShowDialog(this);
+        }
+
         private void B_ImportDelta_Click(object sender, EventArgs e)
         {
             var F = new FormImportDelta();
@@ -27,15 +33,25 @@ namespace FIASUpdate
             F.ShowDialog(this);
         }
 
-        private void B_Search_Click(object sender, EventArgs e)
+        private void B_Operation_Click(object sender, EventArgs e)
         {
-            var F = new FormAddressSearch();
+            var F = new FormOperation();
             F.ShowDialog(this);
         }
 
-        private void MI_About_Click(object sender, EventArgs e)
+        private void B_Search_Click(object sender, EventArgs e)
         {
-            var F = new FormAbout();
+            var F = new FormAddressSearch();
+#if DEBUG
+            F.SearchText = "915b4a80-e4b7-4964-8d46-2320b6e7deb2";
+            F.Level = 0;
+#endif
+            F.ShowDialog(this);
+        }
+
+        private void B_Settings_Click(object sender, EventArgs e)
+        {
+            var F = new FormSettings();
             F.ShowDialog(this);
         }
 

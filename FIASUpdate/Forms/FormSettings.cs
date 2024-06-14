@@ -1,19 +1,20 @@
-﻿using FIAS.Core.Models;
-using FIAS.Core.Stores;
-using FIASUpdate.Forms;
+﻿using FIAS.Core.Stores;
+using FIASUpdate.Controls;
 using FIASUpdate.Properties;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
+using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
-namespace FIASUpdate.Controls
+namespace FIASUpdate.Forms
 {
-    public partial class UC_Database : UserControl
+    public partial class FormSettings : Form
     {
         private static readonly Settings Settings = Settings.Default;
         private readonly FIASDatabaseStore Store = new FIASDatabaseStore(Settings.SQLConnection);
 
-        public UC_Database()
+        public FormSettings()
         {
             InitializeComponent();
         }
@@ -23,11 +24,7 @@ namespace FIASUpdate.Controls
             var Tables = Store.TablesInfo();
             LV_Tables.BeginUpdate();
             LV_Tables.Items.Clear();
-            foreach (var T in Tables)
-            {
-                var LVI = new ListViewItem(new[] { $"{T.Name}", $"{T.RowCount:N0}", $"{T.TotalMB:N2} МБ", $"{T.LastImport:yyyy.MM.dd}" }) { Tag = T, Checked = T.CanImport };
-                LV_Tables.Items.Add(LVI);
-            }
+            LV_Tables.Items.AddRange(Tables.Select(T => new TableLVI(T)).ToArray());
             LV_Tables.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             LV_Tables.EndUpdate();
             Info.Version = Store.GetVersion();
@@ -36,10 +33,9 @@ namespace FIASUpdate.Controls
 
         private void SaveData()
         {
-            foreach (ListViewItem item in LV_Tables.Items)
+            foreach (TableLVI item in LV_Tables.Items)
             {
-                var Table = (FIASTableInfo)item.Tag;
-                Store.SetCanImport(Table.Name, item.Checked);
+                Store.SetCanImport(item.Name, item.Checked);
             }
             RefreshData();
         }
@@ -79,8 +75,9 @@ namespace FIASUpdate.Controls
             }
         }
 
-        private void UC_Database_Load(object sender, EventArgs e)
+        private void FormSettings_Load(object sender, EventArgs e)
         {
+            Icon = Owner.Icon;
             LV_Tables.Items.Clear();
         }
 

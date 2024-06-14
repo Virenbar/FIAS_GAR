@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
@@ -26,18 +27,18 @@ namespace FIASUpdate.Forms
             LV.EndUpdate();
         }
 
-        private void B_Copy_Click(object sender, System.EventArgs e)
+        private void B_Copy_Click(object sender, EventArgs e)
         {
             var text = LV.SelectedItems[0].SubItems[1].Text;
             Clipboard.SetText(text);
         }
 
-        private void FormDictionaryView_Load(object sender, System.EventArgs e)
+        private void FormDictionaryView_Load(object sender, EventArgs e)
         {
             Icon = Owner.Icon;
         }
 
-        private void LV_SelectedIndexChanged(object sender, System.EventArgs e)
+        private void LV_SelectedIndexChanged(object sender, EventArgs e)
         {
             B_Copy.Enabled = LV.SelectedItems.Count > 0;
         }

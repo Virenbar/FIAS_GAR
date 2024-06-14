@@ -44,16 +44,6 @@ namespace FIASUpdate
             OnResultAdded(new ResultAddedEventArgs(table, status));
         }
 
-        private void ShrinkDatabase()
-        {
-            var Size = DB.Size;
-            SP?.Report(new TaskProgress($"Сжатие БД({Size:N2} МБ)", 0, 0));
-            Thread.Sleep(1000);
-            DB.Shrink(1, ShrinkMethod.Default);
-            DB.Refresh();
-            SP?.Report(new TaskProgress($"БД сжата({Size:N2} МБ -> {DB.Size:N2} МБ)"));
-        }
-
         #region Table Import
 
         protected override string ScanPath => FIASProperties.GAR_Full;

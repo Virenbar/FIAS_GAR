@@ -74,7 +74,25 @@ namespace FIASUpdate.Forms
 
         #region Properties
 
-        public int Level { get; private set; }
+        /// <summary>
+        /// Выбранный адрес
+        /// </summary>
+        public string Address { get; private set; }
+
+        /// <summary>
+        /// Выбранный GUID
+        /// </summary>
+        public Guid GUID { get; private set; }
+
+        /// <summary>
+        /// Уровень иерархии по умолчанию
+        /// </summary>
+        public int Level { get; set; }
+
+        /// <summary>
+        /// Адрес/GUID для поиска
+        /// </summary>
+        public string SearchText { get; set; }
 
         #endregion Properties
 
@@ -114,6 +132,7 @@ namespace FIASUpdate.Forms
         private async void FormAddressSearch_Load(object sender, EventArgs e)
         {
             Icon = Owner.Icon;
+            TB_Search.Text = SearchText;
             CB_Level.SelectedIndexChanged -= CB_Level_SelectedIndexChanged;
             UIState(false);
             try

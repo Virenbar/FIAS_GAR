@@ -5,17 +5,25 @@ using System;
 
 namespace FIASUpdate
 {
-    internal abstract class DBClient : IDisposable
+    internal class DBClient : IDisposable
     {
         protected readonly Database DB;
         protected readonly string DBName = FIASProperties.DBName;
 
-        protected DBClient()
+        public DBClient()
         {
             SqlConnection Connection = NewConnection();
             Server Server = new Server(new ServerConnection(Connection));
             DB = Server.Databases[DBName];
             if (DB == null) { throw new InvalidOperationException($"База данных {DBName} не найдена"); }
+            DB.Refresh();
+        }
+
+        public double Size => DB.Size;
+
+        public void Shrink()
+        {
+            DB.Shrink(1, ShrinkMethod.Default);
             DB.Refresh();
         }
 

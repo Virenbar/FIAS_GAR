@@ -1,6 +1,7 @@
 ﻿using FIAS.Core.Stores;
 using FIASUpdate.Models;
 using JANL;
+using Microsoft.SqlServer.Management.Smo;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,9 +13,8 @@ namespace FIASUpdate
     internal abstract class DBImport : DBClient
     {
         protected readonly SyncEvent Events;
-        protected readonly List<FIASTable> Tables = new List<FIASTable>();
         protected readonly FIASDatabaseStore Store = new FIASDatabaseStore(FIASProperties.SQLConnection);
-
+        protected readonly List<FIASTable> Tables = new List<FIASTable>();
         protected IProgress<TaskProgress> SP;
         protected CancellationToken Token;
 
@@ -49,6 +49,15 @@ namespace FIASUpdate
                .Select(L => new FIASTable(L.Key, L.ToList()));
 
             Tables.AddRange(tables);
+        }
+
+        protected void ShrinkDatabase()
+        {
+            var Size = DB.Size;
+            SP?.Report(new TaskProgress($"Сжатие БД ({Size:N2} МБ)", 0, 0));
+            Thread.Sleep(500);
+            Shrink();
+            SP?.Report(new TaskProgress($"БД сжата ({Size:N2} МБ -> {DB.Size:N2} МБ)"));
         }
     }
 }
