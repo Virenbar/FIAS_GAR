@@ -50,7 +50,7 @@ jobs:
         run: msbuild $env:SolutionName /t:Build /p:Configuration=Release
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: FIASUpdate
           path: FIASUpdate\bin\Release\**
