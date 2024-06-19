@@ -57,6 +57,7 @@
             this.MI_DBInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.MI_PDF = new System.Windows.Forms.ToolStripMenuItem();
             this.MI_Parameters = new System.Windows.Forms.ToolStripMenuItem();
+            this.MI_URL = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_Limit)).BeginInit();
             this.FlowLayoutPanel1.SuspendLayout();
             this.TableLayoutPanel3.SuspendLayout();
@@ -370,8 +371,9 @@
             this.дополнительноToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.дополнительноToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MI_DBInfo,
+            this.MI_Parameters,
             this.MI_PDF,
-            this.MI_Parameters});
+            this.MI_URL});
             this.дополнительноToolStripMenuItem.Name = "дополнительноToolStripMenuItem";
             this.дополнительноToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.дополнительноToolStripMenuItem.Text = "Сервис";
@@ -401,6 +403,15 @@
             this.MI_Parameters.Size = new System.Drawing.Size(189, 22);
             this.MI_Parameters.Text = "Показать параметры";
             this.MI_Parameters.Click += new System.EventHandler(this.MI_Parameters_Click);
+            // 
+            // MI_URL
+            // 
+            this.MI_URL.Enabled = false;
+            this.MI_URL.Image = global::FIASUpdate.icons8.Internet16;
+            this.MI_URL.Name = "MI_URL";
+            this.MI_URL.Size = new System.Drawing.Size(189, 22);
+            this.MI_URL.Text = "Открыть на сайте";
+            this.MI_URL.Click += new System.EventHandler(this.MI_URL_Click);
             // 
             // FormAddressSearch
             // 
@@ -466,5 +477,6 @@
         private System.Windows.Forms.ToolStripMenuItem MI_DBInfo;
         private System.Windows.Forms.ToolStripMenuItem MI_PDF;
         private System.Windows.Forms.ToolStripMenuItem MI_Parameters;
+        private System.Windows.Forms.ToolStripMenuItem MI_URL;
     }
 }

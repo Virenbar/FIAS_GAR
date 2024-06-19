@@ -12,6 +12,8 @@ namespace FIAS.Core.Stores
     /// </summary>
     public class FIASStore : SQLStore
     {
+        private const string ENDPOINT = "https://fias.nalog.ru";
+
         public FIASStore(string connection) : base(connection) { }
 
         /// <summary>
@@ -68,8 +70,7 @@ namespace FIAS.Core.Stores
         /// <summary>
         /// Получить параметры объекта
         /// </summary>
-        /// <param name="GUID"></param>
-        /// <returns></returns>
+        /// <param name="GUID">GUID объекта</param>
         public async Task<Dictionary<string, string>> GetObjectParameters(string GUID)
         {
             using (var DT = await Task.Run(() => UP_ObjectParameters(GUID)))
@@ -77,16 +78,35 @@ namespace FIAS.Core.Stores
         }
 
         /// <summary>
+        /// Ссылка на страницу на fias.nalog.ru
+        /// </summary>
+        /// <param name="GUID">GUID объекта</param>
+        public string GetPageURL(string GUID) => GetPageURL(GUID, FIASDivision.mun);
+
+        /// <summary>
+        /// Ссылка на страницу на fias.nalog.ru
+        /// </summary>
+        /// <param name="GUID">GUID объекта</param>
+        /// <param name="division">Деление</param>
+        public string GetPageURL(string GUID, FIASDivision division) => $"{ENDPOINT}/Search/IndexWithPath?objectId={GetID(GUID)}&addressType={division + 1}";
+
+        /// <summary>
         /// Ссылка на выписку по объекту
         /// </summary>
-        /// <param name="GUID"></param>
-        /// <returns></returns>
-        public string GetPDFStatement(string GUID) => $"https://fias.nalog.ru/Export/ExportPdfStatement?objId={GetID(GUID)}&actual=true&division=1";
+        /// <param name="GUID">GUID объекта</param>
+        public string GetPDFStatement(string GUID) => GetPDFStatement(GUID, FIASDivision.mun);
+
+        /// <summary>
+        /// Ссылка на выписку по объекту
+        /// </summary>
+        /// <param name="GUID">GUID объекта</param>
+        /// <param name="division">Деление</param>
+        public string GetPDFStatement(string GUID, FIASDivision division) => $"{ENDPOINT}/Export/ExportPdfStatement?objId={GetID(GUID)}&actual=true&division={(int)division}";
 
         /// <summary>
         /// Поиск адреса по AddressFull или GUID
         /// </summary>
-        /// <param name="division">Иерархия</param>
+        /// <param name="division">Деление</param>
         /// <param name="S">Текст для поиска</param>
         /// <param name="Level">Уровень объекта</param>
         /// <param name="Limit">Максимальное кол-во строк для вывода </param>

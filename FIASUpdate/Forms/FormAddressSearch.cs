@@ -42,10 +42,9 @@ namespace FIASUpdate.Forms
             UIState(false);
             try
             {
-                var D = RB_F.First(R => R.RB.Checked).Division;
                 var S = TB_Search.Text.TrimSpaces();
                 var Limit = (int)NUD_Limit.Value;
-                var Result = await Store.Search(D, S, Level, Limit);
+                var Result = await Store.Search(Division, S, Level, Limit);
                 LV_Search.BeginUpdate();
                 LV_Search.Items.Clear();
                 foreach (var R in Result)
@@ -80,6 +79,11 @@ namespace FIASUpdate.Forms
         public string Address { get; private set; }
 
         /// <summary>
+        /// Деление
+        /// </summary>
+        private FIASDivision Division => RB_F.First(R => R.RB.Checked).Division;
+
+        /// <summary>
         /// Выбранный GUID
         /// </summary>
         public Guid GUID { get; private set; }
@@ -106,19 +110,6 @@ namespace FIASUpdate.Forms
         private void B_CopyGUID_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(TB_GUID.Text);
-        }
-
-        private async void B_Info_Click(object sender, EventArgs e)
-        {
-            UIState(false);
-            try
-            {
-                var D = await Store.Statistics();
-                var S = string.Join(Environment.NewLine, D.Select(KV => $"{KV.Key}: {KV.Value}"));
-                this.ShowInfo(S, "Информация о БД");
-            }
-            catch (Exception E) { this.ShowError(E.Message); }
-            finally { UIState(true); }
         }
 
         private async void B_Search_Click(object sender, EventArgs e) => await Search();
@@ -167,6 +158,7 @@ namespace FIASUpdate.Forms
             }
             MI_PDF.Enabled = TB_GUID.Text.Length > 0;
             MI_Parameters.Enabled = TB_GUID.Text.Length > 0;
+            MI_URL.Enabled = TB_GUID.Text.Length > 0;
             B_CopyGUID.Enabled = TB_GUID.Text.Length > 0;
             B_CopyAddress.Enabled = TB_Address.Text.Length > 0;
         }
@@ -205,7 +197,17 @@ namespace FIASUpdate.Forms
 
         private void MI_PDF_Click(object sender, EventArgs e)
         {
-            var uri = Store.GetPDFStatement(TB_GUID.Text);
+            var uri = Store.GetPDFStatement(TB_GUID.Text, Division);
+            var info = new ProcessStartInfo(uri)
+            {
+                UseShellExecute = true
+            };
+            Process.Start(info);
+        }
+
+        private void MI_URL_Click(object sender, EventArgs e)
+        {
+            var uri = Store.GetPageURL(TB_GUID.Text, Division);
             var info = new ProcessStartInfo(uri)
             {
                 UseShellExecute = true

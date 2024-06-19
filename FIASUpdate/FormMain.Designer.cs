@@ -189,7 +189,7 @@
             // 
             // B_Settings
             // 
-            this.B_Settings.Image = global::FIASUpdate.icons8.TableProperties16;
+            this.B_Settings.Image = global::FIASUpdate.icons8.Settings16;
             this.B_Settings.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.B_Settings.Name = "B_Settings";
             this.B_Settings.Size = new System.Drawing.Size(87, 22);
