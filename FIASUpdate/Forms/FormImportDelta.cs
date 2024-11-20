@@ -142,8 +142,7 @@ namespace FIASUpdate.Forms
                         var progress = new Progress<float>(p => A.State = $"Скачивание: {p:p0}");
                         await AD.Download(A.Archive, progress, token);
                         A.Refresh();
-                        count++;
-                        TS_Progress.Value = $@"{count}/{items.Count}";
+                        TS_Progress.Value = $@"{++count}/{items.Count}";
                         token.ThrowIfCancellationRequested();
                     });
                     await Task.WhenAll(tasks);

@@ -34,6 +34,12 @@ namespace FIASUpdate.Forms
         {
             Text = "Справочник ФИАС";
             if (LV_Search.Items.Count > 0) { Text += $" (Объектов: {LV_Search.Items.Count:N0})"; }
+
+            MI_PDF.Enabled = TB_GUID.Text.Length > 0;
+            MI_Parameters.Enabled = TB_GUID.Text.Length > 0;
+            MI_URL.Enabled = TB_GUID.Text.Length > 0;
+            B_CopyGUID.Enabled = TB_GUID.Text.Length > 0;
+            B_CopyAddress.Enabled = TB_Address.Text.Length > 0;
         }
 
         private async Task Search()
@@ -156,11 +162,7 @@ namespace FIASUpdate.Forms
                 TB_GUID.Text = string.Empty;
                 TB_Address.Text = string.Empty;
             }
-            MI_PDF.Enabled = TB_GUID.Text.Length > 0;
-            MI_Parameters.Enabled = TB_GUID.Text.Length > 0;
-            MI_URL.Enabled = TB_GUID.Text.Length > 0;
-            B_CopyGUID.Enabled = TB_GUID.Text.Length > 0;
-            B_CopyAddress.Enabled = TB_Address.Text.Length > 0;
+            RefreshUI();
         }
 
         private async void MI_DBInfo_Click(object sender, EventArgs e)

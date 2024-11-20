@@ -12,8 +12,11 @@ namespace FIASUpdate
 
         public DBClient()
         {
+            //AppContext.SetSwitch("Switch.Microsoft.Data.SqlClient.EnableSecureProtocolsByOS", true);
             SqlConnection Connection = NewConnection();
             Server Server = new Server(new ServerConnection(Connection));
+            //var SCSB = new SqlConnectionStringBuilder(FIASProperties.SQLConnection);
+            //Server Server = new Server(new ServerConnection(SCSB.DataSource));
             DB = Server.Databases[DBName];
             if (DB == null) { throw new InvalidOperationException($"База данных {DBName} не найдена"); }
             DB.Refresh();
