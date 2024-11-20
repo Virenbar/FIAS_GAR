@@ -45,6 +45,7 @@ description: "Дополнительные объекты БД"
 
 * `[*].[UF_Hierarchy]` – Возвращает иерархию для объекта
 * `[*].[UF_Parent]` - Родитель объекта по ObjectGUID
+* `[*].[UF_RegistryAddress]` - Возвращает реестр с полными адресами
 * `[*].[UF_SearchOne]` - Поиск в реестре (Выводит всегда 1 строку)
 * `[*].[UF_SearchRegistry]` - Поиск в реестре
 * `[adm].[UF_ApartmentsAggregate]` – все квартиры
