@@ -3,7 +3,7 @@
 -- Create date: 19.01.2022
 -- Description:	Поиск в реестре
 -- =============================================
-CREATE FUNCTION [adm].[UF_SearchRegistry](
+CREATE FUNCTION [mun].[UF_SearchRegistry](
 	@Search VARCHAR(1000),
 	@Level  INT           = 0)
 RETURNS TABLE
@@ -12,7 +12,7 @@ RETURN
    (SELECT TOP (1000)
 		[R].*
 	FROM
-		[adm].[A_IndexRegistry] [R]
+		[mun].[A_IndexRegistry] [R]
 	WHERE CONTAINS([R].[AddressFull], @Search) AND
 		  (@Level = 0 OR [R].[Level] = @Level)
 	ORDER BY

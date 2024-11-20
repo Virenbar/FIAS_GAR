@@ -22,6 +22,8 @@ BEGIN
 	SET @Address = REPLACE(@Address, '  ', ' ')
 	SET @Address = REPLACE(@Address, '  ', ' ')
 	SET @Address = REPLACE(@Address, '  ', ' ')
+	--
+	SET @Address = REPLACE(@Address, ' *', '*')
 
 	SET @Address = LTRIM(RTRIM(@Address))
 	RETURN @Address

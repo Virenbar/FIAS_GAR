@@ -3,7 +3,7 @@
 -- Create date: 15.12.2021
 -- Description:	Поиск в реестре (Выводит всегда 1 строку)
 -- =============================================
-CREATE FUNCTION [adm].[UF_SearchOne](
+CREATE FUNCTION [mun].[UF_SearchOne](
 	@Search VARCHAR(1000),
 	@Level  INT           = 0)
 RETURNS TABLE
@@ -19,7 +19,7 @@ RETURN
 		 , COUNT(*) OVER() [Count]
 	   --, IIF(COUNT(*) > 1, 0, 1) [OnlyOne]
 	   FROM
-		   [adm].[A_IndexRegistry] [R]
+		   [mun].[A_IndexRegistry] [R]
 	   WHERE CONTAINS([R].[AddressFull], @Search) AND
 			 (@Level = 0 OR [R].[Level] = @Level)
    ORDER BY

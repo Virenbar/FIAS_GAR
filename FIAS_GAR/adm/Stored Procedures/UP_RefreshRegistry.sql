@@ -91,7 +91,7 @@ BEGIN
 	LEFT JOIN [APARTMENT_TYPES] [AT] ON [AT].[ID] = [A].[APARTTYPE]
 	WHERE [A].[ENDDATE] > GETDATE() AND [A].[ISACTIVE] = 1
 
-	--Активные комнаты
+	-- Активные комнаты
 	RAISERROR('Добавление комнат', 0, 1) WITH NOWAIT
 	INSERT INTO [adm].[A_IndexRegistry](
 		[ParentGUID]
@@ -119,7 +119,7 @@ BEGIN
 	LEFT JOIN [ROOM_TYPES] [RT] ON [RT].[ID] = [R].[ROOMTYPE]
 	WHERE [R].[ENDDATE] > GETDATE() AND [R].[ISACTIVE] = 1
 
-	--Активные парко места
+	-- Активные парко места
 	RAISERROR('Добавление парко-мест', 0, 1) WITH NOWAIT
 	INSERT INTO [adm].[A_IndexRegistry](
 		[ParentGUID]
@@ -145,7 +145,7 @@ BEGIN
 								   [CPR].[ISACTIVE] = 1
 	WHERE [C].[ENDDATE] > GETDATE() AND [C].[ISACTIVE] = 1
 
-	--Активные участки
+	-- Активные участки
 	RAISERROR('Добавление участков', 0, 1) WITH NOWAIT
 	INSERT INTO [adm].[A_IndexRegistry](
 		[ParentGUID]
@@ -173,7 +173,9 @@ BEGIN
 
 	-- Обновить полные адреса для всех объектов
 	RAISERROR('Обновление полных адресов', 0, 1) WITH NOWAIT
-	UPDATE [adm].[A_IndexRegistry] SET
-		[AddressFull] = [adm].[SUF_GetFullAddress]([ObjectGUID])
+	UPDATE [R] SET
+		[AddressFull] = [RA].[AddressFull]
+	FROM [adm].[A_IndexRegistry] [R]
+	JOIN [adm].[UF_RegistryAddress]() [RA] ON [RA].[ObjectGUID] = [R].[ObjectGUID]
 
 END
