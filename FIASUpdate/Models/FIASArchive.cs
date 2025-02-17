@@ -9,18 +9,18 @@ namespace FIASUpdate.Models
 {
     internal class FIASArchive
     {
-        private readonly FileInfo Archive;
+        private readonly FileInfo File;
         private readonly FIASInfo Info;
 
         public FIASArchive(FIASInfo info)
         {
             Info = info;
-            Archive = new FileInfo(ArchivePath);
+            File = new FileInfo(ArchivePath);
             Refresh();
         }
 
         public string ArchivePath => $@"{DirectoryPath}\gar_delta_xml.zip";
-        public long? ArchiveSize => Archive.Exists ? Archive.Length : (long?)null;
+        public long? ArchiveSize { get; set; }
         public DateTime Date => Info.Date;
         public bool Exsists { get; private set; }
         public string ExtractPath => $@"{DirectoryPath}\gar_delta_xml";
@@ -49,8 +49,12 @@ namespace FIASUpdate.Models
 
         public void Refresh()
         {
-            Archive.Refresh();
-            Exsists = Archive.Exists && IsValid();
+            File.Refresh();
+            Exsists = File.Exists && IsValid();
+            if (Exsists)
+            {
+                ArchiveSize = File.Length;
+            }
         }
 
         private bool IsValid()
@@ -60,8 +64,8 @@ namespace FIASUpdate.Models
                 // Попробовать открыть для проверки целостности
                 // Выдаст ошибку если файл в процессе записи или повреждён
                 // Может зависнуть на повреждённом архиве
-                // Нужна проверка хэша, но увы
-                using (var zip = ZipFile.OpenRead(Archive.FullName))
+                // Нужна проверка хэша, но увы. Хэш в сделку не входил
+                using (var zip = ZipFile.OpenRead(File.FullName))
                 {
                     return zip.Entries.Count > 0;
                 }

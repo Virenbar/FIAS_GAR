@@ -393,7 +393,7 @@
       <DependentUpon>FormSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\ImportOptions.cs" />
-    <Compile Include="Models\FIASArchiveItem.cs" />
+    <Compile Include="Models\FIASArchiveLVI.cs" />
     <Compile Include="Forms\FormAbout.cs">
       <SubType>Form</SubType>
     </Compile>

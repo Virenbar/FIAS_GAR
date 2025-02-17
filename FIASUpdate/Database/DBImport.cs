@@ -30,6 +30,9 @@ namespace FIASUpdate
 
         public abstract void Import(IProgress<TaskProgress> progress, CancellationToken token);
 
+        /// <summary>
+        /// Поиск файлов для импорта
+        /// </summary>
         protected void ScanFiles()
         {
             Tables.Clear();

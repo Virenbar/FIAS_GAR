@@ -1,7 +1,7 @@
 site_name: Документация FIAS_GAR
 site_description: "Проект БД ФИАС ГАР для SQL Server и приложение для её обновления"
 site_url: https://virenbar.ru/FIAS_GAR/
-copyright: Copyright &copy; 2024 Virenbar
+copyright: Copyright &copy; 2025 Virenbar
 theme:
   logo: assets/images/logo.png
   favicon: assets/images/favicon.ico

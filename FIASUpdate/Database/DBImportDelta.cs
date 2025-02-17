@@ -65,18 +65,18 @@ namespace FIASUpdate
         private long ImportTable(Table target, FIASTable source)
         {
             // Создать временную таблицу
-            var temporaryTable = $"_{target.Name}";
-            var table = DB.Tables[temporaryTable];
-            table?.Drop();
-            table = new Table(DB, temporaryTable);
+            var temporaryName = $"_{target.Name}";
+            var temporaryTable = DB.Tables[temporaryName];
+            temporaryTable?.Drop();
+            temporaryTable = new Table(DB, temporaryName);
             foreach (Column column in target.Columns)
-            { column.CloneTo(table); }
-            table.Create();
+            { column.CloneTo(temporaryTable); }
+            temporaryTable.Create();
 
-            // Импортировать данные
+            // Импортировать данные во временную таблицу
             var columns = target.Columns.Cast<Column>();
             using (var connection = NewConnection(DBName))
-            using (var SBC = new SqlBulkCopy(connection) { DestinationTableName = table.Name, BulkCopyTimeout = 0, NotifyAfter = 100 })
+            using (var SBC = new SqlBulkCopy(connection) { DestinationTableName = temporaryTable.Name, BulkCopyTimeout = 0, NotifyAfter = 100 })
             {
                 SBC.SqlRowsCopied += SBC_SqlRowsCopied;
                 SBC.EnableStreaming = true;
@@ -96,6 +96,7 @@ namespace FIASUpdate
                 }
             }
 
+            SP.Report(new TaskProgress($"Объединение таблиц: {target.Name}", 0, 0));
             // Объединить таблицы
             var key = columns.First().Name;
             var insert = columns.Select(C => $"[{C.Name}]");
@@ -104,7 +105,7 @@ namespace FIASUpdate
 
             var query = new StringBuilder();
             query.AppendLine($"MERGE INTO [{target.Name}] AS [T]");
-            query.AppendLine($"USING [{temporaryTable}] AS [S]");
+            query.AppendLine($"USING [{temporaryName}] AS [S]");
             query.AppendLine($"ON([T].[{key}] = [S].[{key}])");
             query.AppendLine("WHEN NOT MATCHED BY TARGET THEN");
             query.AppendLine($"INSERT ({string.Join(",", insert)})");
@@ -113,7 +114,7 @@ namespace FIASUpdate
             query.AppendLine($"UPDATE SET { string.Join(",", update)};");
             DB.ExecuteNonQuery(query.ToString());
 
-            table.Drop();
+            temporaryTable.Drop();
             SP.Report(new TaskProgress($"Импорт в таблицу завершён: {target.Name}", 0, 0));
             target.Refresh();
             return target.RowCount;

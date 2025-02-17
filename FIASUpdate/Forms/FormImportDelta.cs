@@ -1,4 +1,6 @@
 ﻿using FIAS.Core.API;
+using FIAS.Core.Extensions;
+using FIAS.Core.Models;
 using FIAS.Core.Stores;
 using FIASUpdate.Models;
 using FIASUpdate.Properties;
@@ -30,7 +32,7 @@ namespace FIASUpdate.Forms
             InitializeComponent();
         }
 
-        private IEnumerable<FIASArchiveItem> ListItems => LV_Archives.Items.Cast<FIASArchiveItem>();
+        private IEnumerable<FIASArchiveLVI> ListItems => LV_Archives.Items.Cast<FIASArchiveLVI>();
 
         private async Task RefreshDatabase()
         {
@@ -93,7 +95,7 @@ namespace FIASUpdate.Forms
             if (Archives.Count == 0) { return; }
             LV_Archives.BeginUpdate();
             LV_Archives.Items.Clear();
-            LV_Archives.Items.AddRange(Archives.Select(A => new FIASArchiveItem(A)).ToArray());
+            LV_Archives.Items.AddRange(Archives.Select(A => new FIASArchiveLVI(A)).ToArray());
             LV_Archives.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.ColumnContent);
             LV_Archives.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.ColumnContent);
             LV_Archives.EndUpdate();
@@ -136,12 +138,22 @@ namespace FIASUpdate.Forms
                 TS_Progress.Value = $@"{count}/{items.Count}";
                 using (var AD = new ArchiveDownloader())
                 {
-                    var tasks = items.Select(async A =>
+                    foreach (var item in items)
+                    {
+                        var size = await AD.GetArhchiveSize(item.Archive);
+                        item.Archive.ArchiveSize = size;
+                        item.Refresh();
+                    }
+
+                    var tasks = items.Select(async item =>
                     {
                         token.ThrowIfCancellationRequested();
-                        var progress = new Progress<float>(p => A.State = $"Скачивание: {p:p0}");
-                        await AD.Download(A.Archive, progress, token);
-                        A.Refresh();
+                        var progress = new Progress<DownloadState>((p) =>
+                        {
+                            item.State = $"Скачивание: {p.DownloadedBytes.BytesToMB()}/{p.TotalBytes.BytesToMB()} МБ ({p.Progress:p0})";
+                        });
+                        await AD.Download(item.Archive, progress, token);
+                        item.Refresh();
                         TS_Progress.Value = $@"{++count}/{items.Count}";
                         token.ThrowIfCancellationRequested();
                     });

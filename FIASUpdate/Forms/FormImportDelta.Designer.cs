@@ -101,8 +101,8 @@
             this.LV_Archives.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
-            this.columnHeader3,
-            this.сolumnHeader4});
+            this.сolumnHeader4,
+            this.columnHeader3});
             this.LV_Archives.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LV_Archives.FullRowSelect = true;
             this.LV_Archives.GridLines = true;
@@ -127,12 +127,12 @@
             // columnHeader3
             // 
             this.columnHeader3.Text = "Статус";
-            this.columnHeader3.Width = 128;
+            this.columnHeader3.Width = 200;
             // 
             // сolumnHeader4
             // 
             this.сolumnHeader4.Text = "Размер";
-            this.сolumnHeader4.Width = 76;
+            this.сolumnHeader4.Width = 80;
             // 
             // B_Download
             // 
