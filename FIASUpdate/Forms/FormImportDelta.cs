@@ -179,7 +179,7 @@ namespace FIASUpdate.Forms
                 var items = ListItems.OrderBy(I => I.Archive.Date);
                 foreach (var item in items)
                 {
-                    item.State = "Импорт";
+                    item.State = "Импорт данных";
                     var Options = new ImportDeltaOptions
                     {
                         Subjects = Subjects
@@ -188,7 +188,7 @@ namespace FIASUpdate.Forms
                     {
                         await Task.Run(() => FIAS.Import(TS_Progress.Progress, token));
                     }
-                    item.State = "Импортирован";
+                    item.State = "Архив импортирован";
                 }
                 TS_Progress.Status = "Импорт завершён";
                 FLP_Action.Enabled = false;

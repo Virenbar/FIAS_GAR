@@ -3,11 +3,11 @@ using System.Windows.Forms;
 
 namespace FIASUpdate.Models
 {
-    internal class DBStringItem : ListViewItem
+    internal class DBStringLVI : ListViewItem
     {
         private readonly SqlConnectionStringBuilder CSB;
 
-        public DBStringItem(string connection)
+        public DBStringLVI(string connection)
         {
             Connection = connection;
             CSB = new SqlConnectionStringBuilder(connection);

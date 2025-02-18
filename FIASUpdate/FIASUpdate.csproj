@@ -432,7 +432,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>icons8.resx</DependentUpon>
     </Compile>
-    <Compile Include="Models\DBStringItem.cs" />
+    <Compile Include="Models\DBStringLVI.cs" />
     <Compile Include="Models\FIASArchive.cs" />
     <Compile Include="FIASProperties.cs" />
     <Compile Include="Properties\Settings.cs" />

@@ -11,7 +11,7 @@ namespace FIASUpdate.Forms
     public partial class FormDBList : Form
     {
         private static readonly Settings Settings = Settings.Default;
-        private DBStringItem Current;
+        private DBStringLVI Current;
 
         public FormDBList()
         {
@@ -31,7 +31,7 @@ namespace FIASUpdate.Forms
             LV_DB.Items.Clear();
             foreach (var DB in Settings.SQLConnections)
             {
-                LV_DB.Items.Add(new DBStringItem(DB));
+                LV_DB.Items.Add(new DBStringLVI(DB));
             }
             LV_DB.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             LV_DB.EndUpdate();
@@ -71,7 +71,7 @@ namespace FIASUpdate.Forms
 
         private void LV_DB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Current = LV_DB.SelectedItems.Count > 0 ? (DBStringItem)LV_DB.SelectedItems[0] : null;
+            Current = LV_DB.SelectedItems.Count > 0 ? (DBStringLVI)LV_DB.SelectedItems[0] : null;
             RefreshUI();
         }
 
