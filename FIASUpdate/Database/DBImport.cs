@@ -57,7 +57,6 @@ namespace FIASUpdate
         {
             var Size = DB.Size;
             SP?.Report(new TaskProgress($"Сжатие БД ({Size:N2} МБ)", 0, 0));
-            Thread.Sleep(500);
             Shrink();
             SP?.Report(new TaskProgress($"БД сжата ({Size:N2} МБ -> {DB.Size:N2} МБ)"));
         }

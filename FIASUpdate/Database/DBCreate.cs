@@ -72,7 +72,6 @@ namespace FIASUpdate
             {
                 SP.Report(new TaskProgress($"Создание таблицы:{Item.Key}"));
                 CreateTable(Item.Key, Item.Value.Tables[0]);
-                Thread.Sleep(100);
             }
         }
 
@@ -83,7 +82,6 @@ namespace FIASUpdate
                 SP.Report(new TaskProgress($"Удаление таблицы: {Name}"));
                 var T = DB.Tables[Name];
                 T?.Drop();
-                Thread.Sleep(100);
             }
         }
 
@@ -107,7 +105,6 @@ namespace FIASUpdate
                     var Last = DS.Tables[0].Columns.Count - 1;
                     DS.Tables[0].Columns.RemoveAt(Last);
                 }
-                Thread.Sleep(200);
             }
         }
 
