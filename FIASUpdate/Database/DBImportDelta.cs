@@ -40,7 +40,6 @@ namespace FIASUpdate
                 // Импорт
                 ImportTable(table, item);
                 Store.SetLastImport(item.Name, item.Date);
-                Thread.Sleep(500);
             }
             Store.SetVersion(Archive.Date);
             if (Options.ShrinkDatabase) { ShrinkDatabase(); }
@@ -92,7 +91,6 @@ namespace FIASUpdate
                     SBC.NotifyAfter = 100;
                     var Count = SBC.RowsCopied;
                     SP.Report(new TaskProgress($"Импорт файла завершён: {File.FullName}", Count, Count));
-                    Thread.Sleep(200);
                 }
             }
 

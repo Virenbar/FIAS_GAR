@@ -73,7 +73,6 @@ namespace FIASUpdate
                     SBC.NotifyAfter = 100;
                     var Count = SBC.RowsCopied;
                     SP?.Report(new TaskProgress($"Импорт файла завершён: {File.FullName}", Count, Count));
-                    Thread.Sleep(1000);
                 }
                 SP?.Report(new TaskProgress($"Импорт в таблицу завершён: {target.Name}", 0, 0));
                 target.Refresh();
@@ -127,7 +126,6 @@ namespace FIASUpdate
                 var Count = ImportTable(T, Table);
                 Store.SetLastImport(Table.Name, Table.Date);
                 AddResult(Table.Name, $"Импортирована ({Count:N0})");
-                Thread.Sleep(2 * 1000);
             }
 
             Store.SetSubjects(subjects);
