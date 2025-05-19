@@ -12,7 +12,15 @@
 
 
 
+
+
 GO
 CREATE UNIQUE NONCLUSTERED INDEX [NCI_ParentObject]
     ON [mun].[A_IndexRegistry]([ParentGUID] ASC, [ObjectGUID] ASC);
+
+
+GO
+CREATE NONCLUSTERED INDEX [NCI_Include]
+    ON [mun].[A_IndexRegistry]([ParentGUID] ASC)
+    INCLUDE([ObjectGUID], [Level], [Type], [Name], [NameFull]);
 

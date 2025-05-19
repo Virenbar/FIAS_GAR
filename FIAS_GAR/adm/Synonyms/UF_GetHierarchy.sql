@@ -1,2 +1,4 @@
-﻿CREATE SYNONYM [adm].[UF_GetHierarchy] FOR [adm].[UF_Hierarchy];
+﻿CREATE SYNONYM [adm].[UF_GetHierarchy] FOR [adm].[UF_RegistryHierarchy];
+
+
 

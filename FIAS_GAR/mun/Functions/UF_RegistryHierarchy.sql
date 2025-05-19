@@ -1,9 +1,9 @@
 ﻿-- =============================================
 -- Author:		Artyom
 -- Create date: 09.12.2021
--- Description:	
+-- Description:	Получить иерархию для объекта по GUID
 -- =============================================
-CREATE FUNCTION [mun].[UF_Hierarchy](
+CREATE FUNCTION [mun].[UF_RegistryHierarchy](
 	@ObjectGUID CHAR(36))
 RETURNS @Hierarchy TABLE(
 	[GUID]     CHAR(36),

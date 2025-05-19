@@ -199,7 +199,7 @@ namespace FIASUpdate.Forms
 
         private void MI_PDF_Click(object sender, EventArgs e)
         {
-            var uri = Store.GetPDFStatement(TB_GUID.Text, Division);
+            var uri = Store.GetPDFStatementURL(TB_GUID.Text, Division);
             var info = new ProcessStartInfo(uri)
             {
                 UseShellExecute = true

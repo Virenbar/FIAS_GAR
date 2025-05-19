@@ -2,6 +2,7 @@
 using FIAS.Core.Models;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -41,7 +42,7 @@ namespace FIAS.Core.Stores
 
         public async Task<List<FIASHierarchyItem>> GetHierarchy(string GUID, FIASDivision division)
         {
-            using (var DT = await Task.Run(() => UP_GetHierarchy(GUID, division)))
+            using (var DT = await Task.Run(() => UP_RegistryHierarchy(GUID, division)))
                 return DT.Rows.Cast<DataRow>().Select(R => FIASHierarchyItem.Parse(R)).ToList();
         }
 
@@ -94,14 +95,14 @@ namespace FIAS.Core.Stores
         /// Ссылка на выписку по объекту
         /// </summary>
         /// <param name="GUID">GUID объекта</param>
-        public string GetPDFStatement(string GUID) => GetPDFStatement(GUID, FIASDivision.mun);
+        public string GetPDFStatementURL(string GUID) => GetPDFStatementURL(GUID, FIASDivision.mun);
 
         /// <summary>
         /// Ссылка на выписку по объекту
         /// </summary>
         /// <param name="GUID">GUID объекта</param>
         /// <param name="division">Деление</param>
-        public string GetPDFStatement(string GUID, FIASDivision division) => $"{ENDPOINT}/Export/ExportPdfStatement?objId={GetID(GUID)}&actual=true&division={(int)division}";
+        public string GetPDFStatementURL(string GUID, FIASDivision division) => $"{ENDPOINT}/Export/ExportPdfStatement?objId={GetID(GUID)}&actual=true&division={(int)division}";
 
         /// <summary>
         /// Поиск адреса по AddressFull или GUID
@@ -140,7 +141,7 @@ namespace FIAS.Core.Stores
             }
         }
 
-        private DataTable UP_GetHierarchy(string GUID, FIASDivision H)
+        private DataTable UP_RegistryHierarchy(string GUID, FIASDivision H)
         {
             using (var command = NewProcedure())
             {
