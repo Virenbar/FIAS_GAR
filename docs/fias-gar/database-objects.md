@@ -18,32 +18,30 @@ description: "Дополнительные объекты БД"
 ## Процедуры
 
 * `[dbo].[UP_FIAS_Statistics]` - Количество активных объектов в БД
-* `[dbo].[UP_ObjectParameters]` – Параметры объекта
+* `[dbo].[UP_ObjectParameters]` – Параметры объекта по GUID
 * `*.[UP_RefreshRegistry]` – Обновление реестра(~30 мин)  
-* `*.[UP_RegistryHierarchy]` - Иерархия для объекта
+* `*.[UP_RegistryHierarchy]` - Иерархия для объекта по GUID
 * `*.[UP_RegistrySelect]` - Объект по GUID
 * `*.[UP_RegistrySelectChild]` - Дочерние объекты по GUID
 
 ### Поиск
 
+Процедура поиска делит строку на подстроки по пробелам, и выводит объекты содержащие все подстроки. Процедура использует полнотекстовый индекс.
+
 * `*.[UP_SearchRegistry]` - Поиск в A_IndexRegistry
 * `*.[UP_SearchRegistryByGUID]` - Поиск в A_IndexRegistry по ParentGUID и ObjectGUID
-
-Процедура поиска делит строку на подстроки по пробелам, и выводит объекты содержащие все подстроки. Процедуры используют полнотекстовый поиск.
 
 ## Функции
 
 ### Табличные функции
-
-Функции с окончанием Full дополнительно выводят полное наименование объекта, начиная с населённого пункта.
 
 * `*.[UF_RegistryAddress]` - Реестр с полными адресами
 * `*.[UF_RegistryChild]` - Все дочерние объекты по GUID
 * `*.[UF_RegistryHierarchy]` – Иерархия для объекта по GUID
 * `*.[UF_SearchOne]` - Поиск в реестре (Выводит всегда 1 строку)
 * `*.[UF_SearchRegistry]` - Поиск в реестре
-* ~~`[adm].[UF_StreetAggregate]`~~ – все улицы (Устаревшее)
-* ~~`[adm].[UF_VillageAggregate]`~~ – все нас. пункты (Устаревшее)
+* `[adm].[UF_StreetAggregate]` – все улицы (Устаревшее)
+* `[adm].[UF_VillageAggregate]` – все нас. пункты (Устаревшее)
 
 ### Скалярные функции
 

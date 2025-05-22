@@ -18,6 +18,7 @@ description: "Таблицы из выгрузки ФИАС ГАР"
 Внешний идентификатор, может использоваться в других системах.
 
 ### `OPERTYPEID`
+<!-- SELECT '* ' + CAST([ID] AS VARCHAR) + ' - ' + [NAME] FROM [OPERATION_TYPES] -->
 
 Принимает значения:
 
