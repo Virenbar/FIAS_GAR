@@ -138,14 +138,15 @@ namespace FIASUpdate.Forms
                 TS_Progress.Value = $@"{count}/{items.Count}";
                 using (var AD = new ArchiveDownloader())
                 {
-                    foreach (var item in items)
+                    var tasks = items.Select(async item =>
                     {
-                        var size = await AD.GetArhchiveSize(item.Archive);
+                        var size = await AD.GetArchiveSize(item.Archive);
                         item.Archive.ArchiveSize = size;
                         item.Refresh();
-                    }
+                    });
+                    await Task.WhenAll(tasks);
 
-                    var tasks = items.Select(async item =>
+                    tasks = items.Select(async item =>
                     {
                         token.ThrowIfCancellationRequested();
                         var progress = new Progress<DownloadState>((p) =>

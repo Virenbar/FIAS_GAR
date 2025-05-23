@@ -86,7 +86,7 @@ namespace FIASUpdate
         /// <param name="archive"></param>
         /// <param name="token"></param>
         /// <returns></returns>
-        public async Task<long?> GetArhchiveSize(FIASArchive archive, CancellationToken token = default)
+        public async Task<long?> GetArchiveSize(FIASArchive archive, CancellationToken token = default)
         {
             try
             {
