@@ -99,7 +99,9 @@ namespace FIAS.Core.Extensions
         public static async Task<long?> GetFileSizeAsync(this HttpClient client, string requestUri)
         {
             using (var request = new HttpRequestMessage(HttpMethod.Head, requestUri))
-            using (var response = await client.SendAsync(request))
+            // Клиент пытается считать ответ при запросе HEAD
+            // https://github.com/dotnet/corefx/pull/38129
+            using (var response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead))
             {
                 if (response.IsSuccessStatusCode)
                 {

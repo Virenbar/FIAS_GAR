@@ -9,6 +9,8 @@ namespace FIAS.Core.Extensions
 {
     public static class SQLExtensions
     {
+        public static string DefaultConnection { get; set; }
+
         public static SqlParameter AddParameter(this SqlCommand command, string parameter, object value)
         {
             return command.Parameters.AddWithValue(parameter, value);
@@ -54,6 +56,11 @@ namespace FIAS.Core.Extensions
                 command.Connection = Connection;
                 return (T)command.ExecuteScalar();
             }
+        }
+
+        public static DataTable ExecuteSelect(this SqlCommand command)
+        {
+            return command.ExecuteSelect(DefaultConnection);
         }
 
         public static DataTable ExecuteSelect(this SqlCommand command, string connection)
