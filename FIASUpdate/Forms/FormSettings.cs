@@ -27,8 +27,11 @@ namespace FIASUpdate.Forms
             LV_Tables.Items.AddRange(Tables.Select(T => new TableLVI(T)).ToArray());
             LV_Tables.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             LV_Tables.EndUpdate();
-            Info.Version = Store.GetVersion();
-            Info.Subjects = Store.GetSubjects();
+
+            var version = Store.GetVersion();
+            var subjects = Store.GetSubjects();
+            TB_Subject.Text = subjects is null ? "" : string.Join(" ", subjects);
+            TB_Version.Text = version is null ? "" : $"{version:yyyy.MM.dd}";
         }
 
         private void SaveData()
@@ -79,6 +82,14 @@ namespace FIASUpdate.Forms
         {
             Icon = Owner.Icon;
             LV_Tables.Items.Clear();
+        }
+
+        private void B_Subjects_Click(object sender, EventArgs e)
+        {
+            using (var F = new FormSubjectList())
+            {
+                F.ShowDialog(this);
+            }
         }
 
         #endregion UIEvents

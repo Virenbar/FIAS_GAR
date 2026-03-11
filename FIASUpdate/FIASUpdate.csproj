@@ -401,6 +401,12 @@
     <Compile Include="Forms\FormOperation.Designer.cs">
       <DependentUpon>FormOperation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormSubjectList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormSubjectList.Designer.cs">
+      <DependentUpon>FormSubjectList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -488,6 +494,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormOperation.resx">
       <DependentUpon>FormOperation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSubjectList.resx">
+      <DependentUpon>FormSubjectList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSettings.resx">
       <DependentUpon>FormSettings.cs</DependentUpon>
