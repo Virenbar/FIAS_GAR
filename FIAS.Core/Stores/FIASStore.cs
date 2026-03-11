@@ -2,7 +2,6 @@
 using FIAS.Core.Models;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -129,7 +128,7 @@ namespace FIAS.Core.Stores
         private DataTable UP_CB_Levels()
         {
             using (var command = NewProcedure())
-                return command.ExecuteSelect(Connection);
+                return Execute(command).Select();
         }
 
         private DataTable UP_FIAS_Statistics()
@@ -137,17 +136,7 @@ namespace FIAS.Core.Stores
             using (var command = NewProcedure())
             {
                 command.CommandTimeout = 300;
-                return command.ExecuteSelect(Connection);
-            }
-        }
-
-        private DataTable UP_RegistryHierarchy(string GUID, FIASDivision H)
-        {
-            using (var command = NewProcedure())
-            {
-                command.SetSchema($"{H}");
-                command.AddParameter("@GUID", GUID);
-                return command.ExecuteSelect(Connection);
+                return Execute(command).Select();
             }
         }
 
@@ -156,7 +145,7 @@ namespace FIAS.Core.Stores
             using (var command = NewProcedure())
             {
                 command.AddParameter("@GUID", GUID);
-                return command.ExecuteScalar<long>(Connection);
+                return Execute(command).Scalar<long>();
             }
         }
 
@@ -166,7 +155,17 @@ namespace FIAS.Core.Stores
             {
                 command.CommandTimeout = 300;
                 command.AddParameter("@GUID", GUID);
-                return command.ExecuteSelect(Connection);
+                return Execute(command).Select();
+            }
+        }
+
+        private DataTable UP_RegistryHierarchy(string GUID, FIASDivision H)
+        {
+            using (var command = NewProcedure())
+            {
+                command.SetSchema($"{H}");
+                command.AddParameter("@GUID", GUID);
+                return Execute(command).Select();
             }
         }
 
@@ -178,7 +177,7 @@ namespace FIAS.Core.Stores
             {
                 command.SetSchema($"{H}");
                 command.AddParameter("@GUID", GUID);
-                return command.ExecuteSelect(Connection);
+                return Execute(command).Select();
             }
         }
 
@@ -188,7 +187,7 @@ namespace FIAS.Core.Stores
             {
                 command.SetSchema($"{H}");
                 command.AddParameter("@GUID", GUID);
-                return command.ExecuteSelect(Connection);
+                return Execute(command).Select();
             }
         }
 
@@ -200,7 +199,7 @@ namespace FIAS.Core.Stores
                 command.AddParameter("@Search", Search);
                 command.AddParameter("@Level", Level);
                 command.AddParameter("@Limit", Limit);
-                return command.ExecuteSelect(Connection);
+                return Execute(command).Select();
             }
         }
 
@@ -212,7 +211,7 @@ namespace FIAS.Core.Stores
                 command.AddParameter("@GUID", GUID);
                 command.AddParameter("@Level", Level);
                 command.AddParameter("@Limit", Limit);
-                return command.ExecuteSelect(Connection);
+                return Execute(command).Select();
             }
         }
 
