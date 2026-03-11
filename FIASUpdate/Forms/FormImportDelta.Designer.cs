@@ -31,14 +31,14 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.Status = new System.Windows.Forms.StatusStrip();
             this.TS_Progress = new FIASUpdate.Controls.ToolStripTaskProgress();
             this.TS_Stopwatch = new JANL.Controls.ToolStripStopwatch();
             this.LV_Archives = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.сolumnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.B_Download = new System.Windows.Forms.Button();
             this.B_Cancel = new System.Windows.Forms.Button();
             this.B_Import = new System.Windows.Forms.Button();
@@ -47,7 +47,7 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.B_Open = new System.Windows.Forms.Button();
             this.Info = new FIASUpdate.Controls.UC_DatabaseInfo();
-            this.statusStrip1.SuspendLayout();
+            this.Status.SuspendLayout();
             this.FLP_Action.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -58,30 +58,30 @@
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Comic Sans MS", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(362, 345);
+            this.label1.Location = new System.Drawing.Point(284, 327);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(278, 135);
             this.label1.TabIndex = 0;
             this.label1.Text = "OwO";
             // 
-            // statusStrip1
+            // Status
             // 
-            this.statusStrip1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.statusStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Status.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Status.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
+            this.Status.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TS_Progress,
             this.TS_Stopwatch});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 458);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.statusStrip1.Size = new System.Drawing.Size(562, 22);
-            this.statusStrip1.TabIndex = 16;
-            this.statusStrip1.Text = "statusStrip1";
+            this.Status.Location = new System.Drawing.Point(0, 440);
+            this.Status.Name = "Status";
+            this.Status.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.Status.Size = new System.Drawing.Size(484, 22);
+            this.Status.TabIndex = 16;
+            this.Status.Text = "statusStrip1";
             // 
             // TS_Progress
             // 
             this.TS_Progress.Name = "TS_Progress";
-            this.TS_Progress.Size = new System.Drawing.Size(489, 17);
+            this.TS_Progress.Size = new System.Drawing.Size(411, 17);
             this.TS_Progress.Spring = true;
             this.TS_Progress.Status = "-";
             this.TS_Progress.Text = "Статус: - -";
@@ -110,7 +110,7 @@
             this.LV_Archives.Location = new System.Drawing.Point(3, 18);
             this.LV_Archives.MultiSelect = false;
             this.LV_Archives.Name = "LV_Archives";
-            this.LV_Archives.Size = new System.Drawing.Size(556, 344);
+            this.LV_Archives.Size = new System.Drawing.Size(478, 332);
             this.LV_Archives.TabIndex = 17;
             this.LV_Archives.UseCompatibleStateImageBehavior = false;
             this.LV_Archives.View = System.Windows.Forms.View.Details;
@@ -124,15 +124,15 @@
             this.columnHeader2.Text = "Описание";
             this.columnHeader2.Width = 91;
             // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Статус";
-            this.columnHeader3.Width = 200;
-            // 
             // сolumnHeader4
             // 
             this.сolumnHeader4.Text = "Размер";
             this.сolumnHeader4.Width = 80;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Статус";
+            this.columnHeader3.Width = 200;
             // 
             // B_Download
             // 
@@ -189,7 +189,8 @@
             this.FLP_Action.Controls.Add(this.B_Download);
             this.FLP_Action.Controls.Add(this.B_Import);
             this.FLP_Action.Controls.Add(this.B_Cancel);
-            this.FLP_Action.Location = new System.Drawing.Point(224, 3);
+            this.FLP_Action.Location = new System.Drawing.Point(149, 0);
+            this.FLP_Action.Margin = new System.Windows.Forms.Padding(0);
             this.FLP_Action.Name = "FLP_Action";
             this.FLP_Action.Size = new System.Drawing.Size(335, 31);
             this.FLP_Action.TabIndex = 21;
@@ -201,7 +202,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 56);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(562, 365);
+            this.groupBox1.Size = new System.Drawing.Size(484, 353);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Список архивов";
@@ -216,11 +217,11 @@
             this.tableLayoutPanel2.Controls.Add(this.FLP_Action, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.B_Open, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 421);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 409);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(562, 37);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(484, 31);
             this.tableLayoutPanel2.TabIndex = 23;
             // 
             // B_Open
@@ -229,7 +230,7 @@
             this.B_Open.AutoSize = true;
             this.B_Open.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.B_Open.Image = global::FIASUpdate.icons8.OpenedFolder16;
-            this.B_Open.Location = new System.Drawing.Point(3, 6);
+            this.B_Open.Location = new System.Drawing.Point(3, 3);
             this.B_Open.Name = "B_Open";
             this.B_Open.Padding = new System.Windows.Forms.Padding(1);
             this.B_Open.Size = new System.Drawing.Size(115, 25);
@@ -245,7 +246,7 @@
             this.Info.Dock = System.Windows.Forms.DockStyle.Top;
             this.Info.Location = new System.Drawing.Point(0, 0);
             this.Info.Name = "Info";
-            this.Info.Size = new System.Drawing.Size(562, 56);
+            this.Info.Size = new System.Drawing.Size(484, 56);
             this.Info.Subjects = null;
             this.Info.TabIndex = 18;
             this.Info.Version = new System.DateTime(((long)(0)));
@@ -255,24 +256,25 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = global::FIASUpdate.Properties.Settings.Default.DefaultBackColor;
-            this.ClientSize = new System.Drawing.Size(562, 480);
+            this.ClientSize = new System.Drawing.Size(484, 462);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.Info);
             this.Controls.Add(this.tableLayoutPanel2);
-            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.Status);
             this.Controls.Add(this.label1);
             this.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::FIASUpdate.Properties.Settings.Default, "DefaultFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.DataBindings.Add(new System.Windows.Forms.Binding("ForeColor", global::FIASUpdate.Properties.Settings.Default, "DefaultForeColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::FIASUpdate.Properties.Settings.Default, "DefaultBackColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.Font = global::FIASUpdate.Properties.Settings.Default.DefaultFont;
             this.ForeColor = global::FIASUpdate.Properties.Settings.Default.DefaultForeColor;
+            this.MinimumSize = new System.Drawing.Size(500, 500);
             this.Name = "FormImportDelta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Импорт БД";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormImportDelta_FormClosing);
             this.Load += new System.EventHandler(this.FormImportDelta_Load);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
+            this.Status.ResumeLayout(false);
+            this.Status.PerformLayout();
             this.FLP_Action.ResumeLayout(false);
             this.FLP_Action.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -286,7 +288,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.StatusStrip Status;
         private System.Windows.Forms.ListView LV_Archives;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;

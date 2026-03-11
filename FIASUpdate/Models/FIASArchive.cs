@@ -1,5 +1,4 @@
-﻿using FIAS.Core.API;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -7,35 +6,92 @@ using System.Linq;
 
 namespace FIASUpdate.Models
 {
-    internal class FIASArchive
+    /// <summary>
+    /// Базовый класс архива ФИАС
+    /// </summary>
+    internal abstract class FIASArchive
     {
-        private readonly FileInfo File;
-        private readonly FIASInfo Info;
+        protected FileInfo Archive;
 
-        public FIASArchive(FIASInfo info)
+        public FIASArchive(string path)
         {
-            Info = info;
-            File = new FileInfo(ArchivePath);
-            Refresh();
+            SetArchivePath(path);
         }
 
-        public string ArchivePath => $@"{DirectoryPath}\gar_delta_xml.zip";
-        public long? ArchiveSize { get; set; }
-        public DateTime Date => Info.Date;
-        public bool Exsists { get; private set; }
-        public string ExtractPath => $@"{DirectoryPath}\gar_delta_xml";
-        public string TextVersion => Info.TextVersion;
-        public string URLDelta => Info.GarXMLDeltaURL;
-        public string URLFull => Info.GarXMLFullURL;
-        public int VersionId => Info.VersionId;
-        private string DirectoryPath => $@"{FIASProperties.GAR_Delta}\{Date:yyyy.MM.dd}";
+        protected FIASArchive() { }
 
+        /// <summary>
+        /// Путь до архива
+        /// </summary>
+        public string ArchivePath { get; protected set; }
+
+        /// <summary>
+        /// Размер архива
+        /// </summary>
+        public long? ArchiveSize { get; protected set; }
+
+        /// <summary>
+        /// Дата (версия) архива
+        /// </summary>
+        public DateTime Date { get; protected set; }
+
+        /// <summary>
+        /// Существует ли архив
+        /// </summary>
+        public bool Exsists { get; protected set; }
+
+        /// <summary>
+        /// Путь для извлечения архива
+        /// </summary>
+        public abstract string ExtractPath { get; }
+
+        /// <summary>
+        /// Путь для хранения версий
+        /// </summary>
+       // protected abstract string DirectoryPath { get; }
+
+        /// <summary>
+        /// Извлечь дату (версию) архива
+        /// </summary>
+        public void ExtractVersion()
+        {
+            Refresh();
+            if (!Exsists) { return; }
+
+            var path = ArchivePath;
+            using (var zip = ZipFile.OpenRead(path))
+            {
+                var version = zip.Entries.First(E => E.FullName.Contains("version.txt"));
+
+                //var file = Path.GetTempFileName();
+                //version.ExtractToFile(file, true);
+                //var V = File.ReadAllLines(file);
+                //DateTime.TryParse(V[0], out var date);
+                //Date = date;
+                using (var s = version.Open())
+                {
+                    using (var SR = new StreamReader(s))
+                    {
+                        var V = SR.ReadLine();
+                        DateTime.TryParse(V, out var date);
+                        Date = date;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Извлечь файлы из архива для указанных субъектов
+        /// </summary>
+        /// <param name="subjects">Перечисление субъектов</param>
         public void Extract(IEnumerable<string> subjects)
         {
             var path = ArchivePath;
             using (var zip = ZipFile.OpenRead(path))
             {
+                // Корневые файлы
                 var root = zip.Entries.Where(E => !E.FullName.Contains(@"/"));
+                // Файлы субъектов
                 var files = zip.Entries.Where(E => subjects.Any(S => E.FullName.Contains($@"{S}/")));
 
                 foreach (var item in root.Concat(files))
@@ -47,17 +103,23 @@ namespace FIASUpdate.Models
             }
         }
 
+        /// <summary>
+        /// Обновить состояние файла архива
+        /// </summary>
         public void Refresh()
         {
-            File.Refresh();
-            Exsists = File.Exists && IsValid();
+            Archive.Refresh();
+            Exsists = Archive.Exists && IsValid();
             if (Exsists)
             {
-                ArchiveSize = File.Length;
+                ArchiveSize = Archive.Length;
             }
         }
 
-        private bool IsValid()
+        /// <summary>
+        /// Проверить корректность архива
+        /// </summary>
+        protected bool IsValid()
         {
             try
             {
@@ -65,7 +127,7 @@ namespace FIASUpdate.Models
                 // Выдаст ошибку если файл в процессе записи или повреждён
                 // Может зависнуть на повреждённом архиве
                 // Нужна проверка хэша, но увы. Хэш в сделку не входил
-                using (var zip = ZipFile.OpenRead(File.FullName))
+                using (var zip = ZipFile.OpenRead(Archive.FullName))
                 {
                     return zip.Entries.Count > 0;
                 }
@@ -74,6 +136,13 @@ namespace FIASUpdate.Models
             {
                 return false;
             }
+        }
+
+        protected void SetArchivePath(string path)
+        {
+            ArchivePath = path;
+            Archive = new FileInfo(ArchivePath);
+            Refresh();
         }
     }
 }
