@@ -13,7 +13,7 @@ namespace FIASUpdate.Models
     {
         protected FileInfo Archive;
 
-        public FIASArchive(string path)
+        protected FIASArchive(string path)
         {
             SetArchivePath(path);
         }
@@ -46,41 +46,6 @@ namespace FIASUpdate.Models
         public abstract string ExtractPath { get; }
 
         /// <summary>
-        /// Путь для хранения версий
-        /// </summary>
-       // protected abstract string DirectoryPath { get; }
-
-        /// <summary>
-        /// Извлечь дату (версию) архива
-        /// </summary>
-        public void ExtractVersion()
-        {
-            Refresh();
-            if (!Exsists) { return; }
-
-            var path = ArchivePath;
-            using (var zip = ZipFile.OpenRead(path))
-            {
-                var version = zip.Entries.First(E => E.FullName.Contains("version.txt"));
-
-                //var file = Path.GetTempFileName();
-                //version.ExtractToFile(file, true);
-                //var V = File.ReadAllLines(file);
-                //DateTime.TryParse(V[0], out var date);
-                //Date = date;
-                using (var s = version.Open())
-                {
-                    using (var SR = new StreamReader(s))
-                    {
-                        var V = SR.ReadLine();
-                        DateTime.TryParse(V, out var date);
-                        Date = date;
-                    }
-                }
-            }
-        }
-
-        /// <summary>
         /// Извлечь файлы из архива для указанных субъектов
         /// </summary>
         /// <param name="subjects">Перечисление субъектов</param>
@@ -99,6 +64,32 @@ namespace FIASUpdate.Models
                     var file = Path.Combine(ExtractPath, item.FullName);
                     Directory.CreateDirectory(Path.GetDirectoryName(file));
                     item.ExtractToFile(file, true);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Извлечь дату (версию) архива
+        /// </summary>
+        public void ExtractVersion()
+        {
+            Refresh();
+            if (!Exsists) { return; }
+
+            var path = ArchivePath;
+            using (var zip = ZipFile.OpenRead(path))
+            {
+                var entry = zip.Entries.First(E => E.FullName.Contains("version.txt"));
+                using (var S = entry.Open())
+                {
+                    using (var SR = new StreamReader(S))
+                    {
+                        var version = SR.ReadLine();
+                        if (DateTime.TryParse(version, out var date))
+                        {
+                            Date = date;
+                        }
+                    }
                 }
             }
         }

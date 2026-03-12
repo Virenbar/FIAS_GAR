@@ -18,12 +18,5 @@ namespace FIAS.Core.Extensions
             command.CommandText = $"{schema}.{name}";
             return command;
         }
-
-        //#region Executor
-        //public static SQLCommandExecutor Execute(this SqlCommand command) => new SQLCommandExecutor(command, DefaultConnection);
-        //public static SQLCommandExecutor Execute(this SqlCommand command, string connection) => new SQLCommandExecutor(command, connection);
-        //public static SQLCommandExecutor ExecuteAs(this SqlCommand command) => new SQLCommandExecutor(command, DefaultConnection);
-        //public static SQLCommandExecutor ExecuteAt(this SqlCommand command, string connection) => new SQLCommandExecutor(command, connection);
-        //#endregion Executor
     }
 }

@@ -21,6 +21,5 @@ namespace FIASUpdate.Models
         public string URLDelta => Info.GarXMLDeltaURL;
         public string URLFull => Info.GarXMLFullURL;
         public int VersionId => Info.VersionId;
-        // protected override string DirectoryPath => $@"{FIASProperties.GAR_Delta}\{Date:yyyy.MM.dd}";
     }
 }

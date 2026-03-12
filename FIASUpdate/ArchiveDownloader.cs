@@ -29,25 +29,6 @@ namespace FIASUpdate
             Semaphore = new SemaphoreSlim(threads);
         }
 
-        public Task Download(FIASArchiveDelta archive, CancellationToken token = default) => Download(archive, (Progress<float>)default, default);
-
-        public async Task Download(FIASArchiveDelta archive, IProgress<float> progress, CancellationToken token = default)
-        {
-            var file = new FileInfo(archive.ArchivePath);
-            try
-            {
-                await Semaphore.WaitAsync().ConfigureAwait(false);
-                token.ThrowIfCancellationRequested();
-                Directory.CreateDirectory(file.DirectoryName);
-                using (var FS = new FileStream(file.FullName, FileMode.Create))
-                    await Client.DownloadAsync(archive.URLDelta, FS, progress, token).ConfigureAwait(false);
-            }
-            finally
-            {
-                Semaphore.Release();
-            }
-        }
-
         public async Task Download(FIASArchiveDelta archive, IProgress<DownloadState> progress, CancellationToken token = default)
         {
             var file = new FileInfo(archive.ArchivePath);

@@ -391,7 +391,6 @@
     <Compile Include="Database\DBImport.cs" />
     <Compile Include="Database\DBImportDelta.cs" />
     <Compile Include="Extensions\DataExtensions.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Forms\FormDictionaryView.cs">
       <SubType>Form</SubType>
     </Compile>
