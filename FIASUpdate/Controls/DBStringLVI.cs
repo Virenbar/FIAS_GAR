@@ -1,7 +1,7 @@
 ﻿using System.Data.SqlClient;
 using System.Windows.Forms;
 
-namespace FIASUpdate.Models
+namespace FIASUpdate.Controls
 {
     internal class DBStringLVI : ListViewItem
     {

@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
-            this.Info = new FIASUpdate.Controls.UC_DatabaseInfo();
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.B_SQLConnection = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -46,21 +45,21 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.LV_Tables = new System.Windows.Forms.ListView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.TB_Version = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.TB_Subject = new System.Windows.Forms.TextBox();
+            this.B_Subjects = new System.Windows.Forms.Button();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // Info
-            // 
-            this.Info.AutoSize = true;
-            this.Info.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.Info.Location = new System.Drawing.Point(0, 475);
-            this.Info.Name = "Info";
-            this.Info.Size = new System.Drawing.Size(544, 56);
-            this.Info.Subjects = null;
-            this.Info.TabIndex = 10;
-            this.Info.Version = new System.DateTime(((long)(0)));
             // 
             // textBox1
             // 
@@ -69,7 +68,7 @@
             this.textBox1.Location = new System.Drawing.Point(82, 4);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(372, 22);
+            this.textBox1.Size = new System.Drawing.Size(360, 22);
             this.textBox1.TabIndex = 1;
             this.textBox1.Text = global::FIASUpdate.Properties.Settings.Default.SQLConnection;
             // 
@@ -79,7 +78,7 @@
             this.B_SQLConnection.AutoSize = true;
             this.B_SQLConnection.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.B_SQLConnection.Image = global::FIASUpdate.icons8.PencilDrawing16;
-            this.B_SQLConnection.Location = new System.Drawing.Point(460, 3);
+            this.B_SQLConnection.Location = new System.Drawing.Point(448, 3);
             this.B_SQLConnection.Name = "B_SQLConnection";
             this.B_SQLConnection.Padding = new System.Windows.Forms.Padding(1);
             this.B_SQLConnection.Size = new System.Drawing.Size(81, 25);
@@ -96,7 +95,7 @@
             this.textBox2.Location = new System.Drawing.Point(82, 35);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(372, 22);
+            this.textBox2.Size = new System.Drawing.Size(360, 22);
             this.textBox2.TabIndex = 1;
             this.textBox2.Text = global::FIASUpdate.Properties.Settings.Default.XMLPath;
             // 
@@ -134,13 +133,13 @@
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.B_XMLPath, 2, 1);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 18);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(544, 62);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(532, 62);
             this.tableLayoutPanel2.TabIndex = 9;
             // 
             // B_XMLPath
@@ -149,7 +148,7 @@
             this.B_XMLPath.AutoSize = true;
             this.B_XMLPath.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.B_XMLPath.Image = global::FIASUpdate.icons8.OpenedFolder16;
-            this.B_XMLPath.Location = new System.Drawing.Point(460, 34);
+            this.B_XMLPath.Location = new System.Drawing.Point(448, 34);
             this.B_XMLPath.Name = "B_XMLPath";
             this.B_XMLPath.Padding = new System.Windows.Forms.Padding(1);
             this.B_XMLPath.Size = new System.Drawing.Size(81, 25);
@@ -161,10 +160,11 @@
             // 
             // B_Save
             // 
+            this.B_Save.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.B_Save.AutoSize = true;
             this.B_Save.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.B_Save.Image = global::FIASUpdate.icons8.Save16;
-            this.B_Save.Location = new System.Drawing.Point(449, 3);
+            this.B_Save.Location = new System.Drawing.Point(437, 3);
             this.B_Save.Name = "B_Save";
             this.B_Save.Padding = new System.Windows.Forms.Padding(1);
             this.B_Save.Size = new System.Drawing.Size(92, 25);
@@ -194,17 +194,16 @@
             // 
             this.tableLayoutPanel3.AutoSize = true;
             this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.Controls.Add(this.B_Save, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.B_Refresh, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 531);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 456);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(544, 31);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(532, 31);
             this.tableLayoutPanel3.TabIndex = 8;
             // 
             // columnHeader4
@@ -238,13 +237,13 @@
             this.LV_Tables.FullRowSelect = true;
             this.LV_Tables.GridLines = true;
             this.LV_Tables.HideSelection = false;
-            listViewItem1.StateImageIndex = 0;
+            listViewItem3.StateImageIndex = 0;
             this.LV_Tables.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem3});
             this.LV_Tables.Location = new System.Drawing.Point(3, 18);
             this.LV_Tables.MultiSelect = false;
             this.LV_Tables.Name = "LV_Tables";
-            this.LV_Tables.Size = new System.Drawing.Size(538, 392);
+            this.LV_Tables.Size = new System.Drawing.Size(526, 358);
             this.LV_Tables.TabIndex = 0;
             this.LV_Tables.UseCompatibleStateImageBehavior = false;
             this.LV_Tables.View = System.Windows.Forms.View.Details;
@@ -253,23 +252,127 @@
             // 
             this.groupBox3.Controls.Add(this.LV_Tables);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(0, 62);
+            this.groupBox3.Location = new System.Drawing.Point(3, 77);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(544, 413);
+            this.groupBox3.Size = new System.Drawing.Size(532, 379);
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Таблицы для импорта";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.AutoSize = true;
+            this.groupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.groupBox1.Controls.Add(this.tableLayoutPanel2);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(538, 83);
+            this.groupBox1.TabIndex = 11;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Настройки приложения";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.groupBox3);
+            this.groupBox2.Controls.Add(this.tableLayoutPanel1);
+            this.groupBox2.Controls.Add(this.tableLayoutPanel3);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(3, 86);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(538, 490);
+            this.groupBox2.TabIndex = 12;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Настройки БД";
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.AutoSize = true;
+            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.TB_Version, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.TB_Subject, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.B_Subjects, 2, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 18);
+            this.tableLayoutPanel1.MinimumSize = new System.Drawing.Size(150, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(532, 59);
+            this.tableLayoutPanel1.TabIndex = 20;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(16, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(45, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Версия";
+            // 
+            // TB_Version
+            // 
+            this.TB_Version.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.TB_Version.Location = new System.Drawing.Point(67, 4);
+            this.TB_Version.Name = "TB_Version";
+            this.TB_Version.ReadOnly = true;
+            this.TB_Version.Size = new System.Drawing.Size(100, 22);
+            this.TB_Version.TabIndex = 1;
+            this.TB_Version.TabStop = false;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 38);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(58, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Субъекты";
+            // 
+            // TB_Subject
+            // 
+            this.TB_Subject.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.TB_Subject, 2);
+            this.TB_Subject.Location = new System.Drawing.Point(67, 34);
+            this.TB_Subject.Name = "TB_Subject";
+            this.TB_Subject.ReadOnly = true;
+            this.TB_Subject.Size = new System.Drawing.Size(462, 22);
+            this.TB_Subject.TabIndex = 1;
+            this.TB_Subject.TabStop = false;
+            // 
+            // B_Subjects
+            // 
+            this.B_Subjects.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.B_Subjects.AutoSize = true;
+            this.B_Subjects.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.B_Subjects.Image = global::FIASUpdate.icons8.PencilDrawing16;
+            this.B_Subjects.Location = new System.Drawing.Point(443, 3);
+            this.B_Subjects.Name = "B_Subjects";
+            this.B_Subjects.Padding = new System.Windows.Forms.Padding(1);
+            this.B_Subjects.Size = new System.Drawing.Size(86, 25);
+            this.B_Subjects.TabIndex = 21;
+            this.B_Subjects.Text = "Субъекты";
+            this.B_Subjects.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.B_Subjects.UseVisualStyleBackColor = true;
+            this.B_Subjects.Click += new System.EventHandler(this.B_Subjects_Click);
             // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = global::FIASUpdate.Properties.Settings.Default.DefaultBackColor;
-            this.ClientSize = new System.Drawing.Size(544, 562);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.Info);
-            this.Controls.Add(this.tableLayoutPanel2);
-            this.Controls.Add(this.tableLayoutPanel3);
+            this.ClientSize = new System.Drawing.Size(544, 579);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::FIASUpdate.Properties.Settings.Default, "DefaultFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.DataBindings.Add(new System.Windows.Forms.Binding("ForeColor", global::FIASUpdate.Properties.Settings.Default, "DefaultForeColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::FIASUpdate.Properties.Settings.Default, "DefaultBackColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -279,6 +382,7 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(560, 600);
             this.Name = "FormSettings";
+            this.Padding = new System.Windows.Forms.Padding(3);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Настройки";
             this.Load += new System.EventHandler(this.FormSettings_Load);
@@ -287,14 +391,18 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.groupBox3.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private Controls.UC_DatabaseInfo Info;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button B_SQLConnection;
         private System.Windows.Forms.TextBox textBox2;
@@ -311,5 +419,13 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ListView LV_Tables;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox TB_Version;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox TB_Subject;
+        private System.Windows.Forms.Button B_Subjects;
     }
 }

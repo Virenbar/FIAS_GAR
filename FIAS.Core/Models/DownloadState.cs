@@ -2,11 +2,6 @@
 {
     public class DownloadState
     {
-        public DownloadState(float progress)
-        {
-            Progress = progress;
-        }
-
         public DownloadState(long totalBytes, long downloadedBytes)
         {
             TotalBytes = totalBytes;

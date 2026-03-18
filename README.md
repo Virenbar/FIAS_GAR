@@ -22,7 +22,7 @@
 ![Основная форма](/docs/assets/fias/main.png)
 ![Форма настроек](/docs/assets/fias/settings.png)
 ![Форма импорта](/docs/assets/fias/import-delta.png)
-![Форма импорта](/docs/assets/fias/import.png)
+![Форма импорта](/docs/assets/fias/import-full.png)
 ![Форма поиска адреса в БД](/docs/assets/fias/search.png)
 
 *P.S. Данное решение предназначено для разработчик работающих с .NET и SQL Server.*  

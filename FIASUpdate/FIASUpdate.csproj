@@ -374,6 +374,9 @@
   <ItemGroup>
     <Compile Include="ArchiveDownloader.cs" />
     <Compile Include="Controls\TableLVI.cs" />
+    <Compile Include="Controls\TextBoxFileDrop.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\ToolStripTaskProgress.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -388,7 +391,6 @@
     <Compile Include="Database\DBImport.cs" />
     <Compile Include="Database\DBImportDelta.cs" />
     <Compile Include="Extensions\DataExtensions.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Forms\FormDictionaryView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -401,13 +403,20 @@
     <Compile Include="Forms\FormOperation.Designer.cs">
       <DependentUpon>FormOperation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormSubjectList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormSubjectList.Designer.cs">
+      <DependentUpon>FormSubjectList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormSettings.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormSettings.Designer.cs">
       <DependentUpon>FormSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ImportOptions.cs" />
+    <Compile Include="Models\FIASArchive.cs" />
+    <Compile Include="Models\FIASArchiveFull.cs" />
     <Compile Include="Models\FIASArchiveLVI.cs" />
     <Compile Include="Forms\FormAbout.cs">
       <SubType>Form</SubType>
@@ -432,8 +441,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>icons8.resx</DependentUpon>
     </Compile>
-    <Compile Include="Models\DBStringLVI.cs" />
-    <Compile Include="Models\FIASArchive.cs" />
+    <Compile Include="Controls\DBStringLVI.cs" />
+    <Compile Include="Models\FIASArchiveDelta.cs" />
     <Compile Include="FIASProperties.cs" />
     <Compile Include="Properties\Settings.cs" />
     <Compile Include="Readers\FIASReader.cs" />
@@ -488,6 +497,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormOperation.resx">
       <DependentUpon>FormOperation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSubjectList.resx">
+      <DependentUpon>FormSubjectList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSettings.resx">
       <DependentUpon>FormSettings.cs</DependentUpon>

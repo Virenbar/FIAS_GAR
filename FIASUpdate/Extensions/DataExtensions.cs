@@ -1,7 +1,4 @@
 ﻿using Microsoft.SqlServer.Management.Smo;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
 
 namespace FIASUpdate
 {

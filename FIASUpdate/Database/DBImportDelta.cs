@@ -1,7 +1,5 @@
 ﻿using FIASUpdate.Models;
-using FIASUpdate.Readers;
 using JANL;
-using Microsoft.Data.SqlClient;
 using Microsoft.SqlServer.Management.Smo;
 using System;
 using System.Linq;
@@ -10,59 +8,33 @@ using System.Threading;
 
 namespace FIASUpdate
 {
-    internal class DBImportDelta : DBImport
+    /// <summary>
+    /// Класс для импорта дельта архива
+    /// </summary>
+    internal class DBImportDelta : DBImport<FIASArchiveDelta>
     {
-        private readonly FIASArchive Archive;
-        private readonly ImportDeltaOptions Options;
-
-        public DBImportDelta(FIASArchive archive, ImportDeltaOptions options)
+        public DBImportDelta(FIASArchiveDelta archive)
         {
-            Options = options;
             Archive = archive;
         }
 
         public override void Import(IProgress<TaskProgress> progress, CancellationToken token)
         {
-            SP = progress;
-            Token = token;
+            base.Import(progress, token);
 
             Extract();
             ScanFiles();
-            foreach (var item in Tables)
-            {
-                // Проверка существования
-                var table = DB.Tables[item.Name];
-                if (table == null) { continue; }
-                // Проверка настроек импорта
-                table.Refresh();
-                if (!Store.GetCanImport(table.Name)) { continue; }
-
-                // Импорт
-                ImportTable(table, item);
-                Store.SetLastImport(item.Name, item.Date);
-                Thread.Sleep(500);
-            }
-            Store.SetVersion(Archive.Date);
-            if (Options.ShrinkDatabase) { ShrinkDatabase(); }
-        }
-
-        private void Extract()
-        {
-            SP.Report(new TaskProgress($"Распаковка архива", 0, 0));
-            Archive.Extract(Options.Subjects);
+            ImportTables();
         }
 
         #region Table Import
-
-        protected override string ScanPath => Archive.ExtractPath;
 
         /// <summary>
         ///
         /// </summary>
         /// <param name="target">Таблица БД</param>
         /// <param name="source">Таблица FIAS</param>
-        /// <returns>Количество импортированных строк</returns>
-        private long ImportTable(Table target, FIASTable source)
+        protected override void ImportTable(Table target, FIASTable source)
         {
             // Создать временную таблицу
             var temporaryName = $"_{target.Name}";
@@ -74,58 +46,48 @@ namespace FIASUpdate
             temporaryTable.Create();
 
             // Импортировать данные во временную таблицу
-            var columns = target.Columns.Cast<Column>();
-            using (var connection = NewConnection(DBName))
-            using (var SBC = new SqlBulkCopy(connection) { DestinationTableName = temporaryTable.Name, BulkCopyTimeout = 0, NotifyAfter = 100 })
-            {
-                SBC.SqlRowsCopied += SBC_SqlRowsCopied;
-                SBC.EnableStreaming = true;
-                var names = target.Columns.Cast<Column>().Select(C => C.Name);
-                foreach (var File in source.Files)
-                {
-                    Token.ThrowIfCancellationRequested();
-                    SP?.Report(new TaskProgress($"Импорт файла: {File.FullName}", 0, 0));
-                    using (var FR = new FIASReader(File.Path, names))
-                    {
-                        SBC.WriteToServer(FR);
-                    }
-                    SBC.NotifyAfter = 100;
-                    var Count = SBC.RowsCopied;
-                    SP.Report(new TaskProgress($"Импорт файла завершён: {File.FullName}", Count, Count));
-                    Thread.Sleep(200);
-                }
-            }
+            base.ImportTable(temporaryTable, source);
 
-            SP.Report(new TaskProgress($"Объединение таблиц: {target.Name}", 0, 0));
+            SP?.Report(new TaskProgress($"Объединение таблиц: {target.Name}", 0, 0));
             // Объединить таблицы
+            var columns = target.Columns.Cast<Column>();
             var key = columns.First().Name;
             var insert = columns.Select(C => $"[{C.Name}]");
             var values = columns.Select(C => $"[S].[{C.Name}]");
             var update = columns.Skip(1).Select(C => $"[{C.Name}] = [S].[{C.Name}]");
 
-            var query = new StringBuilder();
-            query.AppendLine($"MERGE INTO [{target.Name}] AS [T]");
-            query.AppendLine($"USING [{temporaryName}] AS [S]");
-            query.AppendLine($"ON([T].[{key}] = [S].[{key}])");
-            query.AppendLine("WHEN NOT MATCHED BY TARGET THEN");
-            query.AppendLine($"INSERT ({string.Join(",", insert)})");
-            query.AppendLine($"VALUES ({string.Join(",", values)})");
-            query.AppendLine("WHEN MATCHED THEN");
-            query.AppendLine($"UPDATE SET { string.Join(",", update)};");
+            var query = new StringBuilder()
+                .AppendLine($"MERGE INTO [{target.Name}] AS [T]")
+                .AppendLine($"USING [{temporaryName}] AS [S]")
+                .AppendLine($"ON([T].[{key}] = [S].[{key}])")
+                .AppendLine("WHEN NOT MATCHED BY TARGET THEN")
+                .AppendLine($"INSERT ({string.Join(",", insert)})")
+                .AppendLine($"VALUES ({string.Join(",", values)})")
+                .AppendLine("WHEN MATCHED THEN")
+                .AppendLine($"UPDATE SET {string.Join(",", update)};");
             DB.ExecuteNonQuery(query.ToString());
 
             temporaryTable.Drop();
-            SP.Report(new TaskProgress($"Импорт в таблицу завершён: {target.Name}", 0, 0));
-            target.Refresh();
-            return target.RowCount;
         }
 
-        private void SBC_SqlRowsCopied(object sender, SqlRowsCopiedEventArgs e)
+        private void ImportTables()
         {
-            SqlBulkCopy SBC = (SqlBulkCopy)sender;
-            var SBCCount = (int)e.RowsCopied;
-            SP.Report(new TaskProgress(SBCCount, SBCCount));
-            if (SBCCount >= 10000 && SBC.NotifyAfter != 1000) { SBC.NotifyAfter = 1000; }
+            foreach (var table in Tables)
+            {
+                // Проверка существования
+                var T = DB.Tables[table.Name];
+                if (T == null) { continue; }
+                // Проверка настроек импорта
+                T.Refresh();
+                if (!Store.GetCanImport(T.Name)) { continue; }
+
+                // Импорт
+                ImportTable(T, table);
+                SP?.Report(new TaskProgress($"Импорт в таблицу завершён: {T.Name}", 0, 0));
+                Store.SetLastImport(table.Name, table.Date);
+                Thread.Sleep(500);
+            }
+            Store.SetVersion(Archive.Date);
         }
 
         #endregion Table Import

@@ -5,7 +5,7 @@ namespace FIASUpdate.Models
 {
     internal class FIASArchiveLVI : ListViewItem
     {
-        public FIASArchiveLVI(FIASArchive archive) : base($"{archive.Date:yyyy.MM.dd}")
+        public FIASArchiveLVI(FIASArchiveDelta archive) : base($"{archive.Date:yyyy.MM.dd}")
         {
             Archive = archive;
             SubItems.Add(Archive.TextVersion);
@@ -14,7 +14,8 @@ namespace FIASUpdate.Models
             Refresh();
         }
 
-        public FIASArchive Archive { get; }
+        public FIASArchiveDelta Archive { get; }
+        public long? Size { get; set; }
 
         public string State
         {
@@ -29,7 +30,8 @@ namespace FIASUpdate.Models
         public void Refresh()
         {
             Archive.Refresh();
-            SubItems[2].Text = Archive.ArchiveSize.HasValue ? $"{Archive.ArchiveSize / Math.Pow(1024, 2):N2} МБ" : "-";
+            var size = Archive.ArchiveSize ?? Size;
+            SubItems[2].Text = size.HasValue ? $"{size / Math.Pow(1024, 2):N2} МБ" : "-";
             SubItems[3].Text = Archive.Exsists ? "Архив скачан" : "Архив не скачан";
         }
     }

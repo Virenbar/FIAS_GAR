@@ -96,62 +96,61 @@ namespace FIAS.Core.Stores
 
         private T UP_DatabasePropertyGet<T>(string name)
         {
-            using (var Command = NewProcedure())
+            using (var command = NewProcedure())
             {
-                var P = Command.Parameters;
+                var P = command.Parameters;
                 P.AddWithValue("@Name", name);
-                return Command.ExecuteScalar<T>(Connection);
+                return Execute(command).Scalar<T>();
             }
         }
 
         private void UP_DatabasePropertySet(string name, object value)
         {
-            using (var Command = NewProcedure())
+            using (var command = NewProcedure())
             {
-                var P = Command.Parameters;
+                var P = command.Parameters;
                 P.AddWithValue("@Name", name);
                 P.AddWithValue("@Value", value);
-                Command.ExecuteNonQuery(Connection);
+                Execute(command).NonQuery();
             }
         }
 
         private async Task UP_RefreshRegistry(FIASDivision division, CancellationToken token)
         {
-            using (var Command = NewProcedure())
+            using (var command = NewProcedure())
             {
-                Command.SetSchema($"{division}");
-                Command.CommandTimeout = 0;
-                await Command.ExecuteNonQueryAsync(Connection, token);
+                command.SetSchema($"{division}");
+                command.CommandTimeout = 0;
+                await Execute(command).NonQueryAsync(token);
             }
         }
 
         private object UP_TablePropertyGet(string table, string name)
         {
-            using (var Command = NewProcedure())
+            using (var command = NewProcedure())
             {
-                var P = Command.Parameters;
+                var P = command.Parameters;
                 P.AddWithValue("@Table", table);
                 P.AddWithValue("@Name", name);
-                return Command.ExecuteScalar(Connection);
+                return Execute(command).Scalar();
             }
         }
 
         private void UP_TablePropertySet(string table, string name, object value)
         {
-            using (var Command = NewProcedure())
+            using (var command = NewProcedure())
             {
-                var P = Command.Parameters;
-                P.AddWithValue("@Table", table);
-                P.AddWithValue("@Name", name);
-                P.AddWithValue("@Value", value);
-                Command.ExecuteNonQuery(Connection);
+                command.AddParameter("@Table", table);
+                command.AddParameter("@Name", name);
+                command.AddParameter("@Value", value);
+                Execute(command).NonQuery();
             }
         }
 
         private DataTable UP_TablesInfo()
         {
-            using (var Command = NewProcedure())
-                return Command.ExecuteSelect(Connection);
+            using (var command = NewProcedure())
+                return Execute(command).Select();
         }
 
         #endregion SQL

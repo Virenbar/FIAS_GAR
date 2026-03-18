@@ -22,7 +22,7 @@ namespace FIASUpdate.Forms
         private static readonly FIASClient Client = new FIASClient();
         private static readonly Settings Settings = Settings.Default;
         private readonly FIASDatabaseStore Store = new FIASDatabaseStore(Settings.SQLConnection);
-        private List<FIASArchive> Archives;
+        private List<FIASArchiveDelta> Archives;
         private CancellationTokenSource CTS;
         private List<string> Subjects;
         private DateTime Version;
@@ -64,7 +64,7 @@ namespace FIASUpdate.Forms
                 // Бывают выгрузки без ссылок на архивы ГАР.
                 // Если отсутствуют обе,то пропустить такую выгрузку, например от 24.11.2023.
                 Archives = info.Where(I => !(string.IsNullOrEmpty(I.GarXMLFullURL) && string.IsNullOrEmpty(I.GarXMLDeltaURL)))
-                    .Select(I => new FIASArchive(I))
+                    .Select(I => new FIASArchiveDelta(I))
                     .ToList();
             }
             catch (SocketException ex)
@@ -141,7 +141,7 @@ namespace FIASUpdate.Forms
                     var tasks = items.Select(async item =>
                     {
                         var size = await AD.GetArchiveSize(item.Archive);
-                        item.Archive.ArchiveSize = size;
+                        item.Size = size;
                         item.Refresh();
                     });
                     await Task.WhenAll(tasks);
@@ -181,11 +181,10 @@ namespace FIASUpdate.Forms
                 foreach (var item in items)
                 {
                     item.State = "Импорт данных";
-                    var Options = new ImportDeltaOptions
+                    using (var FIAS = new DBImportDelta(item.Archive)
                     {
                         Subjects = Subjects
-                    };
-                    using (var FIAS = new DBImportDelta(item.Archive, Options))
+                    })
                     {
                         await Task.Run(() => FIAS.Import(TS_Progress.Progress, token));
                     }

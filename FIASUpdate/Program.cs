@@ -1,4 +1,5 @@
-﻿using FIASUpdate.Properties;
+﻿using FIAS.Core.Extensions;
+using FIASUpdate.Properties;
 using JANL;
 using System;
 using System.ComponentModel;
@@ -30,6 +31,7 @@ namespace FIASUpdate
             Settings.PropertyChanged += Default_PropertyChanged;
             Settings.Reload();
             Defaults.Connection = Settings.SQLConnection;
+            SQLExtensions.DefaultConnection = Settings.SQLConnection;
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
