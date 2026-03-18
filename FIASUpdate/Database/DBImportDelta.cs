@@ -46,7 +46,7 @@ namespace FIASUpdate
             temporaryTable.Create();
 
             // Импортировать данные во временную таблицу
-            base.ImportTable(target, source);
+            base.ImportTable(temporaryTable, source);
 
             SP?.Report(new TaskProgress($"Объединение таблиц: {target.Name}", 0, 0));
             // Объединить таблицы
