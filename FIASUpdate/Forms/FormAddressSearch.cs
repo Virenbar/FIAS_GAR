@@ -15,10 +15,9 @@ namespace FIASUpdate.Forms
 {
     public partial class FormAddressSearch : Form
     {
-        private static readonly Settings Settings = Settings.Default;
-        private readonly string DBName = Settings.DBName;
+        private readonly string DBName = Settings.Default.DBName;
         private readonly List<(RadioButton RB, FIASDivision Division)> RB_F;
-        private readonly FIASStore Store = new FIASStore(Settings.SQLConnection);
+        private readonly FIASStore Store = new FIASStore(Settings.Default.SQLConnection);
 
         public FormAddressSearch()
         {

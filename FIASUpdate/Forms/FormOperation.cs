@@ -1,11 +1,12 @@
-﻿using FIAS.Core;
-using FIAS.Core.Stores;
-using FIASUpdate.Properties;
-using JANL.Extensions;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FIAS.Core;
+using FIAS.Core.Stores;
+using FIASUpdate.Properties;
+using JANL.Extensions;
+using Microsoft.WindowsAPICodePack.Taskbar;
 
 namespace FIASUpdate.Forms
 {
@@ -13,6 +14,7 @@ namespace FIASUpdate.Forms
     {
         private static readonly Settings Settings = Settings.Default;
         private readonly FIASDatabaseStore Store = new FIASDatabaseStore(Settings.SQLConnection);
+        private readonly TaskbarManager Taskbar = TaskbarManager.Instance;
         private CancellationTokenSource CTS;
 
         public FormOperation()
@@ -25,6 +27,7 @@ namespace FIASUpdate.Forms
             CTS = new CancellationTokenSource();
             RefreshUI();
             TS_Stopwatch.Start();
+            Taskbar.SetProgressState(TaskbarProgressBarState.Indeterminate, Handle);
             try
             {
                 if (CB_Update.Checked)
@@ -44,8 +47,13 @@ namespace FIASUpdate.Forms
                 {
                     await Shrink(CTS.Token);
                 }
+                Taskbar.SetProgressValue(1, 1, Handle);
             }
-            catch (Exception e) { this.ShowException(e); }
+            catch (Exception e)
+            {
+                Taskbar.SetProgressState(TaskbarProgressBarState.Error, Handle);
+                this.ShowException(e);
+            }
             finally
             {
                 CTS.Dispose();

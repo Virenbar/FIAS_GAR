@@ -1,14 +1,14 @@
-﻿using FIAS.Core.Stores;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using FIAS.Core.Stores;
 using FIASUpdate.Models;
 using FIASUpdate.Readers;
 using JANL;
 using Microsoft.Data.SqlClient;
 using Microsoft.SqlServer.Management.Smo;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading;
 
 namespace FIASUpdate
 {

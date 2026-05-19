@@ -1,11 +1,4 @@
-﻿using FIAS.Core.API;
-using FIAS.Core.Extensions;
-using FIAS.Core.Models;
-using FIAS.Core.Stores;
-using FIASUpdate.Models;
-using FIASUpdate.Properties;
-using JANL.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -14,6 +7,14 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FIAS.Core.API;
+using FIAS.Core.Extensions;
+using FIAS.Core.Models;
+using FIAS.Core.Stores;
+using FIASUpdate.Models;
+using FIASUpdate.Properties;
+using JANL.Extensions;
+using Microsoft.WindowsAPICodePack.Taskbar;
 
 namespace FIASUpdate.Forms
 {
@@ -22,6 +23,7 @@ namespace FIASUpdate.Forms
         private static readonly FIASClient Client = new FIASClient();
         private static readonly Settings Settings = Settings.Default;
         private readonly FIASDatabaseStore Store = new FIASDatabaseStore(Settings.SQLConnection);
+        private readonly TaskbarManager Taskbar = TaskbarManager.Instance;
         private List<FIASArchiveDelta> Archives;
         private CancellationTokenSource CTS;
         private List<string> Subjects;
@@ -117,7 +119,11 @@ namespace FIASUpdate.Forms
             {
                 await task(CTS.Token);
             }
-            catch (Exception e) { this.ShowException(e); }
+            catch (Exception e)
+            {
+                Taskbar.SetProgressState(TaskbarProgressBarState.Error, Handle);
+                this.ShowException(e);
+            }
             finally
             {
                 CTS.Dispose();
@@ -136,6 +142,7 @@ namespace FIASUpdate.Forms
 
                 TS_Progress.Status = "Скачивание архивов";
                 TS_Progress.Value = $@"{count}/{items.Count}";
+                Taskbar.SetProgressValue(count, items.Count, Handle);
                 using (var AD = new ArchiveDownloader())
                 {
                     var tasks = items.Select(async item =>
@@ -156,6 +163,7 @@ namespace FIASUpdate.Forms
                         await AD.Download(item.Archive, progress, token);
                         item.Refresh();
                         TS_Progress.Value = $@"{++count}/{items.Count}";
+                        Taskbar.SetProgressValue(count, items.Count, Handle);
                         token.ThrowIfCancellationRequested();
                     });
                     await Task.WhenAll(tasks);
@@ -164,6 +172,7 @@ namespace FIASUpdate.Forms
             }
             catch (OperationCanceledException)
             {
+                Taskbar.SetProgressState(TaskbarProgressBarState.Paused, Handle);
                 TS_Progress.Status = "Скачивание отменено";
                 TS_Progress.Value = "-";
             }
@@ -177,7 +186,10 @@ namespace FIASUpdate.Forms
         {
             try
             {
-                var items = ListItems.OrderBy(I => I.Archive.Date);
+                var count = 0;
+                var items = ListItems.OrderBy(I => I.Archive.Date).ToList();
+
+                Taskbar.SetProgressValue(count, items.Count, Handle);
                 foreach (var item in items)
                 {
                     item.State = "Импорт данных";
@@ -188,6 +200,7 @@ namespace FIASUpdate.Forms
                     {
                         await Task.Run(() => FIAS.Import(TS_Progress.Progress, token));
                     }
+                    Taskbar.SetProgressValue(++count, items.Count, Handle);
                     item.State = "Архив импортирован";
                 }
                 TS_Progress.Status = "Импорт завершён";
@@ -195,6 +208,7 @@ namespace FIASUpdate.Forms
             }
             catch (OperationCanceledException)
             {
+                Taskbar.SetProgressState(TaskbarProgressBarState.Paused, Handle);
                 TS_Progress.Status = "Импорт отменён";
                 TS_Progress.Value = "-";
             }

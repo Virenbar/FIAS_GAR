@@ -1,14 +1,15 @@
-﻿using FIAS.Core.Stores;
-using FIASUpdate.Models;
-using FIASUpdate.Properties;
-using JANL.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FIAS.Core.Stores;
+using FIASUpdate.Models;
+using FIASUpdate.Properties;
+using JANL.Extensions;
+using Microsoft.WindowsAPICodePack.Taskbar;
 
 namespace FIASUpdate.Forms
 {
@@ -16,6 +17,7 @@ namespace FIASUpdate.Forms
     {
         private static readonly Settings Settings = Settings.Default;
         private readonly FIASDatabaseStore Store = new FIASDatabaseStore(Settings.SQLConnection);
+        private readonly TaskbarManager Taskbar = TaskbarManager.Instance;
         private FIASArchiveFull Archive;
         private CancellationTokenSource CTS;
         private List<string> Subjects;
@@ -94,6 +96,7 @@ namespace FIASUpdate.Forms
         {
             try
             {
+                Taskbar.SetProgressState(TaskbarProgressBarState.Indeterminate, Handle);
                 LV_Result.Items.Clear();
                 using (var FIAS = new DBImportFull(Archive)
                 {
@@ -105,11 +108,13 @@ namespace FIASUpdate.Forms
                     await Task.Run(() => FIAS.Import(TS_Progress.Progress, CTS.Token));
                     SetResult(FIAS.Result);
                 }
+                Taskbar.SetProgressState(TaskbarProgressBarState.NoProgress, Handle);
                 TS_Progress.Status = "Импорт завершён";
                 FLP_Action.Enabled = false;
             }
             catch (OperationCanceledException)
             {
+                Taskbar.SetProgressState(TaskbarProgressBarState.Paused, Handle);
                 TS_Progress.Status = "Импорт отменён";
                 TS_Progress.Value = "-";
             }

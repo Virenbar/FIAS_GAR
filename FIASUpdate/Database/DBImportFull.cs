@@ -1,9 +1,9 @@
-﻿using FIASUpdate.Models;
-using JANL;
-using Microsoft.SqlServer.Management.Smo;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using FIASUpdate.Models;
+using JANL;
+using Microsoft.SqlServer.Management.Smo;
 
 namespace FIASUpdate
 {
