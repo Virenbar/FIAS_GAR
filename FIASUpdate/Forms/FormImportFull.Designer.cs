@@ -151,6 +151,7 @@
             this.B_Import.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.B_Import.AutoSize = true;
             this.B_Import.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.B_Import.Enabled = false;
             this.B_Import.Image = global::FIASUpdate.icons8.Replace16;
             this.B_Import.Location = new System.Drawing.Point(3, 3);
             this.B_Import.Name = "B_Import";

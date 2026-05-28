@@ -21,7 +21,7 @@ namespace FIASUpdate.Forms
         private FIASArchiveFull Archive;
         private CancellationTokenSource CTS;
         private List<string> Subjects;
-        private DateTime Version;
+        private DateTime? Version;
 
         public FormImportFull()
         {
@@ -46,7 +46,7 @@ namespace FIASUpdate.Forms
                 this.ShowError("В свойствах БД не указан список субъектов РФ. Импорт невозможно.");
                 return;
             }
-            Version = version.Value;
+            Version = version;
             Subjects = subjects;
             Info.Version = Version;
             Info.Subjects = Subjects;
