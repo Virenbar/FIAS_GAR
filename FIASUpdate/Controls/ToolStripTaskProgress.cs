@@ -1,7 +1,7 @@
-﻿using JANL;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using JANL;
 
 namespace FIASUpdate.Controls
 {

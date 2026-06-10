@@ -1,11 +1,11 @@
-﻿using FIAS.Core.Stores;
-using FIASUpdate.Controls;
-using FIASUpdate.Properties;
-using Microsoft.WindowsAPICodePack.Dialogs;
-using System;
+﻿using System;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using FIAS.Core.Stores;
+using FIASUpdate.Controls;
+using FIASUpdate.Properties;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace FIASUpdate.Forms
 {
@@ -82,6 +82,12 @@ namespace FIASUpdate.Forms
         {
             Icon = Owner.Icon;
             LV_Tables.Items.Clear();
+            try
+            {
+                RefreshData();
+            }
+            catch {/* NO OP */ }
+
         }
 
         private void B_Subjects_Click(object sender, EventArgs e)

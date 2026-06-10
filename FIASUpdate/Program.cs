@@ -1,9 +1,9 @@
-﻿using FIAS.Core.Extensions;
-using FIASUpdate.Properties;
-using JANL;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using FIAS.Core.Extensions;
+using FIASUpdate.Properties;
+using JANL;
 
 namespace FIASUpdate
 {

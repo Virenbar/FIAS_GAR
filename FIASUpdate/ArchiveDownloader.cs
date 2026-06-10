@@ -1,11 +1,11 @@
-﻿using FIAS.Core.Extensions;
-using FIAS.Core.Models;
-using FIASUpdate.Models;
-using System;
+﻿using System;
 using System.IO;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using FIAS.Core.Extensions;
+using FIAS.Core.Models;
+using FIASUpdate.Models;
 
 namespace FIASUpdate
 {

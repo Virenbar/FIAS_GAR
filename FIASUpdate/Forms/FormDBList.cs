@@ -1,10 +1,10 @@
-﻿using FIASUpdate.Controls;
+﻿using System;
+using System.Data.SqlClient;
+using System.Windows.Forms;
+using FIASUpdate.Controls;
 using FIASUpdate.Properties;
 using JANL.Extensions;
 using Microsoft.Data.ConnectionUI;
-using System;
-using System.Data.SqlClient;
-using System.Windows.Forms;
 
 namespace FIASUpdate.Forms
 {

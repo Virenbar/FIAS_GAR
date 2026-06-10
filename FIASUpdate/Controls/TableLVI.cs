@@ -1,5 +1,5 @@
-﻿using FIAS.Core.Models;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+using FIAS.Core.Models;
 
 namespace FIASUpdate.Controls
 {

@@ -1,8 +1,8 @@
-﻿using FIAS.Core.Stores;
-using System;
+﻿using System;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using FIAS.Core.Stores;
 
 namespace FIASUpdate.Forms
 {
