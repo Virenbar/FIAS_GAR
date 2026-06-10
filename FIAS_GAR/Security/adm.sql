@@ -2,24 +2,6 @@
     AUTHORIZATION [dbo];
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 GO
 GRANT SELECT
     ON SCHEMA::[adm] TO PUBLIC;

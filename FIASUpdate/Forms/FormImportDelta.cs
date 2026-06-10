@@ -74,19 +74,29 @@ namespace FIASUpdate.Forms
                 this.ShowError(ex, "Не удалось получить список архивов");
                 return;
             }
-
+            //
             if (Archives.Count == 0)
             {
                 TS_Progress.Status = "Обновление не требуется";
                 return;
             }
-
+            //
             if (Archives.Any(A => string.IsNullOrEmpty(A.URLDelta)))
             {
                 this.ShowError("У некоторых архивов отсутствует ссылка на скачивание. Обновление невозможно.");
                 return;
             }
-
+            // Проверка возраста БД
+            var age = DateTime.Today - Version;
+            var min_diff = Archives.Min(A => A.Date) - Version;
+            if (age.Days > 120)
+            {
+                this.ShowWarning($"Версия БД старее последнего архива на {age.Days} дней. Рекомендуется выполнить импорт полной версии БД.");
+            }
+            if (min_diff.Days > 7)
+            {
+                this.ShowWarning($"Версия БД старее самого раннего доступного архива на {min_diff.Days} дней. Крайне рекомендуется выполнить импорт полной версии БД.");
+            }
             TS_Progress.Clear();
             RefreshList();
             RefreshUI();

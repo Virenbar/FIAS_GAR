@@ -8,7 +8,7 @@ RETURNS TABLE
 AS
 RETURN
    (
-   -- Активные адресные объекты
+   -- Адресные объекты
    SELECT
 	   [RO].[OBJECTID]   [ObjectID]
 	 , [RO].[OBJECTGUID] [ObjectGUID]
@@ -25,7 +25,7 @@ RETURN
    JOIN [dbo].[ADDR_OBJ] [AO] ON [AO].[OBJECTID] = [RO].[OBJECTID]
    UNION ALL
 
-   -- Активные участки
+   -- Участки
    SELECT
 	   [RO].[OBJECTID]
 	 , [RO].[OBJECTGUID]
@@ -44,7 +44,7 @@ RETURN
    JOIN [dbo].[ADDR_OBJ_TYPES] [T] ON [LEVEL] = 9
    UNION ALL
 
-   -- Активные дома
+   -- Дома
    SELECT
 	   [RO].[OBJECTID]
 	 , [RO].[OBJECTGUID]
@@ -65,7 +65,7 @@ RETURN
    LEFT JOIN [ADDHOUSE_TYPES] [HT2] ON [HT2].[ID] = [H].[ADDTYPE2]
    UNION ALL
 
-   -- Активные квартиры
+   -- Квартиры
    SELECT
 	   [RO].[OBJECTID]
 	 , [RO].[OBJECTGUID]
@@ -84,7 +84,7 @@ RETURN
    LEFT JOIN [APARTMENT_TYPES] [AT] ON [AT].[ID] = [A].[APARTTYPE]
    UNION ALL
 
-   -- Активные комнаты
+   -- Комнаты
    SELECT
 	   [RO].[OBJECTID]
 	 , [RO].[OBJECTGUID]
@@ -103,7 +103,7 @@ RETURN
    LEFT JOIN [ROOM_TYPES] [RT] ON [RT].[ID] = [R].[ROOMTYPE]
    UNION ALL
 
-   -- Активные парко места
+   -- Парко места
    SELECT
 	   [RO].[OBJECTID]
 	 , [RO].[OBJECTGUID]

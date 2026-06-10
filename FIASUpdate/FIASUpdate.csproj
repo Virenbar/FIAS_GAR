@@ -373,6 +373,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArchiveDownloader.cs" />
+    <Compile Include="Controls\AddressLVI.cs" />
     <Compile Include="Controls\TableLVI.cs" />
     <Compile Include="Controls\TextBoxFileDrop.cs">
       <SubType>Component</SubType>
@@ -391,6 +392,12 @@
     <Compile Include="Database\DBImport.cs" />
     <Compile Include="Database\DBImportDelta.cs" />
     <Compile Include="Extensions\DataExtensions.cs" />
+    <Compile Include="Forms\FormAddressExplorer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormAddressExplorer.Designer.cs">
+      <DependentUpon>FormAddressExplorer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormDictionaryView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -476,6 +483,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormAbout.resx">
       <DependentUpon>FormAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormAddressExplorer.resx">
+      <DependentUpon>FormAddressExplorer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormAddressSearch.resx">
       <DependentUpon>FormAddressSearch.cs</DependentUpon>
@@ -585,5 +595,9 @@
       <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Data.SqlClient.SNI.5.0.1\build\net46\Microsoft.Data.SqlClient.SNI.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Data.SqlClient.SNI.5.0.1\build\net46\Microsoft.Data.SqlClient.SNI.targets'))" />
+  </Target>
+  <!-- The following makes sure we don’t try to publish a configuration that defines the DEBUG constant -->
+  <Target Name="BeforePublish">
+    <Error Condition="'$(DebugSymbols)' == 'true'" Text="You attempted to publish a configuration that defines the DEBUG constant!" />
   </Target>
 </Project>

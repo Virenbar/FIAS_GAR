@@ -38,6 +38,7 @@ namespace FIAS.Core.Stores
         public List<string> GetSubjects()
         {
             var list = UP_DatabasePropertyGet<string>(Subjects) ?? "";
+            if (string.IsNullOrWhiteSpace(list)) { return new List<string>(); }
             return list.Split(';').ToList();
         }
 

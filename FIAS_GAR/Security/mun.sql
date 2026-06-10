@@ -2,22 +2,6 @@
     AUTHORIZATION [dbo];
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 GO
 GRANT SELECT
     ON SCHEMA::[mun] TO PUBLIC;

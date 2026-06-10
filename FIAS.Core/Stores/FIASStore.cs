@@ -31,14 +31,24 @@ namespace FIAS.Core.Stores
         /// Получить дочерние объекты
         /// </summary>
         /// <param name="GUID">GUID родительского объекта</param>
+        /// <param name="division">Деление</param>
         public async Task<List<FIASRegistryAddress>> GetChilds(string GUID, FIASDivision division)
         {
             using (var DT = await Task.Run(() => UP_RegistrySelectChild(GUID, division)))
                 return FIASRegistryAddress.Parse(DT);
         }
 
+        /// <summary>
+        /// Получить иерархию объекта
+        /// </summary>
+        /// <param name="GUID">GUID объекта</param>
         public Task<List<FIASHierarchyItem>> GetHierarchy(string GUID) => GetHierarchy(GUID, FIASDivision.mun);
 
+        /// <summary>
+        /// Получить иерархию объекта
+        /// </summary>
+        /// <param name="GUID">GUID объекта</param>
+        /// <param name="division">Деление</param>
         public async Task<List<FIASHierarchyItem>> GetHierarchy(string GUID, FIASDivision division)
         {
             using (var DT = await Task.Run(() => UP_RegistryHierarchy(GUID, division)))
@@ -48,16 +58,20 @@ namespace FIAS.Core.Stores
         /// <summary>
         /// Получить внутренний код
         /// </summary>
+        /// <param name="GUID">GUID объекта</param>
         public long GetID(string GUID) => UP_IDByGUID(GUID);
 
         /// <summary>
         /// Получить объект
         /// </summary>
+        /// <param name="GUID">GUID объекта</param>
         public FIASRegistryAddress GetObject(string GUID) => GetObject(GUID, FIASDivision.mun);
 
         /// <summary>
         /// Получить объект
         /// </summary>
+        /// <param name="GUID">GUID объекта</param>
+        /// <param name="division">Деление</param>
         public FIASRegistryAddress GetObject(string GUID, FIASDivision division)
         {
             using (var DT = UP_RegistrySelect(GUID, division))
@@ -76,6 +90,40 @@ namespace FIAS.Core.Stores
             using (var DT = await Task.Run(() => UP_ObjectParameters(GUID)))
                 return DT.ToDictionary<string, string>("Name", "Value");
         }
+
+        /// <summary>
+        /// Получить субъекты РФ
+        /// </summary>
+        public async Task<List<FIASRegistryAddress>> GetSubject()
+        {
+            using (var DT = await Task.Run(() => UP_Subjects()))
+                return FIASRegistryAddress.Parse(DT);
+        }
+
+        /// <summary>
+        /// Поиск адреса по AddressFull или GUID
+        /// </summary>
+        /// <param name="division">Деление</param>
+        /// <param name="S">Текст для поиска</param>
+        /// <param name="level">Уровень объекта</param>
+        /// <param name="limit">Максимальное кол-во строк для вывода </param>
+        public async Task<List<FIASRegistryAddress>> Search(FIASDivision division, string S, int? level, int? limit)
+        {
+            using (var DT = await Task.Run(() => S.IsGUID() ? UP_SearchRegistryByGUID(division, S, level, limit) : UP_SearchRegistry(division, S, level, limit)))
+                return FIASRegistryAddress.Parse(DT);
+        }
+
+        /// <summary>
+        /// Получить статистику по количеству объектов БД
+        /// </summary>
+        /// <returns></returns>
+        public async Task<Dictionary<string, string>> Statistics()
+        {
+            using (var DT = await Task.Run(UP_FIAS_Statistics))
+                return DT.ToDictionary<string, string>("Name", "Value");
+        }
+
+        #region External
 
         /// <summary>
         /// Ссылка на страницу на fias.nalog.ru
@@ -103,25 +151,7 @@ namespace FIAS.Core.Stores
         /// <param name="division">Деление</param>
         public string GetPDFStatementURL(string GUID, FIASDivision division) => $"{ENDPOINT}/Export/ExportPdfStatement?objId={GetID(GUID)}&actual=true&division={(int)division}";
 
-        /// <summary>
-        /// Поиск адреса по AddressFull или GUID
-        /// </summary>
-        /// <param name="division">Деление</param>
-        /// <param name="S">Текст для поиска</param>
-        /// <param name="Level">Уровень объекта</param>
-        /// <param name="Limit">Максимальное кол-во строк для вывода </param>
-        /// <returns></returns>
-        public async Task<List<FIASRegistryAddress>> Search(FIASDivision division, string S, int? Level, int? Limit)
-        {
-            using (var DT = await Task.Run(() => S.IsGUID() ? UP_SearchRegistryByGUID(division, S, Level, Limit) : UP_SearchRegistry(division, S, Level, Limit)))
-                return FIASRegistryAddress.Parse(DT);
-        }
-
-        public async Task<Dictionary<string, string>> Statistics()
-        {
-            using (var DT = await Task.Run(UP_FIAS_Statistics))
-                return DT.ToDictionary<string, string>("Name", "Value");
-        }
+        #endregion External
 
         #region SQL
 
@@ -211,6 +241,14 @@ namespace FIAS.Core.Stores
                 command.AddParameter("@GUID", GUID);
                 command.AddParameter("@Level", Level);
                 command.AddParameter("@Limit", Limit);
+                return Execute(command).Select();
+            }
+        }
+
+        private DataTable UP_Subjects()
+        {
+            using (var command = NewProcedure())
+            {
                 return Execute(command).Select();
             }
         }
