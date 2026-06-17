@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.B_SQLConnection = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -68,7 +68,7 @@
             this.textBox1.Location = new System.Drawing.Point(82, 4);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(360, 22);
+            this.textBox1.Size = new System.Drawing.Size(357, 22);
             this.textBox1.TabIndex = 1;
             this.textBox1.Text = global::FIASUpdate.Properties.Settings.Default.SQLConnection;
             // 
@@ -78,10 +78,10 @@
             this.B_SQLConnection.AutoSize = true;
             this.B_SQLConnection.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.B_SQLConnection.Image = global::FIASUpdate.icons8.PencilDrawing16;
-            this.B_SQLConnection.Location = new System.Drawing.Point(448, 3);
+            this.B_SQLConnection.Location = new System.Drawing.Point(445, 3);
             this.B_SQLConnection.Name = "B_SQLConnection";
             this.B_SQLConnection.Padding = new System.Windows.Forms.Padding(1);
-            this.B_SQLConnection.Size = new System.Drawing.Size(81, 25);
+            this.B_SQLConnection.Size = new System.Drawing.Size(80, 25);
             this.B_SQLConnection.TabIndex = 0;
             this.B_SQLConnection.Text = "Выбрать";
             this.B_SQLConnection.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -95,7 +95,7 @@
             this.textBox2.Location = new System.Drawing.Point(82, 35);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(360, 22);
+            this.textBox2.Size = new System.Drawing.Size(357, 22);
             this.textBox2.TabIndex = 1;
             this.textBox2.Text = global::FIASUpdate.Properties.Settings.Default.XMLPath;
             // 
@@ -139,7 +139,7 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(532, 62);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(528, 62);
             this.tableLayoutPanel2.TabIndex = 9;
             // 
             // B_XMLPath
@@ -148,10 +148,10 @@
             this.B_XMLPath.AutoSize = true;
             this.B_XMLPath.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.B_XMLPath.Image = global::FIASUpdate.icons8.OpenedFolder16;
-            this.B_XMLPath.Location = new System.Drawing.Point(448, 34);
+            this.B_XMLPath.Location = new System.Drawing.Point(445, 34);
             this.B_XMLPath.Name = "B_XMLPath";
             this.B_XMLPath.Padding = new System.Windows.Forms.Padding(1);
-            this.B_XMLPath.Size = new System.Drawing.Size(81, 25);
+            this.B_XMLPath.Size = new System.Drawing.Size(80, 25);
             this.B_XMLPath.TabIndex = 0;
             this.B_XMLPath.Text = "Выбрать";
             this.B_XMLPath.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -164,7 +164,7 @@
             this.B_Save.AutoSize = true;
             this.B_Save.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.B_Save.Image = global::FIASUpdate.icons8.Save16;
-            this.B_Save.Location = new System.Drawing.Point(437, 3);
+            this.B_Save.Location = new System.Drawing.Point(433, 3);
             this.B_Save.Name = "B_Save";
             this.B_Save.Padding = new System.Windows.Forms.Padding(1);
             this.B_Save.Size = new System.Drawing.Size(92, 25);
@@ -199,11 +199,11 @@
             this.tableLayoutPanel3.Controls.Add(this.B_Save, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.B_Refresh, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 456);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 436);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(532, 31);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(528, 31);
             this.tableLayoutPanel3.TabIndex = 8;
             // 
             // columnHeader4
@@ -237,13 +237,13 @@
             this.LV_Tables.FullRowSelect = true;
             this.LV_Tables.GridLines = true;
             this.LV_Tables.HideSelection = false;
-            listViewItem3.StateImageIndex = 0;
+            listViewItem2.StateImageIndex = 0;
             this.LV_Tables.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3});
+            listViewItem2});
             this.LV_Tables.Location = new System.Drawing.Point(3, 18);
             this.LV_Tables.MultiSelect = false;
             this.LV_Tables.Name = "LV_Tables";
-            this.LV_Tables.Size = new System.Drawing.Size(526, 358);
+            this.LV_Tables.Size = new System.Drawing.Size(522, 338);
             this.LV_Tables.TabIndex = 0;
             this.LV_Tables.UseCompatibleStateImageBehavior = false;
             this.LV_Tables.View = System.Windows.Forms.View.Details;
@@ -254,7 +254,7 @@
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(3, 77);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(532, 379);
+            this.groupBox3.Size = new System.Drawing.Size(528, 359);
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Таблицы для импорта";
@@ -265,9 +265,9 @@
             this.groupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBox1.Controls.Add(this.tableLayoutPanel2);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Location = new System.Drawing.Point(5, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(538, 83);
+            this.groupBox1.Size = new System.Drawing.Size(534, 83);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Настройки приложения";
@@ -278,9 +278,9 @@
             this.groupBox2.Controls.Add(this.tableLayoutPanel1);
             this.groupBox2.Controls.Add(this.tableLayoutPanel3);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(3, 86);
+            this.groupBox2.Location = new System.Drawing.Point(5, 88);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(538, 490);
+            this.groupBox2.Size = new System.Drawing.Size(534, 470);
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Настройки БД";
@@ -305,16 +305,16 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(532, 59);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(528, 59);
             this.tableLayoutPanel1.TabIndex = 20;
             // 
             // label3
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 9);
+            this.label3.Location = new System.Drawing.Point(17, 9);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(45, 13);
+            this.label3.Size = new System.Drawing.Size(44, 13);
             this.label3.TabIndex = 0;
             this.label3.Text = "Версия";
             // 
@@ -345,7 +345,7 @@
             this.TB_Subject.Location = new System.Drawing.Point(67, 34);
             this.TB_Subject.Name = "TB_Subject";
             this.TB_Subject.ReadOnly = true;
-            this.TB_Subject.Size = new System.Drawing.Size(462, 22);
+            this.TB_Subject.Size = new System.Drawing.Size(458, 22);
             this.TB_Subject.TabIndex = 1;
             this.TB_Subject.TabStop = false;
             // 
@@ -355,7 +355,7 @@
             this.B_Subjects.AutoSize = true;
             this.B_Subjects.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.B_Subjects.Image = global::FIASUpdate.icons8.PencilDrawing16;
-            this.B_Subjects.Location = new System.Drawing.Point(443, 3);
+            this.B_Subjects.Location = new System.Drawing.Point(439, 3);
             this.B_Subjects.Name = "B_Subjects";
             this.B_Subjects.Padding = new System.Windows.Forms.Padding(1);
             this.B_Subjects.Size = new System.Drawing.Size(86, 25);
@@ -370,7 +370,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = global::FIASUpdate.Properties.Settings.Default.DefaultBackColor;
-            this.ClientSize = new System.Drawing.Size(544, 579);
+            this.ClientSize = new System.Drawing.Size(544, 561);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::FIASUpdate.Properties.Settings.Default, "DefaultFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -382,7 +382,7 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(560, 600);
             this.Name = "FormSettings";
-            this.Padding = new System.Windows.Forms.Padding(3);
+            this.Padding = new System.Windows.Forms.Padding(5, 5, 5, 3);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Настройки";
             this.Load += new System.EventHandler(this.FormSettings_Load);

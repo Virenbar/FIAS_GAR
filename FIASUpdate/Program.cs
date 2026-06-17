@@ -14,6 +14,7 @@ namespace FIASUpdate
         private static void Default_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             Defaults.Connection = Settings.SQLConnection;
+            FIASProperties.Refresh();
         }
 
         /// <summary>

@@ -14,6 +14,16 @@ BEGIN
 	SET @Address = REPLACE(@Address, '5я', '5')
 	SET @Address = REPLACE(@Address, 'Килачевское', 'Килачёвское')
 	--
+	SET @Address = REPLACE(@Address, 'МО город', '')
+	--SET @Address = REPLACE(@Address, ' ГО', '')
+	--SET @Address = REPLACE(@Address, ' МО', '')
+	SET @Address = REPLACE(@Address, 'ГО ', '')
+	SET @Address = REPLACE(@Address, 'МО ', '')
+	--
+	SET @Address = REPLACE(@Address, 'ул _', '')
+	SET @Address = REPLACE(@Address, 'ул -', '')
+	SET @Address = REPLACE(@Address, 'ул без названия', '')
+	--
 	SET @Address = REPLACE(@Address, '-го', ' ')
 	SET @Address = REPLACE(@Address, 'г.', ' ')
 	SET @Address = REPLACE(@Address, 'г ', ' ')
