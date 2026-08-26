@@ -8,7 +8,6 @@ namespace FIASUpdate
     internal class DBClient : IDisposable
     {
         protected readonly Database DB;
-        protected readonly string DBName = FIASProperties.DBName;
 
         public DBClient()
         {
@@ -23,6 +22,7 @@ namespace FIASUpdate
         }
 
         public double Size => DB.Size;
+        protected string DBName => FIASProperties.DatabaseName;
 
         public void Shrink()
         {

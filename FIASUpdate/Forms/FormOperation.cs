@@ -42,10 +42,12 @@ namespace FIASUpdate.Forms
                         await RefreshRegistry(FIASDivision.adm, CTS.Token);
                         await Task.Delay(500);
                     }
+                    CB_Update.Checked = false;
                 }
                 if (CB_Shrink.Checked)
                 {
                     await Shrink(CTS.Token);
+                    CB_Shrink.Checked = false;
                 }
                 Taskbar.SetProgressValue(1, 1, Handle);
             }

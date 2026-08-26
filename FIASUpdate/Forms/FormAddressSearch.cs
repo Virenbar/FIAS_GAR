@@ -1,15 +1,16 @@
-﻿using FIAS.Core;
-using FIAS.Core.Extensions;
-using FIAS.Core.Stores;
-using FIASUpdate.Properties;
-using JANL.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FIAS.Core;
+using FIAS.Core.Extensions;
+using FIAS.Core.Models;
+using FIAS.Core.Stores;
+using FIASUpdate.Controls;
+using FIASUpdate.Properties;
+using JANL.Extensions;
 
 namespace FIASUpdate.Forms
 {
@@ -33,12 +34,6 @@ namespace FIASUpdate.Forms
         {
             Text = "Справочник ФИАС";
             if (LV_Search.Items.Count > 0) { Text += $" (Объектов: {LV_Search.Items.Count:N0})"; }
-
-            MI_PDF.Enabled = TB_GUID.Text.Length > 0;
-            MI_Parameters.Enabled = TB_GUID.Text.Length > 0;
-            MI_URL.Enabled = TB_GUID.Text.Length > 0;
-            B_CopyGUID.Enabled = TB_GUID.Text.Length > 0;
-            B_CopyAddress.Enabled = TB_Address.Text.Length > 0;
         }
 
         private async Task Search()
@@ -47,17 +42,12 @@ namespace FIASUpdate.Forms
             UIState(false);
             try
             {
-                var S = TB_Search.Text.TrimSpaces();
-                var Limit = (int)NUD_Limit.Value;
-                var Result = await Store.Search(Division, S, Level, Limit);
+                var search = TB_Search.Text.TrimSpaces();
+                var limit = (int)NUD_Limit.Value;
+                var result = await Store.Search(Division, search, Level, limit);
                 LV_Search.BeginUpdate();
                 LV_Search.Items.Clear();
-                foreach (var R in Result)
-                {
-                    var LVI = new ListViewItem(R.ObjectGUID) { Font = TB_GUID.Font, UseItemStyleForSubItems = false };
-                    LVI.SubItems.Add(R.AddressFull).Font = Font;
-                    LV_Search.Items.Add(LVI);
-                }
+                LV_Search.Items.AddRange(AddressLVI.FromList(result, false));
                 if (LV_Search.Items.Count > 0) { LV_Search.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent); }
                 LV_Search.EndUpdate();
                 RefreshUI();
@@ -107,16 +97,6 @@ namespace FIASUpdate.Forms
 
         #region UI Events
 
-        private void B_CopyAddress_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(TB_Address.Text);
-        }
-
-        private void B_CopyGUID_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(TB_GUID.Text);
-        }
-
         private async void B_Search_Click(object sender, EventArgs e) => await Search();
 
         private async void CB_Level_SelectedIndexChanged(object sender, EventArgs e)
@@ -152,14 +132,12 @@ namespace FIASUpdate.Forms
         {
             if (LV_Search.SelectedItems.Count > 0)
             {
-                var A = LV_Search.SelectedItems[0];
-                TB_GUID.Text = A.SubItems[0].Text;
-                TB_Address.Text = A.SubItems[1].Text;
+                var address = (FIASRegistryAddress)(AddressLVI)LV_Search.SelectedItems[0];
+                UC_Object.SetObject(address, Division);
             }
             else
             {
-                TB_GUID.Text = string.Empty;
-                TB_Address.Text = string.Empty;
+                UC_Object.ClearObject();
             }
             RefreshUI();
         }
@@ -175,45 +153,6 @@ namespace FIASUpdate.Forms
             }
             catch (Exception E) { this.ShowError(E.Message); }
             finally { UIState(true); }
-        }
-
-        private async void MI_Parameters_Click(object sender, EventArgs e)
-        {
-            UIState(false);
-            try
-            {
-                var parameters = await Store.GetObjectParameters(TB_GUID.Text);
-                var F = new FormDictionaryView
-                {
-                    Text = "Параметры объекта",
-                    KeyHeader = "Параметр",
-                    ValeuHeader = "Значение"
-                };
-                F.SetDictionary(parameters);
-                F.ShowDialog(this);
-            }
-            catch (Exception E) { this.ShowError(E.Message); }
-            finally { UIState(true); }
-        }
-
-        private void MI_PDF_Click(object sender, EventArgs e)
-        {
-            var uri = Store.GetPDFStatementURL(TB_GUID.Text, Division);
-            var info = new ProcessStartInfo(uri)
-            {
-                UseShellExecute = true
-            };
-            Process.Start(info);
-        }
-
-        private void MI_URL_Click(object sender, EventArgs e)
-        {
-            var uri = Store.GetPageURL(TB_GUID.Text, Division);
-            var info = new ProcessStartInfo(uri)
-            {
-                UseShellExecute = true
-            };
-            Process.Start(info);
         }
 
         private async void RB_CheckedChanged(object sender, EventArgs e) => await Search();

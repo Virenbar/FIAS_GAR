@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -14,11 +13,11 @@ namespace FIASUpdate.Controls
 
         public AddressLVI(FIASRegistryAddress address) : this(address, true) { }
 
-        public AddressLVI(FIASRegistryAddress address, bool full)
+        public AddressLVI(FIASRegistryAddress address, bool showName)
         {
             Address = address;
             Text = $"{Address.ObjectGUID}";
-            if (full)
+            if (showName)
             {
                 SubItems.AddRange(new[] { Address.NameFull, Address.AddressFull });
             }
@@ -31,11 +30,15 @@ namespace FIASUpdate.Controls
         }
 
         public FIASRegistryAddress Address { get; }
+        public string GUID => Address.ObjectGUID;
+        public string NameFull => Address.NameFull;
 
-        public static AddressLVI[] FromList(IEnumerable<FIASRegistryAddress> addresses)
+        public static AddressLVI[] FromList(IEnumerable<FIASRegistryAddress> addresses) => FromList(addresses, true);
+
+        public static AddressLVI[] FromList(IEnumerable<FIASRegistryAddress> addresses, bool showName)
         {
             return addresses
-                .Select(R => new AddressLVI(R))
+                .Select(R => new AddressLVI(R, showName))
                 .ToArray();
         }
 

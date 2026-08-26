@@ -36,32 +36,22 @@
             this.RB_ADM = new System.Windows.Forms.RadioButton();
             this.RB_MUN = new System.Windows.Forms.RadioButton();
             this.L_GUID = new System.Windows.Forms.Label();
-            this.TB_Address = new System.Windows.Forms.TextBox();
             this.Label4 = new System.Windows.Forms.Label();
             this.Label1 = new System.Windows.Forms.Label();
             this.FlowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.CB_Level = new System.Windows.Forms.ComboBox();
             this.TableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.B_Search = new System.Windows.Forms.Button();
-            this.TableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.Label3 = new System.Windows.Forms.Label();
-            this.B_CopyGUID = new System.Windows.Forms.Button();
-            this.TB_GUID = new System.Windows.Forms.TextBox();
-            this.Label2 = new System.Windows.Forms.Label();
-            this.B_CopyAddress = new System.Windows.Forms.Button();
             this.LV_Address = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.LV_GUID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.LV_Search = new System.Windows.Forms.ListView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.дополнительноToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MI_DBInfo = new System.Windows.Forms.ToolStripMenuItem();
-            this.MI_PDF = new System.Windows.Forms.ToolStripMenuItem();
-            this.MI_Parameters = new System.Windows.Forms.ToolStripMenuItem();
-            this.MI_URL = new System.Windows.Forms.ToolStripMenuItem();
+            this.UC_Object = new FIASUpdate.Controls.UC_FIASObject();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_Limit)).BeginInit();
             this.FlowLayoutPanel1.SuspendLayout();
             this.TableLayoutPanel3.SuspendLayout();
-            this.TableLayoutPanel2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -150,15 +140,6 @@
             this.L_GUID.Text = "GUID";
             this.L_GUID.Visible = false;
             // 
-            // TB_Address
-            // 
-            this.TB_Address.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.TB_Address.Location = new System.Drawing.Point(47, 32);
-            this.TB_Address.Name = "TB_Address";
-            this.TB_Address.ReadOnly = true;
-            this.TB_Address.Size = new System.Drawing.Size(685, 22);
-            this.TB_Address.TabIndex = 5;
-            // 
             // Label4
             // 
             this.Label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -245,90 +226,6 @@
             this.B_Search.UseVisualStyleBackColor = true;
             this.B_Search.Click += new System.EventHandler(this.B_Search_Click);
             // 
-            // TableLayoutPanel2
-            // 
-            this.TableLayoutPanel2.AutoSize = true;
-            this.TableLayoutPanel2.ColumnCount = 3;
-            this.TableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.TableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.TableLayoutPanel2.Controls.Add(this.TB_Address, 1, 1);
-            this.TableLayoutPanel2.Controls.Add(this.Label3, 0, 1);
-            this.TableLayoutPanel2.Controls.Add(this.B_CopyGUID, 2, 0);
-            this.TableLayoutPanel2.Controls.Add(this.TB_GUID, 1, 0);
-            this.TableLayoutPanel2.Controls.Add(this.Label2, 0, 0);
-            this.TableLayoutPanel2.Controls.Add(this.B_CopyAddress, 2, 1);
-            this.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.TableLayoutPanel2.Location = new System.Drawing.Point(0, 392);
-            this.TableLayoutPanel2.Name = "TableLayoutPanel2";
-            this.TableLayoutPanel2.RowCount = 2;
-            this.TableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.TableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.TableLayoutPanel2.Size = new System.Drawing.Size(800, 58);
-            this.TableLayoutPanel2.TabIndex = 16;
-            // 
-            // Label3
-            // 
-            this.Label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.Label3.AutoSize = true;
-            this.Label3.Location = new System.Drawing.Point(3, 37);
-            this.Label3.Name = "Label3";
-            this.Label3.Size = new System.Drawing.Size(38, 13);
-            this.Label3.TabIndex = 9;
-            this.Label3.Text = "Адрес";
-            // 
-            // B_CopyGUID
-            // 
-            this.B_CopyGUID.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.B_CopyGUID.AutoSize = true;
-            this.B_CopyGUID.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.B_CopyGUID.Enabled = false;
-            this.B_CopyGUID.Image = global::FIASUpdate.icons8.Clipboard16;
-            this.B_CopyGUID.Location = new System.Drawing.Point(738, 3);
-            this.B_CopyGUID.Name = "B_CopyGUID";
-            this.B_CopyGUID.Size = new System.Drawing.Size(59, 23);
-            this.B_CopyGUID.TabIndex = 3;
-            this.B_CopyGUID.Text = "Copy";
-            this.B_CopyGUID.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.B_CopyGUID.UseVisualStyleBackColor = true;
-            this.B_CopyGUID.Click += new System.EventHandler(this.B_CopyGUID_Click);
-            // 
-            // TB_GUID
-            // 
-            this.TB_GUID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.TB_GUID.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TB_GUID.Location = new System.Drawing.Point(47, 4);
-            this.TB_GUID.Name = "TB_GUID";
-            this.TB_GUID.ReadOnly = true;
-            this.TB_GUID.Size = new System.Drawing.Size(685, 20);
-            this.TB_GUID.TabIndex = 4;
-            // 
-            // Label2
-            // 
-            this.Label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.Label2.AutoSize = true;
-            this.Label2.Location = new System.Drawing.Point(3, 8);
-            this.Label2.Name = "Label2";
-            this.Label2.Size = new System.Drawing.Size(34, 13);
-            this.Label2.TabIndex = 8;
-            this.Label2.Text = "GUID";
-            // 
-            // B_CopyAddress
-            // 
-            this.B_CopyAddress.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.B_CopyAddress.AutoSize = true;
-            this.B_CopyAddress.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.B_CopyAddress.Enabled = false;
-            this.B_CopyAddress.Image = global::FIASUpdate.icons8.Clipboard16;
-            this.B_CopyAddress.Location = new System.Drawing.Point(738, 32);
-            this.B_CopyAddress.Name = "B_CopyAddress";
-            this.B_CopyAddress.Size = new System.Drawing.Size(59, 23);
-            this.B_CopyAddress.TabIndex = 3;
-            this.B_CopyAddress.Text = "Copy";
-            this.B_CopyAddress.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.B_CopyAddress.UseVisualStyleBackColor = true;
-            this.B_CopyAddress.Click += new System.EventHandler(this.B_CopyAddress_Click);
-            // 
             // LV_Address
             // 
             this.LV_Address.Text = "Адрес";
@@ -350,7 +247,7 @@
             this.LV_Search.HideSelection = false;
             this.LV_Search.Location = new System.Drawing.Point(0, 124);
             this.LV_Search.Name = "LV_Search";
-            this.LV_Search.Size = new System.Drawing.Size(800, 268);
+            this.LV_Search.Size = new System.Drawing.Size(800, 264);
             this.LV_Search.TabIndex = 14;
             this.LV_Search.UseCompatibleStateImageBehavior = false;
             this.LV_Search.View = System.Windows.Forms.View.Details;
@@ -370,10 +267,7 @@
             // 
             this.дополнительноToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.дополнительноToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MI_DBInfo,
-            this.MI_Parameters,
-            this.MI_PDF,
-            this.MI_URL});
+            this.MI_DBInfo});
             this.дополнительноToolStripMenuItem.Name = "дополнительноToolStripMenuItem";
             this.дополнительноToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.дополнительноToolStripMenuItem.Text = "Сервис";
@@ -386,32 +280,14 @@
             this.MI_DBInfo.Text = "Статистика БД";
             this.MI_DBInfo.Click += new System.EventHandler(this.MI_DBInfo_Click);
             // 
-            // MI_PDF
+            // UC_Object
             // 
-            this.MI_PDF.Enabled = false;
-            this.MI_PDF.Image = global::FIASUpdate.icons8.PDF16;
-            this.MI_PDF.Name = "MI_PDF";
-            this.MI_PDF.Size = new System.Drawing.Size(189, 22);
-            this.MI_PDF.Text = "Скачать выписку";
-            this.MI_PDF.Click += new System.EventHandler(this.MI_PDF_Click);
-            // 
-            // MI_Parameters
-            // 
-            this.MI_Parameters.Enabled = false;
-            this.MI_Parameters.Image = global::FIASUpdate.icons8.TableProperties16;
-            this.MI_Parameters.Name = "MI_Parameters";
-            this.MI_Parameters.Size = new System.Drawing.Size(189, 22);
-            this.MI_Parameters.Text = "Показать параметры";
-            this.MI_Parameters.Click += new System.EventHandler(this.MI_Parameters_Click);
-            // 
-            // MI_URL
-            // 
-            this.MI_URL.Enabled = false;
-            this.MI_URL.Image = global::FIASUpdate.icons8.Internet16;
-            this.MI_URL.Name = "MI_URL";
-            this.MI_URL.Size = new System.Drawing.Size(189, 22);
-            this.MI_URL.Text = "Открыть на сайте";
-            this.MI_URL.Click += new System.EventHandler(this.MI_URL_Click);
+            this.UC_Object.AutoSize = true;
+            this.UC_Object.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.UC_Object.Location = new System.Drawing.Point(0, 388);
+            this.UC_Object.Name = "UC_Object";
+            this.UC_Object.Size = new System.Drawing.Size(800, 62);
+            this.UC_Object.TabIndex = 19;
             // 
             // FormAddressSearch
             // 
@@ -420,8 +296,8 @@
             this.BackColor = global::FIASUpdate.Properties.Settings.Default.DefaultBackColor;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.LV_Search);
+            this.Controls.Add(this.UC_Object);
             this.Controls.Add(this.TableLayoutPanel3);
-            this.Controls.Add(this.TableLayoutPanel2);
             this.Controls.Add(this.menuStrip1);
             this.DataBindings.Add(new System.Windows.Forms.Binding("ForeColor", global::FIASUpdate.Properties.Settings.Default, "DefaultForeColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::FIASUpdate.Properties.Settings.Default, "DefaultFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -438,8 +314,6 @@
             this.FlowLayoutPanel1.PerformLayout();
             this.TableLayoutPanel3.ResumeLayout(false);
             this.TableLayoutPanel3.PerformLayout();
-            this.TableLayoutPanel2.ResumeLayout(false);
-            this.TableLayoutPanel2.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -460,23 +334,14 @@
         internal System.Windows.Forms.RadioButton RB_ADM;
         internal System.Windows.Forms.RadioButton RB_MUN;
         internal System.Windows.Forms.Label L_GUID;
-        internal System.Windows.Forms.TextBox TB_Address;
         internal System.Windows.Forms.TableLayoutPanel TableLayoutPanel3;
         internal System.Windows.Forms.Button B_Search;
-        internal System.Windows.Forms.TableLayoutPanel TableLayoutPanel2;
-        internal System.Windows.Forms.Label Label3;
-        internal System.Windows.Forms.Button B_CopyGUID;
-        internal System.Windows.Forms.TextBox TB_GUID;
-        internal System.Windows.Forms.Label Label2;
-        internal System.Windows.Forms.Button B_CopyAddress;
         internal System.Windows.Forms.ColumnHeader LV_Address;
         internal System.Windows.Forms.ColumnHeader LV_GUID;
         internal System.Windows.Forms.ListView LV_Search;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem дополнительноToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem MI_DBInfo;
-        private System.Windows.Forms.ToolStripMenuItem MI_PDF;
-        private System.Windows.Forms.ToolStripMenuItem MI_Parameters;
-        private System.Windows.Forms.ToolStripMenuItem MI_URL;
+        private Controls.UC_FIASObject UC_Object;
     }
 }

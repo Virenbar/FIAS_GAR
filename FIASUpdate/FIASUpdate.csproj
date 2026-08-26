@@ -29,10 +29,13 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationVersion>1.8.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <BootstrapperComponentsLocation>Relative</BootstrapperComponentsLocation>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -382,6 +385,7 @@
     </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.ValueTuple" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -397,6 +401,9 @@
   <ItemGroup>
     <Compile Include="ArchiveDownloader.cs" />
     <Compile Include="Controls\AddressLVI.cs" />
+    <Compile Include="Controls\SplitButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\TableLVI.cs" />
     <Compile Include="Controls\TextBoxFileDrop.cs">
       <SubType>Component</SubType>
@@ -409,6 +416,12 @@
     </Compile>
     <Compile Include="Controls\UC_DatabaseInfo.Designer.cs">
       <DependentUpon>UC_DatabaseInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UC_FIASObject.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UC_FIASObject.Designer.cs">
+      <DependentUpon>UC_FIASObject.cs</DependentUpon>
     </Compile>
     <Compile Include="Database\DBClient.cs" />
     <Compile Include="Database\DBCreate.cs" />
@@ -503,6 +516,9 @@
     <Compile Include="Readers\XMLDataReader.cs" />
     <EmbeddedResource Include="Controls\UC_DatabaseInfo.resx">
       <DependentUpon>UC_DatabaseInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\UC_FIASObject.resx">
+      <DependentUpon>UC_FIASObject.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormAbout.resx">
       <DependentUpon>FormAbout.cs</DependentUpon>

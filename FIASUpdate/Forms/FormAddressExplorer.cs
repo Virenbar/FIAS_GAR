@@ -77,9 +77,6 @@ namespace FIASUpdate.Forms
             Text = "Справочник ФИАС";
             if (LV_Search.Items.Count > 0) { Text += $" (Объектов: {LV_Search.Items.Count:N0})"; }
 
-            B_CopyGUID.Enabled = TB_GUID.Text.Length > 0;
-            B_CopyAddress.Enabled = TB_Address.Text.Length > 0;
-
             #region Обновление крошек
             foreach (var item in TS_Navigation.Items.OfType<ToolStripButton>().ToList())
             {
@@ -155,16 +152,6 @@ namespace FIASUpdate.Forms
             await RefreshAddresses();
         }
 
-        private void B_CopyAddress_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(TB_Address.Text);
-        }
-
-        private void B_CopyGUID_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(TB_GUID.Text);
-        }
-
         private async void FormAddressExplorer_Load(object sender, EventArgs e)
         {
             Icon = Owner.Icon;
@@ -204,13 +191,11 @@ namespace FIASUpdate.Forms
             if (LV_Search.SelectedItems.Count > 0)
             {
                 var address = (FIASRegistryAddress)(AddressLVI)LV_Search.SelectedItems[0];
-                TB_GUID.Text = address.ObjectGUID;
-                TB_Address.Text = address.AddressFull;
+                UC_Object.SetObject(address, Division);
             }
             else
             {
-                TB_GUID.Text = string.Empty;
-                TB_Address.Text = string.Empty;
+                UC_Object.ClearObject();
             }
             RefreshUI();
         }

@@ -14,9 +14,13 @@ namespace FIAS.Core
             Command = command;
             Connection = connection;
         }
-
+        /// <summary>
+        /// Команда
+        /// </summary>
         public SqlCommand Command { get; }
-
+        /// <summary>
+        /// Соединение для запросов
+        /// </summary>
         public string Connection { get; set; }
 
         /// <summary>

@@ -58,7 +58,7 @@ namespace FIASUpdate.Forms
             set => CH_Key.Text = value;
         }
 
-        public string ValeuHeader
+        public string ValueHeader
         {
             get => CH_Value.Text;
             set => CH_Value.Text = value;
