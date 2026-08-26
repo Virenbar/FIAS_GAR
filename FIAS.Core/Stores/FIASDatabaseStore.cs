@@ -1,11 +1,11 @@
-﻿using FIAS.Core.Extensions;
-using FIAS.Core.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using FIAS.Core.Extensions;
+using FIAS.Core.Models;
 
 namespace FIAS.Core.Stores
 {
