@@ -17,6 +17,7 @@ namespace FIASUpdate.Controls
         public UC_FIASObject()
         {
             InitializeComponent();
+            RefreshUI();
         }
 
         public string Address => TB_Address.Text;
@@ -50,11 +51,12 @@ namespace FIASUpdate.Controls
 
         private void RefreshUI()
         {
-            B_PDF.Enabled = TB_GUID.Text.Length > 0;
-            B_Parameters.Enabled = TB_GUID.Text.Length > 0;
-            SB_Parameters.Enabled = TB_GUID.Text.Length > 0;
-            B_URL.Enabled = TB_GUID.Text.Length > 0;
-            B_CopyGUID.Enabled = TB_GUID.Text.Length > 0;
+            var GUIDset = TB_GUID.Text.Length > 0;
+            B_PDF.Enabled = GUIDset;
+            B_Parameters.Enabled = GUIDset;
+            SB_Parameters.Enabled = GUIDset;
+            B_URL.Enabled = GUIDset;
+            B_CopyGUID.Enabled = GUIDset;
             B_CopyAddress.Enabled = TB_Address.Text.Length > 0;
         }
 
