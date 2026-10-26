@@ -45,14 +45,10 @@
             this.LV_Address = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.LV_GUID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.LV_Search = new System.Windows.Forms.ListView();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.дополнительноToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.MI_DBInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.UC_Object = new FIASUpdate.Controls.UC_FIASObject();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_Limit)).BeginInit();
             this.FlowLayoutPanel1.SuspendLayout();
             this.TableLayoutPanel3.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // TB_Search
@@ -60,7 +56,7 @@
             this.TB_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.TB_Search.Location = new System.Drawing.Point(9, 10);
             this.TB_Search.Name = "TB_Search";
-            this.TB_Search.Size = new System.Drawing.Size(708, 22);
+            this.TB_Search.Size = new System.Drawing.Size(692, 22);
             this.TB_Search.TabIndex = 0;
             this.FormToolTip.SetToolTip(this.TB_Search, "Enter - Выполнить поиск\r\nEsc - Очистить поле");
             this.TB_Search.TextChanged += new System.EventHandler(this.TB_Search_TextChanged);
@@ -201,13 +197,13 @@
             this.TableLayoutPanel3.Controls.Add(this.TB_Search, 0, 0);
             this.TableLayoutPanel3.Controls.Add(this.B_Search, 1, 0);
             this.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.TableLayoutPanel3.Location = new System.Drawing.Point(0, 24);
+            this.TableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             this.TableLayoutPanel3.Name = "TableLayoutPanel3";
             this.TableLayoutPanel3.Padding = new System.Windows.Forms.Padding(6);
             this.TableLayoutPanel3.RowCount = 2;
             this.TableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.TableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.TableLayoutPanel3.Size = new System.Drawing.Size(800, 100);
+            this.TableLayoutPanel3.Size = new System.Drawing.Size(784, 100);
             this.TableLayoutPanel3.TabIndex = 17;
             // 
             // B_Search
@@ -216,7 +212,7 @@
             this.B_Search.AutoSize = true;
             this.B_Search.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.B_Search.Image = global::FIASUpdate.icons8.Search16;
-            this.B_Search.Location = new System.Drawing.Point(723, 9);
+            this.B_Search.Location = new System.Drawing.Point(707, 9);
             this.B_Search.Name = "B_Search";
             this.B_Search.Padding = new System.Windows.Forms.Padding(1);
             this.B_Search.Size = new System.Drawing.Size(68, 25);
@@ -245,48 +241,21 @@
             this.LV_Search.FullRowSelect = true;
             this.LV_Search.GridLines = true;
             this.LV_Search.HideSelection = false;
-            this.LV_Search.Location = new System.Drawing.Point(0, 124);
+            this.LV_Search.Location = new System.Drawing.Point(0, 100);
             this.LV_Search.Name = "LV_Search";
-            this.LV_Search.Size = new System.Drawing.Size(800, 264);
+            this.LV_Search.Size = new System.Drawing.Size(784, 299);
             this.LV_Search.TabIndex = 14;
             this.LV_Search.UseCompatibleStateImageBehavior = false;
             this.LV_Search.View = System.Windows.Forms.View.Details;
             this.LV_Search.SelectedIndexChanged += new System.EventHandler(this.LV_Search_SelectedIndexChanged);
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.дополнительноToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
-            this.menuStrip1.TabIndex = 18;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // дополнительноToolStripMenuItem
-            // 
-            this.дополнительноToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.дополнительноToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MI_DBInfo});
-            this.дополнительноToolStripMenuItem.Name = "дополнительноToolStripMenuItem";
-            this.дополнительноToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
-            this.дополнительноToolStripMenuItem.Text = "Сервис";
-            // 
-            // MI_DBInfo
-            // 
-            this.MI_DBInfo.Image = global::FIASUpdate.icons8.Info16;
-            this.MI_DBInfo.Name = "MI_DBInfo";
-            this.MI_DBInfo.Size = new System.Drawing.Size(189, 22);
-            this.MI_DBInfo.Text = "Статистика БД";
-            this.MI_DBInfo.Click += new System.EventHandler(this.MI_DBInfo_Click);
-            // 
             // UC_Object
             // 
             this.UC_Object.AutoSize = true;
             this.UC_Object.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.UC_Object.Location = new System.Drawing.Point(0, 388);
+            this.UC_Object.Location = new System.Drawing.Point(0, 399);
             this.UC_Object.Name = "UC_Object";
-            this.UC_Object.Size = new System.Drawing.Size(800, 62);
+            this.UC_Object.Size = new System.Drawing.Size(784, 62);
             this.UC_Object.TabIndex = 19;
             // 
             // FormAddressSearch
@@ -294,17 +263,16 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = global::FIASUpdate.Properties.Settings.Default.DefaultBackColor;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(784, 461);
             this.Controls.Add(this.LV_Search);
             this.Controls.Add(this.UC_Object);
             this.Controls.Add(this.TableLayoutPanel3);
-            this.Controls.Add(this.menuStrip1);
             this.DataBindings.Add(new System.Windows.Forms.Binding("ForeColor", global::FIASUpdate.Properties.Settings.Default, "DefaultForeColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::FIASUpdate.Properties.Settings.Default, "DefaultFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::FIASUpdate.Properties.Settings.Default, "DefaultBackColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.Font = global::FIASUpdate.Properties.Settings.Default.DefaultFont;
             this.ForeColor = global::FIASUpdate.Properties.Settings.Default.DefaultForeColor;
-            this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(800, 500);
             this.Name = "FormAddressSearch";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormAddressSearch";
@@ -314,8 +282,6 @@
             this.FlowLayoutPanel1.PerformLayout();
             this.TableLayoutPanel3.ResumeLayout(false);
             this.TableLayoutPanel3.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -339,9 +305,6 @@
         internal System.Windows.Forms.ColumnHeader LV_Address;
         internal System.Windows.Forms.ColumnHeader LV_GUID;
         internal System.Windows.Forms.ListView LV_Search;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem дополнительноToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem MI_DBInfo;
         private Controls.UC_FIASObject UC_Object;
     }
 }

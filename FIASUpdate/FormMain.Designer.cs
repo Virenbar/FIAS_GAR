@@ -43,6 +43,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.ST = new System.Windows.Forms.StatusStrip();
             this.L_Database = new System.Windows.Forms.ToolStripStatusLabel();
+            this.B_Statistics = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -75,6 +76,7 @@
             this.tableLayoutPanel2.Controls.Add(this.B_Search, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.B_Explorer, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.B_Operation, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.B_Statistics, 1, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 18);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -265,6 +267,25 @@
             this.L_Database.Size = new System.Drawing.Size(22, 17);
             this.L_Database.Text = "БД";
             // 
+            // B_Statistics
+            // 
+            this.B_Statistics.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.B_Statistics.AutoSize = true;
+            this.B_Statistics.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.B_Statistics.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
+            this.B_Statistics.Image = global::FIASUpdate.icons8.Info16;
+            this.B_Statistics.Location = new System.Drawing.Point(268, 38);
+            this.B_Statistics.MinimumSize = new System.Drawing.Size(150, 0);
+            this.B_Statistics.Name = "B_Statistics";
+            this.B_Statistics.Padding = new System.Windows.Forms.Padding(3);
+            this.B_Statistics.Size = new System.Drawing.Size(150, 29);
+            this.B_Statistics.TabIndex = 0;
+            this.B_Statistics.Text = "Статистика БД";
+            this.B_Statistics.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.B_Statistics.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.B_Statistics.UseVisualStyleBackColor = true;
+            this.B_Statistics.Click += new System.EventHandler(this.B_Statistics_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -318,6 +339,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.StatusStrip ST;
         private System.Windows.Forms.ToolStripStatusLabel L_Database;
+        private System.Windows.Forms.Button B_Statistics;
     }
 }
 

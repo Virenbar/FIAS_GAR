@@ -41,12 +41,12 @@
             this.CB_Update = new System.Windows.Forms.CheckBox();
             this.RB_adm = new System.Windows.Forms.RadioButton();
             this.CB_Shrink = new System.Windows.Forms.CheckBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.TLP_Operation = new System.Windows.Forms.TableLayoutPanel();
             this.statusStrip1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.FLP_Action.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.TLP_Operation.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -56,7 +56,7 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TS_Progress,
             this.TS_Stopwatch});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 120);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 119);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.statusStrip1.Size = new System.Drawing.Size(344, 22);
@@ -90,7 +90,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel2.Controls.Add(this.FLP_Action, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 83);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 82);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -103,9 +103,9 @@
             this.FLP_Action.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.FLP_Action.Controls.Add(this.B_Run);
             this.FLP_Action.Controls.Add(this.B_Cancel);
-            this.FLP_Action.Location = new System.Drawing.Point(158, 3);
+            this.FLP_Action.Location = new System.Drawing.Point(159, 3);
             this.FLP_Action.Name = "FLP_Action";
-            this.FLP_Action.Size = new System.Drawing.Size(183, 31);
+            this.FLP_Action.Size = new System.Drawing.Size(182, 31);
             this.FLP_Action.TabIndex = 21;
             this.FLP_Action.WrapContents = false;
             // 
@@ -118,7 +118,7 @@
             this.B_Run.Location = new System.Drawing.Point(3, 3);
             this.B_Run.Name = "B_Run";
             this.B_Run.Padding = new System.Windows.Forms.Padding(1);
-            this.B_Run.Size = new System.Drawing.Size(95, 25);
+            this.B_Run.Size = new System.Drawing.Size(94, 25);
             this.B_Run.TabIndex = 19;
             this.B_Run.Text = "Выполнить";
             this.B_Run.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -131,7 +131,7 @@
             this.B_Cancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.B_Cancel.Enabled = false;
             this.B_Cancel.Image = global::FIASUpdate.icons8.Cancel16;
-            this.B_Cancel.Location = new System.Drawing.Point(104, 3);
+            this.B_Cancel.Location = new System.Drawing.Point(103, 3);
             this.B_Cancel.Name = "B_Cancel";
             this.B_Cancel.Padding = new System.Windows.Forms.Padding(1);
             this.B_Cancel.Size = new System.Drawing.Size(76, 25);
@@ -209,32 +209,32 @@
             this.CB_Shrink.Text = "Сжать БД";
             this.CB_Shrink.UseVisualStyleBackColor = true;
             // 
-            // tableLayoutPanel1
+            // TLP_Operation
             // 
-            this.tableLayoutPanel1.AutoSize = true;
-            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.CB_Shrink, 0, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(5);
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(344, 56);
-            this.tableLayoutPanel1.TabIndex = 26;
+            this.TLP_Operation.AutoSize = true;
+            this.TLP_Operation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.TLP_Operation.ColumnCount = 2;
+            this.TLP_Operation.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.TLP_Operation.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TLP_Operation.Controls.Add(this.flowLayoutPanel2, 0, 0);
+            this.TLP_Operation.Controls.Add(this.CB_Shrink, 0, 1);
+            this.TLP_Operation.Dock = System.Windows.Forms.DockStyle.Top;
+            this.TLP_Operation.Location = new System.Drawing.Point(0, 0);
+            this.TLP_Operation.Name = "TLP_Operation";
+            this.TLP_Operation.Padding = new System.Windows.Forms.Padding(5);
+            this.TLP_Operation.RowCount = 2;
+            this.TLP_Operation.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.TLP_Operation.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.TLP_Operation.Size = new System.Drawing.Size(344, 56);
+            this.TLP_Operation.TabIndex = 26;
             // 
             // FormOperation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = global::FIASUpdate.Properties.Settings.Default.DefaultBackColor;
-            this.ClientSize = new System.Drawing.Size(344, 142);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.ClientSize = new System.Drawing.Size(344, 141);
+            this.Controls.Add(this.TLP_Operation);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.statusStrip1);
             this.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::FIASUpdate.Properties.Settings.Default, "DefaultFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -256,8 +256,8 @@
             this.FLP_Action.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.TLP_Operation.ResumeLayout(false);
+            this.TLP_Operation.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -277,6 +277,6 @@
         private System.Windows.Forms.RadioButton RB_adm;
         private System.Windows.Forms.CheckBox CB_Shrink;
         private System.Windows.Forms.CheckBox CB_Update;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel TLP_Operation;
     }
 }

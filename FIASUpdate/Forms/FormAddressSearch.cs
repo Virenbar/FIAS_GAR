@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -145,19 +144,6 @@ namespace FIASUpdate.Forms
                 UC_Object.ClearObject();
             }
             RefreshUI();
-        }
-
-        private async void MI_DBInfo_Click(object sender, EventArgs e)
-        {
-            UIState(false);
-            try
-            {
-                var D = await Store.Statistics();
-                var S = string.Join(Environment.NewLine, D.Select(KV => $"{KV.Key}: {KV.Value}"));
-                this.ShowInfo(S, "Информация о БД");
-            }
-            catch (Exception E) { this.ShowError(E.Message); }
-            finally { UIState(true); }
         }
 
         private async void RB_CheckedChanged(object sender, EventArgs e) => await Search();

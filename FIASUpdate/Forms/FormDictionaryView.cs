@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using FIASUpdate.Extensions;
 
 namespace FIASUpdate.Forms
 {
@@ -11,6 +12,7 @@ namespace FIASUpdate.Forms
         public FormDictionaryView()
         {
             InitializeComponent();
+            this.BindSettings();
         }
 
         public FormDictionaryView(Dictionary<dynamic, dynamic> dictionary) : this()
@@ -18,12 +20,12 @@ namespace FIASUpdate.Forms
             SetDictionary(dictionary);
         }
 
-        public void SetDictionary<K, V>(Dictionary<K, V> dictionary)
+        public void SetDictionary<K, V>(IEnumerable<KeyValuePair<K, V>> dictionary)
         {
             LV.BeginUpdate();
             var items = dictionary.Select(ToLVI).ToArray();
             LV.Items.AddRange(items);
-            LV.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            LV.AutoSizeColumns();
             LV.EndUpdate();
         }
 

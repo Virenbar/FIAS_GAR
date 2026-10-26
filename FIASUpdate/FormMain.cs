@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
+using FIAS.Core.Stores;
 using FIASUpdate.Forms;
 using FIASUpdate.Properties;
+using JANL.Extensions;
 
 namespace FIASUpdate
 {
@@ -84,8 +87,36 @@ namespace FIASUpdate
             }
         }
 
+        private async void B_Statistics_Click(object sender, EventArgs e)
+        {
+            B_Statistics.Enabled = false;
+            try
+            {
+                var store = new FIASStore(Settings.Default.SQLConnection);
+                var statistics = await store.Statistics();
+                var date = statistics.First();
+
+                using (var F = new FormDictionaryView
+                {
+                    Text = $"Информация о БД ({date.Key}: {date.Value})",
+                    KeyHeader = "Уровень",
+                    ValueHeader = "Количество"
+                })
+                {
+                    F.SetDictionary(statistics.Skip(1));
+                    F.ShowDialog(this);
+                }
+            }
+            catch (Exception E) { this.ShowError(E.Message); }
+            finally
+            {
+                B_Statistics.Enabled = true;
+            }
+        }
+
         #endregion Service
 
         #endregion UI Events
+
     }
 }

@@ -77,7 +77,7 @@ namespace FIASUpdate.Forms
             RB_mun.Enabled = CB_Update.Checked;
             RB_mun_adm.Enabled = CB_Update.Checked;
             RB_adm.Enabled = CB_Update.Checked;
-            tableLayoutPanel1.Enabled = CTS == null;
+            TLP_Operation.Enabled = CTS == null;
             B_Run.Enabled = CTS == null;
             B_Cancel.Enabled = CTS != null;
         }

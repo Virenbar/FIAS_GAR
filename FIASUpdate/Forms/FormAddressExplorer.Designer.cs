@@ -89,7 +89,7 @@
             this.LV_Search.HideSelection = false;
             this.LV_Search.Location = new System.Drawing.Point(0, 25);
             this.LV_Search.Name = "LV_Search";
-            this.LV_Search.Size = new System.Drawing.Size(784, 375);
+            this.LV_Search.Size = new System.Drawing.Size(784, 374);
             this.LV_Search.TabIndex = 18;
             this.LV_Search.UseCompatibleStateImageBehavior = false;
             this.LV_Search.View = System.Windows.Forms.View.Details;
@@ -120,7 +120,7 @@
             // 
             this.UC_Object.AutoSize = true;
             this.UC_Object.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.UC_Object.Location = new System.Drawing.Point(0, 400);
+            this.UC_Object.Location = new System.Drawing.Point(0, 399);
             this.UC_Object.Name = "UC_Object";
             this.UC_Object.Size = new System.Drawing.Size(784, 62);
             this.UC_Object.TabIndex = 19;
@@ -129,7 +129,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 462);
+            this.ClientSize = new System.Drawing.Size(784, 461);
             this.Controls.Add(this.LV_Search);
             this.Controls.Add(this.UC_Object);
             this.Controls.Add(this.TS_Navigation);
