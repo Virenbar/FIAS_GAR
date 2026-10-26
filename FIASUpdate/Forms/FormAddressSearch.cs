@@ -52,12 +52,17 @@ namespace FIASUpdate.Forms
                 LV_Search.EndUpdate();
                 RefreshUI();
             }
-            catch (Exception E) { this.ShowError(E); }
+            catch (Exception E)
+            {
+                if (IsDisposed) { return; }
+                this.ShowError(E);
+            }
             finally { UIState(true); }
         }
 
         private void UIState(bool value)
         {
+            if (IsDisposed) { return; }
             TB_Search.ReadOnly = !value;
             B_Search.Enabled = value;
             CB_Level.Enabled = value;

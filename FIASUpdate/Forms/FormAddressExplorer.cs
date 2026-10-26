@@ -42,7 +42,11 @@ namespace FIASUpdate.Forms
                 RefreshList();
                 RefreshUI();
             }
-            catch (Exception E) { this.ShowError(E); }
+            catch (Exception E)
+            {
+                if (IsDisposed) { return; }
+                this.ShowError(E);
+            }
             finally { UIState(true); }
         }
 
@@ -112,6 +116,7 @@ namespace FIASUpdate.Forms
 
         private void UIState(bool value)
         {
+            if (IsDisposed) { return; }
             TS_Navigation.Enabled = value;
         }
 
