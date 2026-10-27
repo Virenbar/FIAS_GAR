@@ -19,6 +19,9 @@ jobs:
 
       - name: Download artifacts
         uses: actions/download-artifact@v8
+        with:
+          name: FIASUpdate
+          path: FIASUpdate
 
       - name: List files
         run: ls -R
